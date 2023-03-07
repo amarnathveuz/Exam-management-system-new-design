@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+    <head>
+        <meta charset="utf-8" />
+        <title>Exam Login</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
+        <meta content="" name="author" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+        <!-- App favicon -->
+        <link rel="shortcut icon" href="{% static 'login/assets/images/favicon.ico' %}">
+
+        <!-- App css -->
+        <link href="{% static 'login/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css" />
+        <link href="{% static 'login/css/icons.css' %}" rel="stylesheet" type="text/css" />
+        <link href="{% static 'login/css/style.css' %}" rel="stylesheet" type="text/css" />
+
+        <script type="text/javascript">
+            history.pushState(null, null, document.URL);
+            window.addEventListener('popstate', function () {
+                history.pushState(null, null, document.URL);
+            });
+        </script>
+
+    </head>
+
+    <body class="account-body accountbg">
+<style>
+    .logo-admin img{
+        width: 100%;
+    }
+    .park img{
+        width: 35%;
+        margin-bottom: 30px;
+    }
+</style>
+        <!-- Log In page -->
+        <div class="container">
+            <div class="row vh-100 d-flex justify-content-center">
+                <div class="col-12 align-self-center">
+                    <div class="row">
+                        <div class="col-lg-5 mx-auto">
+                            <div class="text-center park">
+                            
+                            </div>
+                            <div class="card" style="border-radius: 3px;">
+                                <div class="card-body p-0 auth-header-box" style="border-top-right-radius: 3px;border-top-left-radius: 3px;">
+                                    <div class="text-center p-3">
+                                        <a href="#" class="logo-admin">
+                                            <img style="    width: 36%;" src="{% static 'logo.png' %}" alt="logo" class="auth-logo">
+                                        </a>
+                                     
+                                    </div>
+                                </div>
+                                <div class="card-body p-0">
+                                    <ul class="nav-border nav nav-pills" role="tablist">
+                                        <!-- <li class="nav-item">
+                                            <a class="nav-link active fw-semibold" data-toggle="tab" href="#LogIn_Tab" role="tab">Log In</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link fw-semibold" data-toggle="tab" href="#Register_Tab" role="tab">Register</a>
+                                        </li> -->
+                                    </ul>
+                                     <!-- Tab panes -->
+                                    <div class="tab-content">
+                                        <div class="tab-pane active p-3" id="LogIn_Tab" role="tabpanel">                                        
+                                            <form class="form-horizontal auth-form" action="" method="POST">
+                                                {% csrf_token %}
+                                                <div class="form-group mb-2">
+                                                    <label class="form-label" for="username">Username</label>
+                                                    <div class="input-group">                                                                                         
+                                                        <input type="text" class="form-control" name="username" id="username" required>
+                                                    </div>                                    
+                                                </div><!--end form-group--> 
+                    
+                                                <div class="form-group mb-2">
+                                                    <label class="form-label" for="userpassword">Password</label>                                            
+                                                    <div class="input-group">                                  
+                                                        <input type="password" class="form-control" name="password" id="userpassword" required>
+                                                    </div>                               
+                                                </div><!--end form-group--> 
+                    
+                                                <div class="form-group row my-3">
+                                                    <div class="col-sm-6 px-0">
+                                                        <!-- <div class="custom-switch switch-success remembr">
+                                                            <input type="checkbox" id="remembr">
+                                                            <label class="form-label text-mutedd" for="customSwitchSuccess">Remember me</label>
+                                                        </div> -->
+                                                    </div><!--end col--> 
+                                                    <div class="col-sm-6 px-0 text-end">
+                                                        <!-- <a href="#" class="text-mutedd font-13"><i class="dripicons-lock"></i> Forgot password?</a>                                     -->
+                                                    </div><!--end col--> 
+                                                </div><!--end form-group--> 
+                    
+                                                <div class="form-group mb-0 row">
+                                                    <div class="col-12 px-0">
+                                                       
+                                                        <button class="btn btn-primary w-100 waves-effect waves-light" type="submit">Log In <i class="fas fa-sign-in-alt ms-1"></i></button>
+                                                    </div><!--end col--> 
+                                                </div> <!--end form-group-->                           
+                                            </form><!--end form-->
+                                           
+                                           
+                                        </div>
+                                        <div class="tab-pane px-3 pt-3" id="Register_Tab" role="tabpanel">
+                                            <form class="form-horizontal auth-form" action="register_action" method="POST" enctype="multipart/form-data" >
+                                                {% csrf_token %}
+                                                <div class="form-group mb-2">
+                                                    <label class="form-label" for="useremail">Email</label>
+                                                    <div class="input-group">                                                                                         
+                                                        <input type="email" class="form-control" name="email" id="useremail" required>
+                                                    </div>                                    
+                                                </div><!--end form-group-->
+                                                <div class="form-group mb-2">
+                                                    <label class="form-label" for="mo_number">Phone Number</label>                                            
+                                                    <div class="input-group">                                 
+                                                        <input type="number" class="form-control" name="mobile_number" id="mo_number" required>
+                                                    </div>                               
+                                                </div><!--end form-group--> 
+
+                                                <div class="form-group mb-2">
+                                                    <label class="form-label" for="username">Username</label>
+                                                    <div class="input-group">                                                                                         
+                                                        <input type="text" class="form-control" name="username" id="username" required>
+                                                    </div>                                    
+                                                </div><!--end form-group--> 
+
+                                                <div class="form-group mb-2">
+                                                    <label class="form-label" for="userpassword">Password</label>                                            
+                                                    <div class="input-group">                                  
+                                                        <input type="password" class="form-control" name="password" id="userpassword" required>
+                                                    </div>                               
+                                                </div><!--end form-group--> 
+                                                <div class="form-group mb-2">
+                                                    <label class="form-label" for="userpassword">Website Link</label>                                            
+                                                    <div class="input-group">                                  
+                                                        <input type="password" class="form-control" name="wesite_link" id="userpassword" required>
+                                                    </div>                               
+                                                </div><!--end form-group--> 
+                                                <div class="form-group mb-2">
+                                                    <label class="form-label" for="userpassword">Facebook </label>                                            
+                                                    <div class="input-group">                                  
+                                                        <input type="password" class="form-control" name="facebook" id="userpassword" required>
+                                                    </div>                               
+                                                </div><!--end form-group--> 
+
+                                                <div class="form-group mb-2">
+                                                    <label class="form-label" for="userpassword">Linkedin  </label>                                            
+                                                    <div class="input-group">                                  
+                                                        <input type="password" class="form-control" name="linkedin" id="userpassword" required>
+                                                    </div>                               
+                                                </div><!--end form-group--> 
+
+                                                <div class="form-group mb-2">
+                                                    <label class="form-label" for="companyaddress">Company Address</label>
+                                                    <div class="input-group">                                                                                         
+                                                        <textarea type="text" class="form-control" name="companyaddress" id="companyaddress" required></textarea>
+                                                    </div>                                    
+                                                </div><!--end form-group--> 
+
+
+                                                <div class="form-group mb-2 apendcompany">
+                                                    
+                                                    <label class="form-label" for="companyname">Company Name</label>
+                                                    <div class="row append_cmpy">
+
+                                                        <div class="col-md-11">
+                                                            <div class="input-group">                                                                                         
+                                                                <input type="text" class="form-control" name="companyname[]" id="companyname" required>
+                                                            </div>   
+                                                        </div>
+                                                        <div class="col-md-1">
+
+                                                            <span style="font-size: 22px;
+                                                            font-weight: bold;cursor: pointer;" class="appnd_company_btn">+</span>
+                                                        </div>
+                                                    </div>
+
+                                                    
+                                                                                   
+                                                </div><!--end form-group--> 
+
+
+                                                <div class="form-group mb-2">
+                                                    <label class="form-label" for="firstname">Company Logo</label>
+                                                    <div class="input-group">                                                                                         
+                                                        <input type="file" class="form-control" name="company_logo" id="first_name" required>
+                                                    </div>                                    
+                                                </div><!--end form-group--> 
+                                                
+
+                                               
+            
+                                               
+
+                                              
+                    
+                                              
+                                                
+                                                <div class="form-group row my-3">
+                                                    <div class="col-sm-12">
+                                                        <div class="custom-switch switch-success remembr">
+                                                            <input type="checkbox"  id="terms" required>
+                                                            <label class="form-label text-mutedd" for="terms">You agree to the <a href="#" class="text-primary"> Terms of Use</a></label>
+                                                        </div>
+                                                    </div><!--end col-->                                             
+                                                </div><!--end form-group--> 
+                    
+                                                <div class="form-group mb-0 row">
+                                                    <div class="col-12 px-0">
+                                                        <button class="btn btn-primary w-100 waves-effect waves-light" type="submit">Register <i class="fas fa-sign-in-alt ms-1"></i></button>
+                                                    </div><!--end col--> 
+                                                </div> <!--end form-group-->                           
+                                            </form><!--end form-->
+                                            <p class="my-3 text-mutedd text-center dont">Already have an account ?<a href="" class="text-primary ms-2"> Log in</a></p>                                                    
+                                        </div>
+                                    </div>
+                                </div><!--end card-body-->
+                 
+                            </div><!--end card-->
+                        </div><!--end col-->
+                    </div><!--end row-->
+                </div><!--end col-->
+            </div><!--end row-->
+        </div><!--end container-->
+        <!-- End Log In page -->
+
+        <script type = "text/javascript" >
+            function preventBack() 
+            setTimeout("preventBack()", 0);
+            window.onunload = function () { null };
+        </script>
+
+
+        <!-- jQuery  -->
+        <script src="{% static 'login/js/jquery.min.js' %}"></script>
+        <script src="{% static 'login/js/bootstrap.bundle.min.js' %}"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>   
+        <script>      
+            var message = "{{message}}"
+            if (message == "invalid")
+            {
+               sweetAlert("incorrect username or password","","error");
+            }
+        </script>
+
+    
+<script>
+
+var count = 1
+
+
+    $(".appnd_company_btn").click(function(){
+       
+        $(".append_cmpy").append(`<div class="row  append_count`+count+`"> <label class="form-label" for="companyname">Company Name</label>  <div class="col-md-11">
+                                                            <div class="input-group">                                                                                         
+                                                                <input type="text" class="form-control" name="companyname[]" id="companyname" required>
+                                                            </div>   
+                                                        </div>
+                                                        <div class="col-md-1">
+
+                                                            <span style="font-size: 22px;
+                                                            font-weight: bold;cursor: pointer;" onclick="f1(`+count+`)">-</span>
+                                                        </div> </div>`)
+
+                                                        count = count + 1
+    })
+
+    function f1(count){
+        $('.append_count'+count).remove();
+    }
+</script>
+
+
+<style>
+    #swal2-title{
+        font-size: 12px!important;
+    }
+</style>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+{% if messages %}
+<script>
+    {% for message in messages %}
+ 
+
+    var toastMixin = Swal.mixin({
+    toast: true,
+    icon: '{{message.tags}}',
+    title: 'General Title',
+    animation: false,
+    position: 'top-right',
+    showConfirmButton: false,
+    timer: 5000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+    toast.addEventListener('mouseenter', Swal.stopTimer)
+    toast.addEventListener('mouseleave', Swal.resumeTimer)
+    }
+    });
+    toastMixin.fire({
+    animation: true,
+    title: "{{message}}"
+    });
+    {% endfor %}
+
+</script>
+{% endif %}
+
+    </body>
+
+</html>

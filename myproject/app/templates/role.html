@@ -1,0 +1,198 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container-fluid margin-class-this">
+    <div class="row">
+        <div class="col-md-12 px-0">
+            <div class="card card-shadow">
+
+                <div class="card-body body-change card-border">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <h2 class="main-heading-txt">Role Management</h2>
+                        <button type="button" class="btn btn-pink waves-effect waves-light w-md m-b-5" data-toggle="modal" data-target="#role-modal"><i class="fa fa-plus"></i> New</button>
+                       
+                    </div>
+
+                    <div class="row mt-4">
+
+                        <div class="col-md-12 col-sm-12 col-12 px-0">
+                            <table id="datatable" class="table table-striped dt-responsive table-bordered nowrap table-padd" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+
+                                <thead class="border-class">
+
+                                    <tr class="heading-text">                                                        
+                                        <th>Role Name</th>
+                                        <th>Description</th>
+                                        <th></th>
+                                       
+                                    </tr>
+                                </thead>
+
+
+                                <tbody class="body-textcls vertcle-center">
+                                    {% for i in data %}
+                                    <tr>
+                                        <td>{{i.role_name}}</td>
+                                        <td>{{i.description}}</td>
+                                        <td>
+                                            <div class="action-tbl d-flex justify-content-end">
+                                                <i style="cursor: pointer;" onclick="edit_btn(`{{i.id}}`)" class="fa fa-pencil mx-1 pencil-btn" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"></i>
+                                                <i style="cursor: pointer;" onclick="delete_btn(`{{i.id}}`)" class="fa fa-trash-o mx-1 trash-btn" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"></i>
+                                            
+                                            </div>
+                                        </td>
+                                    </tr>
+                           
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+
+</div>
+
+<div id="role-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+aria-hidden="true" style="display: none">
+<div class="modal-dialog modal-lg">
+    <form action="" method="POST">
+        {% csrf_token %}
+    <div class="modal-content">
+        <div class="modal-header">
+            <h4 class="modal-title mt-0">Create New Role</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="field-1" class="control-label">Role Name</label>
+                        <input required type="text" class="form-control" id="field-1" placeholder="Role Name" name="role_name">
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="field-1" class="control-label">Description</label>
+                        <textarea required class="form-control" rows="2" id="example-textarea-input" placeholder="Description" name="role_description"></textarea>
+       
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <table id="datatable" class="table table-striped dt-responsive table-bordered nowrap table-role" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+
+                        <thead class="border-class">
+
+                            <tr class="heading-text">                                                        
+                                <th>Nav Name</th>
+                                <th class="text-center">Read</th>
+                                <th class="text-center">Write</th>
+                                <th class="text-center">Edit</th>
+                                <th class="text-center">Delete</th>
+                                <th class="text-center">View All</th>
+                                <th class="text-center">Manage All</th>
+                            </tr>
+                        </thead>
+
+
+                        <tbody class="body-textcls vertcle-center">
+                           
+                            <tr> 
+                                <td>User management</td>
+                                <td class="text-center"><input type="checkbox" id="user_read" name="user_read" value="True"></td>
+                                <td class="text-center"><input type="checkbox" id="user_write" name="user_write"  value="True"></td>
+                                <td class="text-center"><input type="checkbox" id="user_edit" name="user_edit" value="True"></td>
+                                <td class="text-center"><input type="checkbox" id="user_delete" name="user_delete" value="True"></td>
+                                <td class="text-center"><input type="checkbox" id="user_view_all" name="user_view_all" value="True"></td>
+                                <td class="text-center"><input type="checkbox" id="user_manage_all"  name="user_manage_all" value="True"></td>
+                            </tr>
+                            <tr>
+                                <td>Role</td>
+                                <td class="text-center"><input type="checkbox" id="role_read" name="role_read" value="True"></td>
+                                <td class="text-center"><input type="checkbox" id="role_write" name="role_write" value="True"></td>
+                                <td class="text-center"><input type="checkbox" id="role_edit"  name="role_edit" value="True"></td>
+                                <td class="text-center"><input type="checkbox" id="role_delete" name="role_delete" value="True"></td>
+                                <td class="text-center"><input type="checkbox" id="role_view_all"  name="role_view_all" value="True"></td>
+                                <td class="text-center"><input type="checkbox" id="role_manage_all" name="role_manage_all" value="True"></td>
+                            </tr>
+                            <tr>
+                                <td>Exam management</td>
+                                <td class="text-center"><input type="checkbox" id="exam_read" name="exam_read" value="True"></td>
+                                <td class="text-center"><input type="checkbox" id="exam_write" name="exam_write" value="True"></td>
+                                <td class="text-center"><input type="checkbox" id="exam_edit"  name="exam_edit" value="True"></td>
+                                <td class="text-center"><input type="checkbox" id="exam_delete" name="exam_delete" value="True"></td>
+                                <td class="text-center"><input type="checkbox" id="exam_view_all"  name="exam_view_all" value="True"></td>
+                                <td class="text-center"><input type="checkbox" id="exam_manage_all" name="exam_manage_all" value="True"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+               
+               
+
+
+            </div>
+
+
+
+        </div>
+        <div class="modal-footer">
+
+            <button type="submit" style="background-color:#f9365f!important;border: none!important;"
+                class="btn btn-info waves-effect waves-light">Save </button>
+        </div>
+    </div>
+
+</form>
+</div>
+</div>
+
+<div id="edit_role_div">
+
+</div>
+<div id="delete_role_div">
+    
+</div>
+
+<script>
+ function edit_btn(id){
+ 
+    var url ="edit_role_management";
+        $.ajax({
+        url: url,
+        data: {
+          'id': id
+        },
+        success: function (data) {
+           $("#edit_role_div").html(data);
+           $('#edit_role_modal').modal('show');
+        }
+      });
+ }
+
+
+ function delete_btn(id){
+    var url ="delete_role_management";
+        $.ajax({
+        url: url,
+        data: {
+          'id': id
+        },
+        success: function (data) {
+            $("#delete_role_div").html(data);
+            $('#delete_role_modal').modal('show');
+        }
+      });
+ }
+</script>
+
+{% endblock %}
+
+
+
