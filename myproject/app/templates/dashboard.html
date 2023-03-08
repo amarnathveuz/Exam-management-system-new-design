@@ -28,7 +28,7 @@
                         <div class="dash-box1 d-flex align-items-center justify-content-between">
                             <div>
                             <h2>Completed Exams</h2>
-                            <h4>20</h4>
+                            <h4>{{total_closed_exam}}</h4>
                         </div>
                         <div>
                             <img src="./static/admin/img/checked.png">
@@ -39,7 +39,7 @@
                         <div class="dash-box1 d-flex align-items-center justify-content-between">
                             <div>
                             <h2>Pending Exams</h2>
-                            <h4>30</h4>
+                            <h4>{{total_pending_exam}}</h4>
                         </div>
                         <div>
                             <img src="./static/admin/img/clock.png">
@@ -50,7 +50,7 @@
                         <div class="dash-box2 d-flex align-items-center justify-content-between">
                             <div>
                             <h2>Total Users</h2>
-                            <h4>100</h4>
+                            <h4>{{total_user}}</h4>
                         </div>
                         <div>
                             <img src="./static/admin/img/group.png">
@@ -61,7 +61,7 @@
                         <div class="dash-box2 d-flex align-items-center justify-content-between">
                             <div>
                             <h2>Total Roles</h2>
-                            <h4>70</h4>
+                            <h4>{{total_role}}</h4>
                         </div>
                         <div>
                             <img src="./static/admin/img/management.png">
@@ -71,159 +71,54 @@
              
         <div class="col-md-12">
           <h3 class="user-list">User List</h3>
-          <table id="datatable" class="table user-list-tab table-striped dt-responsive tnowrap table-padd" style="border-collapse: collapse; border-spacing: 0; width: 100%; margin-top: 10px; background-color: #fff;">
+          <table id="datatable" class="table table-striped dt-responsive table-bordered nowrap table-padd" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
 
-              <thead class="border-class">
+            <thead class="border-class">
 
-                  <tr class="heading-text">
-                      <th style="width: 150px;">User Image</th>                                                           
-                      <th>Name</th>
-                      <th>Company Name</th>
-                      <th>Username</th>
-                      <th>Phone</th>
-                      <th>Email</th>
-                      <th></th>
-                     
-                  </tr>
-              </thead>
+                <tr class="heading-text">
+                    <th style="width: 150px;">User Image</th>                                                           
+                    <th>Name</th>
+                  
+                    <th>Username</th>
+                    <th>Phone</th>
+                    <th>Email</th>
+                    <th>User Type</th>
+                    <th></th>
+                   
+                </tr>
+            </thead>
 
 
-              <tbody class="body-textcls vertcle-center">
-                  <tr>
-                      <td>
-                          <div class="user-field">
-                              <img src="./static/admin/img/users/avatar-5.jpg" alt="">
-                          </div>
-                      </td>
-                      <td>Yourname</td>
-                      <td>Azure Interior</td>
-                      <td>Username</td>
-                      <td>9988776655</td>
-                      <td>youremail@gmail.com</td>
-                      <td>
-                          <div class="action-tbl d-flex justify-content-end">
-                              <i class="fa fa-pencil mx-1 pencil-btn" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"></i>
-                              <i class="fa fa-trash-o mx-1 trash-btn" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"></i>
-                           
-                          </div>
-                      </td>
-                  </tr>
-                  <tr>
-                      <td>
-                          <div class="user-field">
-                              <img src="./static/admin/img/users/avatar-5.jpg" alt="">
-                          </div>
-                      </td>
-                      <td>Yourname</td>
-                      <td>Azure Interior</td>
-                      <td>Username</td>
-                      <td>9988776655</td>
-                      <td>youremail@gmail.com</td>
-                      <td>
-                          <div class="action-tbl d-flex justify-content-end">
-                              <i class="fa fa-pencil mx-1 pencil-btn" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"></i>
-                              <i class="fa fa-trash-o mx-1 trash-btn" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"></i>
-                            
-                          </div>
-                      </td>
-                  </tr>
-                  <tr>
-                      <td>
-                          <div class="user-field">
-                              <img src="./static/admin/img/users/avatar-5.jpg" alt="">
-                          </div>
-                      </td>
-                      <td>Yourname</td>
-                      <td>Azure Interior</td>
-                      <td>Username</td>
-                      <td>9988776655</td>
-                      <td>youremail@gmail.com</td>
-                      <td>
-                          <div class="action-tbl d-flex justify-content-end">
-                              <i class="fa fa-pencil mx-1 pencil-btn" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"></i>
-                              <i class="fa fa-trash-o mx-1 trash-btn" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"></i>
-                        
-                          </div>
-                      </td>
-                  </tr>
-                  <tr>
-                      <td>
-                          <div class="user-field">
-                              <img src="./static/admin/img/users/avatar-5.jpg" alt="">
-                          </div>
-                      </td>
-                      <td>Yourname</td>
-                      <td>Azure Interior</td>
-                      <td>Username</td>
-                      <td>9988776655</td>
-                      <td>youremail@gmail.com</td>
-                      <td>
-                          <div class="action-tbl d-flex justify-content-end">
-                              <i class="fa fa-pencil mx-1 pencil-btn" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"></i>
-                              <i class="fa fa-trash-o mx-1 trash-btn" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"></i>
-                        
-                          </div>
-                      </td>
-                  </tr>
-                  <tr>
-                      <td>
-                          <div class="user-field">
-                              <img src="./static/admin/img/users/avatar-5.jpg" alt="">
-                          </div>
-                      </td>
-                      <td>Yourname</td>
-                      <td>Azure Interior</td>
-                      <td>Username</td>
-                      <td>9988776655</td>
-                      <td>youremail@gmail.com</td>
-                      <td>
-                          <div class="action-tbl d-flex justify-content-end">
-                              <i class="fa fa-pencil mx-1 pencil-btn" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"></i>
-                              <i class="fa fa-trash-o mx-1 trash-btn" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"></i>
-                        
-                          </div>
-                      </td>
-                  </tr>
-                  <tr>
-                      <td>
-                          <div class="user-field">
-                              <img src="./static/admin/img/users/avatar-5.jpg" alt="">
-                          </div>
-                      </td>
-                      <td>Yourname</td>
-                      <td>Azure Interior</td>
-                      <td>Username</td>
-                      <td>9988776655</td>
-                      <td>youremail@gmail.com</td>
-                      <td>
-                          <div class="action-tbl d-flex justify-content-end">
-                              <i class="fa fa-pencil mx-1 pencil-btn" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"></i>
-                              <i class="fa fa-trash-o mx-1 trash-btn" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"></i>
-                        
-                          </div>
-                      </td>
-                  </tr>
-                  <tr>
-                      <td>
-                          <div class="user-field">
-                              <img src="./static/admin/img/users/avatar-5.jpg" alt="">
-                          </div>
-                      </td>
-                      <td>Yourname</td>
-                      <td>Azure Interior</td>
-                      <td>Username</td>
-                      <td>9988776655</td>
-                      <td>youremail@gmail.com</td>
-                      <td>
-                          <div class="action-tbl d-flex justify-content-end">
-                              <i class="fa fa-pencil mx-1 pencil-btn" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"></i>
-                              <i class="fa fa-trash-o mx-1 trash-btn" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"></i>
-                        
-                          </div>
-                      </td>
-                  </tr>
-              </tbody>
-          </table>
+            <tbody class="body-textcls vertcle-center">
+                {% for i in user_data %}
+                <tr>
+                    <td>
+                        <div class="user-field">
+                            <img src="./media/{{i.photo}}" alt="">
+                        </div>
+                    </td>
+                    <td>{{i.name|title}}</td>
+                   
+                    <td>{{i.username}}</td>
+                    <td>{{i.phone}}</td>
+                    <td>{{i.email}}</td>
+                    <td>
+                        {{i.user_level}}
+                    </td>
+                    <td>
+                        <div class="action-tbl d-flex justify-content-end">
+                            <i  style="cursor: pointer;" data-id="{{i.id}}" class="fa fa-pencil mx-1 pencil-btn member_edit" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"></i>
+                            <i style="cursor: pointer;" onclick="delete_btn(`{{i.id}}`)" class="fa fa-trash-o mx-1 trash-btn" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"></i>
+                         
+                        </div>
+                    </td>
+                </tr>
+
+                {% endfor %}
+         
+          
+            </tbody>
+        </table>
         </div>
               
 
@@ -244,98 +139,34 @@
 
 
                     <tbody class="body-textcls vertcle-center">
+
+                        {% for i in current_exam %}
                         <tr>
-                            <td>Basic knowledge</td>
+                            <td>{{i.Exam_title}}</td>
                         
                             <td>
                                 <div class="action-tbl d-flex justify-content-end">
-                                    <a href="exam.html">
+                                    <a href="exam">
                                         <i class="fa fa-eye mx-1 pencil-btn" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"></i>
                                     </a>
                                  
                                 </div>
                             </td>
                         </tr>
-                        <tr>
-                            <td>Basic knowledge</td>
-                        
-                            <td>
-                                <div class="action-tbl d-flex justify-content-end">
-                                    <a href="exam.html">
-                                        <i class="fa fa-eye mx-1 pencil-btn" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"></i>
-                                    </a>
-                                 
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Basic knowledge</td>
-                        
-                            <td>
-                                <div class="action-tbl d-flex justify-content-end">
-                                    <a href="exam.html">
-                                        <i class="fa fa-eye mx-1 pencil-btn" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"></i>
-                                    </a>
-                                 
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Basic knowledge</td>
-                        
-                            <td>
-                                <div class="action-tbl d-flex justify-content-end">
-                                    <a href="exam.html">
-                                        <i class="fa fa-eye mx-1 pencil-btn" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"></i>
-                                    </a>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Basic knowledge</td>
-                        
-                            <td>
-                                <div class="action-tbl d-flex justify-content-end">
-                                    <a href="exam.html">
-                                        <i class="fa fa-eye mx-1 pencil-btn" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"></i>
-                                    </a>
-                                 
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Basic knowledge</td>
-                        
-                            <td>
-                                <div class="action-tbl d-flex justify-content-end">
-                                    <a href="exam.html">
-                                        <i class="fa fa-eye mx-1 pencil-btn" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"></i>
-                                    </a>
-                                 
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Basic knowledge</td>
-                        
-                            <td>
-                                <div class="action-tbl d-flex justify-content-end">
-                                    <a href="exam.html">
-                                    <i class="fa fa-eye mx-1 pencil-btn" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"></i>
-                                </a>
-                                 
-                                </div>
-                            </td>
-                        </tr>
+
+                        {% endfor %}
+                     
                       
                     </tbody>
                 </table>
+                {% if current_exam %}
                 <div class="row">
                     <div class="col-md-12 text-right">
                         <a href="exam.html"><button type="button" class="btn btn-pink waves-effect waves-light w-md mr-3"> View All</button></a>
                     </div>
 
                 </div>
+                {% endif %}
 
               
          </div>
@@ -443,4 +274,50 @@
     }
   </script>
 
+<div id="member_edit_div">
+
+</div>
+
+<div id="delete_user_div"></div>
+
+
+<script>
+    $(".member_edit").click(function(){
+        
+        var id = $(this).attr("data-id")
+        var url ="user_edit_modal";
+        $.ajax({
+        url: url,
+        data: {
+          'id': id
+        },
+        success: function (data) {
+            $("#member_edit_div").html(data);
+            $('#member_edit_modal').modal('show');
+        }
+      });messageCheckbox
+    })
+
+
+    function password_enable_btn(){
+
+        $(".password_manual_id").show()
+
+
+    }
+
+    function delete_btn(id){
+        var url ="delete_user_management";
+        $.ajax({
+        url: url,
+        data: {
+          'id': id
+        },
+        success: function (data) {
+            $("#delete_user_div").html(data);
+            $('#delete_user_modal').modal('show');
+        }
+      });
+    }
+</script>
 {% endblock %}

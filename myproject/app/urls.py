@@ -18,7 +18,8 @@ urlpatterns = [
     path('delete_role_management',views.delete_role_management,name='delete_role_management'),
     path('delete_user_management',views.delete_user_management,name='delete_user_management'),
     path('exam',views.exam,name='exam'),
-    path('edit_exam',views.edit_exam,name='edit_exam')
+    path('edit_exam',views.edit_exam,name='edit_exam'),
+    path('exam-create',views.exam_create,name='exam-create')
 
 
     

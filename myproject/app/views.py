@@ -9,8 +9,20 @@ from .models import *
 
 def dashboard(request):
     total_exam_count = Main_Exam_Master.objects.all().count()
+    total_closed_exam = Main_Exam_Master.objects.filter(status="closed").count()
+    total_pending_exam = Main_Exam_Master.objects.filter(status="pending").count()
+    total_user = User_details.objects.all().count()
+    total_role = Role_master.objects.all().count()
+    user_data = User_details.objects.filter(status=True)
+    current_exam = Main_Exam_Master.objects.all()
     context = {
-        'total_exam_count':total_exam_count
+        'total_exam_count':total_exam_count,
+        'total_closed_exam':total_closed_exam,
+        'total_pending_exam':total_pending_exam,
+        'total_user':total_user,
+        'total_role':total_role,
+        'user_data':user_data,
+        'current_exam':current_exam
     }
     return render(request,'dashboard.html',context)
 
@@ -441,3 +453,7 @@ def exam(request):
 
 def edit_exam(request):
     return render(request,'edit_exam.html')
+
+
+def exam_create(request):
+    return render(request,'exam_create.html')
