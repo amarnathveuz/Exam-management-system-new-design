@@ -66,6 +66,7 @@ class Main_Exam_Master(common_table):
     access_mode = models.CharField(max_length=25,choices=access_choices,null=True)
     Login_required = models.BooleanField(null=True)
     attempt_limit = models.IntegerField(null=True)
+    Success_per = models.IntegerField(null=True)
 
 question_type_choices =(
     ("Radio","Multiple choice: only one answer"),

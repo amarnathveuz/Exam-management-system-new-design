@@ -1,0 +1,172 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+<div class="content">
+    <div class="container-fluid margin-class-this">
+        <div class="row">
+            <div class="col-md-12 px-0">
+                <div class="card card-shadow">
+
+                    <div class="card-body body-change card-border">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <h2 class="main-heading-txt">Exam Management</h2>
+                           <a href="exam-create.html"> <button type="button" class="btn btn-pink waves-effect waves-light w-md m-b-5"><i class="fa fa-plus mr-1"></i>Create</button></a>
+                           
+                        </div>
+
+                        <div class="row mt-4">
+
+                            <div class="col-md-12 col-sm-12 col-12 px-0">
+                                <table id="datatable" class="table table-striped dt-responsive table-bordered nowrap table-padd" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+
+                                    <thead class="border-class">
+
+                                        <tr class="heading-text">
+                                            <th>S/No</th>                                                     
+                                            <th>Exam Title</th>
+                                            <th>Responsible</th>
+                                            <th>Created at</th>
+                                            <th>Questions</th>
+                                            <th>Average Duration</th>
+                                            <th>Registered</th>
+                                            <th>Completed</th>
+                                            <th>Status</th>
+                                            <th></th>
+                                            <th></th>
+                                           
+                                        </tr>
+                                    </thead>
+
+
+                                    <tbody class="body-textcls vertcle-center">
+                                        <tr>
+                                            <td>1</td>
+                                            <td>Quiz about our Company</td>
+                                            <td>
+                                                <div class="created-user d-flex align-items-center">
+                                                    <img src="./static/admin/img/users/avatar-5.jpg" alt="">
+                                                    <h6>Admin</h6>
+                                                </div>
+                                            </td>
+                                          
+                                            <td>02/03/2023</td>
+                                            <td>20</td>
+                                            <td>02:00</td>
+                                            <td>5</td> 
+                                            <td>4</td>
+                                            <td>
+                                                <h6 class="mt-0 mb-1">Certified</h6>
+                                                <div class="progress-container" data-percentage='50'>
+                                                    <div class="progress"></div>
+                                                    <div class="percentage">0%</div>
+                                                  </div>
+                                              
+                                            </td>
+                                            <td>
+                                                <button type="button" class="btn sv-btn waves-effect waves-light m-b-5 exm-btns">Test</button>
+                                                <a href="result.html"><button type="button" class="btn btn-see waves-effect m-b-5 exm-btns">See Result</button></a>
+                                            </td>
+                                            <td>
+                                                <div class="action-tbl d-flex justify-content-end">
+                                                    <button type="button" class="btn share-btn mx-1" data-toggle="modal" data-target="#share-modal"><span class="fa fa-share mx-1" data-toggle="tooltip" data-placement="top" title="" data-original-title="Share"></span></button>
+                                                    
+                                                    <a href="edit_exam">
+                                                    <i class="fa fa-pencil mx-1 pencil-btn" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"></i>
+                                                </a>
+
+
+
+                                                    <i class="fa fa-trash-o mx-1 trash-btn" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"></i>
+                                                 
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>2</td>
+                                            <td>Quiz about our Company</td>
+                                            <td>
+                                                <div class="created-user d-flex align-items-center">
+                                                    <img src="./static/admin/img/users/avatar-5.jpg" alt="">
+                                                    <h6>Admin</h6>
+                                                </div>
+                                            </td>
+                                          
+                                            <td>02/03/2023</td>
+                                            <td>20</td>
+                                            <td>02:00</td>
+                                            <td>5</td> 
+                                            <td>4</td>
+                                            <td>
+                                                <h6 class="mt-0 mb-1">Passed</h6>
+                                                <div class="progress-container" data-percentage='100'>
+                                                    <div class="progress"></div>
+                                                    <div class="percentage">0%</div>
+                                                  </div>
+                                                
+                                            </td>
+                                            <td>
+                                                <button type="button" class="btn sv-btn waves-effect waves-light m-b-5 exm-btns">Test</button>
+                                                <a href="result.html"><button type="button" class="btn btn-see waves-effect m-b-5 exm-btns">See Result</button></a>
+                                            </td>
+                                            <td>
+                                                <div class="action-tbl d-flex justify-content-end">
+                                                    <i class="fa fa-share mx-1 share-btn" data-toggle="tooltip" data-placement="top" title="" data-original-title="Share"></i>
+                                                    <i class="fa fa-pencil mx-1 pencil-btn" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"></i>
+                                                    <i class="fa fa-trash-o mx-1 trash-btn" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"></i>
+                                                 
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>3</td>
+                                            <td>Quiz about our Company</td>
+                                            <td>
+                                                <div class="created-user d-flex align-items-center">
+                                                    <img src="./static/admin/img/users/avatar-5.jpg" alt="">
+                                                    <h6>Admin</h6>
+                                                </div>
+                                            </td>
+                                          
+                                            <td>02/03/2023</td>
+                                            <td>20</td>
+                                            <td>02:00</td>
+                                            <td>5</td> 
+                                            <td>4</td>
+                                            <td>
+                                                <h6 class="mt-0 mb-1">Certified</h6>
+                                                <div class="progress-container" data-percentage='50'>
+                                                    <div class="progress"></div>
+                                                    <div class="percentage">0%</div>
+                                                  </div>
+                                                 
+                                            </td>
+                                            <td>
+                                                <button type="button" class="btn sv-btn waves-effect waves-light m-b-5 exm-btns">Test</button>
+                                                <a href="result.html"><button type="button" class="btn btn-see waves-effect m-b-5 exm-btns">See Result</button></a>
+                                            </td>
+                                            <td>
+                                                <div class="action-tbl d-flex justify-content-end">
+                                                    <i class="fa fa-share mx-1 share-btn" data-toggle="tooltip" data-placement="top" title="" data-original-title="Share"></i>
+                                                    <i class="fa fa-pencil mx-1 pencil-btn" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"></i>
+                                                    <i class="fa fa-trash-o mx-1 trash-btn" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"></i>
+                                                 
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          </div>
+
+    </div>
+</div>
+
+
+{% endblock %}

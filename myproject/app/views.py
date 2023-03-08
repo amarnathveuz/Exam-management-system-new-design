@@ -8,7 +8,11 @@ from .models import *
 
 
 def dashboard(request):
-    return render(request,'dashboard.html')
+    total_exam_count = Main_Exam_Master.objects.all().count()
+    context = {
+        'total_exam_count':total_exam_count
+    }
+    return render(request,'dashboard.html',context)
 
 def index(request):
     if request.method == "POST":
@@ -398,7 +402,7 @@ def user_edit_action(request):
                 data_user = User_details.objects.filter(id=data['member_id']).update(photo=image_new1)
             except:
                 pass
-        messages.success(request, "Successfully updated Member details")
+        messages.success(request, "Successfully updated user details")
         return redirect('user_management')
     
 
@@ -429,3 +433,11 @@ def delete_user_management(request):
         id = request.GET.get("id")
         data = User_details.objects.get(id=id)
         return render(request,"delete_user_management.html",{'data':data})
+
+
+def exam(request):
+    return render(request,'exam.html')
+
+
+def edit_exam(request):
+    return render(request,'edit_exam.html')

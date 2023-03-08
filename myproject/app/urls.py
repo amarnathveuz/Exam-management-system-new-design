@@ -16,7 +16,10 @@ urlpatterns = [
     path('user_edit_modal',views.user_edit_modal,name='user_edit_modal'),
     path('user_edit_action',views.user_edit_action,name='user_edit_action'),
     path('delete_role_management',views.delete_role_management,name='delete_role_management'),
-    path('delete_user_management',views.delete_user_management,name='delete_user_management')
+    path('delete_user_management',views.delete_user_management,name='delete_user_management'),
+    path('exam',views.exam,name='exam'),
+    path('edit_exam',views.edit_exam,name='edit_exam')
+
 
     
 
