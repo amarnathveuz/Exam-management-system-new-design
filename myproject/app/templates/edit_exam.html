@@ -37,7 +37,7 @@
                                     <div class="form-group exam-titl mr-3">
                                         <label for="field-1" class="control-label">Responsible</label>
                                         <div class="responsbl d-flex">
-                                            <img src="img/users/avatar-4.jpg" alt="">
+                                            <img src="./static/admin/img/users/avatar-4.jpg" alt="">
                                             <select name="" id="" class="form-control">
                                                 <option value="" selected="" disabled="">user1</option>
                                                 <option value="">user2</option>
@@ -535,5 +535,620 @@
     </div>
 </div>
 
+<div id="share-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+    aria-hidden="true" style="display: none">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title mt-0">Share a Exam</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="field-1" class="control-label">Exam Title</label>
+                            <input type="text" class="form-control" id="field-1" placeholder="Exam Title">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="field-1" class="control-label">Exam URL</label>
+                            <div class="input-group uploadFile1">
+                               
+                                <input type="text" class="form-control" name="url" value="https://demo4.odoo.com/survey/start/b137640d-9876-1234-abcd-344ca256531e">
+                                <div class="input-group-append">
+                                    <span class="input-group-text"> <i class="fas fa-copy"></i></span>
+                                </div>
+                            </div>
+           
+                        </div>
+                    </div>
+                    <div class="col-md-12 recipient">
+                        <div class="form-group">
+                            <label for="field-1" class="control-label">Recipients</label>
+                            <div id="root1"></div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="field-1" class="control-label">Subject</label>
+                            <input type="text" class="form-control" placeholder="Subject">
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                       <div class="mail-content">
+                        <h5>Dear Participant,</h5>
+                        <p>You have been invited to take a new test.</p>
+                        <p>Please answer the survey for 05/05/2021.</p>
+                        <p>We wish you good luck!</p>
+                       </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="field-1" class="control-label attachmt-plus">Attachments <span>+</span></label>
+                            <div class="input-group uploadFile1">
+                               
+                                <input type="file" class="inputfile form-control" name="file" >
+                                <div class="input-group-append">
+                                    <span class="input-group-text"> <i class="fas fa-paperclip"></i></span>
+                                </div>
+                            </div>
+           
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="field-1" class="control-label">Answer deadline</label>
+                            <input type="text" class="form-control" id="field-1" placeholder="05/03/2023">
+                        </div>
+                    </div>
+                   
+                   
+
+    
+                </div>
+
+
+
+            </div>
+            <div class="modal-footer">
+
+                <button type="button" style="background-color:#f9365f!important;border: none!important;"
+                    class="btn btn-info waves-effect waves-light">Send </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="addsection" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+aria-hidden="true" style="display: none">
+<div class="modal-dialog modal-md modal-dialog-centered">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h4 class="modal-title mt-0">Add a Section</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="field-1" class="control-label">Section Name</label>
+                        <input type="text" class="form-control" id="field-1" placeholder="Section Name">
+                    </div>
+                </div>
+
+            </div>
+
+
+
+        </div>
+        <div class="modal-footer">
+
+            <button type="button" style="background-color:#f9365f!important;border: none!important;"
+                class="btn btn-info waves-effect waves-light">Save </button>
+        </div>
+    </div>
+</div>
+</div>
+
+<div id="question-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+aria-hidden="true" style="display: none">
+<div class="modal-dialog modal-lg">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h4 class="modal-title mt-0">Add a Question</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="field-1" class="control-label">Question</label>
+                        <div class="input-group">
+                      
+                            <input type="text" class="inputfile form-control mb-0" name="file" placeholder="eg: What is the...">
+                            <div class="input-group-append">
+                                <button type="button"
+                            class="input-group-text" data-toggle="modal"
+                            data-target="#language-modal">
+                            <i class="fas fa-language"></i>
+                        </button>
+                         
+                            </div> 
+                        </div>
+                    </div>
+                    
+                 
+                </div>
+                <div class="col-md-12">
+                    <div class="row answer-type">
+                        <div
+                            class="col-md-3 br-right d-flex align-items-start px-0">
+                            <label>Question Type</label>
+                        </div>
+                        <div class="col-md-9 px-2">
+                            <div class="form-group d-flex align-items-center">
+                                <input type="radio" id="customer">
+                                <label for="customer">One page per question</label>
+                            </div>
+                            <div class="form-group d-flex align-items-center">
+                                <input type="radio" id="customer">
+                                <label for="customer">One page per section</label>
+                            </div>
+                            <div class="form-group d-flex align-items-center">
+                                <input type="radio" id="customer">
+                                <label for="customer">One page with all the questions</label>
+                            </div>
+                          
+                        </div>
+                    </div>
+                    
+                </div>
+             <div class="col-md-12 mt-3">
+                <div class="paytab">
+                    <ul class="nav nav-tabs nav-pay mb-2" role="tablist">
+                        <li class="nav-item d-flex align-items-center">
+                            <a class="nav-link active" data-toggle="tab" href="#Answers1"
+                                role="tab">
+                                Answers
+                            </a>
+                        </li>
+                        <li class="nav-item d-flex align-items-center">
+                            <a class="nav-link" data-toggle="tab" href="#Options1"
+                                role="tab">
+                                Options
+                            </a>
+                        </li>
+                        <li class="nav-item d-flex align-items-center">
+                            <a class="nav-link" data-toggle="tab" href="#Description1"
+                                role="tab">
+                                Description
+                            </a>
+                        </li>
+                      
+                    </ul>
+                    <div class="tab-content small-form">
+                        <div class="tab-pane active" id="Answers1" role="tabpanel">
+                            <div class="mt-3">
+                                <div class="mb-2">
+                                    <button type="button"
+                                    class="btn btn-prim pay" >
+                                    Add a Line
+                                </button>
+                             
+                                </div>
+                                <table  class="table table-qstn dt-responsive table-bordered nowrap table-padd" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+
+                                    <thead class="border-class">
+
+                                        <tr class="heading-text">                                                        
+                                            <th>Choices</th>
+                                            <th>Image</th>
+                                            <th></th>
+                                           
+                                        </tr>
+                                    </thead>
+
+
+                                    <tbody class="body-textcls vertcle-center">
+                                        <tr>
+                                            <td>
+                                                <input type="text" class="form-control">
+                                            </td>
+                                            <td>
+                                                <div class="input-group uploadFile1">
+                           
+                                                    <input type="file" class="inputfile form-control mb-0" name="file" >
+                                                    <div class="input-group-append">
+                                                        <span class="input-group-text"> <i class="fas fa-paperclip"></i></span>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="action-tbl d-flex justify-content-end">
+                                                   
+                                                    <i class="fa fa-trash-o mx-1 trash-btn" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"></i>
+                                                
+                                                </div>
+                                            </td>
+                                        </tr>
+                                       
+                                    </tbody>
+                                </table>
+                                
+                                
+                                
+                              
+                            </div>
+
+
+                        </div>
+                        <div class="tab-pane sales_purchase" id="Options1" role="tabpanel">
+
+
+                            <div class="row mb-2 question-options">
+                                <div class="col-md-6 px-0">
+                                    <h5>Answers</h5>
+
+                                    <div class="row">
+                                        <div
+                                            class="col-md-5 br-right d-flex align-items-center px-0">
+                                            <h6>Show Comments Field</h6>
+                                        </div>
+                                        <div class="col-md-7">
+                                            <div class="form-group mt-2 d-flex align-items-center">
+                                                <input type="checkbox" id="customer">
+                                               
+                                            </div>
+                                          
+                                        
+                                          
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                                <div class="col-md-6">
+                                    <h5>Layout</h5>
+
+                                    <div class="row">
+                                        <div
+                                            class="col-md-5 br-right d-flex align-items-center px-0">
+                                            <h6>Conditional Display</h6>
+                                        </div>
+                                        <div
+                                            class="col-md-7 d-flex align-items-center r-day">
+                                            <input type="checkbox" id="r-day">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-md-6 px-0">
+                                    <h5>Constraints</h5>
+
+                                    <div class="row">
+                                        <div
+                                            class="col-md-5 br-right d-flex align-items-center px-0 px-0">
+                                            <h6>Mandatory Answer</h6>
+                                        </div>
+                                        <div
+                                        class="col-md-7 d-flex align-items-center r-day">
+                                        <input type="checkbox" id="r-day">
+                                    </div>
+                                    </div>
+                                   
+                                </div>
+                                <div class="col-md-6">
+                                    <h5>Live Session</h5>
+
+                                    <div class="row">
+                                        <div
+                                            class="col-md-5 br-right d-flex align-items-center px-0">
+                                            <h6>Question Time Limit</h6>
+                                        </div>
+                                        <div
+                                        class="col-md-7 d-flex align-items-center r-day">
+                                        <input type="checkbox" id="r-day">
+                                     </div>
+                                     </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="tab-pane descptn" id="Description1" role="tabpanel">
+
+
+                            <div class="row">
+                                <div class="col-md-12 px-0">
+                                    <textarea name="" id="" cols="30" rows="5"
+                                        class="form-control border-0"
+                                        placeholder="e.g. Guidelines, instructions, picture, ... to help attendees answer"></textarea>
+                                </div>
+                            </div>
+
+                        </div>
+                        
+                    </div>
+                </div>
+             </div>
+              
+               
+               
+
+
+            </div>
+
+
+
+        </div>
+        <div class="modal-footer">
+
+            <button type="button" style="background-color:#f9365f!important;border: none!important;"
+                class="btn btn-info waves-effect waves-light">Save </button>
+        </div>
+    </div>
+</div>
+</div>
+
+<div id="language-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+aria-hidden="true" style="display: none">
+<div class="modal-dialog modal-lg">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h4 class="modal-title mt-0">Language</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="field-1" class="control-label">English</label>
+                        <div class="input-group">
+                      
+                            <input type="text" class="inputfile form-control mb-0"  placeholder="">
+                            <div class="input-group-append">
+                                <span  class="input-group-text">  <img src="img/language/english.jpg" alt="" style="height: 20px;"></span>
+                         
+                            </div> 
+                     
+                      
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="field-1" class="control-label">Arabic</label>
+                        <div class="input-group">
+                      
+                            <input type="text" class="inputfile form-control mb-0"  placeholder="">
+                            <div class="input-group-append">
+                                <span  class="input-group-text">  <img src="img/language/arabic.jpg" alt="" style="height: 20px;"></span>
+                         
+                            </div> 
+                     
+                      
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="field-1" class="control-label">Hindi</label>
+                        <div class="input-group">
+                      
+                            <input type="text" class="inputfile form-control mb-0"  placeholder="">
+                            <div class="input-group-append">
+                                <span  class="input-group-text">  <img src="img/language/hindi.jpg" alt="" style="height: 20px;"></span>
+                         
+                            </div> 
+                     
+                      
+                    </div>
+                </div>
+
+            </div>
+
+
+
+        </div>
+        <div class="modal-footer">
+
+            <button type="button" style="background-color:#f9365f!important;border: none!important;"
+                class="btn btn-info waves-effect waves-light">Save </button>
+        </div>
+    </div>
+</div>
+</div>
+
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/custome.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="plugins/datatables/dataTables.bootstrap4.min.js"></script>
+    <script src="plugins/datatables/dataTables.responsive.min.js"></script>
+    <script src="plugins/datatables/responsive.bootstrap4.min.js"></script>
+    <script src="plugins/datatables/datatables.init.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/16.8.4/umd/react.production.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.8.4/umd/react-dom.production.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('#datatable').dataTable();
+            $('#datatable-keytable').DataTable({
+                keys: true
+            });
+            $('#datatable-responsive').DataTable();
+            $('#datatable-scroller').DataTable({
+                ajax: "plugins/datatables/json/scroller-demo.json",
+                deferRender: true,
+                scrollY: 380,
+                scrollCollapse: true,
+                scroller: true
+            });
+            var table = $('#datatable-fixed-header').DataTable({
+                fixedHeader: true
+            });
+        });
+        TableManageButtons.init();
+    </script>
+
+
+    <script>
+        $("a.splnav").click(function () {
+            $("a.splnav").css("background-color", "#222");
+            $(this).css("background-color", "black");
+            // $(this).css("border-left", "3px solid #6e56a3");
+        });
+    </script>
+    <script>
+        jQuery(document).ready(function (e) {
+            function t(t) {
+                e(t).bind("click", function (t) {
+                    t.preventDefault();
+                    e(this).parent().fadeOut()
+                })
+            }
+            e(".drpdown-toggle").click(function () {
+                var t = e(this).parents(".button-drpdown").children(".drpdown-menu").is(":hidden");
+                e(".button-drpdown .drpdown-menu").hide();
+                e(".button-drpdown .drpdown-toggle").removeClass("active");
+                if (t) {
+                    e(this).parents(".button-drpdown").children(".drpdown-menu").toggle().parents(
+                        ".button-drpdown").children(".drpdown-toggle").addClass("active")
+                }
+            });
+            e(document).bind("click", function (t) {
+                var n = e(t.target);
+                if (!n.parents().hasClass("button-drpdown")) e(".button-drpdown .drpdown-menu").hide();
+            });
+            e(document).bind("click", function (t) {
+                var n = e(t.target);
+                if (!n.parents().hasClass("button-drpdown")) e(".button-drpdown .drpdown-toggle")
+                    .removeClass("active");
+            })
+        });
+    </script>
+    <script>
+        let searchIcon = document.querySelector(".search-bar__search-icon"),
+            closeIcon = document.querySelector(".search-bar__close-icon .far"),
+            searchBar = document.querySelector(".search-bar"),
+            searchInput = document.querySelector(".search-bar__search-input input")
+
+
+        searchIcon.onclick = () => {
+            searchBar.classList.toggle("search-bar--active")
+        }
+
+
+        closeIcon.onclick = () => {
+            searchInput.value = ""
+            searchInput.focus()
+        }
+
+
+
+        searchInput.onfocus = function () {
+            let place = this.getAttribute("placeholder")
+            this.setAttribute("data", `${place}`)
+            this.removeAttribute("placeholder")
+        }
+
+        searchInput.onblur = function () {
+            this.setAttribute("placeholder", `${this.getAttribute("data")}`)
+        }
+    </script>
+    <script>
+        const progressContainer = document.querySelector('.progress-container');
+        setPercentage();
+
+        function setPercentage() {
+            const percentage = progressContainer.getAttribute('data-percentage') + '%';
+
+            const progressEl = progressContainer.querySelector('.progress');
+            const percentageEl = progressContainer.querySelector('.percentage');
+
+            progressEl.style.width = percentage;
+            percentageEl.innerText = percentage;
+            percentageEl.style.left = percentage;
+        }
+    </script>
+        <script>
+            const TagsInput1 = props => {
+                const [tags1, setTags1] = React.useState(props.tags1);
+                const removeTags1 = indexToRemove => {
+                    setTags1([...tags1.filter((_, index) => index !== indexToRemove)]);
+                };
+                const addTags1 = event => {
+                    if (event.target.value !== "") {
+                        setTags1([...tags1, event.target.value]);
+                        props.selectedTags1([...tags1, event.target.value]);
+                        event.target.value = "";
+                    }
+                };
+                return /*#__PURE__*/ (
+                    React.createElement("div", {
+                            className: "tags-input1"
+                        }, /*#__PURE__*/
+                        React.createElement("ul", {
+                                id: "tags1"
+                            },
+                            tags1.map((tag1, index) => /*#__PURE__*/
+                                React.createElement("li", {
+                                        key: index,
+                                        className: "tag1"
+                                    }, /*#__PURE__*/
+                                    React.createElement("span", {
+                                        className: "tag-title1"
+                                    }, tag1), /*#__PURE__*/
+                                    React.createElement("span", {
+                                        className: "tag-close-icon1",
+                                        onClick: () => removeTags1(index)
+                                    }, "x")))), /*#__PURE__*/
+    
+    
+    
+    
+    
+    
+                        React.createElement("input", {
+                            type: "text",
+                            onKeyUp: event => event.key === "Enter" ? addTags1(event) : null,
+                            placeholder: "Mail id"
+                        })));
+    
+    
+    
+            };
+    
+            const App1 = () => {
+                const selectedTags1 = tags1 => {
+                    console.log(tags1);
+                };
+                return /*#__PURE__*/ (
+                    React.createElement("div", {
+                            className: "App1"
+                        }, /*#__PURE__*/
+                        React.createElement(TagsInput1, {
+                            selectedTags1: selectedTags1,
+                            tags1: ['user@gmail.com']
+                        })));
+    
+    
+            };
+    
+            ReactDOM.render( /*#__PURE__*/ React.createElement(App1, null), document.getElementById("root1"));
+        </script>
+
+</body>
+
+</html>
 
 {% endblock %}
