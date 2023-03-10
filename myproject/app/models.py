@@ -68,6 +68,7 @@ class Main_Exam_Master(common_table):
     attempt_limit = models.IntegerField(null=True)
     Success_per = models.IntegerField(null=True)
     slug = models.SlugField(max_length=50, unique=True)
+    back_button = models.BooleanField(default=False)
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify(rand_slug() + "-" + self.Exam_title)
