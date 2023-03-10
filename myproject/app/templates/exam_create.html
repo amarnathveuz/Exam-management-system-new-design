@@ -3,6 +3,16 @@
 {% load static %}
 
 {% block content %}
+
+<style>
+    #scoring_ans, #no_score{
+        accent-color: #1e4561; 
+    }
+</style>
+
+
+<form class="forms-sample submit_action" name="exam_form"  action="exam_save_action"  method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
 <div class="content">
     <div class="container-fluid margin-class-this">
         <div class="row">
@@ -11,13 +21,13 @@
 
                     <div class="card-body body-change card-border">
                         <div class="d-flex align-items-center justify-content-between">
-                            <h2 class="main-heading-txt">New Exam</h2>
+                            <h2 class="main-heading-txt"></h2>
                             <div class="d-flex"> 
                      
                                 <!-- <button type="button" class="btn btn-outline-pink waves-effect waves-light m-b-5 mx-1" data-toggle="modal" data-target="#share-modal"><i class="fa fa-share mr-1"></i>Share</button>
                                 <button type="button" class="btn btn-outline-pink waves-effect waves-light m-b-5 mx-1"><i class="fa fa-print mr-1"></i>Print</button> -->
-                                <button type="button" class="btn btn-outline-pink waves-effect waves-light m-b-5 mx-1"><i class="fas fa-times mr-1"></i>Close</button>
-                                <a href=""> <button type="button" class="btn btn-pink waves-effect waves-light m-b-5">Save</button></a>
+                                <a href="exam"><button type="button" class="btn btn-outline-pink waves-effect waves-light m-b-5 mx-1"><i class="fas fa-times mr-1"></i>Close</button></a>
+                                <a href=""> <button type="submit" class="btn btn-pink waves-effect waves-light m-b-5">Save</button></a>
                             </div>
                         
                            
@@ -28,41 +38,64 @@
                             <div class="col-md-5 col-sm-12 col-12 px-0">
                                 <div class="form-group exam-titl">
                                     <label for="field-1" class="control-label">Exam Title</label>
-                                    <input type="text" class="form-control" id="field-1" value="Exam Title">
+                                    <input type="text" required name="exam_title" placeholder="Exam Title" class="form-control" id="field-1">
                                 </div>
 
                             </div>
+
+                            <div class="col-md-7" style="float: right;">
+                                <div class="col-md-12">
+                                       <div class="form-group"> 
+                                         <style>
+                                            .uploadFile1 .inputfile::-webkit-file-upload-button {
+                                            display: none;
+                                        }
+                                         </style>
+                                              <div class="input-group uploadFile1" style="width: 35%;
+                                              float: right;">
+                                                <input type="file" accept="image/*"  class="inputfile form-control" name="exam_background"  > 
+                                                   <div class="input-group-append"><span class="input-group-text"> <i class="fa fa-user"></i></span> 
+                                                   </div> 
+                                                   </div> 
+                                                 </div> 
+                                            </div>
+                                </div>
+
+
                             <div class="col-12 px-0">
                                 <div class="d-flex">
                                     <div class="form-group exam-titl mr-3">
                                         <label for="field-1" class="control-label">Responsible</label>
                                         <div class="responsbl d-flex">
                                             <img src="./static/admin/img/users/avatar-4.jpg" alt="">
-                                            <select name="" id="" class="form-control">
-                                                <option value="" selected="" disabled="">user1</option>
-                                                <option value="">user2</option>
-                                                <option value="">user3</option>
+                                            <select required name="responsible_name" id="" class="form-control">
+                                                <option value="">Select User</option>
+                                                {% for i in user_details %}
+            
+                                                <option value="{{i.id}}">{{i.username}}</option>
+                                    
+                                                {% endfor %}
                                             
                                             </select>
                                         </div>
                                     
                                     </div>
-                                    <div class="form-group responsbl">
+                                    <div class="form-group responsbl ">
                                         <label for="field-1" class="control-label">Language</label>
-                                                                                       
-                                            <select name="" id="" class="form-control">
-                                                <option value="" selected="" disabled="">English</option>
-                                                <option value="">Arabic</option>
-                                                <option value="">Hindi</option>
-                                                <option value="">Urdu</option>
-                                            
-                                            </select>
-                                      
-                                    
+                                        <span style="color: red;
+                                        font-weight: bold;">(Default English)</span>
+
+                                    <div class="responsbl d-flex">
+
+                                    <input type="hidden" name="language_type" value="en"  >  
+                                    <input type="checkbox" name="language_type" value="ar" data-id="ar" class="lang_class">&ensp; <span style="font-size: 12px;" >Arabic</span>  &ensp;
+                                    <input type="checkbox" name="language_type" value="hi" data-id="hi" class="lang_class">&ensp; <span style="font-size: 12px;" >Hindi </span>  &ensp;
+                                    <input type="checkbox" name="language_type" value="ur" data-id="ur" class="lang_class">&ensp; <span style="font-size: 12px;" >Urdu </span> &ensp;
+                                    <input type="checkbox" name="language_type" value="ta" data-id="ta" class="lang_class">&ensp; <span style="font-size: 12px;" >Tamil </span>
+                                    </div>                                            
+                                           
                                     </div>
                                 </div>
-                               
-
                             </div>
                             <div class="col">
                                 
@@ -84,7 +117,7 @@
                                             </a>
                                         </li>
                                         <li class="nav-item d-flex align-items-center">
-                                            <a class="nav-link" data-toggle="tab" href="#Description"
+                                            <a class="nav-link" data-toggle="tab" href="#Startmessage"
                                                 role="tab">
                                                 Start Message
                                             </a>
@@ -101,6 +134,12 @@
                                                 Initial Fields
                                             </a>
                                         </li>
+                                        <li class="nav-item d-flex align-items-center">
+                                            <a class="nav-link" data-toggle="tab" href="#generalinstructions"
+                                                role="tab">
+                                                General Instructions
+                                            </a>
+                                        </li>
                                     </ul>
                                     <div class="tab-content small-form">
                                         <div class="tab-pane active" id="Questions" role="tabpanel">
@@ -111,11 +150,24 @@
                                                     data-target="#addsection">
                                                     Add a Section
                                                 </button>
-                                                <button type="button"
-                                                class="btn btn-prim pay" data-toggle="modal"
-                                                data-target="#question-modal">
+                                                <button type="button" style="cursor: pointer;"  class="btn btn-prim pay dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"  >
+                                                            <div style="padding: 18px 5px 10px;" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                                <div style="padding: 3px 2px;
+                                                                background: black;
+                                                                color: white;
+                                                                font-size: 12px;
+                                                                margin: 7px 1px; border-radius: 5px;" onclick="direct_question_btn()"><span style="margin:4px 4px;">Direct Question</span>  </div>
+                                                                
+                                                                <div style="padding: 3px 2px;
+                                                                background: black;
+                                                                color: white;
+                                                                font-size: 12px;
+                                                                margin: 7px 1px; border-radius: 5px;"><span style="margin:4px 4px;">Pick from question bank</span>  </div>
+                                                                
+                                                            </div>
+                                                
                                                 Add a question
-                                            </button>
+                                                </button>
                                                 </div>
                                                 <table  class="table table-qstn dt-responsive table-bordered nowrap table-padd" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
 
@@ -130,91 +182,21 @@
                                                     </thead>
     
     
-                                                    <tbody class="body-textcls vertcle-center">
-                                                        <tr>
-                                                            <td>what is HTML ?</td>
-                                                            <td>Multiple choice: only one answer</td>
-                                                            <td>
-                                                                <div class="action-tbl d-flex justify-content-end">
-                                                                   
-                                                                    <i class="fa fa-trash-o mx-1 trash-btn" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"></i>
-                                                                
-                                                                </div>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>what is CSS ?</td>
-                                                            <td>Multiple choice: only one answer</td>
-                                                            <td>
-                                                                <div class="action-tbl d-flex justify-content-end">
-                                                                   
-                                                                    <i class="fa fa-trash-o mx-1 trash-btn" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"></i>
-                                                                
-                                                                </div>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td colspan="2" style="background-color: #f3f6f8"><b>SECTION 1</b>  </td>
-                                                            <td style="background-color: #f3f6f8">
-                                                                <div class="action-tbl d-flex justify-content-end">
-                                                                   
-                                                                    <i class="fa fa-trash-o mx-1 trash-btn" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"></i>
-                                                                
-                                                                </div>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td colspan="3">
-                                                                <table  class="table-bordered" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
-                                                                    <thead class="border-class">
-        
-                                                                        <tr class="heading-text">                                                        
-                                                                            <th>Title</th>
-                                                                            <th>Question Type</th>
-                                                                            <th></th>
-                                                                           
-                                                                        </tr>
-                                                                    </thead>
-                                                                    <tbody class="body-textcls vertcle-center">
-                                                                        <tr>
-                                                                            <td>what is HTML ?</td>
-                                                                            <td>Multiple choice: only one answer</td>
-                                                                            <td>
-                                                                                <div class="action-tbl d-flex justify-content-end">
-                                                                                   
-                                                                                    <i class="fa fa-trash-o mx-1 trash-btn" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"></i>
-                                                                                
-                                                                                </div>
-                                                                            </td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td>what is CSS ?</td>
-                                                                            <td>Multiple choice: only one answer</td>
-                                                                            <td>
-                                                                                <div class="action-tbl d-flex justify-content-end">
-                                                                                   
-                                                                                    <i class="fa fa-trash-o mx-1 trash-btn" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"></i>
-                                                                                
-                                                                                </div>
-                                                                            </td>
-                                                                        </tr>
-                                                                    </tbody>
-                                                                </table>
-                                                            </td>
-                                                         
-                                                        </tr>
+                                                    <tbody id="append_table" class="body-textcls vertcle-center">
+                                                       
+
                                                     </tbody>
                                                 </table>
                                                 
-                                                
-                                                
-                                              
                                             </div>
 
 
                                         </div>
-                                        <div class="tab-pane sales_purchase" id="Options" role="tabpanel">
 
+
+                                        <!-- Options tab -->
+
+                                        <div class="tab-pane sales_purchase" id="Options" role="tabpanel">
 
                                             <div class="row mb-2 question-options">
                                                 <div class="col-md-6 px-0">
@@ -227,16 +209,18 @@
                                                         </div>
                                                         <div class="col-md-9 py-2">
                                                             <div class="form-group d-flex align-items-center">
-                                                                <input type="radio" id="customer">
-                                                                <label for="customer">One page per question</label>
+                                                                <input type="radio" value="0" checked  name="layout" id="customer">
+                                                                <label for="customer">One page with all the questions</label>
+                                                               
                                                             </div>
                                                             <div class="form-group d-flex align-items-center">
-                                                                <input type="radio" id="customer">
+                                                                <input type="radio" value="1"  name="layout" id="customer">
                                                                 <label for="customer">One page per section</label>
                                                             </div>
                                                             <div class="form-group d-flex align-items-center">
-                                                                <input type="radio" id="customer">
-                                                                <label for="customer">One page with all the questions</label>
+                                                                <input type="radio" value="2"  name="layout" id="customer">
+                                                                <label for="customer">One page per question</label>
+                                                                
                                                             </div>
                                                           
                                                         </div>
@@ -248,11 +232,11 @@
                                                         </div>
                                                         <div class="col-md-9 py-2">
                                                             <div class="form-group d-flex align-items-center">
-                                                                <input type="radio" id="customer">
+                                                                <input type="radio" checked value="Percentage" name="progression" id="customer">
                                                                 <label for="customer">Percentage left</label>
                                                             </div>
                                                             <div class="form-group d-flex align-items-center">
-                                                                <input type="radio" id="customer">
+                                                                <input type="radio" value="Number" name="progression" id="customer">
                                                                 <label for="customer">Number</label>
                                                             </div>
                                                         
@@ -266,18 +250,19 @@
                                                         </div>
                                                         <div class="col-md-9 py-2">
                                                             <div class="form-group d-flex align-items-center">
-                                                                <input type="radio" id="customer">
+                                                                <input type="radio" checked value="All questions" id="customer" name="selection_mode">
                                                                 <label for="customer">All questions</label>
                                                             </div>
                                                             <div class="form-group d-flex align-items-center">
-                                                                <input type="radio" id="customer">
+                                                                <input type="radio" value="Randomized per section" id="customer" name="selection_mode">
                                                                 <label for="customer">Randomized per Section</label>
                                                             </div>
                                                         
                                                           
                                                         </div>
                                                     </div>
-                                                    <div class="row">
+
+                                                    <!-- <div class="row">
                                                         <div
                                                             class="col-md-3 br-right d-flex align-items-center px-0">
                                                             <h6>Back Button</h6>
@@ -287,11 +272,8 @@
                                                                 <input type="checkbox" id="customer">
                                                                
                                                             </div>
-                                                          
-                                                        
-                                                          
                                                         </div>
-                                                    </div>
+                                                    </div> -->
                                                     
                                                 </div>
                                                 <div class="col-md-6">
@@ -305,14 +287,16 @@
                                                         </div>
                                                         <div
                                                             class="col-md-5 d-flex align-items-center m-l-10">
-                                                            <select name="" id="" class="form-control">
-                                                                <option value="">Anyone with the link</option>
-                                                                <option value="">Invited people only</option>
+                                                            <select name="access_mode" id="" class="form-control">
+                                                                <option value="0">Anyone with the link</option>
+                                                                <option value="1">Invited people only</option>
                                                              
 
                                                             </select>
                                                         </div>
                                                     </div>
+
+
                                                     <div class="row">
                                                         <div
                                                             class="col-md-3 br-right d-flex align-items-center px-0">
@@ -320,8 +304,26 @@
                                                         </div>
                                                         <div
                                                             class="col-md-9 d-flex align-items-center r-day">
-                                                            <input type="checkbox" id="r-day">
+                                                            <input type="checkbox" id="login_required" value="True" name="login_required">
                                                         </div>
+                                                    </div>
+
+
+                                                    <div class="row" id="attemp_lim" style="display:none;">
+                                                        <div
+                                                            class="col-md-3 br-right d-flex align-items-center px-0">
+                                                            <h6>Attempts Limit</h6>
+                                                        </div>
+                                                        <div
+                                                            class="col-md-1 d-flex align-items-center r-day">
+                                                            <input type="checkbox">
+                                                        </div>
+                                                        <div
+                                                        class="col-md-1 d-flex align-items-center r-day">
+                                                        <input style="border: 1px solid #e8ecf1;
+                                                        font-size: 0.8125rem;" value="1" name="attempt_limit" type="number" placeholder="attempts">
+                                                        <span style="font-size: 10px;">attempts</span>
+                                                    </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -333,11 +335,16 @@
                                                     <div class="row">
                                                         <div
                                                             class="col-md-3 br-right d-flex align-items-center px-0 px-0">
-                                                            <h6>Survey Time Limit</h6>
+                                                            <h6>Exam Time Limit</h6>
                                                         </div>
                                                         <div
                                                         class="col-md-7 d-flex align-items-center r-day">
-                                                        <input type="checkbox" id="r-day">
+                                                        <input type="checkbox" name="exam_check" value="True" id="exam_check">
+                                                        <div id="show_timelimit" style="display: none;">
+                                                            <input  style="border: 1px solid #e8ecf1;
+                                                           
+                                                            font-size: 0.8125rem;" value="10:00" type="text" name="exam_time_limit" placeholder="10:00"> <span style="font-size: 10px;">minutes</span>
+                                                            </div>
                                                     </div>
                                                     </div>
                                                     <div class="row">
@@ -347,27 +354,27 @@
                                                         </div>
                                                         <div class="col-md-9 py-2">
                                                             <div class="form-group d-flex align-items-center">
-                                                                <input type="radio" id="customer">
-                                                                <label for="customer">No scoring</label>
+                                                                <input type="radio" id="no_score" checked value="0" name="Scoring">
+                                                                <label for="no_score">No scoring</label>
                                                             </div>
                                                             <div class="form-group d-flex align-items-center">
-                                                                <input type="radio" id="customer">
-                                                                <label for="customer">Scoring with answers at the end</label>
+                                                                <input type="radio" id="scoring_ans" value="1" name="Scoring">
+                                                                <label for="scoring_ans">Scoring with answers at the end</label>
                                                             </div>
                                                             <div class="form-group d-flex align-items-center">
-                                                                <input type="radio" id="customer">
+                                                                <input type="radio" id="customer" value="2" name="Scoring">
                                                                 <label for="customer">Scoring without answers at the end</label>
                                                             </div>
                                                           
                                                         </div>
                                                     </div>
-                                                    <div class="row">
+                                                    <div class="row" id="req_score" style="display:none;">
                                                         <div
                                                             class="col-md-3 br-right d-flex align-items-center px-0">
                                                             <h6>Required Score (%)</h6>
                                                         </div>
                                                         <div class="col-md-1">
-                                                            <input type="text" class="form-control" value="80.00">
+                                                            <input type="text" name="required_score" class="form-control" value="80">
                                                            
                                                           
                                                         </div>
@@ -384,7 +391,9 @@
                                                     </div>
 
                                                 </div>
-                                                <div class="col-md-6">
+
+
+                                                <!-- <div class="col-md-6">
                                                     <h5>Live Session</h5>
 
                                                     <div class="row">
@@ -424,39 +433,50 @@
                                                         <input type="checkbox" id="r-day">
                                                      </div>
                                                      </div>
-                                                </div>
+                                                </div> -->
+
+
                                             </div>
 
                                         </div>
-                                        <div class="tab-pane descptn" id="Description" role="tabpanel">
+
+                                         <!-- Startmessage tab -->
+
+                                        <div class="tab-pane descptn" id="Startmessage" role="tabpanel">
 
 
                                             <div class="row">
                                                 <div class="col-md-12 px-0">
-                                                    <textarea name="" id="" cols="30" rows="5"
+                                                    <textarea name="start_message" id="" cols="30" rows="5"
                                                         class="form-control border-0"
                                                         placeholder="Start Message..."></textarea>
                                                 </div>
                                             </div>
 
                                         </div>
+
+                                         <!-- Endmessage tab -->
+
                                         <div class="tab-pane descptn" id="Endmessage" role="tabpanel">
                                             <div class="row">
                                                 <div class="col-md-12 px-0">
-                                                    <textarea name="" id="" cols="30" rows="5"
+                                                    <textarea name="end_message" id="" cols="30" rows="5"
                                                         class="form-control border-0"
                                                         placeholder="End Message..."></textarea>
                                                 </div>
                                             </div>
 
                                         </div>
+
+                                         <!-- initialfield tab -->
+
                                         <div class="tab-pane" id="initialfield" role="tabpanel">
                                             <div class="mt-4">
                                                 <div class="mb-2">
                                                     <button type="button"
-                                                    class="btn btn-prim pay">
+                                                    class="btn btn-prim pay add_exam_field">
                                                     Add a Line
-                                                </button>
+                                                    </button>
                                               
                                                 </div>
                                                 <table  class="table table-qstn table-input dt-responsive table-bordered nowrap table-padd" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
@@ -473,47 +493,12 @@
                                                     </thead>
     
     
-                                                    <tbody class="body-textcls vertcle-center">
-                                                        <tr>
-                                                            <td><input type="text" name="" id="" class="form-control"></td>
-                                                            <td>
-                                                                <select name="" id="" class="form-control">
-                                                                    <option value="" selected="" disabled="">Text</option>
-                                                                    <option value="">Select</option>
-                                                                    <option value="">Date</option>
-                                                                
-                                                                </select>
-                                                            </td>
-                                                            <td>
-                                                                <input type="text" name="" id="" class="form-control">
-                                                            </td>
-                                                            <td> <div class="action-tbl d-flex justify-content-end mt-1">
-                                                                   
-                                                                <i class="fa fa-trash-o mx-1 trash-btn" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"></i>
-                                                            
-                                                            </div></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td><input type="text" name="" id="" class="form-control"></td>
-                                                            <td>
-                                                                <select name="" id="" class="form-control">
-                                                                    <option value="" selected="" disabled="">Text</option>
-                                                                    <option value="">Select</option>
-                                                                    <option value="">Date</option>
-                                                                
-                                                                </select>
-                                                            </td>
-                                                            <td>
-                                                                <input type="text" name="" id="" class="form-control">
-                                                            </td>
-                                                            <td> <div class="action-tbl d-flex justify-content-end mt-1">
-                                                                   
-                                                                <i class="fa fa-trash-o mx-1 trash-btn" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"></i>
-                                                            
-                                                            </div></td>
-                                                        </tr>
+                                                    <tbody id="append_inital_field" class="body-textcls vertcle-center">
+                                                        
+                                                        
                                                   
                                                     </tbody>
+
                                                 </table>
                                                 
                                                 
@@ -522,6 +507,49 @@
                                             </div>
 
                                         </div>
+
+
+                                         <!-- generalinstructions tab -->
+
+                                         <div class="tab-pane" id="generalinstructions" role="tabpanel">
+                                            <div class="mt-4">
+                                                <div class="mb-2">
+                                                    <button type="button"
+                                                    class="btn btn-prim pay add_instruction">
+                                                    Add a Line
+                                                    </button>
+                                              
+                                                </div>
+                                                <table  class="table table-qstn table-input dt-responsive table-bordered nowrap table-padd" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+
+                                                    <thead class="border-class">
+    
+                                                        <tr class="heading-text">                                                        
+                                                            <th style="width: 300px">Instruction</th>
+                                                           
+                                                            <th></th>
+                                                           
+                                                        </tr>
+                                                    </thead>
+    
+    
+                                                    <tbody id="append_instruction" class="body-textcls vertcle-center">
+                                                        
+                                                        
+                                                  
+                                                    </tbody>
+
+                                                </table>
+                                                
+                                                
+                                                
+                                              
+                                            </div>
+
+                                        </div>
+
+                                       
+
                                     </div>
                                 </div>
                             </div>
@@ -531,97 +559,17 @@
                 </div>
             </div>
           </div>
-
     </div>
 </div>
 
-<div id="share-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-    aria-hidden="true" style="display: none">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title mt-0">Share a Exam</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="field-1" class="control-label">Exam Title</label>
-                            <input type="text" class="form-control" id="field-1" placeholder="Exam Title">
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="field-1" class="control-label">Exam URL</label>
-                            <div class="input-group uploadFile1">
-                               
-                                <input type="text" class="form-control" name="url" value="https://demo4.odoo.com/survey/start/b137640d-9876-1234-abcd-344ca256531e">
-                                <div class="input-group-append">
-                                    <span class="input-group-text"> <i class="fas fa-copy"></i></span>
-                                </div>
-                            </div>
-           
-                        </div>
-                    </div>
-                    <div class="col-md-12 recipient">
-                        <div class="form-group">
-                            <label for="field-1" class="control-label">Recipients</label>
-                            <div id="root1"></div>
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label for="field-1" class="control-label">Subject</label>
-                            <input type="text" class="form-control" placeholder="Subject">
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                       <div class="mail-content">
-                        <h5>Dear Participant,</h5>
-                        <p>You have been invited to take a new test.</p>
-                        <p>Please answer the survey for 05/05/2021.</p>
-                        <p>We wish you good luck!</p>
-                       </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="field-1" class="control-label attachmt-plus">Attachments <span>+</span></label>
-                            <div class="input-group uploadFile1">
-                               
-                                <input type="file" class="inputfile form-control" name="file" >
-                                <div class="input-group-append">
-                                    <span class="input-group-text"> <i class="fas fa-paperclip"></i></span>
-                                </div>
-                            </div>
-           
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="field-1" class="control-label">Answer deadline</label>
-                            <input type="text" class="form-control" id="field-1" placeholder="05/03/2023">
-                        </div>
-                    </div>
-                   
-                   
 
-    
-                </div>
+<div class="direct_question_modal">
 
-
-
-            </div>
-            <div class="modal-footer">
-
-                <button type="button" style="background-color:#f9365f!important;border: none!important;"
-                    class="btn btn-info waves-effect waves-light">Send </button>
-            </div>
-        </div>
-    </div>
 </div>
+
+</form>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 <div id="addsection" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
 aria-hidden="true" style="display: none">
@@ -633,351 +581,26 @@ aria-hidden="true" style="display: none">
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
+
         <div class="modal-body">
             <div class="row">
                 <div class="col-md-12">
                     <div class="form-group">
                         <label for="field-1" class="control-label">Section Name</label>
-                        <input type="text" class="form-control" id="field-1" placeholder="Section Name">
+                        <input type="text" class="form-control section_title" id="field-1" placeholder="Section Name">
                     </div>
                 </div>
-
             </div>
-
-
-
         </div>
-        <div class="modal-footer">
 
+        <div class="modal-footer">
             <button type="button" style="background-color:#f9365f!important;border: none!important;"
-                class="btn btn-info waves-effect waves-light">Save </button>
+                class="btn btn-info waves-effect waves-light section_btn">Save </button>
         </div>
     </div>
 </div>
 </div>
 
-<div id="question-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-aria-hidden="true" style="display: none">
-<div class="modal-dialog modal-lg">
-    <div class="modal-content">
-        <div class="modal-header">
-            <h4 class="modal-title mt-0">Add a Question</h4>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        <div class="modal-body">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <label for="field-1" class="control-label">Question</label>
-                        <div class="input-group">
-                      
-                            <input type="text" class="inputfile form-control mb-0" name="file" placeholder="eg: What is the...">
-                            <div class="input-group-append">
-                                <button type="button"
-                            class="input-group-text" data-toggle="modal"
-                            data-target="#language-modal">
-                            <i class="fas fa-language"></i>
-                        </button>
-                         
-                            </div> 
-                        </div>
-                    </div>
-                    
-                 
-                </div>
-                <div class="col-md-12">
-                    <div class="row answer-type">
-                        <div
-                            class="col-md-3 br-right d-flex align-items-start px-0">
-                            <label>Question Type</label>
-                        </div>
-                        <div class="col-md-9 px-2">
-                            <div class="form-group d-flex align-items-center">
-                                <input type="radio" id="customer">
-                                <label for="customer">One page per question</label>
-                            </div>
-                            <div class="form-group d-flex align-items-center">
-                                <input type="radio" id="customer">
-                                <label for="customer">One page per section</label>
-                            </div>
-                            <div class="form-group d-flex align-items-center">
-                                <input type="radio" id="customer">
-                                <label for="customer">One page with all the questions</label>
-                            </div>
-                          
-                        </div>
-                    </div>
-                    
-                </div>
-             <div class="col-md-12 mt-3">
-                <div class="paytab">
-                    <ul class="nav nav-tabs nav-pay mb-2" role="tablist">
-                        <li class="nav-item d-flex align-items-center">
-                            <a class="nav-link active" data-toggle="tab" href="#Answers1"
-                                role="tab">
-                                Answers
-                            </a>
-                        </li>
-                        <li class="nav-item d-flex align-items-center">
-                            <a class="nav-link" data-toggle="tab" href="#Options1"
-                                role="tab">
-                                Options
-                            </a>
-                        </li>
-                        <li class="nav-item d-flex align-items-center">
-                            <a class="nav-link" data-toggle="tab" href="#Description1"
-                                role="tab">
-                                Description
-                            </a>
-                        </li>
-                      
-                    </ul>
-                    <div class="tab-content small-form">
-                        <div class="tab-pane active" id="Answers1" role="tabpanel">
-                            <div class="mt-3">
-                                <div class="mb-2">
-                                    <button type="button"
-                                    class="btn btn-prim pay" >
-                                    Add a Line
-                                </button>
-                             
-                                </div>
-                                <table  class="table table-qstn dt-responsive table-bordered nowrap table-padd" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
-
-                                    <thead class="border-class">
-
-                                        <tr class="heading-text">                                                        
-                                            <th>Choices</th>
-                                            <th>Image</th>
-                                            <th></th>
-                                           
-                                        </tr>
-                                    </thead>
-
-
-                                    <tbody class="body-textcls vertcle-center">
-                                        <tr>
-                                            <td>
-                                                <input type="text" class="form-control">
-                                            </td>
-                                            <td>
-                                                <div class="input-group uploadFile1">
-                           
-                                                    <input type="file" class="inputfile form-control mb-0" name="file" >
-                                                    <div class="input-group-append">
-                                                        <span class="input-group-text"> <i class="fas fa-paperclip"></i></span>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="action-tbl d-flex justify-content-end">
-                                                   
-                                                    <i class="fa fa-trash-o mx-1 trash-btn" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"></i>
-                                                
-                                                </div>
-                                            </td>
-                                        </tr>
-                                       
-                                    </tbody>
-                                </table>
-                                
-                                
-                                
-                              
-                            </div>
-
-
-                        </div>
-                        <div class="tab-pane sales_purchase" id="Options1" role="tabpanel">
-
-
-                            <div class="row mb-2 question-options">
-                                <div class="col-md-6 px-0">
-                                    <h5>Answers</h5>
-
-                                    <div class="row">
-                                        <div
-                                            class="col-md-5 br-right d-flex align-items-center px-0">
-                                            <h6>Show Comments Field</h6>
-                                        </div>
-                                        <div class="col-md-7">
-                                            <div class="form-group mt-2 d-flex align-items-center">
-                                                <input type="checkbox" id="customer">
-                                               
-                                            </div>
-                                          
-                                        
-                                          
-                                        </div>
-                                    </div>
-                                    
-                                </div>
-                                <div class="col-md-6">
-                                    <h5>Layout</h5>
-
-                                    <div class="row">
-                                        <div
-                                            class="col-md-5 br-right d-flex align-items-center px-0">
-                                            <h6>Conditional Display</h6>
-                                        </div>
-                                        <div
-                                            class="col-md-7 d-flex align-items-center r-day">
-                                            <input type="checkbox" id="r-day">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row mb-3">
-                                <div class="col-md-6 px-0">
-                                    <h5>Constraints</h5>
-
-                                    <div class="row">
-                                        <div
-                                            class="col-md-5 br-right d-flex align-items-center px-0 px-0">
-                                            <h6>Mandatory Answer</h6>
-                                        </div>
-                                        <div
-                                        class="col-md-7 d-flex align-items-center r-day">
-                                        <input type="checkbox" id="r-day">
-                                    </div>
-                                    </div>
-                                   
-                                </div>
-                                <div class="col-md-6">
-                                    <h5>Live Session</h5>
-
-                                    <div class="row">
-                                        <div
-                                            class="col-md-5 br-right d-flex align-items-center px-0">
-                                            <h6>Question Time Limit</h6>
-                                        </div>
-                                        <div
-                                        class="col-md-7 d-flex align-items-center r-day">
-                                        <input type="checkbox" id="r-day">
-                                     </div>
-                                     </div>
-                                </div>
-                            </div>
-
-                        </div>
-                        <div class="tab-pane descptn" id="Description1" role="tabpanel">
-
-
-                            <div class="row">
-                                <div class="col-md-12 px-0">
-                                    <textarea name="" id="" cols="30" rows="5"
-                                        class="form-control border-0"
-                                        placeholder="e.g. Guidelines, instructions, picture, ... to help attendees answer"></textarea>
-                                </div>
-                            </div>
-
-                        </div>
-                        
-                    </div>
-                </div>
-             </div>
-              
-               
-               
-
-
-            </div>
-
-
-
-        </div>
-        <div class="modal-footer">
-
-            <button type="button" style="background-color:#f9365f!important;border: none!important;"
-                class="btn btn-info waves-effect waves-light">Save </button>
-        </div>
-    </div>
-</div>
-</div>
-
-<div id="language-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-aria-hidden="true" style="display: none">
-<div class="modal-dialog modal-lg">
-    <div class="modal-content">
-        <div class="modal-header">
-            <h4 class="modal-title mt-0">Language</h4>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        <div class="modal-body">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <label for="field-1" class="control-label">English</label>
-                        <div class="input-group">
-                      
-                            <input type="text" class="inputfile form-control mb-0"  placeholder="">
-                            <div class="input-group-append">
-                                <span  class="input-group-text">  <img src="img/language/english.jpg" alt="" style="height: 20px;"></span>
-                         
-                            </div> 
-                     
-                      
-                    </div>
-                </div>
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <label for="field-1" class="control-label">Arabic</label>
-                        <div class="input-group">
-                      
-                            <input type="text" class="inputfile form-control mb-0"  placeholder="">
-                            <div class="input-group-append">
-                                <span  class="input-group-text">  <img src="img/language/arabic.jpg" alt="" style="height: 20px;"></span>
-                         
-                            </div> 
-                     
-                      
-                    </div>
-                </div>
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <label for="field-1" class="control-label">Hindi</label>
-                        <div class="input-group">
-                      
-                            <input type="text" class="inputfile form-control mb-0"  placeholder="">
-                            <div class="input-group-append">
-                                <span  class="input-group-text">  <img src="img/language/hindi.jpg" alt="" style="height: 20px;"></span>
-                         
-                            </div> 
-                     
-                      
-                    </div>
-                </div>
-
-            </div>
-
-
-
-        </div>
-        <div class="modal-footer">
-
-            <button type="button" style="background-color:#f9365f!important;border: none!important;"
-                class="btn btn-info waves-effect waves-light">Save </button>
-        </div>
-    </div>
-</div>
-</div>
-
-
-    <script src="js/jquery.min.js"></script>
-    <script src="js/custome.js"></script>
-    <script src="js/bootstrap.bundle.min.js"></script>
-    <script src="plugins/datatables/jquery.dataTables.min.js"></script>
-    <script src="plugins/datatables/dataTables.bootstrap4.min.js"></script>
-    <script src="plugins/datatables/dataTables.responsive.min.js"></script>
-    <script src="plugins/datatables/responsive.bootstrap4.min.js"></script>
-    <script src="plugins/datatables/datatables.init.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/16.8.4/umd/react.production.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.8.4/umd/react-dom.production.min.js"></script>
 
     <script>
         $(document).ready(function() {
@@ -1113,19 +736,11 @@ aria-hidden="true" style="display: none">
                                         onClick: () => removeTags1(index)
                                     }, "x")))), /*#__PURE__*/
     
-    
-    
-    
-    
-    
                         React.createElement("input", {
                             type: "text",
                             onKeyUp: event => event.key === "Enter" ? addTags1(event) : null,
                             placeholder: "Mail id"
                         })));
-    
-    
-    
             };
     
             const App1 = () => {
@@ -1141,14 +756,413 @@ aria-hidden="true" style="display: none">
                             tags1: ['user@gmail.com']
                         })));
     
-    
             };
     
             ReactDOM.render( /*#__PURE__*/ React.createElement(App1, null), document.getElementById("root1"));
         </script>
 
-</body>
 
-</html>
+    <script>
+        $("#login_required").click(function() {
+ 
+       login_required =  $("#login_required").is(":checked")
+       if (login_required == true){
+ 
+         $("#attemp_lim").show()
+ 
+       }
+       else{
+         $("#attemp_lim").hide()
+ 
+       }
+     })
+
+ 
+     $("#exam_check").click(function() {
+ 
+       exam_check =  $("#exam_check").is(":checked")
+     if (exam_check == true){
+ 
+       $("#show_timelimit").show()
+ 
+     }
+     else{
+       $("#show_timelimit").hide()
+ 
+     }
+     })
+
+     $("#scoring_ans").click(function() {
+ 
+        scoring_ans =  $("#scoring_ans").is(":checked")
+        
+        if (scoring_ans == true){
+
+        $("#req_score").show()
+
+        }
+        })
+
+
+        $("#scoring_ans").click(function() {
+            no_score = $("#no_score").is(":checked")
+
+            if(no_score == true){
+        $("#req_score").hide()
+
+        }
+    })
+
+
+ 
+     </script>
+
+
+
+<script>
+
+    intital_value = 1
+    $(".add_exam_field").click(function(){
+     
+      $("#append_inital_field").append(
+
+        ` <tr class="init_remove`+intital_value+`">
+                <td>
+                    <input type="text" placeholder="Title" name="initial_label`+intital_value+`" id="" class="form-control">
+                    <input type="hidden" class="initial_count" name="initial_count" value='`+intital_value+`'>
+                    </td>
+                <td>
+                    <select class="form-control initial_type`+intital_value+`" name="initial_type`+intital_value+`">
+                        <option value="Text Input" selected="">Text Input</option>
+                        <option value="selection">Selection</option>
+                        <option value="Date Field">Date Field</option>
+                    
+                    </select>
+                </td>
+                <td id='multiple_choice`+intital_value+`'>
+                    <a href="#" style="font-size: 16px;float:right;
+                color: black;"  onclick="multiple_choice_add(`+intital_value+`)">+</a>
+                <input type="text" >
+                    
+                </td>
+                <td> <div class="action-tbl d-flex justify-content-end mt-1">
+                        
+                    <i class="fa fa-trash-o mx-1 trash-btn"  onclick="initial_field_remove(`+intital_value+`)" data-original-title="Delete"></i>
+                
+                </div></td>
+           
+            </tr>`                       
+             
+      )
+      intital_value = intital_value + 1
+    })
+
+
+    instruction_value = 1
+    $(".add_instruction").click(function(){
+     
+      $("#append_instruction").append(
+
+        ` <tr class="instruct_remove`+instruction_value+`">
+                <td>
+                    <input type="text" placeholder="Instruction" name="instruction_label`+instruction_value+`" id="" class="form-control">
+                    <input type="hidden" class="instruction_count" name="instruction_count" value='`+instruction_value+`'>
+                    </td>
+                
+                    <td><div class="action-tbl d-flex justify-content-end mt-1">
+                        
+                    <i class="fa fa-trash-o mx-1 trash-btn"  onclick="instruction_field_remove(`+instruction_value+`)" data-original-title="Delete"></i>
+                
+                </div></td>
+           
+            </tr>`                       
+             
+      )
+      instruction_value = instruction_value + 1
+    })
+
+
+  
+    function multiple_choice_add(val){
+  
+      $("#multiple_choice"+val).append(
+        `<input class="form-control" placeholder="Enter your option" type="text" name="initial_answer`+val+`">`
+      )
+    }
+  </script>
+
+
+
+<script>
+
+    let i = 1
+    $(".section_btn").click(function(){
+      var section_string = $(".section_title").val();
+      if(section_string == ''){
+
+      }
+      else{
+
+        $("#append_table").append(`
+        
+        <tr class="tr_remove`+i+`">
+          <td  style="background-color: #f3f6f8"><b>`+section_string+`</b>  </td>
+          <td style="background-color: #f3f6f8">
+            <input type="hidden" value=`+i+` id="section_id`+i+`">
+            <input type="hidden" name='section_line_count' value=`+i+`>
+            <input type="hidden" name="modal_status" value = "False">
+            <input type="hidden" class="section_status`+i+`" name="section_status" value = "False">
+            <input type="hidden" class="section_line" value="`+section_string+`" name='section_line'>
+            <input type="hidden" class="first_open`+i+`" value="first">
+            
+            <button type="button" onclick="section_question(`+i+`)"
+              class="btn btn-prim pay">
+              Add a question
+            </button></td>
+          <td style="background-color: #f3f6f8">
+            
+              <div class="action-tbl d-flex justify-content-end">
+                  
+                <i class="fa fa-trash-o mx-1 trash-btn" onclick="section_remove(`+i+`)" data-toggle="tooltip" data-original-title="Delete"></i>
+              
+              </div>
+          </td>
+      </tr>
+      <tr class="tr_remove2`+i+`">
+          <td colspan="3">
+              <table  class="table-bordered" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                  <thead class="border-class">
+                      <tr class="heading-text">                                                        
+                        <th>Title</th>
+                        <th>Question Type</th>
+                        <th></th>
+                          
+                      </tr>
+                  </thead>
+
+                  <tbody class="body-textcls vertcle-center" id="apppend_child`+i+`">
+
+                  </tbody>
+                  
+              </table>
+          </td>
+      </tr>
+
+        `)
+
+        i = i + 1
+         $(".section_title").val('');
+         $('#addsection').modal('hide');
+      }
+    })
+
+
+    function section_remove(val){
+     
+      var tr_id = val
+     $('.tr_remove'+tr_id).hide()
+     $('.tr_remove2'+tr_id).hide()
+     div_update = document.getElementsByClassName("tr_remove"+tr_id).innerHTML = "";
+     $('.tr_remove'+tr_id).empty()
+     }
+
+    function initial_field_remove(val){
+    
+    var tr_id = val
+    $('.init_remove'+tr_id).hide()
+    div_update = document.getElementsByClassName("init_remove"+tr_id).innerHTML = "";
+    $('.init_remove'+tr_id).empty()
+    }
+
+    function instruction_field_remove(val){
+    
+    var tr_id = val
+    $('.instruct_remove'+tr_id).hide()
+    div_update = document.getElementsByClassName("instruct_remove"+tr_id).innerHTML = "";
+    $('.instruct_remove'+tr_id).empty()
+   
+    }
+ 
+ 
+
+    function section_question(data_id){
+
+      var modal_id = $("#section_id"+data_id).val();
+      var modal_name = data_id+"-"+modal_id
+      var section_status = $(".section_status"+data_id).val();
+      if (section_status == "False"){
+        value = $('.first_open'+data_id).val()
+        if (value == "second"){
+        modal_id_new = parseInt(modal_id)-parseInt(1)
+        var modal_name2 = data_id+"-"+modal_id_new
+        $('.question-modal-'+modal_name2).modal('show');
+        }
+        else{
+            var isClassExist = document.getElementsByClassName('question-modal-'+modal_name);
+            if (isClassExist.length > 0) {
+                $('.question-modal-'+modal_name).modal('show');
+                $('.first_open'+data_id).val("new")
+            }
+          else{
+          $.ajax(
+        {
+            type:"GET",
+            url: "open_section_based_question",
+            data:{
+                    modal_id: modal_id,
+                    data_id:data_id
+            },
+            success: function( data ) 
+            {
+              var modal_name = data_id+"-"+modal_id
+              $("#apppend_child"+data_id).append(data)
+              $('.question-modal-'+modal_name).modal('show');
+              let total = parseInt(modal_id) + 1
+              $("#section_id"+data_id).val(total);
+            }
+        })
+        }
+    }
+      }
+      else{
+
+        $.ajax(
+        {
+            type:"GET",
+            url: "open_section_based_question",
+            data:{
+                    modal_id: modal_id,
+                    data_id:data_id
+            },
+            success: function( data ) 
+            {
+              var modal_name = data_id+"-"+modal_id
+              $("#apppend_child"+data_id).append(data)
+              $('.question-modal-'+modal_name).modal('show');
+              let total = parseInt(modal_id) + 1
+              $("#section_id"+data_id).val(total);
+            }
+        })
+        $('.first_open'+data_id).val("second")
+      } 
+    }
+
+    function direct_question_btn(){
+      var modal_name1 = i+"-"+i
+           var isClassExist = document.getElementsByClassName('question-modal-'+modal_name1);
+            if (isClassExist.length > 0) {
+                $('.question-modal-'+modal_name1).modal('show');
+            }
+          else{
+
+    $.ajax(
+    {
+        type:"GET",
+        url: "open_section_based_question",
+        data:{
+
+            modal_id: i,
+            data_id:i,
+            status:'direct_question'
+        },
+        success: function( data ) 
+        {
+          var modal_name = i+"-"+i
+           
+          $(".direct_question_modal").append(data)
+          $('.question-modal-'+modal_name).modal('show');
+            
+        } 
+     })
+    }
+    }
+    </script>
+
+
+
+<script>
+    $(".submit_action").submit(function(){
+  
+      event.preventDefault()
+      $.ajax({   
+  
+      url: "validation_check",                    
+      data: {
+  
+        section_line : $(".section_line").val(),
+        initial_count : $(".initial_count").val(),
+       
+        // initial_type : $(".initial_type`+initial_count+`").val(),
+        // initial_answer : $(".initial_answer").val(),
+  
+      },
+          success: function (data) {  
+              status = data['message']
+              if(status == "sectionFalse"){
+                  var toastMixin = Swal.mixin({
+                  toast: true,
+                  icon: 'error',
+                  title: 'General Title',
+                  animation: false,
+                  position: 'top-right',
+                  showConfirmButton: false,
+                  timer: 1000,
+                  timerProgressBar: true,
+                  didOpen: (toast) => {
+                  toast.addEventListener('mouseenter', Swal.stopTimer)
+                  toast.addEventListener('mouseleave', Swal.resumeTimer)
+                  }
+                  });
+                  toastMixin.fire({
+                  animation: true,
+                  title: 'Add atleast one question'
+                  });
+              }
+              else{
+                 
+                document.forms["exam_form"].submit();
+                 
+             }
+            }
+    })
+  })
+  
+  </script>
+  
+  
+  <script>
+
+
+$(".lang_class").click(function(){
+   
+    var val1 = $(this).attr('data-id')
+
+    if ($(this).is(':checked')) {
+        $(".lang"+val1).show()
+      
+    } else {
+        $(".lang"+val1).hide()
+      
+    }
+})
+
+
+
+    function lang_class(){
+
+      var checks = $('.lang_class:checked').map(function() {
+        preferred_lang = $(this).val();
+  
+      return $(this).val();
+    }).get()
+   
+    console.log(checks);
+    }
+  </script>
+  
+  
+
+
+
 
 {% endblock %}

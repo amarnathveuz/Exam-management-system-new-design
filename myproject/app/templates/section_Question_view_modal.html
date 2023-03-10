@@ -1,0 +1,260 @@
+
+<div id="question-modal" class="modal fade question-modal-{{value1}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+    aria-hidden="true" style="display: none">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+        <form class="forms-sample" action="Question_Management_update" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}   
+                <div class="modal-header">
+                <h4 class="modal-title mt-0">Question</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <input type="hidden"
+                            name="updated_id" value="{{data.id}}">
+                            <label for="field-1" class="control-label">Question</label>
+                            <div class="input-group">
+                                <input type="text" class="inputfile form-control mb-0" name="question_name"
+                                    placeholder="" value="{{data.Question}}">
+                                <div class="input-group-append">
+                                    <button type="button" class="input-group-text" data-toggle="modal"
+                                        data-target="#language-modal">
+                                        <i class="fas fa-language"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="col-md-12">
+                        <div class="row answer-type">
+                            <div class="col-md-3 br-right d-flex align-items-start px-0">
+                                <label>Question Type</label>
+                            </div>
+                            <div class="col-md-9 px-2">
+                                <div class="form-group d-flex align-items-center">
+                                    <input type="radio"  name="Question_type"  {% if data.Question_type == "Radio" %} checked {% endif %} value="Radio" >
+                                    <label for="customer">One page per question</label>
+                                </div>
+                                <div class="form-group d-flex align-items-center">
+                                    <input type="radio" name="Question_type" {% if data.Question_type == "Checkbox" %} checked {% endif %} value="Checkbox" > <span style="font-size: 12px;">Multiple choice: multiple answers
+                                    <label for="customer">One page per section</label>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-md-12 mt-3">
+                        <div class="paytab">
+                            <ul class="nav nav-tabs nav-pay mb-2" role="tablist">
+                                <li class="nav-item d-flex align-items-center">
+                                    <a class="nav-link active" data-toggle="tab" href="#Answers1" role="tab">
+                                        Answers
+                                    </a>
+                                </li>
+                                <li class="nav-item d-flex align-items-center">
+                                    <a class="nav-link" data-toggle="tab" href="#Options1" role="tab">
+                                        Options
+                                    </a>
+                                </li>
+                                <li class="nav-item d-flex align-items-center">
+                                    <a class="nav-link" data-toggle="tab" href="#Description1" role="tab">
+                                        Description
+                                    </a>
+                                </li>
+
+                            </ul>
+                            <div class="tab-content small-form">
+                                <div class="tab-pane active" id="Answers1" role="tabpanel">
+                                    <div class="mt-3">
+                                        <div class="mb-2">
+                                            <button type="button" class="btn btn-prim pay">
+                                                Add a Line
+                                            </button>
+
+                                        </div>
+                                        <table class="table table-qstn dt-responsive table-bordered nowrap table-padd"
+                                            style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+
+                                            <thead class="border-class">
+                                                <tr class="heading-text">
+                                                    <th>Choices</th>
+                                                    <th>Is a correct answer</th>
+                                                    <th>Score for this choice</th>
+                                                    <th>Image</th>
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+
+
+                                            <tbody class="body-textcls vertcle-center">
+
+                                                {% for i in data.Exam_section_exam_id.all %}
+                                                <tr>
+                                                    <td>
+                                                        <input type="hidden" name="choice_update[]" value="{{i.id}}">
+                                                        <input type="text" class="form-control" name="question_choice[]" value="{{i.choice}}">
+                                                    </td>
+
+                                                    <td>
+                                                        <input type="checkbox" class="form-control" value="{{i.id}}" name="answer[]" {% if i.result_status %} checked {% else %}  {% endif %} >
+                                                    </td>
+
+                                                    <td>
+                                                        <input type="number" class="form-control" name="Score[]" value="{{i.Mark}}">
+                                                    </td>
+
+                                                    <td>
+                                                        <input type="hidden" name="remove_status[]" value="0" id="remove_id{{i.id}}">
+
+                                                        <div class="input-group uploadFile1 upload_image_address{{i.id}}" {% if i.Imagefield == " " or i.Imagefield == None %} {% else %}
+                                                        style="display: none" {% endif %} >
+                                                            <input type="file" class="inputfile form-control mb-0"
+                                                                name="exam_choice_image[]" onchange="image_upload({{i.id}})" >
+                                                            <div class="input-group-append" >
+                                                                <span class="input-group-text" > <i
+                                                                        class="fas fa-paperclip" ></i></span>
+                                                            </div>
+                                                        </div>
+
+                                                        {% if i.Imagefield == " " or i.Imagefield == None %}
+
+                                                        {% else %}
+                                                        <!-- image  -->
+
+                                                        <div class="input-group uploadFile1 image_address_view{{i.id}}" >
+                                                            <input type="text"  value="{{i.Imagefield}}"  class="inputfile form-control mb-0"
+                                                                name="file" >
+                                                            <div class="input-group-append">
+                                                                <span class="input-group-text" onclick="remove_image({{i.id}})" ><i
+                                                                        class="fa fa-trash" ></i></span>
+                                                            </div>
+                                                        </div>
+
+                                                        {% endif %}
+
+                                                    </td>
+
+                                                    <td>
+                                                        <div class="action-tbl d-flex justify-content-end">
+                                                            <i class="fa fa-trash-o mx-1 trash-btn"
+                                                                data-toggle="tooltip" data-placement="top" title=""
+                                                                data-original-title="Delete"></i>
+                                                        </div>
+                                                    </td>
+
+                                                </tr>
+                                                {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="tab-pane sales_purchase" id="Options1" role="tabpanel">
+
+                                    <div class="row mb-2 question-options">
+                                        <div class="col-md-6 px-0">
+                                            <h5>Answers</h5>
+
+                                            <div class="row">
+                                                <div class="col-md-5 br-right d-flex align-items-center px-0">
+                                                    <h6>Show Comments Field</h6>
+                                                </div>
+                                                <div class="col-md-7">
+                                                    <div class="form-group mt-2 d-flex align-items-center">
+                                                        <input type="checkbox" id="customer">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-6">
+                                            <h5>Layout</h5>
+
+                                            <div class="row">
+                                                <div class="col-md-5 br-right d-flex align-items-center px-0">
+                                                    <h6>Conditional Display</h6>
+                                                </div>
+                                                <div class="col-md-7 d-flex align-items-center r-day">
+                                                    <input type="checkbox" id="r-day">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-3">
+                                        <div class="col-md-6 px-0">
+                                            <h5>Constraints</h5>
+
+                                            <div class="row">
+                                                <div class="col-md-5 br-right d-flex align-items-center px-0 px-0">
+                                                    <h6>Mandatory Answer</h6>
+                                                </div>
+                                                <div class="col-md-7 d-flex align-items-center r-day">
+                                                    <input type="checkbox" id="" name="manadatory" {% if data.manadatory %} checked {% endif %} >
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-6">
+                                            <h5>Live Session</h5>
+
+                                            <div class="row">
+                                                <div class="col-md-5 br-right d-flex align-items-center px-0">
+                                                    <h6>Question Time Limit</h6>
+                                                </div>
+                                                <div class="col-md-7 d-flex align-items-center r-day">
+                                                    <input type="checkbox" id="r-day">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="tab-pane descptn" id="Description1" role="tabpanel">
+                                    <div class="row">
+                                        <div class="col-md-12 px-0">
+                                            <textarea name="Description" id="" cols="30" rows="5" class="form-control border-0"
+                                                placeholder="e.g. Guidelines, instructions, picture, ... to help attendees answer">{{data.Description}}</textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+
+                <button type="submit" style="background-color:#f9365f!important;border: none!important;"
+                    class="btn btn-info waves-effect waves-light">Save </button>
+            </div>
+        </form>
+        </div>
+    </div>
+</div>
+
+
+
+
+<script>
+    function remove_image(data) {
+      
+        $("#remove_id"+data).val(1)
+        $(".image_address_view"+data).hide()
+        $(".upload_image_address"+data).show()
+    }
+
+    function image_upload(data){
+        $("#remove_id"+data).val(1)
+    }
+</script>
+
+

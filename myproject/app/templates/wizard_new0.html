@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Ansonika">
+    <title>Veuz</title>
+
+    <!-- Favicons-->
+    <link rel="shortcut icon" href="{% static 'exam_page/img/favicon.svg' %}" type="image/x-icon">
+
+    <!-- GOOGLE WEB FONT -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+
+    <link href="{% static 'exam_page/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'exam_page/css/style.css' %}" rel="stylesheet">
+
+</head>
+
+<body>
+
+    <div id="preloader">
+        <div data-loader="circle-side"></div>
+    </div>
+
+    <div id="loader_form">
+        <div data-loader="circle-side-2"></div>
+    </div>
+
+
+    <div class="container-fluid px-0">
+        <div id="form_container">
+            <div class="row no-gutters">
+
+                <div class="col-lg-12">
+                    <div class="top-bg d-flex align-items-center justify-content-between">
+                        <div class="exam-heading">
+                            <h2>{{data_main_exam.Exam_title}} Questionnaire</h2>
+                            <h6>Maximum Score: {{total_mark}}</h6>
+                        </div>
+                        <div class="total-tym">
+                            <input type="hidden" value="{{y}}" id="time_id">
+                            <h6 class="d-flex align-items-end">Total Time Left: <div id="countdown"> {{data_main_exam.Exam_time_limit|safe}}</div></h6>
+                        </div>
+                    </div>
+
+<!--                    <div class="timer">-->
+<!--                        <div class="timer-overlay"></div>-->
+<!--                        <div id="countdown-number"></div>-->
+<!--                        <svg viewBox="0 0 100 100">-->
+<!--						  <linearGradient id="gradient" x1="0%" y1="0%" x2="0%" y2="100%">-->
+<!--							<stop offset="10%" stop-color="#C096EA" />-->
+<!--							<stop offset="100%" stop-color="#7012CE" />-->
+<!--						  </linearGradient>-->
+<!--						  <circle-->
+<!--							class="main-circle"-->
+<!--							cx="50"-->
+<!--							cy="50"-->
+<!--							r="45"-->
+<!--							stroke="url(#gradient)"-->
+<!--							stroke-width="10"-->
+<!--							fill="none"-->
+<!--							transform="rotate(30 50 50)"-->
+<!--						  ></circle>-->
+<!--						</svg>-->
+<!--                    </div>-->
+
+
+                    <div id="wizard_container" class="wizard_container1">
+
+
+                        <!-- /top-wizard -->
+                        <form role="form" method="post" action="exam_result_new?type={{data_main_exam.slug}}" enctype="multipart/form-data">
+                        {% csrf_token %}
+
+                            <div id="all-qstn d-flex align-items-center">
+
+
+                                {% for i in data %}
+                                <div class="qstn">
+                                    <input type="hidden" value="{{i.Question_id.id}}" name="question_id">
+                                    <h3 class="main_question"><i class="arrow_right"></i>{{forloop.counter}}) {{i.Question_id.Question}}</h3>
+                                    <small class="center-small"> {{i.Question_id.Description}} </small>
+                                    {% if i.Question_id.Imagefield == "" %}
+                                    {% else %}
+                                    <img src="./media/{{i.Question_id.Imagefield}}" style="width:20%;" class="img-fluid img-center">
+                                    {% endif %}
+                                    <div class="row d-flex justify-content-center">
+                                        {% if i.Question_id.Question_type == "Checkbox" %}
+                                        <div class="col-12 mb-2">
+                                            <small class="center-small">* Multiple answers allowed </small>
+                                        </div>
+                                        {% for j in i.Question_id.Exam_section_exam_id.all %}
+                                        {% if j.choice == "" %}
+                                        {% else %}
+                                        <div class="col-lg-3">
+                                            <div class="form-group">
+                                                <label class="container_check version_2">{{j.choice}}
+	                                                <input type="checkbox" name="answer{{i.Question_id.id}}" value="{{j.id}}"
+	                                                    class="required">
+	                                                <span class="checkmark"></span>
+	                                            </label>
+                                            </div>
+                                        </div>
+                                        {% endif %}
+                                        {% if j.Imagefield == "" %}
+                                        {% else %}
+                                        <div class="col-lg-3">
+                                            <div class="form-group">
+                                                <label class="container_radio version_2 opt-img">
+                                                        <img src="./media/{{j.Imagefield}}" alt="">
+                                                        <input type="checkbox" name="answer{{i.Question_id.id}}" value="{{j.id}}" class="required">
+                                                        <span class="checkmark"></span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        {% endif %}
+                                        {% endfor %}
+                                        {% endif %}
+                                        {% if i.Question_id.Question_type == "Radio" %}
+                                        {% for j in i.Question_id.Exam_section_exam_id.all %}
+                                        {% if j.choice == "" %}
+                                        {% else %}
+                                        <div class="col-lg-3">
+                                            <div class="form-group">
+                                                <label class="container_radio version_2">{{j.choice}}
+                                                    <input type="radio" name="answer{{i.Question_id.id}}" value="{{j.id}}" class="required">
+                                                    <span class="checkmark"></span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                         {% endif %}
+                                        {% if j.Imagefield == "" %}
+                                        {% else %}
+                                        <div class="col-lg-3">
+                                            <div class="form-group">
+                                                <label class="container_radio version_2 opt-img">
+                                                        <img src="./media/{{j.Imagefield}}" alt="">
+                                                        <input type="checkbox" name="answer{{i.Question_id.id}}" value="{{j.id}}" class="required">
+                                                        <span class="checkmark"></span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        {% endif %}
+                                        {% endfor %}
+                                        {% endif %}
+                                    </div>
+                                    <!-- /row -->
+                                </div>
+                                <!-- /step-->
+
+                                {% endfor %}
+                            </div>
+                            <!-- /middle-wizard -->
+                            <div id="bottom-wizard1" class="text-center">
+
+                                <a href="#"> <button type="submit" name="process" class="submit">Submit</button></a>
+                            </div>
+                            <!-- /bottom-wizard -->
+                        </form>
+                    </div>
+                    <!-- /Wizard container -->
+                </div>
+            </div>
+            <!-- /Row -->
+        </div>
+    </div>
+
+
+
+
+
+
+
+    <!-- COMMON SCRIPTS -->
+    <script src="{% static 'exam_page/js/jquery-3.6.0.min.js' %}"></script>
+    <script src="{% static 'exam_page/js/common_scripts.min.js' %}"></script>
+    <script src="{% static 'exam_page/js/common_functions.js' %}"></script>
+    <script src="{% static 'exam_page/js/wizard_with_branch.js' %}"></script>
+    <script>
+        const countdownNumberEl = document.getElementById("countdown-number");
+        let countdown = 10;
+
+        let interval;
+
+        const btnPause = document.querySelector(".btn-pause");
+        const btnStop = document.querySelector(".btn-stop");
+        const mainCircle = document.querySelector(".main-circle");
+
+        countdownNumberEl.textContent = "00:" + countdown;
+
+        const startTimer = () => {
+            countdown = 11;
+
+            clearInterval(interval);
+            interval = setInterval(() => {
+                countdown = --countdown <= 0 ? 10 : countdown;
+                let foram = countdown >= 10 ? `00:${countdown}` : `00:0${countdown}`;
+                countdownNumberEl.textContent = foram;
+            }, 1000);
+        };
+        startTimer();
+    </script>
+
+
+
+    <script>
+        let timeInSecs;
+        let ticker;
+
+        function startTimer(secs) {
+            timeInSecs = parseInt(secs);
+            ticker = setInterval("tick()", 1000);
+        }
+
+        function tick() {
+            let secs = timeInSecs;
+            if (secs > 0) {
+                timeInSecs--;
+            } else {
+                clearInterval(ticker);
+                startTimer(5 * 60); // 5 minutes in seconds
+            }
+
+            ss = new Date(secs * 1000).toISOString().substring(14, 19)
+            let hours = Math.floor(secs / 3600);
+            secs %= 3600;
+            let mins = Math.floor(secs / 60);
+            secs %= 60;
+            let result =
+                (hours < 10 ? "0" : "") + hours + ":" +  (mins < 10 ? "0" : "") + mins + ":" + (secs < 10 ? "0" : "") + secs;
+            document.getElementById("countdown").innerHTML = result;
+        }
+        time_id = document.getElementById("time_id").value
+        startTimer(time_id); // 5 minutes in seconds
+    </script>
+
+    <script type = "text/javascript" >
+        function preventBack() { window.history.forward(); }
+        setTimeout("preventBack()", 0);
+        window.onunload = function () { null };
+    </script>
+</body>
+
+</html>

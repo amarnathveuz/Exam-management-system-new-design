@@ -41,17 +41,18 @@
 
 
                                     <tbody class="body-textcls vertcle-center">
+                                        {% for i in exam_details %}
                                         <tr>
-                                            <td>1</td>
-                                            <td>Quiz about our Company</td>
+                                            <td>{{forloop.counter}}.</td>
+                                            <td>{{i.Exam_title}}</td>
                                             <td>
                                                 <div class="created-user d-flex align-items-center">
                                                     <img src="./static/admin/img/users/avatar-5.jpg" alt="">
-                                                    <h6>Admin</h6>
+                                                    <h6>{{i.responsible_person}}</h6>
                                                 </div>
                                             </td>
                                           
-                                            <td>02/03/2023</td>
+                                            <td>{{i.created_dt|safe}}</td>
                                             <td>20</td>
                                             <td>02:00</td>
                                             <td>5</td> 
@@ -72,89 +73,18 @@
                                                 <div class="action-tbl d-flex justify-content-end">
                                                     <button type="button" class="btn share-btn mx-1" data-toggle="modal" data-target="#share-modal"><span class="fa fa-share mx-1" data-toggle="tooltip" data-placement="top" title="" data-original-title="Share"></span></button>
                                                     
-                                                    <a href="edit_exam">
+                                                    <a href="edit_exam?type={{i.id}}">
                                                     <i class="fa fa-pencil mx-1 pencil-btn" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"></i>
                                                 </a>
 
+                                                    <i class="fa fa-trash-o mx-1 trash-btn" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"></i>
+                                                 
+                                                </div>
+                                            </td>
+                                        </tr>
 
+                                        {% endfor %}
 
-                                                    <i class="fa fa-trash-o mx-1 trash-btn" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"></i>
-                                                 
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>Quiz about our Company</td>
-                                            <td>
-                                                <div class="created-user d-flex align-items-center">
-                                                    <img src="./static/admin/img/users/avatar-5.jpg" alt="">
-                                                    <h6>Admin</h6>
-                                                </div>
-                                            </td>
-                                          
-                                            <td>02/03/2023</td>
-                                            <td>20</td>
-                                            <td>02:00</td>
-                                            <td>5</td> 
-                                            <td>4</td>
-                                            <td>
-                                                <h6 class="mt-0 mb-1">Passed</h6>
-                                                <div class="progress-container" data-percentage='100'>
-                                                    <div class="progress"></div>
-                                                    <div class="percentage">0%</div>
-                                                  </div>
-                                                
-                                            </td>
-                                            <td>
-                                                <button type="button" class="btn sv-btn waves-effect waves-light m-b-5 exm-btns">Test</button>
-                                                <a href="result.html"><button type="button" class="btn btn-see waves-effect m-b-5 exm-btns">See Result</button></a>
-                                            </td>
-                                            <td>
-                                                <div class="action-tbl d-flex justify-content-end">
-                                                    <i class="fa fa-share mx-1 share-btn" data-toggle="tooltip" data-placement="top" title="" data-original-title="Share"></i>
-                                                    <i class="fa fa-pencil mx-1 pencil-btn" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"></i>
-                                                    <i class="fa fa-trash-o mx-1 trash-btn" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"></i>
-                                                 
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>3</td>
-                                            <td>Quiz about our Company</td>
-                                            <td>
-                                                <div class="created-user d-flex align-items-center">
-                                                    <img src="./static/admin/img/users/avatar-5.jpg" alt="">
-                                                    <h6>Admin</h6>
-                                                </div>
-                                            </td>
-                                          
-                                            <td>02/03/2023</td>
-                                            <td>20</td>
-                                            <td>02:00</td>
-                                            <td>5</td> 
-                                            <td>4</td>
-                                            <td>
-                                                <h6 class="mt-0 mb-1">Certified</h6>
-                                                <div class="progress-container" data-percentage='50'>
-                                                    <div class="progress"></div>
-                                                    <div class="percentage">0%</div>
-                                                  </div>
-                                                 
-                                            </td>
-                                            <td>
-                                                <button type="button" class="btn sv-btn waves-effect waves-light m-b-5 exm-btns">Test</button>
-                                                <a href="result.html"><button type="button" class="btn btn-see waves-effect m-b-5 exm-btns">See Result</button></a>
-                                            </td>
-                                            <td>
-                                                <div class="action-tbl d-flex justify-content-end">
-                                                    <i class="fa fa-share mx-1 share-btn" data-toggle="tooltip" data-placement="top" title="" data-original-title="Share"></i>
-                                                    <i class="fa fa-pencil mx-1 pencil-btn" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"></i>
-                                                    <i class="fa fa-trash-o mx-1 trash-btn" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"></i>
-                                                 
-                                                </div>
-                                            </td>
-                                        </tr>
                                     </tbody>
                                 </table>
 

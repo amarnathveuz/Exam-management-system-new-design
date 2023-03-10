@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Ansonika">
+    <title>Veuz</title>
+
+    <!-- Favicons-->
+    <link rel="shortcut icon" href="{% static 'exam_page/img/favicon.svg' %}" type="image/x-icon">
+
+    <!-- GOOGLE WEB FONT -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
+
+    <link href="{% static 'exam_page/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'exam_page/css/style.css' %}" rel="stylesheet">
+
+</head>
+
+<body>
+<form class="pt-3" action="exam_login_action_new" method="POST">
+    {% csrf_token %}
+    <input type="hidden" value="{{data.slug}}" name="exam_id">
+    <div id="preloader">
+        <div data-loader="circle-side"></div>
+    </div>
+
+    <div id="loader_form">
+        <div data-loader="circle-side-2"></div>
+    </div>
+
+    <div class="welcome-message d-flex align-items-center">
+        <div class="container">
+            <div class="row d-flex align-items-center">
+                <div class="col-lg-8">
+                    <img src="{% static 'exam_page/img/logo.png' %}" class="img-fluid logo-of-this">
+                    <h3 class="first-head">Welcome to the <span>{{data.Exam_title}}</span> questionnaire.
+                    </h3>
+                    <h4 class="first-head2">Compulsory questionnaire to test your basic know-how.</h4>
+                </div>
+                <div class="col-lg-4">
+                    <img src="{% static 'exam_page/img/user.png' %}" class="img-fluid image-size">
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="content-form">
+        <div class="container">
+             <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h3 class="form-head">Please fill in these below fields</h3>
+                </div>
+             </div>
+            <div class="row d-flex justify-content-center">
+                <div class="col-lg-4">
+                    <input type="text" class="inp-1" placeholder="Username" name="uname">
+                </div>
+            </div>
+            <div class="row d-flex justify-content-center">
+                 <div class="col-lg-4">
+                    <input type="password" class="inp-1" placeholder="Password" name="password">
+                </div>
+            </div>
+
+
+  <div class="row">
+                <div class="col-lg-12 text-center">
+                    <button type="submit" class="submit-button-class">Submit</button>
+                </div>
+
+</div>
+
+        </div>
+    </div>
+</form>
+
+
+<!--    <div class="footer-reg">-->
+<!--        <p>&COPY; VEUZ CONCEPTS 2023 / All rights reserved.</p>-->
+<!--    </div>-->
+
+
+    <!-- COMMON SCRIPTS -->
+    <script src="{% static 'exam_page/js/jquery-3.6.0.min.js' %}"></script>
+    <script src="{% static 'exam_page/js/common_scripts.min.js' %}"></script>
+    <script src="{% static 'exam_page/js/common_functions.js' %}"></script>
+    <script src="{% static 'exam_page/js/wizard_with_branch.js' %}"></script>
+
+</body>
+
+<script type = "text/javascript" >    function preventBack() { window.history.forward(); }
+    setTimeout("preventBack()", 0);
+    window.onunload = function () { null };
+</script>
+
+</html>

@@ -8,535 +8,667 @@
         <div class="row">
             <div class="col-md-12 px-0">
                 <div class="card card-shadow">
-
                     <div class="card-body body-change card-border">
-                        <div class="d-flex align-items-center justify-content-between">
-                            <h2 class="main-heading-txt">New Exam</h2>
-                            <div class="d-flex"> 
-                     
-                                <button type="button" class="btn btn-outline-pink waves-effect waves-light m-b-5 mx-1" data-toggle="modal" data-target="#share-modal"><i class="fa fa-share mr-1"></i>Share</button>
-                                <button type="button" class="btn btn-outline-pink waves-effect waves-light m-b-5 mx-1"><i class="fa fa-print mr-1"></i>Print</button>
-                                <button type="button" class="btn btn-outline-pink waves-effect waves-light m-b-5 mx-1"><i class="fas fa-times mr-1"></i>Close</button>
-                                <a href="exam-create.html"> <button type="button" class="btn btn-pink waves-effect waves-light m-b-5"><i class="fa fa-plus mr-1"></i>Create</button></a>
-                            </div>
-                        
-                           
-                        </div>
+                        <form name="updae_form" method="POST" action="update_exam_details"
+                            enctype="multipart/form-data">
+                            {% csrf_token %}
 
-                        <div class="row mt-4">
+                            <input type="hidden" name="updated_id" value="{{data.id}}">
+                            <div class="d-flex align-items-center justify-content-between">
+                                <h2 class="main-heading-txt"></h2>
+                                <div class="d-flex">
+                                          
 
-                            <div class="col-md-5 col-sm-12 col-12 px-0">
-                                <div class="form-group exam-titl">
-                                    <label for="field-1" class="control-label">Exam Title</label>
-                                    <input type="text" class="form-control" id="field-1" value="Exam Title">
+
+                        {% if data.Login_required == True %}
+                                    <a target="_blank" href="exam_login_new?type={{data.slug}}"><button type="button"
+                                        class="btn btn-outline-pink waves-effect waves-light m-b-5 mx-1"
+                                        data-toggle="modal" data-target="#share-modal"><i
+                                            class="fa fa-share mr-1"></i>Test Link</button></a>
+
+                                            {% else %}
+                                            <a target="_blank" href="customer_using_link_new?type={{data.slug}}"><button type="button"
+                                                class="btn btn-outline-pink waves-effect waves-light m-b-5 mx-1"
+                                                data-toggle="modal" data-target="#share-modal"><i
+                                                    class="fa fa-share mr-1"></i>Test Link</button></a>
+                                                    {% endif %}
+                                    <button type="button"
+                                        class="btn btn-outline-pink waves-effect waves-light m-b-5 mx-1"><i
+                                            class="fa fa-print mr-1"></i>Print</button>
+                                    <a href="exam"> <button type="button"
+                                            class="btn btn-outline-pink waves-effect waves-light m-b-5 mx-1"><i
+                                                class="fas fa-times mr-1"></i>Close</button></a>
+                                    <button type="submit"
+                                        class="btn btn-pink waves-effect waves-light m-b-5">Save</button>
+
                                 </div>
 
                             </div>
-                            <div class="col-12 px-0">
-                                <div class="d-flex">
-                                    <div class="form-group exam-titl mr-3">
-                                        <label for="field-1" class="control-label">Responsible</label>
-                                        <div class="responsbl d-flex">
-                                            <img src="./static/admin/img/users/avatar-4.jpg" alt="">
-                                            <select name="" id="" class="form-control">
-                                                <option value="" selected="" disabled="">user1</option>
-                                                <option value="">user2</option>
-                                                <option value="">user3</option>
-                                            
-                                            </select>
-                                        </div>
-                                    
+
+                            <div class="row mt-4">
+
+                                <div class="col-md-5 col-sm-12 col-12 px-0">
+                                    <div class="form-group exam-titl">
+                                        <label for="field-1" class="control-label">Exam Title</label>
+                                        <input type="text" name="exam_title" class="form-control" id="field-1"
+                                            value="{{data.Exam_title}}">
                                     </div>
-                                    <div class="form-group responsbl">
-                                        <label for="field-1" class="control-label">Language</label>
-                                                                                       
+                                </div>
+
+                                <div class="col-12 px-0">
+                                    <div class="d-flex">
+                                        <div class="form-group exam-titl mr-3">
+                                            <label for="field-1" class="control-label">Responsible</label>
+                                            <div class="responsbl d-flex">
+                                                <img src="./static/admin/img/users/avatar-4.jpg" alt="">
+                                                <select name="responsible_person" id="" class="form-control">
+                                                    <option value="{{data.responsible_person.id}}" selected>
+                                                        {{data.responsible_person}}</option>
+                                                    {% for i in user %}
+                                                    {% if i.id == data.responsible_person.id %}
+                                                    {% else %}
+                                                    <option value="{{i.id}}">{{i.username}}</option>
+                                                    {% endif %}
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+
+                                        </div>
+                                        <!-- <div class="form-group responsbl">
+                                            <label for="field-1" class="control-label">Language</label>
+
                                             <select name="" id="" class="form-control">
                                                 <option value="" selected="" disabled="">English</option>
                                                 <option value="">Arabic</option>
                                                 <option value="">Hindi</option>
                                                 <option value="">Urdu</option>
-                                            
                                             </select>
-                                      
-                                    
+                                        </div> -->
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="">Language <span style="color: red;
+                                                  font-weight: bold;">(Default English)</span></label>
+                                                <br>
+                                                <input type="checkbox" name="language_type" value="ar"
+                                                    class="lang_class"> <span style="font-size: 12px;">Arabic</span>
+                                                &nbsp; &nbsp;
+                                                <input type="checkbox" name="language_type" value="hi"
+                                                    class="lang_class"> <span style="font-size: 12px;">Hindi </span>
+                                                &nbsp; &nbsp;
+                                                <input type="checkbox" name="language_type" value="ur"
+                                                    class="lang_class"> <span style="font-size: 12px;">Urdu </span>
+                                                &nbsp; &nbsp;
+                                                <input type="checkbox" name="language_type" value="ta"
+                                                    class="lang_class"> <span style="font-size: 12px;">Tamil </span>
+                                            </div>
+                                        </div>
                                     </div>
+
+
                                 </div>
-                               
+                                <div class="col">
 
-                            </div>
-                            <div class="col">
-                                
-                            </div>
+                                </div>
 
-                            <div class="col-md-12 px-0 mt-3">
-                                <div class="paytab">
-                                    <ul class="nav nav-tabs nav-pay mb-2" role="tablist">
-                                        <li class="nav-item d-flex align-items-center">
-                                            <a class="nav-link active" data-toggle="tab" href="#Questions"
-                                                role="tab">
-                                               Questions
-                                            </a>
-                                        </li>
-                                        <li class="nav-item d-flex align-items-center">
-                                            <a class="nav-link" data-toggle="tab" href="#Options"
-                                                role="tab">
-                                                Options
-                                            </a>
-                                        </li>
-                                        <li class="nav-item d-flex align-items-center">
-                                            <a class="nav-link" data-toggle="tab" href="#Description"
-                                                role="tab">
-                                                Start Message
-                                            </a>
-                                        </li>
-                                        <li class="nav-item d-flex align-items-center">
-                                            <a class="nav-link" data-toggle="tab" href="#Endmessage"
-                                                role="tab">
-                                                End Message
-                                            </a>
-                                        </li>
-                                        <li class="nav-item d-flex align-items-center">
-                                            <a class="nav-link" data-toggle="tab" href="#initialfield"
-                                                role="tab">
-                                                Initial Fields
-                                            </a>
-                                        </li>
-                                    </ul>
-                                    <div class="tab-content small-form">
-                                        <div class="tab-pane active" id="Questions" role="tabpanel">
-                                            <div class="mt-4">
-                                                <div class="mb-2">
-                                                    <button type="button"
-                                                    class="btn btn-prim pay" data-toggle="modal"
-                                                    data-target="#addsection">
-                                                    Add a Section
-                                                </button>
-                                                <button type="button"
-                                                class="btn btn-prim pay" data-toggle="modal"
-                                                data-target="#question-modal">
-                                                Add a question
-                                            </button>
+                                <div class="col-md-12 px-0 mt-3">
+                                    <div class="paytab">
+                                        <ul class="nav nav-tabs nav-pay mb-2" role="tablist">
+                                            <li class="nav-item d-flex align-items-center">
+                                                <a class="nav-link active" data-toggle="tab" href="#Questions"
+                                                    role="tab">
+                                                    Questions
+                                                </a>
+                                            </li>
+                                            <li class="nav-item d-flex align-items-center">
+                                                <a class="nav-link" data-toggle="tab" href="#Options" role="tab">
+                                                    Options
+                                                </a>
+                                            </li>
+                                            <li class="nav-item d-flex align-items-center">
+                                                <a class="nav-link" data-toggle="tab" href="#Description" role="tab">
+                                                    Start Message
+                                                </a>
+                                            </li>
+                                            <li class="nav-item d-flex align-items-center">
+                                                <a class="nav-link" data-toggle="tab" href="#Endmessage" role="tab">
+                                                    End Message
+                                                </a>
+                                            </li>
+                                            <li class="nav-item d-flex align-items-center">
+                                                <a class="nav-link" data-toggle="tab" href="#initialfield" role="tab">
+                                                    Initial Fields
+                                                </a>
+                                            </li>
+                                        </ul>
+                                        <div class="tab-content small-form">
+                                            <div class="tab-pane active" id="Questions" role="tabpanel">
+                                                <div class="mt-4">
+                                                    <div class="mb-2">
+                                                        <button type="button" class="btn btn-prim pay"
+                                                            data-toggle="modal" data-target="#addsection">
+                                                            Add a Section
+                                                        </button>
+                                                        <button type="button" class="btn btn-prim pay"
+                                                            data-toggle="modal" data-target="#question-modal">
+                                                            Add a question
+                                                        </button>
+                                                    </div>
+                                                    <table
+                                                        class="table table-qstn dt-responsive table-bordered nowrap table-padd"
+                                                        style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+
+                                                        <thead class="border-class">
+                                                            <tr class="heading-text">
+                                                                <th>Title</th>
+                                                                <th>Question Type</th>
+                                                                <th></th>
+                                                            </tr>
+                                                        </thead>
+
+                                                        <tbody class="body-textcls vertcle-center">
+                                                        {% for i in data_main %}
+                                                            {% if i.section_type == "Section" %} 
+                                                            <tr>
+                                                                <td colspan="2" style="background-color: #f3f6f8">
+                                                                    <a data-toggle="modal" href="#section_edit" data-id="{{i.id}}" data-title="{{i.section_title}}" class="title_edit" style="text-decoration: none; color: black;">
+                                                                        <b>{{i.section_title}}</b></a></td>
+                                                                <td style="background-color: #f3f6f8">
+
+                                                                    <div class="action-tbl d-flex justify-content-end">
+                                                                        <button type="button" class="btn btn-prim pay"
+                                                                    data-toggle="modal" data-target="#question-modal">
+                                                                    Add a question
+                                                                    </button>
+                                                                        <i class="fa fa-trash-o mx-1 trash-btn"
+                                                                            data-toggle="tooltip" data-placement="top"
+                                                                            title="" data-original-title="Delete"></i>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td colspan="3">
+                                                                    <table class="table-bordered"
+                                                                        style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                                                        <thead class="border-class">
+
+                                                                            <tr class="heading-text">
+                                                                                <th>Title</th>
+                                                                                <th>Question Type</th>
+                                                                                <th></th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody class="body-textcls vertcle-center">
+                                                                            {% for j in i.Section_Question_Mapping_id.all %}
+
+                                                                            <tr>
+                                                                                <td> <a href="#" onclick="section_Question_view({{j.Question_id.id}})" style="text-decoration: none; color: black;"> 
+                                                                                    {{j.Question_id.Question}}  </a>
+                                                                                </td>
+                                                                                <td>{% if j.Question_id.Question_type == "Radio" %} Multiple choice: only one answer  {% else %}  Multiple choice: multiple answers allowed {% endif %}
+                                                                                </td>
+                                                                                <td>
+                                                                                    <div
+                                                                                        class="action-tbl d-flex justify-content-end">
+                                                                                        <i class="fa fa-trash-o mx-1 trash-btn"
+                                                                                            data-toggle="tooltip"
+                                                                                            data-placement="top"
+                                                                                            title=""
+                                                                                            data-original-title="Delete"></i>
+
+                                                                                    </div>
+                                                                                </td>
+                                                                            </tr>
+                                                                            {% endfor %}
+                                                                        </tbody>
+                                                                    </table>
+                                                                </td>
+                                                            </tr>
+
+                                                            {% elif i.section_type == "Question" %}
+
+                                                            <tr>
+                                                                <td> <a href="#" onclick="section_Question_view({{i.Question_bank_id.id}})" style="text-decoration: none; color: black;">
+                                                                    {{i.Question_bank_id.Question}}</a>
+                                                                </td>
+                                                                <td>{% if i.Question_id.Question_type == "Radio" %} Multiple choice: only one answer  {% else %}  Multiple choice: multiple answers allowed {% endif %}</td>
+                                                                <td>
+                                                                    <div class="action-tbl d-flex justify-content-end">
+
+                                                                        <i class="fa fa-trash-o mx-1 trash-btn"
+                                                                            data-toggle="tooltip" data-placement="top"
+                                                                            title="" data-original-title="Delete"></i>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                            {% endif %}
+
+                                                        {% endfor %}
+
+                                                        </tbody>
+                                                    </table>
+
                                                 </div>
-                                                <table  class="table table-qstn dt-responsive table-bordered nowrap table-padd" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
 
-                                                    <thead class="border-class">
-    
-                                                        <tr class="heading-text">                                                        
-                                                            <th>Title</th>
-                                                            <th>Question Type</th>
-                                                            <th></th>
-                                                           
-                                                        </tr>
-                                                    </thead>
-    
-    
-                                                    <tbody class="body-textcls vertcle-center">
-                                                        <tr>
-                                                            <td>what is HTML ?</td>
-                                                            <td>Multiple choice: only one answer</td>
-                                                            <td>
-                                                                <div class="action-tbl d-flex justify-content-end">
-                                                                   
-                                                                    <i class="fa fa-trash-o mx-1 trash-btn" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"></i>
-                                                                
+
+                                            </div>
+                                            <div class="tab-pane sales_purchase" id="Options" role="tabpanel">
+
+
+                                                <div class="row mb-2 question-options">
+                                                    <div class="col-md-6 px-0">
+                                                        <h5>Questions</h5>
+
+                                                        <div class="row">
+                                                            <div
+                                                                class="col-md-3 br-right d-flex align-items-start px-0">
+                                                                <h6>Pagination</h6>
+                                                            </div>
+                                                            <div class="col-md-9 py-2">
+                                                                <div class="form-group d-flex align-items-center">
+                                                                    <input type="radio" id="customer" name="layout"
+                                                                        {% if data.layout == "2" %} checked {% endif %}
+                                                                        value="2">
+                                                                    <label for="customer">One page per question</label>
                                                                 </div>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>what is CSS ?</td>
-                                                            <td>Multiple choice: only one answer</td>
-                                                            <td>
-                                                                <div class="action-tbl d-flex justify-content-end">
-                                                                   
-                                                                    <i class="fa fa-trash-o mx-1 trash-btn" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"></i>
-                                                                
+                                                                <div class="form-group d-flex align-items-center">
+                                                                    <input type="radio" id="customer" name="layout"
+                                                                        {% if data.layout == "1" %} checked {% endif %}
+                                                                        value="1">
+                                                                    <label for="customer">One page per section</label>
                                                                 </div>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td colspan="2" style="background-color: #f3f6f8"><b>SECTION 1</b>  </td>
-                                                            <td style="background-color: #f3f6f8">
-                                                                <div class="action-tbl d-flex justify-content-end">
-                                                                   
-                                                                    <i class="fa fa-trash-o mx-1 trash-btn" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"></i>
-                                                                
+                                                                <div class="form-group d-flex align-items-center">
+                                                                    <input type="radio" id="customer" name="layout"
+                                                                        {% if data.layout == "0" %} checked {% endif %}
+                                                                        value="0">
+                                                                    <label for="customer">One page with all the
+                                                                        questions</label>
                                                                 </div>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td colspan="3">
-                                                                <table  class="table-bordered" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
-                                                                    <thead class="border-class">
-        
-                                                                        <tr class="heading-text">                                                        
-                                                                            <th>Title</th>
-                                                                            <th>Question Type</th>
-                                                                            <th></th>
-                                                                           
-                                                                        </tr>
-                                                                    </thead>
-                                                                    <tbody class="body-textcls vertcle-center">
-                                                                        <tr>
-                                                                            <td>what is HTML ?</td>
-                                                                            <td>Multiple choice: only one answer</td>
-                                                                            <td>
-                                                                                <div class="action-tbl d-flex justify-content-end">
-                                                                                   
-                                                                                    <i class="fa fa-trash-o mx-1 trash-btn" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"></i>
-                                                                                
-                                                                                </div>
-                                                                            </td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td>what is CSS ?</td>
-                                                                            <td>Multiple choice: only one answer</td>
-                                                                            <td>
-                                                                                <div class="action-tbl d-flex justify-content-end">
-                                                                                   
-                                                                                    <i class="fa fa-trash-o mx-1 trash-btn" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"></i>
-                                                                                
-                                                                                </div>
-                                                                            </td>
-                                                                        </tr>
-                                                                    </tbody>
-                                                                </table>
-                                                            </td>
-                                                         
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                                
-                                                
-                                                
-                                              
-                                            </div>
 
-
-                                        </div>
-                                        <div class="tab-pane sales_purchase" id="Options" role="tabpanel">
-
-
-                                            <div class="row mb-2 question-options">
-                                                <div class="col-md-6 px-0">
-                                                    <h5>Questions</h5>
-
-                                                    <div class="row">
-                                                        <div
-                                                            class="col-md-3 br-right d-flex align-items-start px-0">
-                                                            <h6>Pagination</h6>
+                                                            </div>
                                                         </div>
-                                                        <div class="col-md-9 py-2">
-                                                            <div class="form-group d-flex align-items-center">
-                                                                <input type="radio" id="customer">
-                                                                <label for="customer">One page per question</label>
+                                                        <div class="row">
+                                                            <div
+                                                                class="col-md-3 br-right d-flex align-items-start px-0">
+                                                                <h6>Display Progress as</h6>
                                                             </div>
-                                                            <div class="form-group d-flex align-items-center">
-                                                                <input type="radio" id="customer">
-                                                                <label for="customer">One page per section</label>
+                                                            <div class="col-md-9 py-2">
+                                                                <div class="form-group d-flex align-items-center">
+                                                                    <input type="radio" id="customer"
+                                                                        name="progression_mode"
+                                                                        {% if data.progression_mode == "Percentage" %}
+                                                                        checked {% endif %} value="Percentage">
+                                                                    <label for="customer">Percentage left</label>
+                                                                </div>
+                                                                <div class="form-group d-flex align-items-center">
+                                                                    <input type="radio" id="customer"
+                                                                        name="progression_mode"
+                                                                        {% if data.progression_mode == "Number" %}
+                                                                        checked {% endif %} value="Number">
+                                                                    <label for="customer">Number</label>
+                                                                </div>
+
+
                                                             </div>
-                                                            <div class="form-group d-flex align-items-center">
-                                                                <input type="radio" id="customer">
-                                                                <label for="customer">One page with all the questions</label>
-                                                            </div>
-                                                          
                                                         </div>
+                                                        <div class="row">
+                                                            <div
+                                                                class="col-md-3 br-right d-flex align-items-start px-0">
+                                                                <h6>Question Selection</h6>
+                                                            </div>
+                                                            <div class="col-md-9 py-2">
+                                                                <div class="form-group d-flex align-items-center">
+                                                                    <input type="radio" id="customer" name="section"
+                                                                        {% if data.selection_mode == "All questions" %}
+                                                                        checked {% endif %} value="All questions">
+                                                                    <label for="customer">All questions</label>
+                                                                </div>
+                                                                <div class="form-group d-flex align-items-center">
+                                                                    <input type="radio" id="customer" name="section"
+                                                                        {% if data.selection_mode == "Randomized per section" %}
+                                                                        checked {% endif %}
+                                                                        value="Randomized per section">
+                                                                    <label for="customer">Randomized per Section</label>
+                                                                </div>
+
+
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div
+                                                                class="col-md-3 br-right d-flex align-items-center px-0">
+                                                                <h6>Back Button</h6>
+                                                            </div>
+                                                            <div class="col-md-9">
+                                                                <div class="form-group mt-2 d-flex align-items-center">
+                                                                    <input type="checkbox" id="customer">
+
+                                                                </div>
+
+
+
+                                                            </div>
+                                                        </div>
+
                                                     </div>
-                                                    <div class="row">
-                                                        <div
-                                                            class="col-md-3 br-right d-flex align-items-start px-0">
-                                                            <h6>Display Progress as</h6>
-                                                        </div>
-                                                        <div class="col-md-9 py-2">
-                                                            <div class="form-group d-flex align-items-center">
-                                                                <input type="radio" id="customer">
-                                                                <label for="customer">Percentage left</label>
-                                                            </div>
-                                                            <div class="form-group d-flex align-items-center">
-                                                                <input type="radio" id="customer">
-                                                                <label for="customer">Number</label>
-                                                            </div>
-                                                        
-                                                          
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div
-                                                            class="col-md-3 br-right d-flex align-items-start px-0">
-                                                            <h6>Question Selection</h6>
-                                                        </div>
-                                                        <div class="col-md-9 py-2">
-                                                            <div class="form-group d-flex align-items-center">
-                                                                <input type="radio" id="customer">
-                                                                <label for="customer">All questions</label>
-                                                            </div>
-                                                            <div class="form-group d-flex align-items-center">
-                                                                <input type="radio" id="customer">
-                                                                <label for="customer">Randomized per Section</label>
-                                                            </div>
-                                                        
-                                                          
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div
-                                                            class="col-md-3 br-right d-flex align-items-center px-0">
-                                                            <h6>Back Button</h6>
-                                                        </div>
-                                                        <div class="col-md-9">
-                                                            <div class="form-group mt-2 d-flex align-items-center">
-                                                                <input type="checkbox" id="customer">
-                                                               
-                                                            </div>
-                                                          
-                                                        
-                                                          
-                                                        </div>
-                                                    </div>
-                                                    
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <h5>Participants</h5>
+                                                    <div class="col-md-6">
+                                                        <h5>Participants</h5>
 
-                                           
-                                                    <div class="row">
-                                                        <div
-                                                            class="col-md-3 br-right d-flex align-items-center px-0">
-                                                            <h6>Access Mode</h6>
-                                                        </div>
-                                                        <div
-                                                            class="col-md-5 d-flex align-items-center m-l-10">
-                                                            <select name="" id="" class="form-control">
-                                                                <option value="">Anyone with the link</option>
-                                                                <option value="">Invited people only</option>
-                                                             
 
-                                                            </select>
+                                                        <div class="row">
+                                                            <div
+                                                                class="col-md-3 br-right d-flex align-items-center px-0">
+                                                                <h6>Access Mode</h6>
+                                                            </div>
+
+                                                            <div class="col-md-5 d-flex align-items-center m-l-10">
+                                                                <select class="form-control" name="access_mode"
+                                                                    id="select_access_mode">
+                                                                    <option value="0" {% if data.access_mode == "0" %}
+                                                                        selected {% endif %}>Anyone with the link
+                                                                    </option>
+                                                                    <option value="1" {% if data.access_mode == "1" %}
+                                                                        selected {% endif %}>Invited people only
+                                                                    </option>
+                                                                </select>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div
-                                                            class="col-md-3 br-right d-flex align-items-center px-0">
-                                                            <h6>Require Login</h6>
+
+                                                        <div class="row">
+
+                                                            <div
+                                                                class="col-md-3 br-right d-flex align-items-center px-0">
+                                                                <h6>Require Login</h6>
+                                                            </div>
+
+                                                            <div class="col-md-9 d-flex align-items-center r-day">
+                                                                <input type="checkbox" id="login_required" value="True"
+                                                                    name="login_required" {% if data.Login_required %}
+                                                                    checked {% endif %}>
+                                                            </div>
                                                         </div>
-                                                        <div
-                                                            class="col-md-9 d-flex align-items-center r-day">
-                                                            <input type="checkbox" id="r-day">
+
+                                                        <div class="row" id="attemp_lim" {% if data.Login_required %}
+                                                            style="display:block;" {% else %} style="display:none;"
+                                                            {% endif %}>
+                                                            <div
+                                                                class="col-md-3 br-right d-flex align-items-center px-0">
+                                                                <h6>Attempts Limit</h6>
+                                                            </div>
+
+                                                            <div class="col-md-9 d-flex align-items-center r-day">
+                                                                <input type="checkbox" id="Attempts"
+                                                                    name="Attempt_check" value="True"
+                                                                    {% if data.attempt_limit %} checked {% endif %}>
+                                                            </div>
+
+
+                                                            <div class="col-md-9 d-flex align-items-center r-day">
+                                                                <input type="number" class="form-control col-md-3"
+                                                                    attemptsid="attempts_limit" value="1"
+                                                                    name="attempt_limit" value="{{data.attempt_limit}}">
+                                                                <span style="font-size: 10px;">attempts</span>
+
+                                                            </div>
+
+
+
                                                         </div>
+
                                                     </div>
                                                 </div>
-                                            </div>
 
-                                            <div class="row">
-                                                <div class="col-md-6 px-0">
-                                                    <h5>Time & Scoring</h5>
+                                                <div class="row">
+                                                    <div class="col-md-6 px-0">
+                                                        <h5>Time & Scoring</h5>
 
-                                                    <div class="row">
-                                                        <div
-                                                            class="col-md-3 br-right d-flex align-items-center px-0 px-0">
-                                                            <h6>Survey Time Limit</h6>
-                                                        </div>
-                                                        <div
-                                                        class="col-md-7 d-flex align-items-center r-day">
-                                                        <input type="checkbox" id="r-day">
-                                                    </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div
-                                                            class="col-md-3 br-right d-flex align-items-start px-0">
-                                                            <h6>Scoring</h6>
-                                                        </div>
-                                                        <div class="col-md-9 py-2">
-                                                            <div class="form-group d-flex align-items-center">
-                                                                <input type="radio" id="customer">
-                                                                <label for="customer">No scoring</label>
+                                                        <div class="row">
+                                                            <div
+                                                                class="col-md-3 br-right d-flex align-items-center px-0 px-0">
+                                                                <h6>Survey Time Limit</h6>
                                                             </div>
-                                                            <div class="form-group d-flex align-items-center">
-                                                                <input type="radio" id="customer">
-                                                                <label for="customer">Scoring with answers at the end</label>
-                                                            </div>
-                                                            <div class="form-group d-flex align-items-center">
-                                                                <input type="radio" id="customer">
-                                                                <label for="customer">Scoring without answers at the end</label>
-                                                            </div>
-                                                          
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div
-                                                            class="col-md-3 br-right d-flex align-items-center px-0">
-                                                            <h6>Required Score (%)</h6>
-                                                        </div>
-                                                        <div class="col-md-1">
-                                                            <input type="text" class="form-control" value="80.00">
-                                                           
-                                                          
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div
-                                                            class="col-md-3 br-right d-flex align-items-center px-0 px-0">
-                                                            <h6>Is a Certification</h6>
-                                                        </div>
-                                                        <div
-                                                        class="col-md-7 d-flex align-items-center r-day">
-                                                        <input type="checkbox" id="r-day">
-                                                    </div>
-                                                    </div>
 
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <h5>Live Session</h5>
+                                                            <div class="col-md-7 d-flex align-items-center r-day">
+                                                                <input type="checkbox" id="time_limit" name="time_limit"
+                                                                    value="True"
+                                                                    {% if data.Exam_time_limit|safe != "00:00:00" %}
+                                                                    checked {% endif %}>
 
-                                                    <div class="row">
-                                                        <div
-                                                            class="col-md-3 br-right d-flex align-items-center px-0">
-                                                            <h6>Session Code</h6>
+                                                                <div id="show_timelimit"
+                                                                    {% if data.Exam_time_limit|safe != "00:00:00" and  data.Exam_time_limit != " "  %}
+                                                                    style="display: block;" {% else %}
+                                                                    style="display: none;" {% endif %}>
+                                                                    <input
+                                                                        style="border: 1px solid #e8ecf1; font-size: 0.8125rem;"
+                                                                        type="text" name="exam_time_limit"
+                                                                        id="exam_time_limit"
+                                                                        value="{{data.Exam_time_limit|time:'H:i:s'}}"
+                                                                        placeholder="HH:MM:SS">
+                                                                    <span style="font-size: 10px;">minutes</span>
+                                                                </div>
+
+                                                            </div>
                                                         </div>
-                                                        <div
-                                                            class="col-md-2 d-flex align-items-center">
-                                                            <input type="text" class="form-control"
-                                                                value="2168">
+                                                        <div class="row">
+                                                            <div
+                                                                class="col-md-3 br-right d-flex align-items-start px-0">
+                                                                <h6>Scoring</h6>
+                                                            </div>
+                                                            <div class="col-md-9 py-2">
+                                                                <div class="form-group d-flex align-items-center">
+                                                                    <input type="radio" id="customer"
+                                                                        name="scoring_mode"
+                                                                        {% if data.scoring_mode == "0" %} checked
+                                                                        {% endif %} value="0">
+                                                                    <label for="customer">No scoring</label>
+                                                                </div>
+                                                                <div class="form-group d-flex align-items-center">
+                                                                    <input type="radio" id="customer"
+                                                                        name="scoring_mode"
+                                                                        {% if data.scoring_mode == "1" %} checked
+                                                                        {% endif %} value="1">
+                                                                    <label for="customer">Scoring with answers at the
+                                                                        end</label>
+                                                                </div>
+                                                                <div class="form-group d-flex align-items-center">
+                                                                    <input type="radio" id="customer"
+                                                                        name="scoring_mode"
+                                                                        {% if data.scoring_mode == "2" %} checked
+                                                                        {% endif %} value="2">
+                                                                    <label for="customer">Scoring without answers at the
+                                                                        end</label>
+                                                                </div>
+
+                                                            </div>
                                                         </div>
+                                                        <div class="row">
+                                                            <div
+                                                                class="col-md-3 br-right d-flex align-items-center px-0">
+                                                                <h6>Required Score (%)</h6>
+                                                            </div>
+                                                            <div class="col-md-1">
+                                                                <input type="text" class="form-control"
+                                                                    name="required_score" value="{{data.Success_per}}">
+
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div
+                                                                class="col-md-3 br-right d-flex align-items-center px-0 px-0">
+                                                                <h6>Is a Certification</h6>
+                                                            </div>
+                                                            <div class="col-md-7 d-flex align-items-center r-day">
+                                                                <input type="checkbox" id="r-day">
+                                                            </div>
+                                                        </div>
+
                                                     </div>
-                                                    <div class="row">
-                                                        <div
-                                                            class="col-md-3 br-right d-flex align-items-center px-0">
-                                                            <h6>Session Link</h6>
+                                                    <div class="col-md-6">
+                                                        <h5>Live Session</h5>
+
+                                                        <div class="row">
+                                                            <div
+                                                                class="col-md-3 br-right d-flex align-items-center px-0">
+                                                                <h6>Session Code</h6>
+                                                            </div>
+                                                            <div class="col-md-2 d-flex align-items-center">
+                                                                <input type="text" class="form-control" value="2168">
+                                                            </div>
                                                         </div>
-                                                        <div
-                                                            class="col-md-7 d-flex align-items-center">
-                                                            <div class="input-group uploadFile1">
-                   
-                                                                <input type="text" class="form-control" name="url" value="https://demo4.odoo.com/survey/start/b137640d-9876-1234-abcd-344ca256531e">
-                                                                <div class="input-group-append">
-                                                                    <span class="input-group-text"> <i class="fas fa-copy" aria-hidden="true"></i></span>
+                                                        <div class="row">
+                                                            <div
+                                                                class="col-md-3 br-right d-flex align-items-center px-0">
+                                                                <h6>Session Link</h6>
+                                                            </div>
+                                                            <div class="col-md-7 d-flex align-items-center">
+                                                                <div class="input-group uploadFile1">
+
+                                                                    <input type="text" class="form-control" name="url"
+                                                                        value="https://demo4.odoo.com/survey/start/b137640d-9876-1234-abcd-344ca256531e">
+                                                                    <div class="input-group-append">
+                                                                        <span class="input-group-text"> <i
+                                                                                class="fas fa-copy"
+                                                                                aria-hidden="true"></i></span>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div
-                                                            class="col-md-3 br-right d-flex align-items-center px-0">
-                                                            <h6>Reward quick answers</h6>
+                                                        <div class="row">
+                                                            <div
+                                                                class="col-md-3 br-right d-flex align-items-center px-0">
+                                                                <h6>Reward quick answers</h6>
+                                                            </div>
+                                                            <div class="col-md-7 d-flex align-items-center r-day">
+                                                                <input type="checkbox" id="r-day">
+                                                            </div>
                                                         </div>
-                                                        <div
-                                                        class="col-md-7 d-flex align-items-center r-day">
-                                                        <input type="checkbox" id="r-day">
-                                                     </div>
-                                                     </div>
+                                                    </div>
                                                 </div>
+
                                             </div>
-
-                                        </div>
-                                        <div class="tab-pane descptn" id="Description" role="tabpanel">
+                                            <div class="tab-pane descptn" id="Description" role="tabpanel">
 
 
-                                            <div class="row">
-                                                <div class="col-md-12 px-0">
-                                                    <textarea name="" id="" cols="30" rows="5"
-                                                        class="form-control border-0"
-                                                        placeholder="Start Message..."></textarea>
+                                                <div class="row">
+                                                    <div class="col-md-12 px-0">
+                                                        <textarea name="start_message" id="" cols="30" rows="5"
+                                                            class="form-control border-0"
+                                                            placeholder="Start Message...">{{data.start_message}}</textarea>
+                                                    </div>
                                                 </div>
-                                            </div>
 
-                                        </div>
-                                        <div class="tab-pane descptn" id="Endmessage" role="tabpanel">
-                                            <div class="row">
-                                                <div class="col-md-12 px-0">
-                                                    <textarea name="" id="" cols="30" rows="5"
-                                                        class="form-control border-0"
-                                                        placeholder="End Message..."></textarea>
+                                            </div>
+                                            <div class="tab-pane descptn" id="Endmessage" role="tabpanel">
+                                                <div class="row">
+                                                    <div class="col-md-12 px-0">
+                                                        <textarea name="end_message" id="" cols="30" rows="5"
+                                                            class="form-control border-0"
+                                                            placeholder="End Message...">{{data.end_message}}</textarea>
+                                                    </div>
                                                 </div>
-                                            </div>
 
-                                        </div>
-                                        <div class="tab-pane" id="initialfield" role="tabpanel">
-                                            <div class="mt-4">
-                                                <div class="mb-2">
-                                                    <button type="button"
+                                            </div>
+                                            <div class="tab-pane" id="initialfield" role="tabpanel">
+                                                <div class="mt-4">
+                                                    <div class="mb-2">
+                                                        <!-- <button type="button"
                                                     class="btn btn-prim pay">
                                                     Add a Line
-                                                </button>
-                                              
+                                                </button> -->
+
+                                                    </div>
+                                                    <table
+                                                        class="table table-qstn table-input dt-responsive table-bordered nowrap table-padd"
+                                                        style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+
+                                                        <thead class="border-class">
+
+                                                            <tr class="heading-text">
+                                                                <th style="width: 300px">Title</th>
+                                                                <th style="width: 300px">Type</th>
+                                                                <th>Inputs</th>
+                                                                <th></th>
+
+                                                            </tr>
+                                                        </thead>
+
+
+                                                        <tbody class="body-textcls vertcle-center">
+
+                                                            {% for i in intial_field %}
+                                                            <tr>
+                                                                <td><input type="text" name="initial_title" id=""
+                                                                        value="{{i.title}}" class="form-control"></td>
+                                                                <td>
+                                                                    <select name="initial_type" id=""
+                                                                        class="form-control">
+                                                                        <option value="selection" selected>
+                                                                            {{i.field_type}}</option>
+                                                                        {% if "selection" == i.field_type %}
+                                                                        <option value="Text Input">Text Input</option>
+                                                                        <option value="Date Input">Date Input</option>
+                                                                        {% elif "Text Input" ==  i.field_type %}
+                                                                        <option value="selection">Selection</option>
+                                                                        <option value="Date Input">Date Input</option>
+                                                                        {% else %}
+                                                                        <option value="selection">Selection</option>
+                                                                        <option value="Text Input">Text Input</option>
+                                                                        {% endif %}
+                                                                    </select>
+                                                                </td>
+                                                                <td>
+                                                                    {% for j in i.Exam_inital_field_id.all %}
+                                                                    <input type="text" name="" id=""
+                                                                        class="form-control" value="{{j.choice_name}}">
+                                                                    {% endfor %}
+                                                                </td>
+
+                                                                <td>
+                                                                    <div
+                                                                        class="action-tbl d-flex justify-content-end mt-1">
+
+                                                                        <i style="cursor: pointer;"
+                                                                            onclick="delete_btn(`{{i.id}}`)"
+                                                                            class="fa fa-trash-o mx-1 trash-btn"
+                                                                            data-toggle="tooltip" data-placement="top"
+                                                                            title="" data-original-title="Delete"></i>
+
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                            {% endfor %}
+                                                        </tbody>
+                                                    </table>
+
+
                                                 </div>
-                                                <table  class="table table-qstn table-input dt-responsive table-bordered nowrap table-padd" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
 
-                                                    <thead class="border-class">
-    
-                                                        <tr class="heading-text">                                                        
-                                                            <th style="width: 300px">Input Title</th>
-                                                            <th style="width: 300px">Input Type</th>
-                                                            <th>Inputs</th>
-                                                            <th></th>
-                                                           
-                                                        </tr>
-                                                    </thead>
-    
-    
-                                                    <tbody class="body-textcls vertcle-center">
-                                                        <tr>
-                                                            <td><input type="text" name="" id="" class="form-control"></td>
-                                                            <td>
-                                                                <select name="" id="" class="form-control">
-                                                                    <option value="" selected="" disabled="">Text</option>
-                                                                    <option value="">Select</option>
-                                                                    <option value="">Date</option>
-                                                                
-                                                                </select>
-                                                            </td>
-                                                            <td>
-                                                                <input type="text" name="" id="" class="form-control">
-                                                            </td>
-                                                            <td> <div class="action-tbl d-flex justify-content-end mt-1">
-                                                                   
-                                                                <i class="fa fa-trash-o mx-1 trash-btn" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"></i>
-                                                            
-                                                            </div></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td><input type="text" name="" id="" class="form-control"></td>
-                                                            <td>
-                                                                <select name="" id="" class="form-control">
-                                                                    <option value="" selected="" disabled="">Text</option>
-                                                                    <option value="">Select</option>
-                                                                    <option value="">Date</option>
-                                                                
-                                                                </select>
-                                                            </td>
-                                                            <td>
-                                                                <input type="text" name="" id="" class="form-control">
-                                                            </td>
-                                                            <td> <div class="action-tbl d-flex justify-content-end mt-1">
-                                                                   
-                                                                <i class="fa fa-trash-o mx-1 trash-btn" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"></i>
-                                                            
-                                                            </div></td>
-                                                        </tr>
-                                                  
-                                                    </tbody>
-                                                </table>
-                                                
-                                                
-                                                
-                                              
                                             </div>
-
                                         </div>
                                     </div>
                                 </div>
+
                             </div>
-                           
-                        </div>
+                        </form>
                     </div>
                 </div>
+
+
             </div>
-          </div>
+        </div>
 
     </div>
 </div>
 
-<div id="share-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-    aria-hidden="true" style="display: none">
+<div id="delete_initial_field_div">
+
+</div>
+
+<div class="section_Question_view_modal">
+
+</div>
+
+<div id="share-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
+    style="display: none">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
@@ -557,13 +689,14 @@
                         <div class="form-group">
                             <label for="field-1" class="control-label">Exam URL</label>
                             <div class="input-group uploadFile1">
-                               
-                                <input type="text" class="form-control" name="url" value="https://demo4.odoo.com/survey/start/b137640d-9876-1234-abcd-344ca256531e">
+
+                                <input type="text" class="form-control" name="url"
+                                    value="https://demo4.odoo.com/survey/start/b137640d-9876-1234-abcd-344ca256531e">
                                 <div class="input-group-append">
                                     <span class="input-group-text"> <i class="fas fa-copy"></i></span>
                                 </div>
                             </div>
-           
+
                         </div>
                     </div>
                     <div class="col-md-12 recipient">
@@ -579,24 +712,24 @@
                         </div>
                     </div>
                     <div class="col-md-12">
-                       <div class="mail-content">
-                        <h5>Dear Participant,</h5>
-                        <p>You have been invited to take a new test.</p>
-                        <p>Please answer the survey for 05/05/2021.</p>
-                        <p>We wish you good luck!</p>
-                       </div>
+                        <div class="mail-content">
+                            <h5>Dear Participant,</h5>
+                            <p>You have been invited to take a new test.</p>
+                            <p>Please answer the survey for 05/05/2021.</p>
+                            <p>We wish you good luck!</p>
+                        </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="field-1" class="control-label attachmt-plus">Attachments <span>+</span></label>
                             <div class="input-group uploadFile1">
-                               
-                                <input type="file" class="inputfile form-control" name="file" >
+
+                                <input type="file" class="inputfile form-control" name="file">
                                 <div class="input-group-append">
                                     <span class="input-group-text"> <i class="fas fa-paperclip"></i></span>
                                 </div>
                             </div>
-           
+
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -605,10 +738,10 @@
                             <input type="text" class="form-control" id="field-1" placeholder="05/03/2023">
                         </div>
                     </div>
-                   
-                   
 
-    
+
+
+
                 </div>
 
 
@@ -623,532 +756,653 @@
     </div>
 </div>
 
-<div id="addsection" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-aria-hidden="true" style="display: none">
-<div class="modal-dialog modal-md modal-dialog-centered">
-    <div class="modal-content">
-        <div class="modal-header">
-            <h4 class="modal-title mt-0">Add a Section</h4>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        <div class="modal-body">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <label for="field-1" class="control-label">Section Name</label>
-                        <input type="text" class="form-control" id="field-1" placeholder="Section Name">
+<div id="addsection" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
+    style="display: none">
+    <div class="modal-dialog modal-md modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title mt-0">Add a Section</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="field-1" class="control-label">Section Name</label>
+                            <input type="text" class="form-control" id="field-1" placeholder="Section Name">
+                        </div>
                     </div>
+
                 </div>
 
             </div>
+            <div class="modal-footer">
 
-
-
-        </div>
-        <div class="modal-footer">
-
-            <button type="button" style="background-color:#f9365f!important;border: none!important;"
-                class="btn btn-info waves-effect waves-light">Save </button>
+                <button type="button" style="background-color:#f9365f!important;border: none!important;"
+                    class="btn btn-info waves-effect waves-light">Save </button>
+            </div>
         </div>
     </div>
 </div>
+
+
+
+<div id="section_edit" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
+    style="display: none">
+    <form class="forms-sample" action="section_title_edit" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}   
+    <div class="modal-dialog modal-md modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title mt-0">Section</h4>
+                <input value="{{data.id}}" type="hidden" name="updated_id" id="title_updated_id">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="title_name_update" class="control-label">Section Name</label>
+                            <input type="text" class="form-control" name="exam_title"  placeholder="Section Name" id="title_name_update" > 
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+
+                <button type="submit" style="background-color:#f9365f!important;border: none!important;"
+                    class="btn btn-info waves-effect waves-light">Save </button>
+            </div>
+        </div>
+    </div>
+    </form>
 </div>
 
 <div id="question-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-aria-hidden="true" style="display: none">
-<div class="modal-dialog modal-lg">
-    <div class="modal-content">
-        <div class="modal-header">
-            <h4 class="modal-title mt-0">Add a Question</h4>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        <div class="modal-body">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <label for="field-1" class="control-label">Question</label>
-                        <div class="input-group">
-                      
-                            <input type="text" class="inputfile form-control mb-0" name="file" placeholder="eg: What is the...">
-                            <div class="input-group-append">
-                                <button type="button"
-                            class="input-group-text" data-toggle="modal"
-                            data-target="#language-modal">
-                            <i class="fas fa-language"></i>
-                        </button>
-                         
-                            </div> 
-                        </div>
-                    </div>
-                    
-                 
-                </div>
-                <div class="col-md-12">
-                    <div class="row answer-type">
-                        <div
-                            class="col-md-3 br-right d-flex align-items-start px-0">
-                            <label>Question Type</label>
-                        </div>
-                        <div class="col-md-9 px-2">
-                            <div class="form-group d-flex align-items-center">
-                                <input type="radio" id="customer">
-                                <label for="customer">One page per question</label>
-                            </div>
-                            <div class="form-group d-flex align-items-center">
-                                <input type="radio" id="customer">
-                                <label for="customer">One page per section</label>
-                            </div>
-                            <div class="form-group d-flex align-items-center">
-                                <input type="radio" id="customer">
-                                <label for="customer">One page with all the questions</label>
-                            </div>
-                          
-                        </div>
-                    </div>
-                    
-                </div>
-             <div class="col-md-12 mt-3">
-                <div class="paytab">
-                    <ul class="nav nav-tabs nav-pay mb-2" role="tablist">
-                        <li class="nav-item d-flex align-items-center">
-                            <a class="nav-link active" data-toggle="tab" href="#Answers1"
-                                role="tab">
-                                Answers
-                            </a>
-                        </li>
-                        <li class="nav-item d-flex align-items-center">
-                            <a class="nav-link" data-toggle="tab" href="#Options1"
-                                role="tab">
-                                Options
-                            </a>
-                        </li>
-                        <li class="nav-item d-flex align-items-center">
-                            <a class="nav-link" data-toggle="tab" href="#Description1"
-                                role="tab">
-                                Description
-                            </a>
-                        </li>
-                      
-                    </ul>
-                    <div class="tab-content small-form">
-                        <div class="tab-pane active" id="Answers1" role="tabpanel">
-                            <div class="mt-3">
-                                <div class="mb-2">
-                                    <button type="button"
-                                    class="btn btn-prim pay" >
-                                    Add a Line
-                                </button>
-                             
+    aria-hidden="true" style="display: none">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title mt-0">Add a Question</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="field-1" class="control-label">Question</label>
+                            <div class="input-group">
+
+                                <input type="text" class="inputfile form-control mb-0" name="file"
+                                    placeholder="eg: What is the...">
+                                <div class="input-group-append">
+                                    <button type="button" class="input-group-text" data-toggle="modal"
+                                        data-target="#language-modal">
+                                        <i class="fas fa-language"></i>
+                                    </button>
+
                                 </div>
-                                <table  class="table table-qstn dt-responsive table-bordered nowrap table-padd" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
-
-                                    <thead class="border-class">
-
-                                        <tr class="heading-text">                                                        
-                                            <th>Choices</th>
-                                            <th>Image</th>
-                                            <th></th>
-                                           
-                                        </tr>
-                                    </thead>
+                            </div>
+                        </div>
 
 
-                                    <tbody class="body-textcls vertcle-center">
-                                        <tr>
-                                            <td>
-                                                <input type="text" class="form-control">
-                                            </td>
-                                            <td>
-                                                <div class="input-group uploadFile1">
-                           
-                                                    <input type="file" class="inputfile form-control mb-0" name="file" >
-                                                    <div class="input-group-append">
-                                                        <span class="input-group-text"> <i class="fas fa-paperclip"></i></span>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="row answer-type">
+                            <div class="col-md-3 br-right d-flex align-items-start px-0">
+                                <label>Question Type</label>
+                            </div>
+                            <div class="col-md-9 px-2">
+                                <div class="form-group d-flex align-items-center">
+                                    <input type="radio" id="customer">
+                                    <label for="customer">One page per question</label>
+                                </div>
+                                <div class="form-group d-flex align-items-center">
+                                    <input type="radio" id="customer">
+                                    <label for="customer">One page per section</label>
+                                </div>
+                                <div class="form-group d-flex align-items-center">
+                                    <input type="radio" id="customer">
+                                    <label for="customer">One page with all the questions</label>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-md-12 mt-3">
+                        <div class="paytab">
+                            <ul class="nav nav-tabs nav-pay mb-2" role="tablist">
+                                <li class="nav-item d-flex align-items-center">
+                                    <a class="nav-link active" data-toggle="tab" href="#Answers1" role="tab">
+                                        Answers
+                                    </a>
+                                </li>
+                                <li class="nav-item d-flex align-items-center">
+                                    <a class="nav-link" data-toggle="tab" href="#Options1" role="tab">
+                                        Options
+                                    </a>
+                                </li>
+                                <li class="nav-item d-flex align-items-center">
+                                    <a class="nav-link" data-toggle="tab" href="#Description1" role="tab">
+                                        Description
+                                    </a>
+                                </li>
+
+                            </ul>
+                            <div class="tab-content small-form">
+                                <div class="tab-pane active" id="Answers1" role="tabpanel">
+                                    <div class="mt-3">
+                                        <div class="mb-2">
+                                            <button type="button" class="btn btn-prim pay">
+                                                Add a Line
+                                            </button>
+
+                                        </div>
+                                        <table class="table table-qstn dt-responsive table-bordered nowrap table-padd"
+                                            style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+
+                                            <thead class="border-class">
+
+                                                <tr class="heading-text">
+                                                    <th>Choices</th>
+                                                    <th>Image</th>
+                                                    <th></th>
+
+                                                </tr>
+                                            </thead>
+
+
+                                            <tbody class="body-textcls vertcle-center">
+                                                <tr>
+                                                    <td>
+                                                        <input type="text" class="form-control">
+                                                    </td>
+                                                    <td>
+                                                        <div class="input-group uploadFile1">
+
+                                                            <input type="file" class="inputfile form-control mb-0"
+                                                                name="file">
+                                                            <div class="input-group-append">
+                                                                <span class="input-group-text"> <i
+                                                                        class="fas fa-paperclip"></i></span>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="action-tbl d-flex justify-content-end">
+
+                                                            <i class="fa fa-trash-o mx-1 trash-btn"
+                                                                data-toggle="tooltip" data-placement="top" title=""
+                                                                data-original-title="Delete"></i>
+
+                                                        </div>
+                                                    </td>
+                                                </tr>
+
+                                            </tbody>
+                                        </table>
+
+
+
+
+                                    </div>
+
+
+                                </div>
+                                <div class="tab-pane sales_purchase" id="Options1" role="tabpanel">
+
+
+                                    <div class="row mb-2 question-options">
+                                        <div class="col-md-6 px-0">
+                                            <h5>Answers</h5>
+
+                                            <div class="row">
+                                                <div class="col-md-5 br-right d-flex align-items-center px-0">
+                                                    <h6>Show Comments Field</h6>
+                                                </div>
+                                                <div class="col-md-7">
+                                                    <div class="form-group mt-2 d-flex align-items-center">
+                                                        <input type="checkbox" id="customer">
+
                                                     </div>
+
+
+
                                                 </div>
-                                            </td>
-                                            <td>
-                                                <div class="action-tbl d-flex justify-content-end">
-                                                   
-                                                    <i class="fa fa-trash-o mx-1 trash-btn" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"></i>
-                                                
-                                                </div>
-                                            </td>
-                                        </tr>
-                                       
-                                    </tbody>
-                                </table>
-                                
-                                
-                                
-                              
-                            </div>
-
-
-                        </div>
-                        <div class="tab-pane sales_purchase" id="Options1" role="tabpanel">
-
-
-                            <div class="row mb-2 question-options">
-                                <div class="col-md-6 px-0">
-                                    <h5>Answers</h5>
-
-                                    <div class="row">
-                                        <div
-                                            class="col-md-5 br-right d-flex align-items-center px-0">
-                                            <h6>Show Comments Field</h6>
-                                        </div>
-                                        <div class="col-md-7">
-                                            <div class="form-group mt-2 d-flex align-items-center">
-                                                <input type="checkbox" id="customer">
-                                               
                                             </div>
-                                          
-                                        
-                                          
+
+                                        </div>
+                                        <div class="col-md-6">
+                                            <h5>Layout</h5>
+
+                                            <div class="row">
+                                                <div class="col-md-5 br-right d-flex align-items-center px-0">
+                                                    <h6>Conditional Display</h6>
+                                                </div>
+                                                <div class="col-md-7 d-flex align-items-center r-day">
+                                                    <input type="checkbox" id="r-day">
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                    
+
+                                    <div class="row mb-3">
+                                        <div class="col-md-6 px-0">
+                                            <h5>Constraints</h5>
+
+                                            <div class="row">
+                                                <div class="col-md-5 br-right d-flex align-items-center px-0 px-0">
+                                                    <h6>Mandatory Answer</h6>
+                                                </div>
+                                                <div class="col-md-7 d-flex align-items-center r-day">
+                                                    <input type="checkbox" id="r-day">
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-6">
+                                            <h5>Live Session</h5>
+
+                                            <div class="row">
+                                                <div class="col-md-5 br-right d-flex align-items-center px-0">
+                                                    <h6>Question Time Limit</h6>
+                                                </div>
+                                                <div class="col-md-7 d-flex align-items-center r-day">
+                                                    <input type="checkbox" id="r-day">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
                                 </div>
-                                <div class="col-md-6">
-                                    <h5>Layout</h5>
+                                <div class="tab-pane descptn" id="Description1" role="tabpanel">
+
 
                                     <div class="row">
-                                        <div
-                                            class="col-md-5 br-right d-flex align-items-center px-0">
-                                            <h6>Conditional Display</h6>
-                                        </div>
-                                        <div
-                                            class="col-md-7 d-flex align-items-center r-day">
-                                            <input type="checkbox" id="r-day">
+                                        <div class="col-md-12 px-0">
+                                            <textarea name="" id="" cols="30" rows="5" class="form-control border-0"
+                                                placeholder="e.g. Guidelines, instructions, picture, ... to help attendees answer"></textarea>
                                         </div>
                                     </div>
+
                                 </div>
+
                             </div>
-
-                            <div class="row mb-3">
-                                <div class="col-md-6 px-0">
-                                    <h5>Constraints</h5>
-
-                                    <div class="row">
-                                        <div
-                                            class="col-md-5 br-right d-flex align-items-center px-0 px-0">
-                                            <h6>Mandatory Answer</h6>
-                                        </div>
-                                        <div
-                                        class="col-md-7 d-flex align-items-center r-day">
-                                        <input type="checkbox" id="r-day">
-                                    </div>
-                                    </div>
-                                   
-                                </div>
-                                <div class="col-md-6">
-                                    <h5>Live Session</h5>
-
-                                    <div class="row">
-                                        <div
-                                            class="col-md-5 br-right d-flex align-items-center px-0">
-                                            <h6>Question Time Limit</h6>
-                                        </div>
-                                        <div
-                                        class="col-md-7 d-flex align-items-center r-day">
-                                        <input type="checkbox" id="r-day">
-                                     </div>
-                                     </div>
-                                </div>
-                            </div>
-
                         </div>
-                        <div class="tab-pane descptn" id="Description1" role="tabpanel">
-
-
-                            <div class="row">
-                                <div class="col-md-12 px-0">
-                                    <textarea name="" id="" cols="30" rows="5"
-                                        class="form-control border-0"
-                                        placeholder="e.g. Guidelines, instructions, picture, ... to help attendees answer"></textarea>
-                                </div>
-                            </div>
-
-                        </div>
-                        
                     </div>
+
+
+
+
+
                 </div>
-             </div>
-              
-               
-               
+
 
 
             </div>
+            <div class="modal-footer">
 
-
-
-        </div>
-        <div class="modal-footer">
-
-            <button type="button" style="background-color:#f9365f!important;border: none!important;"
-                class="btn btn-info waves-effect waves-light">Save </button>
+                <button type="button" style="background-color:#f9365f!important;border: none!important;"
+                    class="btn btn-info waves-effect waves-light">Save </button>
+            </div>
         </div>
     </div>
-</div>
 </div>
 
 <div id="language-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-aria-hidden="true" style="display: none">
-<div class="modal-dialog modal-lg">
-    <div class="modal-content">
-        <div class="modal-header">
-            <h4 class="modal-title mt-0">Language</h4>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        <div class="modal-body">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <label for="field-1" class="control-label">English</label>
-                        <div class="input-group">
-                      
-                            <input type="text" class="inputfile form-control mb-0"  placeholder="">
-                            <div class="input-group-append">
-                                <span  class="input-group-text">  <img src="img/language/english.jpg" alt="" style="height: 20px;"></span>
-                         
-                            </div> 
-                     
-                      
-                    </div>
-                </div>
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <label for="field-1" class="control-label">Arabic</label>
-                        <div class="input-group">
-                      
-                            <input type="text" class="inputfile form-control mb-0"  placeholder="">
-                            <div class="input-group-append">
-                                <span  class="input-group-text">  <img src="img/language/arabic.jpg" alt="" style="height: 20px;"></span>
-                         
-                            </div> 
-                     
-                      
-                    </div>
-                </div>
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <label for="field-1" class="control-label">Hindi</label>
-                        <div class="input-group">
-                      
-                            <input type="text" class="inputfile form-control mb-0"  placeholder="">
-                            <div class="input-group-append">
-                                <span  class="input-group-text">  <img src="img/language/hindi.jpg" alt="" style="height: 20px;"></span>
-                         
-                            </div> 
-                     
-                      
-                    </div>
-                </div>
+    aria-hidden="true" style="display: none">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title mt-0">Language</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="field-1" class="control-label">English</label>
+                            <div class="input-group">
 
+                                <input type="text" class="inputfile form-control mb-0" placeholder="">
+                                <div class="input-group-append">
+                                    <span class="input-group-text"> <img src="img/language/english.jpg" alt=""
+                                            style="height: 20px;"></span>
+
+                                </div>
+
+
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="field-1" class="control-label">Arabic</label>
+                                <div class="input-group">
+
+                                    <input type="text" class="inputfile form-control mb-0" placeholder="">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text"> <img src="img/language/arabic.jpg" alt=""
+                                                style="height: 20px;"></span>
+
+                                    </div>
+
+
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="field-1" class="control-label">Hindi</label>
+                                    <div class="input-group">
+
+                                        <input type="text" class="inputfile form-control mb-0" placeholder="">
+                                        <div class="input-group-append">
+                                            <span class="input-group-text"> <img src="img/language/hindi.jpg" alt=""
+                                                    style="height: 20px;"></span>
+
+                                        </div>
+
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+
+                        </div>
+                        <div class="modal-footer">
+
+                            <button type="button" style="background-color:#f9365f!important;border: none!important;"
+                                class="btn btn-info waves-effect waves-light">Save </button>
+                        </div>
+                    </div>
+                </div>
             </div>
 
 
 
-        </div>
-        <div class="modal-footer">
 
-            <button type="button" style="background-color:#f9365f!important;border: none!important;"
-                class="btn btn-info waves-effect waves-light">Save </button>
-        </div>
-    </div>
-</div>
-</div>
+            <script src="js/jquery.min.js"></script>
+            <script src="js/custome.js"></script>
+            <script src="js/bootstrap.bundle.min.js"></script>
+            <script src="plugins/datatables/jquery.dataTables.min.js"></script>
+            <script src="plugins/datatables/dataTables.bootstrap4.min.js"></script>
+            <script src="plugins/datatables/dataTables.responsive.min.js"></script>
+            <script src="plugins/datatables/responsive.bootstrap4.min.js"></script>
+            <script src="plugins/datatables/datatables.init.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/react/16.8.4/umd/react.production.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.8.4/umd/react-dom.production.min.js">
+            </script>
 
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-    <script src="js/jquery.min.js"></script>
-    <script src="js/custome.js"></script>
-    <script src="js/bootstrap.bundle.min.js"></script>
-    <script src="plugins/datatables/jquery.dataTables.min.js"></script>
-    <script src="plugins/datatables/dataTables.bootstrap4.min.js"></script>
-    <script src="plugins/datatables/dataTables.responsive.min.js"></script>
-    <script src="plugins/datatables/responsive.bootstrap4.min.js"></script>
-    <script src="plugins/datatables/datatables.init.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/16.8.4/umd/react.production.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.8.4/umd/react-dom.production.min.js"></script>
+            <script>
 
-    <script>
-        $(document).ready(function() {
-            $('#datatable').dataTable();
-            $('#datatable-keytable').DataTable({
-                keys: true
-            });
-            $('#datatable-responsive').DataTable();
-            $('#datatable-scroller').DataTable({
-                ajax: "plugins/datatables/json/scroller-demo.json",
-                deferRender: true,
-                scrollY: 380,
-                scrollCollapse: true,
-                scroller: true
-            });
-            var table = $('#datatable-fixed-header').DataTable({
-                fixedHeader: true
-            });
-        });
-        TableManageButtons.init();
-    </script>
-
-
-    <script>
-        $("a.splnav").click(function () {
-            $("a.splnav").css("background-color", "#222");
-            $(this).css("background-color", "black");
-            // $(this).css("border-left", "3px solid #6e56a3");
-        });
-    </script>
-    <script>
-        jQuery(document).ready(function (e) {
-            function t(t) {
-                e(t).bind("click", function (t) {
-                    t.preventDefault();
-                    e(this).parent().fadeOut()
-                })
-            }
-            e(".drpdown-toggle").click(function () {
-                var t = e(this).parents(".button-drpdown").children(".drpdown-menu").is(":hidden");
-                e(".button-drpdown .drpdown-menu").hide();
-                e(".button-drpdown .drpdown-toggle").removeClass("active");
-                if (t) {
-                    e(this).parents(".button-drpdown").children(".drpdown-menu").toggle().parents(
-                        ".button-drpdown").children(".drpdown-toggle").addClass("active")
+            function section_Question_view(data_id){
+                var data_id = data_id
+                $.ajax({
+                        type: "GET",
+                        url: "section_Question_view_modal",
+                        data: {
+                            data_id: data_id
+                        },
+                        success: function (data) {
+                            $(".section_Question_view_modal").append(data);
+                            $('.question-modal-'+data_id).modal('show');
+                        }
+                    })
                 }
-            });
-            e(document).bind("click", function (t) {
-                var n = e(t.target);
-                if (!n.parents().hasClass("button-drpdown")) e(".button-drpdown .drpdown-menu").hide();
-            });
-            e(document).bind("click", function (t) {
-                var n = e(t.target);
-                if (!n.parents().hasClass("button-drpdown")) e(".button-drpdown .drpdown-toggle")
-                    .removeClass("active");
-            })
-        });
-    </script>
-    <script>
-        let searchIcon = document.querySelector(".search-bar__search-icon"),
-            closeIcon = document.querySelector(".search-bar__close-icon .far"),
-            searchBar = document.querySelector(".search-bar"),
-            searchInput = document.querySelector(".search-bar__search-input input")
 
+                $(document).on("click", ".title_edit", function () {
+                    var myid = $(this).attr("data-id") ;
+                    var title = $(this).attr("data-title") ;
+                    $("#title_updated_id").val(myid)
+                    $("#title_name_update").val(title)
+                });
 
-        searchIcon.onclick = () => {
-            searchBar.classList.toggle("search-bar--active")
-        }
-
-
-        closeIcon.onclick = () => {
-            searchInput.value = ""
-            searchInput.focus()
-        }
-
-
-
-        searchInput.onfocus = function () {
-            let place = this.getAttribute("placeholder")
-            this.setAttribute("data", `${place}`)
-            this.removeAttribute("placeholder")
-        }
-
-        searchInput.onblur = function () {
-            this.setAttribute("placeholder", `${this.getAttribute("data")}`)
-        }
-    </script>
-    <script>
-        const progressContainer = document.querySelector('.progress-container');
-        setPercentage();
-
-        function setPercentage() {
-            const percentage = progressContainer.getAttribute('data-percentage') + '%';
-
-            const progressEl = progressContainer.querySelector('.progress');
-            const percentageEl = progressContainer.querySelector('.percentage');
-
-            progressEl.style.width = percentage;
-            percentageEl.innerText = percentage;
-            percentageEl.style.left = percentage;
-        }
-    </script>
-        <script>
-            const TagsInput1 = props => {
-                const [tags1, setTags1] = React.useState(props.tags1);
-                const removeTags1 = indexToRemove => {
-                    setTags1([...tags1.filter((_, index) => index !== indexToRemove)]);
-                };
-                const addTags1 = event => {
-                    if (event.target.value !== "") {
-                        setTags1([...tags1, event.target.value]);
-                        props.selectedTags1([...tags1, event.target.value]);
-                        event.target.value = "";
+                $("#time_limit").click(function () {
+                    exam_check = $("#time_limit").is(":checked")
+                    if (exam_check == true) {
+                        $("#show_timelimit").show();
+                    } else {
+                        $("#show_timelimit").hide();
+                        $("#exam_time_limit").val(" ");
                     }
+                });
+
+                $("#Attempts").click(function () {
+                    attempt_check = $("#Attempts").is(":checked")
+                    if (attempt_check == true) {
+                        $("#show_attempts").show();
+                    } else {
+                        $("#show_attempts").hide();
+                    }
+                });
+
+                $("#login_required").click(function () {
+                    login_required = $("#login_required").is(":checked")
+                    if (login_required == true) {
+                        $("#attemp_lim").show()
+                    } else {
+                        $("#attemp_lim").hide()
+                    }
+                });
+
+
+
+                $("#select_access_mode").change(function () {
+                    select_value = $("#select_access_mode").val();
+                    if (select_value == 1) {
+                        $("#attemp_lim").show()
+                    } else {
+                        $("#attemp_lim").hide()
+                    }
+                })
+
+
+
+
+                function delete_btn(id) {
+                    var url = "delete_initial_field";
+                    $.ajax({
+                        url: url,
+                        data: {
+                            'id': id
+                        },
+                        success: function (data) {
+                            $("#delete_initial_field_div").html(data);
+                            $('#delete_initial_field_modal').modal('show');
+                        }
+                    });
+                }
+            </script>
+
+
+            <script>
+                $(document).ready(function () {
+                    $('#datatable').dataTable();
+                    $('#datatable-keytable').DataTable({
+                        keys: true
+                    });
+                    $('#datatable-responsive').DataTable();
+                    $('#datatable-scroller').DataTable({
+                        ajax: "plugins/datatables/json/scroller-demo.json",
+                        deferRender: true,
+                        scrollY: 380,
+                        scrollCollapse: true,
+                        scroller: true
+                    });
+                    var table = $('#datatable-fixed-header').DataTable({
+                        fixedHeader: true
+                    });
+                });
+                TableManageButtons.init();
+            </script>
+
+
+            <script>
+                $("a.splnav").click(function () {
+                    $("a.splnav").css("background-color", "#222");
+                    $(this).css("background-color", "black");
+                    // $(this).css("border-left", "3px solid #6e56a3");
+                });
+            </script>
+            <script>
+                jQuery(document).ready(function (e) {
+                    function t(t) {
+                        e(t).bind("click", function (t) {
+                            t.preventDefault();
+                            e(this).parent().fadeOut()
+                        })
+                    }
+                    e(".drpdown-toggle").click(function () {
+                        var t = e(this).parents(".button-drpdown").children(".drpdown-menu").is(
+                            ":hidden");
+                        e(".button-drpdown .drpdown-menu").hide();
+                        e(".button-drpdown .drpdown-toggle").removeClass("active");
+                        if (t) {
+                            e(this).parents(".button-drpdown").children(".drpdown-menu").toggle()
+                                .parents(
+                                    ".button-drpdown").children(".drpdown-toggle").addClass("active")
+                        }
+                    });
+                    e(document).bind("click", function (t) {
+                        var n = e(t.target);
+                        if (!n.parents().hasClass("button-drpdown")) e(".button-drpdown .drpdown-menu")
+                            .hide();
+                    });
+                    e(document).bind("click", function (t) {
+                        var n = e(t.target);
+                        if (!n.parents().hasClass("button-drpdown")) e(
+                                ".button-drpdown .drpdown-toggle")
+                            .removeClass("active");
+                    })
+                });
+            </script>
+            <script>
+                let searchIcon = document.querySelector(".search-bar__search-icon"),
+                    closeIcon = document.querySelector(".search-bar__close-icon .far"),
+                    searchBar = document.querySelector(".search-bar"),
+                    searchInput = document.querySelector(".search-bar__search-input input")
+
+
+                searchIcon.onclick = () => {
+                    searchBar.classList.toggle("search-bar--active")
+                }
+
+
+                closeIcon.onclick = () => {
+                    searchInput.value = ""
+                    searchInput.focus()
+                }
+
+
+
+                searchInput.onfocus = function () {
+                    let place = this.getAttribute("placeholder")
+                    this.setAttribute("data", `${place}`)
+                    this.removeAttribute("placeholder")
+                }
+
+                searchInput.onblur = function () {
+                    this.setAttribute("placeholder", `${this.getAttribute("data")}`)
+                }
+            </script>
+            <script>
+                const progressContainer = document.querySelector('.progress-container');
+                setPercentage();
+
+                function setPercentage() {
+                    const percentage = progressContainer.getAttribute('data-percentage') + '%';
+
+                    const progressEl = progressContainer.querySelector('.progress');
+                    const percentageEl = progressContainer.querySelector('.percentage');
+
+                    progressEl.style.width = percentage;
+                    percentageEl.innerText = percentage;
+                    percentageEl.style.left = percentage;
+                }
+            </script>
+            <script>
+                const TagsInput1 = props => {
+                    const [tags1, setTags1] = React.useState(props.tags1);
+                    const removeTags1 = indexToRemove => {
+                        setTags1([...tags1.filter((_, index) => index !== indexToRemove)]);
+                    };
+                    const addTags1 = event => {
+                        if (event.target.value !== "") {
+                            setTags1([...tags1, event.target.value]);
+                            props.selectedTags1([...tags1, event.target.value]);
+                            event.target.value = "";
+                        }
+                    };
+                    return /*#__PURE__*/ (
+                        React.createElement("div", {
+                                className: "tags-input1"
+                            }, /*#__PURE__*/
+                            React.createElement("ul", {
+                                    id: "tags1"
+                                },
+                                tags1.map((tag1, index) => /*#__PURE__*/
+                                    React.createElement("li", {
+                                            key: index,
+                                            className: "tag1"
+                                        }, /*#__PURE__*/
+                                        React.createElement("span", {
+                                            className: "tag-title1"
+                                        }, tag1), /*#__PURE__*/
+                                        React.createElement("span", {
+                                            className: "tag-close-icon1",
+                                            onClick: () => removeTags1(index)
+                                        }, "x")))), /*#__PURE__*/
+
+
+
+
+
+
+                            React.createElement("input", {
+                                type: "text",
+                                onKeyUp: event => event.key === "Enter" ? addTags1(event) : null,
+                                placeholder: "Mail id"
+                            })));
+
+
+
                 };
-                return /*#__PURE__*/ (
-                    React.createElement("div", {
-                            className: "tags-input1"
-                        }, /*#__PURE__*/
-                        React.createElement("ul", {
-                                id: "tags1"
-                            },
-                            tags1.map((tag1, index) => /*#__PURE__*/
-                                React.createElement("li", {
-                                        key: index,
-                                        className: "tag1"
-                                    }, /*#__PURE__*/
-                                    React.createElement("span", {
-                                        className: "tag-title1"
-                                    }, tag1), /*#__PURE__*/
-                                    React.createElement("span", {
-                                        className: "tag-close-icon1",
-                                        onClick: () => removeTags1(index)
-                                    }, "x")))), /*#__PURE__*/
-    
-    
-    
-    
-    
-    
-                        React.createElement("input", {
-                            type: "text",
-                            onKeyUp: event => event.key === "Enter" ? addTags1(event) : null,
-                            placeholder: "Mail id"
-                        })));
-    
-    
-    
-            };
-    
-            const App1 = () => {
-                const selectedTags1 = tags1 => {
-                    console.log(tags1);
+
+                const App1 = () => {
+                    const selectedTags1 = tags1 => {
+                        console.log(tags1);
+                    };
+                    return /*#__PURE__*/ (
+                        React.createElement("div", {
+                                className: "App1"
+                            }, /*#__PURE__*/
+                            React.createElement(TagsInput1, {
+                                selectedTags1: selectedTags1,
+                                tags1: ['user@gmail.com']
+                            })));
+
+
                 };
-                return /*#__PURE__*/ (
-                    React.createElement("div", {
-                            className: "App1"
-                        }, /*#__PURE__*/
-                        React.createElement(TagsInput1, {
-                            selectedTags1: selectedTags1,
-                            tags1: ['user@gmail.com']
-                        })));
-    
-    
-            };
-    
-            ReactDOM.render( /*#__PURE__*/ React.createElement(App1, null), document.getElementById("root1"));
-        </script>
 
-</body>
+                ReactDOM.render( /*#__PURE__*/ React.createElement(App1, null), document.getElementById("root1"));
+            </script>
 
-</html>
+            </body>
 
-{% endblock %}
+            </html>
+
+            {% endblock %}

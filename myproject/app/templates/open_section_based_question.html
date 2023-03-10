@@ -1,0 +1,679 @@
+
+<div id="" class="modal fade question-modal-{{value1}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+aria-hidden="true" style="display: none">
+<div class="modal-dialog modal-lg">
+    <div class="modal-content">
+        <input type="hidden" value="{{modal_id}}" class="add_line_count{{value1}}">
+        <input type="hidden" value="{{value1}}" name="question_model_name{{data_id}}">
+        <div class="modal-header">
+            <h4 class="modal-title mt-0">Add a Question</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="field-1" class="control-label">Question</label>
+                        <div class="input-group">
+                      
+                            <input type="text" required onchange="question_value(this,`{{value1}}`)" class="form-control modal_question{{value1}}" name="question_name{{data_id}}" placeholder="eg: What is the...">
+                            <div class="input-group-append">
+                                <button type="button"
+                            class="input-group-text" data-toggle="modal"
+                            data-target="#language-modal-{{value1}}">
+                            <i class="fas fa-language"></i>
+                            </button>
+                         
+                            </div> 
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 input-group uploadFile1">
+                    <div class="form-group">
+                        <label for="field-1" class="control-label"></label>
+                        <div class="input-group mt-1">
+                            <input type="file" accept="image/*,.pdf,.txt,.doc,.docx," name="question_image{{value1}}" class="inputfile form-control">                             
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <div class="row answer-type">
+                        <div
+                            class="col-md-3 br-right d-flex align-items-start px-0">
+                            <label>Question Type</label>
+                        </div>
+                        <div class="col-md-9 px-2">
+                            <div class="form-group d-flex align-items-center">
+                                <input type="radio" checked  class="question_type_radio{{value1}}" name="question_type{{value1}}" value="Radio">
+                                <label for="customer">Multiple choice: only one answer</label>
+                            </div>
+                            <div class="form-group d-flex align-items-center">
+                                <input type="radio" class="question_type_checkbox{{value1}}" name="question_type{{value1}}" value="Checkbox">
+                                <label for="customer">Multiple choice: multiple answers allowed</label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+             <div class="col-md-12 mt-3">
+                <div class="paytab">
+                    <ul class="nav nav-tabs nav-pay mb-2" role="tablist">
+                        <li class="nav-item d-flex align-items-center">
+                            <a class="nav-link active" data-toggle="tab" href="#Answers1{{value1}}"
+                                role="tab">
+                                Answers
+                            </a>
+                        </li>
+
+                        <li class="nav-item d-flex align-items-center">
+                            <a class="nav-link" data-toggle="tab" href="#Description1{{value1}}"
+                                role="tab">
+                                Description
+                            </a>
+                        </li>
+
+                        <li class="nav-item d-flex align-items-center">
+                            <a class="nav-link" data-toggle="tab" href="#Options1{{value1}}"
+                                role="tab">
+                                Options
+                            </a>
+                        </li>
+                    </ul>
+
+                    <div class="tab-content small-form">
+
+                        <!-- Answers1 tab -->
+
+                        <div class="tab-pane active" id="Answers1{{value1}}" role="tabpanel">
+                            <div class="mt-3">
+                                <div class="mb-2">
+                                    <button type="button" onclick="choice_add_fun(`{{value1}}`)"
+                                    class="btn btn-prim pay" >
+                                    Add a Line
+                                </button>
+                             
+                                </div>
+                                <table  class="table table-qstn dt-responsive table-bordered nowrap table-padd" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+
+                                    <thead class="border-class">
+                                        <tr class="heading-text">  
+                                            <th>Choices</th>
+                                            <th class="file_th{{value1}}" style="display:none;">File</th>
+                                            <th>Is a correct answer</th>
+                                            <th>Score for this choice</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody class="body-textcls vertcle-center" id="choice_add{{value1}}">
+                             
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- Description1 tab -->
+
+                        <div class="tab-pane descptn" id="Description1{{value1}}" role="tabpanel">
+                            <div class="row">
+                                <div class="col-md-12 px-0">
+                                    <textarea  id="" cols="30" rows="5"
+                                        class="form-control border-0" name="qstn_descriptn{{data_id}}"
+                                        placeholder="e.g. Guidelines, instructions, picture, ... to help attendees answer"></textarea>
+                                </div>
+                            </div>
+
+                        </div>
+                        
+
+                        <!-- Options1 tab -->
+
+                        <div class="tab-pane sales_purchase" id="Options1{{value1}}" role="tabpanel">
+                            <div class="row mb-2 question-options">
+                                <div class="col-md-6 px-0">
+                                    <h5>Answers</h5>
+                                    <div class="row">
+                                        <div
+                                            class="col-md-5 br-right d-flex align-items-center px-0">
+                                            <h6>File Field</h6>
+                                        </div>
+                                        <div class="col-md-7">
+                                            <div class="form-group mt-2 d-flex align-items-center">
+                                                <input type="checkbox" onclick="image_filed_btn(`{{value1}}`)" class="file_field{{value1}}" name="choice_image_check{{data_id}}" value="True">
+                                               
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <h5>Layout</h5>
+
+                                    <div class="row">
+                                        <div
+                                            class="col-md-5 br-right d-flex align-items-center px-0">
+                                            <h6>Comment Message</h6>
+                                        </div>
+                                        <div
+                                            class="col-md-7 d-flex align-items-center r-day">
+                                            <input type="text" name="question_comment{{data_id}}" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-md-6 px-0">
+                                    <h5>Constraints</h5>
+
+                                    <div class="row">
+                                        <div
+                                            class="col-md-5 br-right d-flex align-items-center px-0 px-0">
+                                            <h6>Mandatory Answer</h6>
+                                        </div>
+                                        <div
+                                        class="col-md-7 d-flex align-items-center r-day">
+                                        <input type="checkbox" value="True" name="question_mandatory{{value1}}"id="r-day">
+                                    </div>
+                                    </div>
+                                   
+                                </div>
+
+                                <!-- <div class="col-md-6">
+                                    <h5>Live Session</h5>
+
+                                    <div class="row">
+                                        <div
+                                            class="col-md-5 br-right d-flex align-items-center px-0">
+                                            <h6>Question Time Limit</h6>
+                                        </div>
+                                        <div
+                                        class="col-md-7 d-flex align-items-center r-day">
+                                        <input type="checkbox" id="r-day">
+                                     </div>
+                                     </div>
+                                </div> -->
+
+                            </div>
+
+                        </div>
+
+                        
+                    </div>
+                </div>
+             </div>
+            </div>
+            <input type="hidden" name="" class="modal_status{{value1}}" value="{{status}}" >
+        </div>
+        <div class="modal-footer">
+
+            <button type="button" style="background-color:#f9365f!important;border: none!important;" onclick="modal_question_action(`{{value1}}`,`{{data_id}}`)"
+                class="btn btn-info waves-effect waves-light section_btn remove_onclick{{value1}}">Save </button>
+
+            <button type="button" style="background-color:#f9365f!important;border: none!important ;display:none;" onclick="modal_question_update(`{{value1}}`,`{{data_id}}`)"
+            class="btn btn-info waves-effect waves-light section_btn remove_onclick1{{value1}}">Save </button>
+        </div>
+    </div>
+</div>
+</div>
+
+<div id="language-modal-{{value1}}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+aria-hidden="true" style="display: none">
+<div class="modal-dialog modal-lg">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h4 class="modal-title mt-0">Language</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="field-1" class="control-label">English</label>
+                        <div class="input-group">
+                      
+                            <input type="text"  name="eng_question{{data_id}}" class="inputfile form-control mb-0 question_val{{value1}}"  placeholder="">
+                            <div class="input-group-append">
+                                <span  class="input-group-text"><img src="img/language/english.jpg" alt="" style="height: 20px;"></span>
+                            </div> 
+                    </div>
+                </div>
+
+                <div class="col-md-12" >
+                    <div class="form-group langar" style="display: none;">
+                        <label for="field-1" class="control-label">Arabic</label>
+                        <div class="input-group">
+                      
+                            <input type="text" name="ar_question{{data_id}}" class="inputfile form-control mb-0 question_val{{value1}}"  placeholder="">
+                            <div class="input-group-append">
+                                <span  class="input-group-text"><img src="img/language/arabic.jpg" alt="" style="height: 20px;"></span>
+                            </div> 
+                    </div>
+                </div>
+
+                <div class="col-md-12 " >
+                    <div class="form-group langhi" style="display: none;">
+                        <label for="field-1" class="control-label">Hindi</label>
+                        <div class="input-group">
+                      
+                            <input type="text" name="hi_question{{data_id}}" class="inputfile form-control mb-0 question_val{{value1}}"  placeholder="">
+                            <div class="input-group-append">
+                                <span  class="input-group-text"><img src="img/language/hindi.jpg" alt="" style="height: 20px;"></span>
+                            </div> 
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12 " >
+                    <div class="form-group langta" style="display: none;">
+                        <label for="field-1" class="control-label">Tamil</label>
+                        <div class="input-group">
+                      
+                            <input type="text" name="ta_question{{data_id}}" class="inputfile form-control mb-0 question_val{{value1}}"  placeholder="">
+                            <div class="input-group-append">
+                                <span  class="input-group-text"><img src="img/language/hindi.jpg" alt="" style="height: 20px;"></span>
+                            </div> 
+                    </div>
+                </div>
+                </div>
+
+                <div class="col-md-12 langur" >
+                    <div class="form-group langur" style="display: none;">
+                        <label for="field-1" class="control-label">Urdu</label>
+                        <div class="input-group">
+                      
+                            <input type="text" name="ur_question{{data_id}}"  class="inputfile form-control mb-0 question_val{{value1}}"  placeholder="">
+                            <div class="input-group-append">
+                                <span  class="input-group-text"><img src="img/language/hindi.jpg" alt="" style="height: 20px;"></span>
+                            </div> 
+                        </div>
+                    </div>
+                </div>
+
+                </div>
+
+        <div class="modal-footer">
+
+            <button type="submit" style="background-color:#f9365f!important;border: none!important;"
+                class="btn btn-info waves-effect waves-light" data-dismiss="modal">Save </button>
+        </div>
+    </div>
+    </div>
+    </div>
+    </div>
+</div>
+</div>
+
+<script>
+    var checks = $('.lang_class:checked').map(function() {
+    var data =  $(this).val()
+    $(".lang"+data).show()
+    }).get()
+  </script>
+  
+    
+    <script>
+    
+    function choice_add_fun(val1){
+     
+    var add_line_count = $(".add_line_count"+val1).val();
+    if ($(".question_type_radio"+val1).is(":checked")){
+      question_type = "radio"
+      
+    }
+    else if($(".question_type_checkbox"+val1).is(":checked")){
+        question_type = "checkbox"
+        }
+  
+      var file_status = 'none'
+    if($(".file_field"+val1).is(":checked")){
+      file_status = 'show'
+  
+      $(".file_td"+val1).show()
+      $(".file_th"+val1).show()
+    }
+  
+    
+    $("#choice_add"+val1).append(`<tr class="tr_choice_remove`+add_line_count+`" >
+
+        <td>
+            <div class="input-group">
+            <input type="text" onchange="choice_value(this,`+add_line_count+`)"  name="question_choice`+add_line_count+``+'-'+`{{value1}}"  class="form-control">
+            <div class="input-group-append">
+                <button type="button" style="margin-bottom: 7px;"
+                class="input-group-text" data-toggle="modal"
+                data-target="#choice_modal-`+add_line_count+`-{{value1}}">
+                <i class="fas fa-language"></i>
+                </button>
+            </div>
+            </div> 
+            <input type="hidden" value=`+add_line_count+` name="question_line_count{{value1}}">
+            </td>
+            <td style="display:`+file_status+`;" class="file_td`+val1+`">
+                <div class="input-group uploadFile1">
+                    <input type="file" accept="image/*,.pdf,.txt,.doc,.docx," name="question_image_choice`+add_line_count+``+'-'+`{{value1}}" class="inputfile form-control mb-0" >
+                    <div class="input-group-append">
+                        <span class="input-group-text"> <i class="fas fa-paperclip"></i></span>
+                    </div>
+                </div>
+            </td>
+            <td>
+                <div style="margin-left:47px;" class="input-group date">
+                <input  type="checkbox"  name="addline_check`+add_line_count+``+'-'+`{{value1}}" value="True">
+                </div></td>
+            <td>
+                  
+            <input style="border: 1px solid #e8ecf1; 
+            font-size: 0.8125rem;" name="Score`+add_line_count+``+'-'+`{{value1}}" value="0" class="form-control" type="number" >
+            </td>
+
+            <td>
+                <div class="action-tbl d-flex justify-content-end">
+                    <i class="fa fa-trash-o mx-1 trash-btn" onclick="choice_remove(`+add_line_count+`)"
+                    title="" data-original-title="Delete"></i>
+                </div>
+           
+
+            <div id="choice_modal-`+add_line_count+`-{{value1}}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+            aria-hidden="true" style="display: none">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title mt-0">Language</h4>
+                        <button type="button" class="close" data-dismiss-modal="modal3" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="field-1" class="control-label">English</label>
+                                    <div class="input-group">
+                                
+                                        <input type="text"  name="eng_choice`+add_line_count+`-{{value1}}"  class="inputfile form-control mb-0 choice_val-`+add_line_count+`-{{value1}}"  placeholder="">
+                                        <div class="input-group-append">
+                                            <span  class="input-group-text"><img src="img/language/english.jpg" alt="" style="height: 20px;"></span>
+                                        </div> 
+                                    </div>
+                                </div>
+
+                            <div class="col-md-12" >
+                                <div class="form-group langar" style="display: none;">
+                                    <label for="field-1" class="control-label">Arabic</label>
+                                    <div class="input-group">
+                                
+                                        <input type="text" name="ar_choice`+add_line_count+`-{{value1}}" class="inputfile form-control mb-0 choice_val-`+add_line_count+`-{{value1}}"  placeholder="">
+                                        <div class="input-group-append">
+                                            <span  class="input-group-text"><img src="img/language/arabic.jpg" alt="" style="height: 20px;"></span>
+                                        </div> 
+                                </div>
+                            </div>
+
+                            <div class="col-md-12" >
+                                <div class="form-group langhi" style="display: none;">
+                                    <label for="field-1" class="control-label">Hindi</label>
+                                    <div class="input-group">
+                                
+                                        <input type="text" name="hi_choice`+add_line_count+`-{{value1}}" class="inputfile form-control mb-0 choice_val-`+add_line_count+`-{{value1}}"  placeholder="">
+                                        <div class="input-group-append">
+                                            <span  class="input-group-text"><img src="img/language/hindi.jpg" alt="" style="height: 20px;"></span>
+                                        </div> 
+                                </div>
+                            </div>
+                            </div>
+
+                            <div class="col-md-12" >
+                                <div class="form-group langta" style="display: none;">
+                                    <label for="field-1" class="control-label">Tamil</label>
+                                    <div class="input-group">
+                                
+                                    <input type="text" name="ta_choice`+add_line_count+`-{{value1}}" class="inputfile form-control mb-0 choice_val-`+add_line_count+`-{{value1}}"  placeholder="">
+                                    <div class="input-group-append">
+                                        <span  class="input-group-text"><img src="img/language/hindi.jpg" alt="" style="height: 20px;"></span>
+                                    </div> 
+                                </div>
+                            </div>
+                            </div>
+
+                            <div class="col-md-12" >
+                                <div class="form-group langur" style="display: none;">
+                                    <label for="field-1" class="control-label">Urdu</label>
+                                    <div class="input-group">
+                                
+                                        <input type="text" name="ur_choice`+add_line_count+`-{{value1}}" class="inputfile form-control mb-0 choice_val-`+add_line_count+`-{{value1}}"  placeholder="">
+                                        <div class="input-group-append">
+                                            <span  class="input-group-text"><img src="img/language/hindi.jpg" alt="" style="height: 20px;"></span>
+                                        </div> 
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    <div class="modal-footer">
+                        <button type="button" data-dismiss-modal="modal3" style="background-color:#f9365f!important;border: none!important;"
+                        class="btn btn-info waves-effect waves-light">Save </button>
+                    </div>
+                </div>
+            </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </td>
+        
+          </tr>`)
+  
+          var checks = $('.lang_class:checked').map(function() {
+          var data =  $(this).val()
+          $(".lang"+data).show()
+          }).get()
+  
+  
+    $("button[data-dismiss-modal=modal3]").click(function(){
+      var modal_name = add_line_count+"-"+`{{value1}}`
+  
+        $('#choice_modal-'+modal_name).modal('hide');
+        });
+   
+        let total1 = parseInt(add_line_count) + 1
+        $(".add_line_count"+val1).val(total1);
+  
+      }
+  
+      function modal_question_update(modal_count,section_count){
+
+        var question =  $(".modal_question"+modal_count).val();
+        $("#question_span-"+section_count).empty().append(``+question+``)
+        if ($(".question_type_radio"+modal_count).is(":checked")){
+              question_type = "Multiple choice: only one answer"
+            }
+           else if($(".question_type_checkbox"+modal_count).is(":checked")){
+              question_type = "Multiple choice: multiple answers allowed"
+            }
+        $("#questiontype_span-"+section_count).empty().append(``+question_type+``)
+        $('.question-modal-'+modal_count).modal('hide');
+
+
+      }
+
+  
+      function modal_question_action(val1,val2){
+
+        var question =  $(".modal_question"+val1).val();
+        var modal_status = $(".modal_status"+val1).val();
+  
+        if ($(".question_type_radio"+val1).is(":checked")){
+              question_type = "Multiple choice: only one answer"
+            }
+           else if($(".question_type_checkbox"+val1).is(":checked")){
+              question_type = "Multiple choice: multiple answers allowed"
+            }
+           else{
+  
+              $(".alertshow").show()
+            }
+        
+        if(modal_status == "direct_question"){
+
+          if(question == ''){
+            
+          }
+          else{
+    
+            $("#append_table").append(`
+
+                <tr class="tr_remove`+i+`">
+
+                    <td><a href="#"  style="text-decoration: none;
+                  color: black;
+                  font-size: 12px;" data-toggle="modal" data-target=".question-modal-{{value1}}">
+                  <span id="question_span-`+val2+`">`+question+`</span> </a></td>
+
+                    <td><span id="questiontype_span-`+val2+`">`+question_type+`</span>
+                        <input type="hidden" value=`+i+` id="section_id`+i+`">
+                        <input type="hidden" name='section_line_count' value=`+i+`>
+                        <input type="hidden" name="modal_status" value =`+modal_status+`>
+                        <input type="hidden" class="section_line" value="`+question+`" name='section_line'>
+                    </td>
+                    <td>
+                        <div class="action-tbl d-flex justify-content-end">
+                            
+                            <i data-modal-id="{{value1}}" data-tr = "`+i+`" class="fa fa-trash-o mx-1 trash-btn" onclick="question_remove('{{value1}}',`+i+`)"></i>
+                        
+                        </div>
+                    </td>
+                </tr>
+                      
+          `)
+    
+          i = i + 1
+          $('.question-modal-'+val1).modal('hide');
+          $('.remove_onclick'+val1).hide()
+          $('.remove_onclick1'+val1).show()
+          }
+        }
+    
+        else{
+    
+          if(question == '')
+          {
+  
+    
+          }
+          else{
+     
+         $("#apppend_child"+val2).append(`
+
+            <tr class="tr_remove{{value1}}">
+                <td>
+                    <a href="#"  style="text-decoration: none;
+                    color: black;
+                    font-size: 12px;" data-toggle="modal" data-target=".question-modal-{{value1}}">
+                    `+question+`
+                    </a>    
+                </td>
+
+                <td>`+question_type+`</td>
+                <td>
+                    <div class="action-tbl d-flex justify-content-end">
+
+                        <i data-modal-id="{{value1}}" data-tr = "{{value1}}" class="fa fa-trash-o mx-1 trash-btn " onclick="question_remove('{{value1}}','{{value1}}')"></i>
+                        
+                        </div>
+                   
+                </td>
+            </tr>
+         `)
+    
+         $('.question-modal-'+val1).modal('hide');
+         $('.remove_onclick'+val1).hide()
+         $('.remove_onclick1'+val1).show()
+         $('.section_status'+val2).val("True")
+    }
+    }
+      }
+
+      function question_remove(val,val1){
+       
+       
+      
+      $('.question-modal-'+val).html("");
+       var tr_id = val1
+      $('.tr_remove'+tr_id).hide()
+      }
+  
+   
+      function choice_remove(val){
+     
+        var tr_id = val
+        $('.tr_choice_remove'+tr_id).hide()
+        div_update = document.getElementsByClassName("tr_choice_remove"+tr_id).innerHTML = "";
+        $('.tr_choice_remove'+tr_id).empty()
+        }
+  
+        function image_filed_btn(val){
+        var file_status1 = $(".file_field"+val).is(":checked")
+        if(file_status1 == true){
+          file_status = 'show'
+          $(".file_th"+val).show()
+          $(".file_td"+val).show()
+        }
+        else{
+          file_status = 'none'
+        $(".file_th"+val).hide()
+        $(".file_td"+val).hide()
+        }
+        }
+  
+    </script>
+  
+  
+  
+  
+  <script>
+    function question_value(sel,count){
+  
+      question_val = sel.value
+      $(".question_val"+count).val(question_val)
+  
+    }
+  
+  </script>
+  
+  
+  <script>
+  
+      $("button[data-dismiss-modal=modal2]").click(function(){
+      $('#language_modal-{{value1}}').modal('hide');
+  });
+  
+  </script>
+  
+  
+  <script>
+  
+  
+  function choice_value(sel,count){
+  
+    choice_val = sel.value
+    modal_name = count+"-"+`{{value1}}`
+    $(".choice_val-"+modal_name).val(choice_val)
+  
+    }
+  
+   
+  </script>
+  
+  
+
+
+

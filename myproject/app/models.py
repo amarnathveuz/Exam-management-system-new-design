@@ -51,7 +51,7 @@ section_choices =(
    
 )
 
-
+from django.utils.text import slugify
 class Main_Exam_Master(common_table):
     Exam_title = models.CharField(max_length=50,null=True)
     responsible_person = models.ForeignKey(User,related_name='Main_Exam_Master_auth_id',on_delete=models.CASCADE,null=True)
@@ -67,6 +67,16 @@ class Main_Exam_Master(common_table):
     Login_required = models.BooleanField(null=True)
     attempt_limit = models.IntegerField(null=True)
     Success_per = models.IntegerField(null=True)
+    slug = models.SlugField(max_length=50, unique=True)
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(rand_slug() + "-" + self.Exam_title)
+        super(Main_Exam_Master, self).save(*args, **kwargs)
+
+import string
+import random
+def rand_slug():
+    return ''.join(random.choice(string.ascii_letters + string.digits) for _ in range(1))
 
 question_type_choices =(
     ("Radio","Multiple choice: only one answer"),
@@ -256,3 +266,8 @@ class user_permission_mapping(common_table):
     start_dt = models.DateField(null=True)
     end_dt = models.DateField(null=True)
     description = models.TextField(null=True)
+
+
+class Exam_general_instruction(models.Model):
+    exam_id  = models.ForeignKey(Main_Exam_Master, related_name="Exam_general_instruction_exam_id", on_delete=models.CASCADE,null=True)
+    instruction = models.CharField(max_length=50,null=True)

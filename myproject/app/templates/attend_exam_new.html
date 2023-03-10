@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Ansonika">
+    <title>Veuz</title>
+
+    <!-- Favicons-->
+    <link rel="shortcut icon" href="{% static 'exam_page/img/favicon.svg' %}" type="image/x-icon">
+
+    <!-- GOOGLE WEB FONT -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
+
+    <link href="{% static 'exam_page/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'exam_page/css/style.css' %}" rel="stylesheet">
+
+</head>
+
+<body>
+
+    <div id="preloader">
+        <div data-loader="circle-side"></div>
+    </div>
+
+    <div id="loader_form">
+        <div data-loader="circle-side-2"></div>
+    </div>
+
+    <div class="welcome-message d-flex align-items-center">
+        <div class="container">
+            <div class="row d-flex align-items-center">
+                <div class="col-lg-8">
+                    <img src="{% static 'exam_page/img/logo.png' %}" class="img-fluid logo-of-this">
+                    <h3 class="first-head">Welcome to the <span>{{data.Exam_title}}</span> questionnaire.
+                    </h3>
+                    <h4 class="first-head2">{{data.start_message}}</h4>
+                </div>
+                <div class="col-lg-4">
+                    <img src="{% static 'exam_page/img/user.png' %}" class="img-fluid image-size">
+                </div>
+            </div>
+        </div>
+
+    </div>
+    {% if data_attend.attend_status == True %}
+        <div class="content-form">
+            <div class="container">
+                <div class="row padding-class language-select">
+                    <h2>You have already completed this test</h2>
+                    <div class="col-lg-12 text-center">
+            <!--            <a href="{% url 'view_exams' %}"><button style="width: 140px;height: 60px;color: #fdecf2;background-color: #485e9d;border-radius: 10px;cursor: pointer;" type="button"><b>BACK TO HOME</b></button></a>-->
+                        <a href="{% url 'view_exams' %}"> <button type="button" class="submit-button-class">BACK TO HOME</button></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% else %}
+        <div class="content-form">
+            <div class="container">
+                <div class="row padding-class language-select">
+                    {% if data_language %}
+                    <div class="col-lg-12 mb-2">
+                        <h3 class="form-head">Choose our language</h3>
+                    </div>
+                    {% else %}
+                    {% endif %}
+                    {% for i in data_language %}
+                    {% if i.language_access == "en" %}
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label class="container_radio version_2">English
+                                    <input type="radio" name="question_2" value="Yes" class="required" checked>
+                                    <img src="{% static 'exam_page/img/english.jpg' %}" alt="" class="img-fluid">
+                                    <span class="checkmark"></span>
+                                </label>
+
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% if i.language_access == "ar" %}
+                    <div class="col-lg-4">
+                        <div class="form-group">
+
+                            <label class="container_radio version_2">Arabic
+                                    <input type="radio" name="question_2" value="No" class="required">
+                                    <img src="{% static 'exam_page/img/arabic.jpg' %}" alt="" class="img-fluid">
+                                    <span class="checkmark"></span>
+                                </label>
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% if i.language_access == "ur" %}
+                    <div class="col-lg-4">
+                        <div class="form-group">
+
+                            <label class="container_radio version_2">Urdu
+                                    <input type="radio" name="question_2" value="No" class="required">
+                                    <img src="{% static 'exam_page/img/urdu.jpg' %}" alt="" class="img-fluid">
+                                    <span class="checkmark"></span>
+                                </label>
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% if i.language_access == "hi" %}
+                    <div class="col-lg-4">
+                        <div class="form-group">
+
+                            <label class="container_radio version_2">Hindi
+                                    <input type="radio" name="question_2" value="No" class="required">
+                                    <img src="{% static 'exam_page/img/hindi.jpg' %}" alt="" class="img-fluid">
+                                    <span class="checkmark"></span>
+                                </label>
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% if i.language_access == "ta" %}
+                    <div class="col-lg-4">
+                        <div class="form-group">
+
+                            <label class="container_radio version_2">Tamil
+                                    <input type="radio" name="question_2" value="No" class="required">
+                                    <img src="{% static 'exam_page/img/malayalam.jpg' %}" alt="" class="img-fluid">
+                                    <span class="checkmark"></span>
+                                </label>
+                        </div>
+                    </div>
+                    {% endif %}
+<!--                    <div class="col-lg-4">-->
+<!--                        <div class="form-group">-->
+
+<!--                            <label class="container_radio version_2">Spanish-->
+<!--                                    <input type="radio" name="question_2" value="No" class="required">-->
+<!--                                    <img src="{% static 'exam_page/img/spanish.jpg' %}" alt="" class="img-fluid">-->
+<!--                                    <span class="checkmark"></span>-->
+<!--                                </label>-->
+<!--                        </div>-->
+<!--                    </div>-->
+                    {% endfor %}
+                    <div class="col-lg-12 text-center">
+                        <a href="{% url 'wizard_new' %}?type={{data.slug}}"> <button type="button" class="submit-button-class">Start Exam</button></a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+
+<!--    <div class="footer-reg">-->
+<!--        <p>&COPY; VEUZ CONCEPTS 2023 / All rights reserved.</p>-->
+<!--    </div>-->
+
+
+    <!-- COMMON SCRIPTS -->
+    <script src="{% static 'exam_page/js/jquery-3.6.0.min.js' %}"></script>
+    <script src="{% static 'exam_page/js/common_scripts.min.js' %}"></script>
+    <script src="{% static 'exam_page/js/common_functions.js' %}"></script>
+    <script src="{% static 'exam_page/js/wizard_with_branch.js' %}"></script>
+
+<script type = "text/javascript" >    function preventBack() { window.history.forward(); }
+    setTimeout("preventBack()", 0);
+    window.onunload = function () { null };
+</script>
+
+</body>
+
+</html>
