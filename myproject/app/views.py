@@ -683,6 +683,8 @@ def exam_save_action(request):
                             pass
                 question_save.total_mark = total_score
                 question_save.save()
+
+
         # Exam_inital_field save
         initial_line_count = request.POST.getlist("initial_count")
         for initial_count in initial_line_count:
@@ -882,6 +884,23 @@ def New_section_add(request):
                         created_by = request.user
                     )
         return redirect(request.META['HTTP_REFERER'])
+    
+
+
+def open_section_based_question_edit(request):
+    modal_id = request.GET.get("modal_id")
+    data_id = request.GET.get("data_id")
+    status = request.GET.get("status")
+    value1 = str(data_id)+"-"+str(modal_id)
+
+    context = {
+        "value1":value1,
+        "modal_id":modal_id,
+        "data_id":data_id,
+        "status":status,
+    }
+
+    return render(request,'open_section_based_question_edit.html',context)
 
 
 

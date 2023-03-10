@@ -176,10 +176,11 @@
                                                                 <td  style="background-color: #f3f6f8">
                                                                     <a data-toggle="modal" href="#section_edit" data-id="{{i.id}}" data-title="{{i.section_title}}" class="title_edit" style="text-decoration: none; color: black;">
                                                                         <b>{{i.section_title}}</b></a>
-                                                                    
+                                    
                                                                     </td>
+
                                                                     <td style="background-color: #f3f6f8">    <button type="button" class="btn btn-prim pay"
-                                                                        data-toggle="modal" data-target="#question-modal">
+                                                                    onclick="section_question({{i.id}})">
                                                                         Add a question
                                                                         </button></td>
                                                                 <td style="background-color: #f3f6f8">
@@ -253,6 +254,8 @@
                                                         {% endfor %}
 
                                                         </tbody>
+
+                                                        
                                                     </table>
 
                                                 </div>
@@ -682,6 +685,10 @@
 
 </div>
 
+<div  class="append_child">
+
+</div>
+
 <div id="share-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
     style="display: none">
     <div class="modal-dialog modal-lg">
@@ -1064,10 +1071,6 @@
                         </div>
                     </div>
 
-
-
-
-
                 </div>
 
 
@@ -1156,20 +1159,73 @@
 
 
 
-
-            <script src="js/jquery.min.js"></script>
-            <script src="js/custome.js"></script>
-            <script src="js/bootstrap.bundle.min.js"></script>
-            <script src="plugins/datatables/jquery.dataTables.min.js"></script>
-            <script src="plugins/datatables/dataTables.bootstrap4.min.js"></script>
-            <script src="plugins/datatables/dataTables.responsive.min.js"></script>
-            <script src="plugins/datatables/responsive.bootstrap4.min.js"></script>
-            <script src="plugins/datatables/datatables.init.js"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/react/16.8.4/umd/react.production.min.js"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.8.4/umd/react-dom.production.min.js">
-            </script>
-
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+        <script>
+        function section_question(data_id){
+            alert("sss")
+            var modal_id = $("#section_id"+data_id).val();
+            var modal_name = data_id+"-"+modal_id
+            var section_status = $(".section_status"+data_id).val();
+            if (section_status == "False"){
+            value = $('.first_open'+data_id).val()
+            if (value == "second"){
+            modal_id_new = parseInt(modal_id)-parseInt(1)
+            var modal_name2 = data_id+"-"+modal_id_new
+            $('.question-modal-'+modal_name2).modal('show');
+            }
+            else{
+                var isClassExist = document.getElementsByClassName('question-modal-'+modal_name);
+                if (isClassExist.length > 0) {
+                    $('.question-modal-'+modal_name).modal('show');
+                    $('.first_open'+data_id).val("new")
+                }
+                else{
+                $.ajax(
+            {
+                type:"GET",
+                url: "open_section_based_question_edit",
+                data:{
+                        modal_id: modal_id,
+                        data_id:data_id
+                },
+                success: function( data ) 
+                {
+                    var modal_name = data_id+"-"+modal_id
+                    $("#append_child").append(data)
+                    $('.question-modal-'+modal_name).modal('show');
+                    let total = parseInt(modal_id) + 1
+                    $("#section_id"+data_id).val(total);
+                }
+            })
+            }
+            }
+            }
+            else{
+
+            $.ajax(
+            {
+                type:"GET",
+                url: "open_section_based_question_edit",
+                data:{
+                        modal_id: modal_id,
+                        data_id:data_id
+                },
+                success: function( data ) 
+                {
+                    var modal_name = data_id+"-"+modal_id
+                    $("#append_child").append(data)
+                    $('.question-modal-'+modal_name).modal('show');
+                    let total = parseInt(modal_id) + 1
+                    $("#section_id"+data_id).val(total);
+                }
+            })
+            $('.first_open'+data_id).val("second")
+            } 
+            }
+
+            </script>
 
 
             <script>

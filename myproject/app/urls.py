@@ -40,8 +40,7 @@ urlpatterns = [
 
     
     path('New_section_add',views.New_section_add,name='New_section_add'),
-
-
+    path('open_section_based_question_edit',views.open_section_based_question_edit,name='open_section_based_question_edit'),
 
 
     # ------------------jiyad url---------------
