@@ -107,6 +107,18 @@
                                     <div class="row d-flex justify-content-center">
                                         {% for j in i.Question_id.Exam_section_exam_id.all %}
                                         {% if j.choice == "" %}
+                                            {% if j.Imagefield == "" %}
+                                            {% else %}
+                                            <div class="col-lg-3">
+                                                <div class="form-group">
+                                                    <label class="container_radio version_2 opt-img">
+                                                            <img src="./media/{{j.Imagefield}}" alt="">
+                                                            <input type="checkbox" name="answer{{i.Question_id.id}}" value="{{j.id}}" class="required">
+                                                            <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            {% endif %}
                                         {% else %}
                                         <div class="col-lg-3">
                                             <div class="form-group">
@@ -115,18 +127,10 @@
 	                                                    class="required">
 	                                                <span class="checkmark"></span>
 	                                            </label>
-                                            </div>
-                                        </div>
-                                        {% endif %}
-                                        {% if j.Imagefield == "" %}
-                                        {% else %}
-                                        <div class="col-lg-3">
-                                            <div class="form-group">
-                                                <label class="container_radio version_2 opt-img">
-                                                        <img src="./media/{{j.Imagefield}}" alt="">
-                                                        <input type="checkbox" name="answer{{i.Question_id.id}}" value="{{j.id}}" class="required">
-                                                        <span class="checkmark"></span>
-                                                </label>
+                                                {% if j.Imagefield == "" %}
+                                                {% else %}
+                                                <img src="./media/{{j.Imagefield}}" class="img-fluid img-center">
+                                                {% endif %}
                                             </div>
                                         </div>
                                         {% endif %}
@@ -137,25 +141,29 @@
                                     <div class="row d-flex justify-content-center">
                                         {% for j in i.Question_id.Exam_section_exam_id.all %}
                                         {% if j.choice == "" %}
+                                            {% if j.Imagefield == "" %}
+                                            {% else %}
+                                            <div class="col-lg-3">
+                                                <div class="form-group">
+                                                    <label class="container_radio version_2 opt-img">
+                                                            <img src="./media/{{j.Imagefield}}" alt="">
+                                                            <input type="radio" name="answer{{i.Question_id.id}}" value="{{j.id}}" class="required">
+                                                            <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            {% endif %}
                                         {% else %}
                                         <div class="col-lg-3">
                                             <div class="form-group">
                                                 <label class="container_radio version_2">{{j.choice}}
                                                         <input type="radio" name="answer{{i.Question_id.id}}" value="{{j.id}}" class="required">
                                                         <span class="checkmark"></span>
-                                                    </label>
-                                            </div>
-                                        </div>
-                                        {% endif %}
-                                        {% if j.Imagefield == "" %}
-                                        {% else %}
-                                        <div class="col-lg-3">
-                                            <div class="form-group">
-                                                <label class="container_radio version_2 opt-img">
-                                                        <img src="./media/{{j.Imagefield}}" alt="">
-                                                        <input type="radio" name="answer{{i.Question_id.id}}" value="{{j.id}}" class="required">
-                                                        <span class="checkmark"></span>
                                                 </label>
+                                                {% if j.Imagefield == "" %}
+                                                {% else %}
+                                                <img src="./media/{{j.Imagefield}}" class="img-fluid img-center">
+                                                {% endif %}
                                             </div>
                                         </div>
                                         {% endif %}
@@ -277,7 +285,12 @@
         window.onunload = function () { null };
     </script>
 
-
+    <script>
+        function userCheated() {
+            document.getElementById("form1").submit();
+        }
+        window.onblur = userCheated;
+    </script>
 
 </body>
 
