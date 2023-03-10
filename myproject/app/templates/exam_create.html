@@ -1084,21 +1084,12 @@ aria-hidden="true" style="display: none">
     $(".submit_action").submit(function(){
   
       event.preventDefault()
-      $.ajax({   
-  
-      url: "validation_check",                    
-      data: {
-  
-        section_line : $(".section_line").val(),
-        initial_count : $(".initial_count").val(),
-       
-        // initial_type : $(".initial_type`+initial_count+`").val(),
-        // initial_answer : $(".initial_answer").val(),
-  
-      },
-          success: function (data) {  
-              status = data['message']
-              if(status == "sectionFalse"){
+      section_line = $(".section_line").val()
+      console.log("section_line::::::",section_line)
+      if (section_line == undefined)
+      {
+        status = 'sectionFalse'
+        if(status == "sectionFalse"){
                   var toastMixin = Swal.mixin({
                   toast: true,
                   icon: 'error',
@@ -1118,13 +1109,12 @@ aria-hidden="true" style="display: none">
                   title: 'Add atleast one question'
                   });
               }
-              else{
-                 
-                document.forms["exam_form"].submit();
-                 
-             }
-            }
-    })
+      }
+      else{
+        document.forms["exam_form"].submit();
+      }
+      
+   
   })
   
   </script>
