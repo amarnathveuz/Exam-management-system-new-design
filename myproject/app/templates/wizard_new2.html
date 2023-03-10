@@ -44,13 +44,19 @@
                             <i class="fa-solid fa-angle-left"></i>
                             <div>
                                 <h2>{{data_main_exam.Exam_title}} Questionnaire</h2>
+                                 {% if total_mark == 0 %}
+                                 {% else %}
                                 <h6>Maximum Score: {{total_mark}}</h6>
+                                {% endif %}
                             </div>
 
                         </div>
                         <div class="total-tym">
+                            {%  if data_main_exam.Exam_time_limit|safe == "00:00:00" %}
+                            {% else %}
                             <input type="hidden" value="{{y}}" id="time_id">
                             <h6 class="d-flex align-items-end">Total Time Left: <div id="countdown"> {{data_main_exam.Exam_time_limit|safe}}</div></h6>
+                            {% endif %}
                         </div>
                     </div>
 
@@ -244,7 +250,12 @@
             if (secs > 0) {
                 timeInSecs--;
             } else {
+                if (`{{data_main_exam.Exam_time_limit|safe}}` == "00:00:00"){
+
+                }
+                else{
                 document.getElementById("form1").submit();
+                }
             }
 
             ss = new Date(secs * 1000).toISOString().substring(14, 19)

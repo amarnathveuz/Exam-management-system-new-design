@@ -20,18 +20,13 @@
                                           
 
 
-                        {% if data.Login_required == True %}
+               
                                     <a target="_blank" href="exam_login_new?type={{data.slug}}"><button type="button"
                                         class="btn btn-outline-pink waves-effect waves-light m-b-5 mx-1"
                                         data-toggle="modal" data-target="#share-modal"><i
                                             class="fa fa-share mr-1"></i>Test Link</button></a>
 
-                                            {% else %}
-                                            <a target="_blank" href="customer_using_link_new?type={{data.slug}}"><button type="button"
-                                                class="btn btn-outline-pink waves-effect waves-light m-b-5 mx-1"
-                                                data-toggle="modal" data-target="#share-modal"><i
-                                                    class="fa fa-share mr-1"></i>Test Link</button></a>
-                                                    {% endif %}
+                                         
                                     <button type="button"
                                         class="btn btn-outline-pink waves-effect waves-light m-b-5 mx-1"><i
                                             class="fa fa-print mr-1"></i>Print</button>

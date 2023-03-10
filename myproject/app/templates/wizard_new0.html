@@ -39,11 +39,17 @@
                     <div class="top-bg d-flex align-items-center justify-content-between">
                         <div class="exam-heading">
                             <h2>{{data_main_exam.Exam_title}} Questionnaire</h2>
+                            {% if total_mark == 0 %}
+                            {% else %}
                             <h6>Maximum Score: {{total_mark}}</h6>
+                            {% endif %}
                         </div>
                         <div class="total-tym">
+                            {%  if data_main_exam.Exam_time_limit|safe == "00:00:00" %}
+                            {% else %}
                             <input type="hidden" value="{{y}}" id="time_id">
                             <h6 class="d-flex align-items-end">Total Time Left: <div id="countdown"> {{data_main_exam.Exam_time_limit|safe}}</div></h6>
+                            {% endif %}
                         </div>
                     </div>
 
@@ -73,7 +79,7 @@
 
 
                         <!-- /top-wizard -->
-                        <form role="form" method="post" action="exam_result_new?type={{data_main_exam.slug}}" enctype="multipart/form-data">
+                        <form role="form" id="form1" method="post" action="exam_result_new?type={{data_main_exam.slug}}" enctype="multipart/form-data">
                         {% csrf_token %}
 
                             <div id="all-qstn d-flex align-items-center">
@@ -221,8 +227,12 @@
             if (secs > 0) {
                 timeInSecs--;
             } else {
-                clearInterval(ticker);
-                startTimer(5 * 60); // 5 minutes in seconds
+                if (`{{data_main_exam.Exam_time_limit|safe}}` == "00:00:00"){
+
+                }
+                else{
+                document.getElementById("form1").submit();
+                }
             }
 
             ss = new Date(secs * 1000).toISOString().substring(14, 19)

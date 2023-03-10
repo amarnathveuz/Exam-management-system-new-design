@@ -58,8 +58,8 @@
                                 <div class="submit step" id="end">
                                     <div class="summary">
                                         <div class="wrapper">
-                                            <h3>Thank your for your time !</h3>
-                                            {% if data_main_exam.Success_per == None %}
+                                            <h3>Thank you for your time !</h3>
+                                            {% if data_main_exam.Success_per == None or total_mark == 0 %}
                                             {% else %}
                                             {% if data_main_exam.Success_per > exam_per %}
                                             <h2>Result : <span style="color: #df1313;">Failed </span></h2>
@@ -108,7 +108,7 @@
                                             {% endif %}
                                         </div>
                                         <div style="padding: 15px 0px 0px 0px">
-                                            <a href="view_exams"><button class="submit-button-class" type="button"><b>BACK TO HOME</b></button></a>
+                                          
                                         </div>
                                     </div>
                                 </div>
