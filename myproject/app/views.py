@@ -613,7 +613,7 @@ def exam_save_action(request):
                     if extension == ".pdf" or extension == ".txt" or extension == ".doc" or extension == ".docx" :
                         image_new1 = question_image
                     else:
-                        fixed_height = 758
+                        fixed_height = 171
                         image = Image.open(question_image)
                         print("image.size",image.size)
                         width_size = int(fixed_height/image.height * image.width)
@@ -658,7 +658,7 @@ def exam_save_action(request):
                         if extension == ".pdf" or extension == ".txt" or extension == ".doc" or extension == ".docx" :
                             image_new1 = file_data
                         else:
-                            fixed_height = 758
+                            fixed_height = 171
                             image = Image.open(file_data)
                             print("image.size",image.size)
                             width_size = int(fixed_height/image.height * image.width)
@@ -898,7 +898,7 @@ def exam_login_action_new(request):
             messages.error(request, str("Incorrect username or password"))
             return redirect(request.META['HTTP_REFERER'])
         
-        
+
 def exam_link_action_new(request):
     if request.method == "POST":
         exam_id = request.POST.get('exam_details')
