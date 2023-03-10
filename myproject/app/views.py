@@ -550,6 +550,8 @@ def exam_save_action(request):
             return redirect(request.META['HTTP_REFERER'])
         else:
             pass
+
+
         initial_line_count = request.POST.getlist("initial_count")
         for initial_count in initial_line_count:
             initial_label =  request.POST.get("initial_label"+initial_count)
@@ -699,7 +701,6 @@ def exam_save_action(request):
 
 
 def open_section_based_question(request):
-
     modal_id = request.GET.get("modal_id")
     data_id = request.GET.get("data_id")
     status = request.GET.get("status")
@@ -726,55 +727,76 @@ def open_section_based_question(request):
 
 # ---------------anirudh ----------------------------------
 def update_exam_details(request):
-    updated_id = request.POST.get("updated_id",False)
-    exam_title = request.POST.get("exam_title",False)
-    responsible_person = request.POST.get("responsible_person",False)
-    start_message = request.POST.get("start_message",False)
-    end_message = request.POST.get("end_message",False)
-    layout = request.POST.get("layout",False)
-    access_mode = request.POST.get("access_mode",False)
-    progression_mode = request.POST.get("progression_mode",False)
-    login_required = bool(request.POST.get('login_required', False))
-    attempt_limit = request.POST.get("attempt_limit",False)
-    attempt_check = request.POST.get("Attempt_check",False)
-    required_score = request.POST.get("required_score",False)
-    if attempt_check == False:
-        attempt_limit = 0
-    else:
-        pass
-    if login_required == False:
-        attempt_limit = 0
-    else:
-        pass
-    exam_time_limit = request.POST.get("exam_time_limit",False)
-    section = request.POST.get("section",False)
-    scoring_mode = request.POST.get("scoring_mode",False)
-    if exam_time_limit == "":
-        exam_time_limit = "00:00:00"
-    else:
-        pass        
-    data_update = Main_Exam_Master.objects.filter(id=updated_id).update(
-        responsible_person_id = responsible_person,
-        Exam_title = exam_title,
-        start_message = start_message,
-        end_message = end_message,
-        layout = layout,
-        progression_mode = progression_mode,
-        Exam_time_limit = exam_time_limit,
-        selection_mode = section,
-        scoring_mode = scoring_mode,
-        access_mode = access_mode,
-        Login_required = login_required,
-        attempt_limit = attempt_limit,
-        Success_per = required_score
-    )
-    messages.success(request,str("Updated"))
-    return redirect(request.META['HTTP_REFERER'])
+    if request.method == "POST":
+        updated_id = request.POST.get("updated_id",False)
+        exam_title = request.POST.get("exam_title",False)
+        responsible_person = request.POST.get("responsible_person",False)
+        start_message = request.POST.get("start_message",False)
+        end_message = request.POST.get("end_message",False)
+        layout = request.POST.get("layout",False)
+        access_mode = request.POST.get("access_mode",False)
+        progression_mode = request.POST.get("progression_mode",False)
+        login_required = bool(request.POST.get('login_required', False))
+        attempt_limit = request.POST.get("attempt_limit",False)
+        attempt_check = request.POST.get("Attempt_check",False)
+        required_score = request.POST.get("required_score",False)
+
+        if attempt_check == False:
+            attempt_limit = 0
+        else:
+            pass
+        if login_required == False:
+            attempt_limit = 0
+        else:
+            pass
+        exam_time_limit = request.POST.get("exam_time_limit",False)
+        section = request.POST.get("section",False)
+        scoring_mode = request.POST.get("scoring_mode",False)
+        if exam_time_limit == "":
+            exam_time_limit = "00:00:00"
+        else:
+            pass   
+
+            #  initail field #######
+        
+        initial_line_count = request.POST.getlist("initial_count")
+        for initial_count in initial_line_count:
+            initial_label =  request.POST.get("initial_label"+initial_count)
+            initial_type =  request.POST.get("initial_type"+initial_count)
+            exam_initial_save = Exam_inital_field.objects.create(Exam_id_id = updated_id,title = initial_label,field_type = initial_type  )
+            if initial_type == "selection":
+                initial_answer =  request.POST.getlist("initial_answer"+initial_count)
+                for i in initial_answer:
+                    Exam_inital_field_choice.objects.create(initial_field_id_id = exam_initial_save.id,choice_name = i)
+            else:
+                pass
+
+        data_update = Main_Exam_Master.objects.filter(id=updated_id).update(
+            responsible_person_id = responsible_person,
+            Exam_title = exam_title,
+            start_message = start_message,
+            end_message = end_message,
+            layout = layout,
+            progression_mode = progression_mode,
+            Exam_time_limit = exam_time_limit,
+            selection_mode = section,
+            scoring_mode = scoring_mode,
+            access_mode = access_mode,
+            Login_required = login_required,
+            attempt_limit = attempt_limit,
+            Success_per = required_score
+        )
+        messages.success(request,str("Updated"))
+        return redirect(request.META['HTTP_REFERER'])
+
+
+
 def section_Question_view_modal(request):
     data_id = request.GET.get("data_id")
     data = Main_Question_Bank.objects.get(id=data_id)
     value1 = data_id
     return render(request,'section_Question_view_modal.html',{'data':data,'value1':value1})
+
 def Question_Management_update(request):
     updated_id = request.POST.get("updated_id",False)
     question_name = request.POST.get("question_name",False)
@@ -794,6 +816,7 @@ def Question_Management_update(request):
                 manadatory = manadatory,
                 comments =  comments
     )
+
     image_field = request.FILES.getlist('exam_choice_image[]')
     print("image_field L:::::::::::::::::",image_field)
     for i in range(len(choice_update)):
@@ -822,6 +845,8 @@ def Question_Management_update(request):
                 )
     messages.success(request,str("Updated"))
     return redirect(request.META['HTTP_REFERER'])
+
+
 def section_title_edit(request):
     updated_id = request.POST.get("updated_id",False)
     exam_title = request.POST.get("exam_title")
@@ -830,6 +855,8 @@ def section_title_edit(request):
         )
     messages.success(request,str("Section Title Updated"))
     return redirect(request.META['HTTP_REFERER'])
+
+
 def delete_initial_field(request):
     if request.method == "POST":
         field_id = request.POST.get("initial_field_id")
@@ -841,21 +868,37 @@ def delete_initial_field(request):
         id = request.GET.get("id")
         data = Exam_inital_field.objects.get(id=id)
         return render(request,"delete_initial_field.html",{'data':data})
-    
+
+
+def New_section_add(request):
+    if request.method == "POST":
+        exam_id = request.POST.get("exam_id")
+        section_title = request.POST.get("section_title")
+
+        section_save = Main_Exam_section.objects.create(
+                        Exam_id_id = exam_id,
+                        section_title = section_title,
+                        section_type = "Section",
+                        created_by = request.user
+                    )
+        return redirect(request.META['HTTP_REFERER'])
 
 
 
+# /////////////////////////////////////////////////////////////////////////
 
 def exam_login_new(request):
     slug = request.GET.get("type")
     data = Main_Exam_Master.objects.get(slug=slug)
     return render(request,'exam_login_new.html',{'data':data})
 
+
 def customer_using_link_new(request):
     slug = request.GET.get("type")
     data_exam = Main_Exam_Master.objects.get(slug=slug)
     data = Exam_inital_field.objects.filter(Exam_id=data_exam)
     return render(request,'customer_using_link_new.html',{'data':data})
+
 
 def attend_exam_new(request,slug):
     data = Main_Exam_Master.objects.get(slug=slug)
@@ -891,6 +934,7 @@ def exam_login_action_new(request):
         else:
             messages.error(request, str("Incorrect username or password"))
             return redirect(request.META['HTTP_REFERER'])
+
 def exam_link_action_new(request):
     if request.method == "POST":
         exam_id = request.POST.getlist('exam_details')
@@ -911,6 +955,7 @@ def exam_link_action_new(request):
             )
         url = "attend_exam_new/" + exam_id[0]
         return redirect(url)
+
 def wizard_new(request):
     slug = request.GET.get("type")
     data_main_exam = Main_Exam_Master.objects.get(slug=slug)
@@ -956,6 +1001,7 @@ def wizard_new(request):
         data_question = Main_Question_Bank.objects.filter(id__in=question_list)
         total_mark = sum(data_question.values_list('total_mark', flat=True))
         return render(request, 'wizard_new2.html', {'data_main_exam': data_main_exam, 'data': data,'data_count':data_count,'total_mark':total_mark,'y':y})
+
 def exam_result_new(request):
     uid = request.session['uid']
     slug = request.GET.get("type")

@@ -38,6 +38,9 @@ urlpatterns = [
     path('section_Question_view_modal',views.section_Question_view_modal,name='section_Question_view_modal'),
     path('Question_Management_update',views.Question_Management_update,name='Question_Management_update'),
 
+    
+    path('New_section_add',views.New_section_add,name='New_section_add'),
+
 
 
 

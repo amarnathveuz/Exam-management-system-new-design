@@ -41,11 +41,11 @@
                             <div class="col-md-9 px-2">
                                 <div class="form-group d-flex align-items-center">
                                     <input type="radio"  name="Question_type"  {% if data.Question_type == "Radio" %} checked {% endif %} value="Radio" >
-                                    <label for="customer">One page per question</label>
+                                    <label for="customer">Multiple choice: only one answer</label>
                                 </div>
                                 <div class="form-group d-flex align-items-center">
-                                    <input type="radio" name="Question_type" {% if data.Question_type == "Checkbox" %} checked {% endif %} value="Checkbox" > <span style="font-size: 12px;">Multiple choice: multiple answers
-                                    <label for="customer">One page per section</label>
+                                    <input type="radio" name="Question_type" {% if data.Question_type == "Checkbox" %} checked {% endif %} value="Checkbox" > <span style="font-size: 12px;">
+                                    <label for="customer">Multiple choice: multiple answers</label>
                                 </div>
 
                             </div>
@@ -116,7 +116,7 @@
                                                         <input type="hidden" name="remove_status[]" value="0" id="remove_id{{i.id}}">
 
                                                         <div class="input-group uploadFile1 upload_image_address{{i.id}}" {% if i.Imagefield == " " or i.Imagefield == None %} {% else %}
-                                                        style="display: none" {% endif %} >
+                                                        style="display: none;" {% endif %} >
                                                             <input type="file" class="inputfile form-control mb-0"
                                                                 name="exam_choice_image[]" onchange="image_upload({{i.id}})" >
                                                             <div class="input-group-append" >

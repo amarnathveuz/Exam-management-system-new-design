@@ -18,18 +18,16 @@
                                 <h2 class="main-heading-txt"></h2>
                                 <div class="d-flex">
                                           
-
-
                         {% if data.Login_required == True %}
                                     <a target="_blank" href="exam_login_new?type={{data.slug}}"><button type="button"
                                         class="btn btn-outline-pink waves-effect waves-light m-b-5 mx-1"
-                                        data-toggle="modal" data-target="#share-modal"><i
+                                        data-toggle="modal" data-target=""><i
                                             class="fa fa-share mr-1"></i>Test Link</button></a>
 
                                             {% else %}
                                             <a target="_blank" href="customer_using_link_new?type={{data.slug}}"><button type="button"
                                                 class="btn btn-outline-pink waves-effect waves-light m-b-5 mx-1"
-                                                data-toggle="modal" data-target="#share-modal"><i
+                                                data-toggle="modal" data-target=""><i
                                                     class="fa fa-share mr-1"></i>Test Link</button></a>
                                                     {% endif %}
                                     <button type="button"
@@ -119,27 +117,32 @@
                                                     Questions
                                                 </a>
                                             </li>
+                                            
                                             <li class="nav-item d-flex align-items-center">
                                                 <a class="nav-link" data-toggle="tab" href="#Options" role="tab">
                                                     Options
                                                 </a>
                                             </li>
+
                                             <li class="nav-item d-flex align-items-center">
                                                 <a class="nav-link" data-toggle="tab" href="#Description" role="tab">
                                                     Start Message
                                                 </a>
                                             </li>
+
                                             <li class="nav-item d-flex align-items-center">
                                                 <a class="nav-link" data-toggle="tab" href="#Endmessage" role="tab">
                                                     End Message
                                                 </a>
                                             </li>
+
                                             <li class="nav-item d-flex align-items-center">
                                                 <a class="nav-link" data-toggle="tab" href="#initialfield" role="tab">
                                                     Initial Fields
                                                 </a>
                                             </li>
                                         </ul>
+
                                         <div class="tab-content small-form">
                                             <div class="tab-pane active" id="Questions" role="tabpanel">
                                                 <div class="mt-4">
@@ -153,6 +156,7 @@
                                                             Add a question
                                                         </button>
                                                     </div>
+
                                                     <table
                                                         class="table table-qstn dt-responsive table-bordered nowrap table-padd"
                                                         style="border-collapse: collapse; border-spacing: 0; width: 100%;">
@@ -169,16 +173,20 @@
                                                         {% for i in data_main %}
                                                             {% if i.section_type == "Section" %} 
                                                             <tr>
-                                                                <td colspan="2" style="background-color: #f3f6f8">
+                                                                <td  style="background-color: #f3f6f8">
                                                                     <a data-toggle="modal" href="#section_edit" data-id="{{i.id}}" data-title="{{i.section_title}}" class="title_edit" style="text-decoration: none; color: black;">
-                                                                        <b>{{i.section_title}}</b></a></td>
+                                                                        <b>{{i.section_title}}</b></a>
+                                                                    
+                                                                    </td>
+                                                                    <td style="background-color: #f3f6f8">    <button type="button" class="btn btn-prim pay"
+                                                                        data-toggle="modal" data-target="#question-modal">
+                                                                        Add a question
+                                                                        </button></td>
                                                                 <td style="background-color: #f3f6f8">
+                                                                    
 
                                                                     <div class="action-tbl d-flex justify-content-end">
-                                                                        <button type="button" class="btn btn-prim pay"
-                                                                    data-toggle="modal" data-target="#question-modal">
-                                                                    Add a question
-                                                                    </button>
+                                                                        
                                                                         <i class="fa fa-trash-o mx-1 trash-btn"
                                                                             data-toggle="tooltip" data-placement="top"
                                                                             title="" data-original-title="Delete"></i>
@@ -570,10 +578,10 @@
                                             <div class="tab-pane" id="initialfield" role="tabpanel">
                                                 <div class="mt-4">
                                                     <div class="mb-2">
-                                                        <!-- <button type="button"
-                                                    class="btn btn-prim pay">
+                                                        <button type="button"
+                                                    class="btn btn-prim pay add_exam_field">
                                                     Add a Line
-                                                </button> -->
+                                                </button>
 
                                                     </div>
                                                     <table
@@ -637,6 +645,13 @@
                                                             </tr>
                                                             {% endfor %}
                                                         </tbody>
+
+                                                        <tbody id="append_inital_field" class="body-textcls vertcle-center">
+                                                        
+                                                        
+                                                  
+                                                        </tbody>
+
                                                     </table>
 
 
@@ -756,12 +771,19 @@
     </div>
 </div>
 
+
+
 <div id="addsection" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
-    style="display: none">
+    style="display: none" >
+    <form class="forms-sample" action="New_section_add" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}   
+
     <div class="modal-dialog modal-md modal-dialog-centered">
-        <div class="modal-content">
+       
+        <div class="modal-content" >
             <div class="modal-header">
                 <h4 class="modal-title mt-0">Add a Section</h4>
+                
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -769,22 +791,23 @@
             <div class="modal-body">
                 <div class="row">
                     <div class="col-md-12">
+                        <input type="hidden" name="exam_id" value="{{data.id}}">
                         <div class="form-group">
                             <label for="field-1" class="control-label">Section Name</label>
-                            <input type="text" class="form-control" id="field-1" placeholder="Section Name">
+                            <input type="text" class="form-control" id="field-1" placeholder="Section Name" name="section_title">
                         </div>
                     </div>
-
                 </div>
-
             </div>
             <div class="modal-footer">
 
-                <button type="button" style="background-color:#f9365f!important;border: none!important;"
+                <button type="submit" style="background-color:#f9365f!important;border: none!important;"
                     class="btn btn-info waves-effect waves-light">Save </button>
             </div>
         </div>
     </div>
+</form>
+
 </div>
 
 
@@ -834,6 +857,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
+
             <div class="modal-body">
                 <div class="row">
                     <div class="col-md-12">
@@ -1147,6 +1171,65 @@
 
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
+
+            <script>
+    
+            intital_value = 1
+            $(".add_exam_field").click(function(){
+            
+            $("#append_inital_field").append(
+
+                ` <tr class="init_remove`+intital_value+`">
+                        <td>
+                            <input type="text" placeholder="Title" name="initial_label`+intital_value+`" id="" class="form-control">
+                            <input type="hidden" class="initial_count" name="initial_count" value='`+intital_value+`'>
+                            </td>
+                        <td>
+                            <select class="form-control initial_type`+intital_value+`" name="initial_type`+intital_value+`">
+                                <option value="Text Input" selected="">Text Input</option>
+                                <option value="selection">Selection</option>
+                                <option value="Date Field">Date Field</option>
+                            </select>
+                        </td>
+                        <td id='multiple_choice`+intital_value+`'>
+                            <a href="#" style="font-size: 16px;float:right;
+                        color: black;"  onclick="multiple_choice_add(`+intital_value+`)">+</a>
+                            
+                        </td>
+                        <td> <div class="action-tbl d-flex justify-content-end mt-1">
+                                
+                            <i class="fa fa-trash-o mx-1 trash-btn"  onclick="initial_field_remove(`+intital_value+`)" data-original-title="Delete"></i>
+                        
+                        </div></td>
+                
+                    </tr>`                       
+                    
+            )
+
+            intital_value = intital_value + 1
+            });
+
+
+            function multiple_choice_add(val){
+                $("#multiple_choice"+val).append(
+                    `<input class="form-control" placeholder="Enter your option" type="text" name="initial_answer`+val+`">`
+                )
+            }
+            </script>
+
+            <script>
+
+            function initial_field_remove(val)
+            {
+            var tr_id = val
+            $('.init_remove'+tr_id).hide()
+            div_update = document.getElementsByClassName("init_remove"+tr_id).innerHTML = "";
+            $('.init_remove'+tr_id).empty()
+            }
+
+
+            </script>
+
             <script>
 
             function section_Question_view(data_id){
@@ -1227,6 +1310,10 @@
                     });
                 }
             </script>
+
+
+
+<!-- extrassssssssssssss -->
 
 
             <script>
