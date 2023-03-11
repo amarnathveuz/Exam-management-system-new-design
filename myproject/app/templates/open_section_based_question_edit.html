@@ -1,6 +1,9 @@
 
-<div id="" class="modal fade question-modal-{{value1}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+<div id="question-modal" class="modal fade question-modal-{{value1}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
 aria-hidden="true" style="display: none">
+<form class="forms-sample" action="save_section_question_action" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}   
+
 <div class="modal-dialog modal-lg">
     <div class="modal-content">
         <input type="hidden" value="{{modal_id}}" class="add_line_count{{value1}}">
@@ -13,12 +16,15 @@ aria-hidden="true" style="display: none">
         </div>
         <div class="modal-body">
             <div class="row">
-
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="field-1" class="control-label">Question</label>
                         <div class="input-group">
-                      
+                            <input type="hidden" name="updated_id" value="{{section_id.id}}">
+                            <input type="hidden" name="button_status" value="{{button_status}}">
+                            <input type="hidden" name="exam_id" value="{{data_id}}">
+
+
                             <input type="text" required onchange="question_value(this,`{{value1}}`)" class="form-control modal_question{{value1}}" name="question_name{{data_id}}" placeholder="eg: What is the...">
                             <div class="input-group-append">
                                 <button type="button"
@@ -26,7 +32,6 @@ aria-hidden="true" style="display: none">
                             data-target="#language-modal-{{value1}}">
                             <i class="fas fa-language"></i>
                             </button>
-                         
                             </div> 
                         </div>
                     </div>
@@ -211,15 +216,15 @@ aria-hidden="true" style="display: none">
         </div>
         <div class="modal-footer">
 
-            <button type="button" style="background-color:#f9365f!important;border: none!important;" onclick="modal_question_action(`{{value1}}`,`{{data_id}}`)"
-                class="btn btn-info waves-effect waves-light section_btn remove_onclick{{value1}}">Save </button>
-
-            <button type="button" style="background-color:#f9365f!important;border: none!important ;display:none;" onclick="modal_question_update(`{{value1}}`,`{{data_id}}`)"
-            class="btn btn-info waves-effect waves-light section_btn remove_onclick1{{value1}}">Save </button>
+            <button type="submit" style="background-color:#f9365f!important;border: none!important;" 
+                class="btn btn-info waves-effect waves-light section_btn remove_onclick{{value1}}">Save</button>
         </div>
     </div>
 </div>
+</form>
 </div>
+
+
 
 <div id="language-modal-{{value1}}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
 aria-hidden="true" style="display: none">
@@ -233,13 +238,12 @@ aria-hidden="true" style="display: none">
         </div>
         <div class="modal-body">
             <div class="row">
-
                 <div class="col-md-12">
                     <div class="form-group">
                         <label for="field-1" class="control-label">English</label>
                         <div class="input-group">
                       
-                            <input type="text"  name="eng_question{{data_id}}" class="inputfile form-control mb-0 question_val{{value1}}"  placeholder="">
+                            <input type="text"  name="eng_question" class="inputfile form-control mb-0 question_val{{value1}}"  placeholder="">
                             <div class="input-group-append">
                                 <span  class="input-group-text"><img src="img/language/english.jpg" alt="" style="height: 20px;"></span>
                             </div> 
@@ -251,7 +255,7 @@ aria-hidden="true" style="display: none">
                         <label for="field-1" class="control-label">Arabic</label>
                         <div class="input-group">
                       
-                            <input type="text" name="ar_question{{data_id}}" class="inputfile form-control mb-0 question_val{{value1}}"  placeholder="">
+                            <input type="text" name="ar_question" class="inputfile form-control mb-0 question_val{{value1}}"  placeholder="">
                             <div class="input-group-append">
                                 <span  class="input-group-text"><img src="img/language/arabic.jpg" alt="" style="height: 20px;"></span>
                             </div> 
@@ -263,7 +267,7 @@ aria-hidden="true" style="display: none">
                         <label for="field-1" class="control-label">Hindi</label>
                         <div class="input-group">
                       
-                            <input type="text" name="hi_question{{data_id}}" class="inputfile form-control mb-0 question_val{{value1}}"  placeholder="">
+                            <input type="text" name="hi_question" class="inputfile form-control mb-0 question_val{{value1}}"  placeholder="">
                             <div class="input-group-append">
                                 <span  class="input-group-text"><img src="img/language/hindi.jpg" alt="" style="height: 20px;"></span>
                             </div> 
@@ -276,7 +280,7 @@ aria-hidden="true" style="display: none">
                         <label for="field-1" class="control-label">Tamil</label>
                         <div class="input-group">
                       
-                            <input type="text" name="ta_question{{data_id}}" class="inputfile form-control mb-0 question_val{{value1}}"  placeholder="">
+                            <input type="text" name="ta_question" class="inputfile form-control mb-0 question_val{{value1}}"  placeholder="">
                             <div class="input-group-append">
                                 <span  class="input-group-text"><img src="img/language/hindi.jpg" alt="" style="height: 20px;"></span>
                             </div> 
@@ -289,7 +293,7 @@ aria-hidden="true" style="display: none">
                         <label for="field-1" class="control-label">Urdu</label>
                         <div class="input-group">
                       
-                            <input type="text" name="ur_question{{data_id}}"  class="inputfile form-control mb-0 question_val{{value1}}"  placeholder="">
+                            <input type="text" name="ur_question"  class="inputfile form-control mb-0 question_val{{value1}}"  placeholder="">
                             <div class="input-group-append">
                                 <span  class="input-group-text"><img src="img/language/hindi.jpg" alt="" style="height: 20px;"></span>
                             </div> 
@@ -320,7 +324,6 @@ aria-hidden="true" style="display: none">
   
     
     <script>
-    
     function choice_add_fun(val1){
      
     var add_line_count = $(".add_line_count"+val1).val();
@@ -340,9 +343,8 @@ aria-hidden="true" style="display: none">
       $(".file_th"+val1).show()
     }
   
-    
-    $("#choice_add"+val1).append(`<tr class="tr_choice_remove`+add_line_count+`" >
 
+    $("#choice_add"+val1).append(`<tr class="tr_choice_remove`+add_line_count+`" >
         <td>
             <div class="input-group">
             <input type="text" onchange="choice_value(this,`+add_line_count+`)"  name="question_choice`+add_line_count+``+'-'+`{{value1}}"  class="form-control">

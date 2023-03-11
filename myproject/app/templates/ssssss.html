@@ -1,306 +1,149 @@
-<div id="question-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-    aria-hidden="true" style="display: none">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title mt-0">Add a Question</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label for="field-1" class="control-label">Question</label>
-                            <div class="input-group">
-
-                                <input type="text" class="inputfile form-control mb-0" name="file"
-                                    placeholder="eg: What is the...">
-                                <div class="input-group-append">
-                                    <button type="button" class="input-group-text" data-toggle="modal"
-                                        data-target="#language-modal">
-                                        <i class="fas fa-language"></i>
-                                    </button>
-
-                                </div>
-                            </div>
-                        </div>
-
-
-                    </div>
-                    <div class="col-md-12">
-                        <div class="row answer-type">
-                            <div class="col-md-3 br-right d-flex align-items-start px-0">
-                                <label>Question Type</label>
-                            </div>
-                            <div class="col-md-9 px-2">
-                                <div class="form-group d-flex align-items-center">
-                                    <input type="radio" id="customer">
-                                    <label for="customer">One page per question</label>
-                                </div>
-                                <div class="form-group d-flex align-items-center">
-                                    <input type="radio" id="customer">
-                                    <label for="customer">One page per section</label>
-                                </div>
-                                <div class="form-group d-flex align-items-center">
-                                    <input type="radio" id="customer">
-                                    <label for="customer">One page with all the questions</label>
-                                </div>
-
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class="col-md-12 mt-3">
-                        <div class="paytab">
-                            <ul class="nav nav-tabs nav-pay mb-2" role="tablist">
-                                <li class="nav-item d-flex align-items-center">
-                                    <a class="nav-link active" data-toggle="tab" href="#Answers1" role="tab">
-                                        Answers
-                                    </a>
-                                </li>
-                                <li class="nav-item d-flex align-items-center">
-                                    <a class="nav-link" data-toggle="tab" href="#Options1" role="tab">
-                                        Options
-                                    </a>
-                                </li>
-                                <li class="nav-item d-flex align-items-center">
-                                    <a class="nav-link" data-toggle="tab" href="#Description1" role="tab">
-                                        Description
-                                    </a>
-                                </li>
-
-                            </ul>
-                            <div class="tab-content small-form">
-                                <div class="tab-pane active" id="Answers1" role="tabpanel">
-                                    <div class="mt-3">
-                                        <div class="mb-2">
-                                            <button type="button" class="btn btn-prim pay">
-                                                Add a Line
-                                            </button>
-
-                                        </div>
-                                        <table class="table table-qstn dt-responsive table-bordered nowrap table-padd"
-                                            style="border-collapse: collapse; border-spacing: 0; width: 100%;">
-
-                                            <thead class="border-class">
-
-                                                <tr class="heading-text">
-                                                    <th>Choices</th>
-                                                    <th>Image</th>
-                                                    <th></th>
-
-                                                </tr>
-                                            </thead>
-
-
-                                            <tbody class="body-textcls vertcle-center">
-                                                <tr>
-                                                    <td>
-                                                        <input type="text" class="form-control">
-                                                    </td>
-                                                    <td>
-                                                        <div class="input-group uploadFile1">
-
-                                                            <input type="file" class="inputfile form-control mb-0"
-                                                                name="file">
-                                                            <div class="input-group-append">
-                                                                <span class="input-group-text"> <i
-                                                                        class="fas fa-paperclip"></i></span>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="action-tbl d-flex justify-content-end">
-
-                                                            <i class="fa fa-trash-o mx-1 trash-btn"
-                                                                data-toggle="tooltip" data-placement="top" title=""
-                                                                data-original-title="Delete"></i>
-
-                                                        </div>
-                                                    </td>
-                                                </tr>
-
-                                            </tbody>
-                                        </table>
-
-
-
-
-                                    </div>
-
-
-                                </div>
-                                <div class="tab-pane sales_purchase" id="Options1" role="tabpanel">
-
-
-                                    <div class="row mb-2 question-options">
-                                        <div class="col-md-6 px-0">
-                                            <h5>Answers</h5>
-
-                                            <div class="row">
-                                                <div class="col-md-5 br-right d-flex align-items-center px-0">
-                                                    <h6>Show Comments Field</h6>
-                                                </div>
-                                                <div class="col-md-7">
-                                                    <div class="form-group mt-2 d-flex align-items-center">
-                                                        <input type="checkbox" id="customer">
-
-                                                    </div>
-
-
-
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                        <div class="col-md-6">
-                                            <h5>Layout</h5>
-
-                                            <div class="row">
-                                                <div class="col-md-5 br-right d-flex align-items-center px-0">
-                                                    <h6>Conditional Display</h6>
-                                                </div>
-                                                <div class="col-md-7 d-flex align-items-center r-day">
-                                                    <input type="checkbox" id="r-day">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row mb-3">
-                                        <div class="col-md-6 px-0">
-                                            <h5>Constraints</h5>
-
-                                            <div class="row">
-                                                <div class="col-md-5 br-right d-flex align-items-center px-0 px-0">
-                                                    <h6>Mandatory Answer</h6>
-                                                </div>
-                                                <div class="col-md-7 d-flex align-items-center r-day">
-                                                    <input type="checkbox" id="r-day">
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                        <div class="col-md-6">
-                                            <h5>Live Session</h5>
-
-                                            <div class="row">
-                                                <div class="col-md-5 br-right d-flex align-items-center px-0">
-                                                    <h6>Question Time Limit</h6>
-                                                </div>
-                                                <div class="col-md-7 d-flex align-items-center r-day">
-                                                    <input type="checkbox" id="r-day">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-                                <div class="tab-pane descptn" id="Description1" role="tabpanel">
-
-
-                                    <div class="row">
-                                        <div class="col-md-12 px-0">
-                                            <textarea name="" id="" cols="30" rows="5" class="form-control border-0"
-                                                placeholder="e.g. Guidelines, instructions, picture, ... to help attendees answer"></textarea>
-                                        </div>
-                                    </div>
-
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-
-
-
-
-
-                </div>
-
-
-
-            </div>
-            <div class="modal-footer">
-
-                <button type="button" style="background-color:#f9365f!important;border: none!important;"
-                    class="btn btn-info waves-effect waves-light">Save </button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div id="language-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-    aria-hidden="true" style="display: none">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title mt-0">Language</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label for="field-1" class="control-label">English</label>
-                            <div class="input-group">
-
-                                <input type="text" class="inputfile form-control mb-0" placeholder="">
-                                <div class="input-group-append">
-                                    <span class="input-group-text"> <img src="img/language/english.jpg" alt=""
-                                            style="height: 20px;"></span>
-
-                                </div>
-
-
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label for="field-1" class="control-label">Arabic</label>
-                                <div class="input-group">
-
-                                    <input type="text" class="inputfile form-control mb-0" placeholder="">
-                                    <div class="input-group-append">
-                                        <span class="input-group-text"> <img src="img/language/arabic.jpg" alt=""
-                                                style="height: 20px;"></span>
-
-                                    </div>
-
-
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label for="field-1" class="control-label">Hindi</label>
-                                    <div class="input-group">
-
-                                        <input type="text" class="inputfile form-control mb-0" placeholder="">
-                                        <div class="input-group-append">
-                                            <span class="input-group-text"> <img src="img/language/hindi.jpg" alt=""
-                                                    style="height: 20px;"></span>
-
-                                        </div>
-
-
-                                    </div>
-                                </div>
-
-                            </div>
-
-
-
-                        </div>
-                        <div class="modal-footer">
-
-                            <button type="button" style="background-color:#f9365f!important;border: none!important;"
-                                class="btn btn-info waves-effect waves-light">Save </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+def save_section_question_action(request):
+    if request.method == "POST":
+        
+        updated_id = request.POST.get("updated_id")
+        button_status =  request.GET.get("button_status")
+        exam_id =  request.GET.get("exam_id")
+        section_line = request.POST.getlist("section_line")
+        section_line_count = request.POST.getlist("section_line_count")
+        modal_status = request.POST.getlist("modal_status")
+        section_count = updated_id
+        question = request.POST.get("question_name"+str(section_count))
+        eng_question = request.POST.get("eng_question")
+        ar_question = request.POST.get("ar_question")
+        hi_question = request.POST.get("hi_question")
+        ur_question = request.POST.get("ur_question")
+        ta_question = request.POST.get("ta_question")
+
+        print("question::::::::::::::::",question)
+
+        print("eng_question::::::::::::::::",eng_question)
+        print("eng_question::::::::::::::::",ar_question)
+
+        question_description = request.POST.get("qstn_descriptn"+str(section_count))
+        question_comment = request.POST.get("question_comment"+str(section_count))
+        model_count = request.POST.get("question_model_name"+str(section_count))
+
+        question_type = request.POST.get("question_type"+model_count)
+        question_mandatory = request.POST.get("question_mandatory"+model_count,False)
+
+
+        if modal_status == "direct_question" :
+            section_save = Main_Exam_section.objects.create(Exam_id_id = exam_id ,section_title = question,
+                        section_type = "Question",
+                        created_by = request.user
+                        )
+        else:   
+
+            pass
+
+        try:
+            question_image = request.FILES['question_image'+model_count]
+            import os
+            extension = os.path.splitext(str(question_image))[1]
+            print("extension:::",extension)
+            if extension == ".pdf" or extension == ".txt" or extension == ".doc" or extension == ".docx" :
+                image_new1 = question_image
+            else:
+                fixed_height = 758
+                image = Image.open(question_image)
+                print("image.size",image.size)
+                width_size = int(fixed_height/image.height * image.width)
+                resized_image = image.resize((width_size,fixed_height))
+                print("resizeeeeeed:",resized_image.size)
+                from django.conf import settings
+                resized_image.save("media/user_image/"+question_image.name)
+                image_new1 = 'user_image/'+question_image.name
+
+
+            question_save = Main_Question_Bank.objects.create(Question=question,question_ar=ar_question,question_en=eng_question,question_hi=hi_question,question_ur=ur_question,question_ta=ta_question,
+                Description =  question_description, Question_type = question_type,created_by = request.user,
+                comments = question_comment,Imagefield =image_new1,manadatory = question_mandatory)
+
+
+            if modal_status == "direct_question":
+                section_save.Question_bank_id_id = question_save.id
+                section_save.save()
+                Section_Question_Mapping.objects.create(Section_id_id = section_save.id,Question_id_id = question_save.id,created_by = request.user)
+
+            else:
+
+                Section_Question_Mapping.objects.create(Section_id_id = updated_id,Question_id_id = question_save.id,created_by = request.user)
+        
+
+             # Question_Bank_multiple_choice save 
+            question_line_count = request.POST.getlist("question_line_count"+model_count)
+            total_score = 0
+            for  choice_count in question_line_count:
+                choice_data = request.POST.get("question_choice"+choice_count+'-'+model_count)
+                eng_choice = request.POST.get("eng_choice"+choice_count+'-'+model_count)
+                ar_choice = request.POST.get("ar_choice"+choice_count+'-'+model_count)
+                hi_choice = request.POST.get("hi_choice"+choice_count+'-'+model_count)
+                ur_choice = request.POST.get("ur_choice"+choice_count+'-'+model_count)
+                ta_choice = request.POST.get("ta_choice"+choice_count+'-'+model_count)
+                result_status = request.POST.get("addline_check"+choice_count+'-'+model_count,False)
+                Score = request.POST.get("Score"+choice_count+'-'+model_count,False)
+                if (result_status == "True"):
+                    total_score += int(Score)
+                try:
+                    file_data = request.FILES['question_image_choice'+choice_count+'-'+model_count]
+                    import os
+                    extension = os.path.splitext(str(file_data))[1]
+                    print("extension:::",extension)
+                    if extension == ".pdf" or extension == ".txt" or extension == ".doc" or extension == ".docx" :
+                        image_new1 = file_data
+                    else:
+                        fixed_height = 758
+                        image = Image.open(file_data)
+                        print("image.size",image.size)
+                        width_size = int(fixed_height/image.height * image.width)
+                        resized_image = image.resize((width_size,fixed_height))
+                        print("resizeeeeeed:",resized_image.size)
+                        from django.conf import settings
+                        resized_image.save("media/Question_Bank_image/"+file_data.name)
+                        image_new1 = 'Question_Bank_image/'+file_data.name
+                    question_choices = Question_Bank_multiple_choice.objects.create(Question_id_id=question_save.id,choice= choice_data,choice_ar=ar_choice,choice_en=eng_choice,choice_hi=hi_choice,choice_ur=ur_choice,choice_ta=ta_choice,
+                        Imagefield =  image_new1, file_type = extension, Mark = Score,result_status=result_status,created_by = request.user
+                        )
+
+                    if(result_status == "True"):
+                        question_save.answer_id.add(question_choices.id)
+                except:
+                    question_choices = Question_Bank_multiple_choice.objects.create(Question_id_id=question_save.id,choice= choice_data,choice_ar=ar_choice,choice_en=eng_choice,choice_hi=hi_choice,choice_ur=ur_choice,choice_ta=ta_choice,
+                        Mark = Score,result_status=result_status,created_by = request.user
+                        )
+                    if(result_status == "True"):
+                        question_save.answer_id.add(question_choices.id)
+                        pass
+            question_save.total_mark = total_score
+            question_save.save()
+        except:
+            pass
+        messages.success(request, "Added Successfully")
+        return redirect(request.META['HTTP_REFERER'])
+
+
+
+
+    def open_section_based_question_edit(request):
+
+        button_status =  request.GET.get("button_status")
+        modal_id = request.GET.get("modal_id")
+        data_id = request.GET.get("data_id")
+        value1 = str(data_id)+"-"+str(modal_id)
+        status =  request.GET.get("status")
+        if status == "section_question":
+            section_id = Main_Exam_section.objects.get(id=data_id)
+        else:
+            section_id = 0
+    
+        context = {
+            "value1":value1,
+            "modal_id":modal_id,
+            "data_id":data_id,
+            "status":status,
+            "button_status":button_status,
+            "section_id":section_id,
+        }
+        
+        return render(request,'open_section_based_question_edit.html',context)

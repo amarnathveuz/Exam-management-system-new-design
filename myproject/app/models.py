@@ -109,7 +109,6 @@ class Main_Exam_section(common_table):
     Question_bank_id = models.ForeignKey(Main_Question_Bank,related_name='Main_Exam_Master_question_id',on_delete=models.CASCADE,null=True)
 
 
-
 language_type =(
     ("en","English"),
     ("ar","Arabic "),
@@ -156,9 +155,6 @@ class Exam_inital_field(common_table):
 class Exam_inital_field_choice(common_table):
     initial_field_id = models.ForeignKey(Exam_inital_field,related_name ="Exam_inital_field_id",on_delete=models.CASCADE,null=True)
     choice_name = models.CharField(max_length=25,null=True)
-
-
-
 
 
 

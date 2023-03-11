@@ -41,6 +41,12 @@ urlpatterns = [
     
     path('New_section_add',views.New_section_add,name='New_section_add'),
     path('open_section_based_question_edit',views.open_section_based_question_edit,name='open_section_based_question_edit'),
+    path('delete_question_section',views.delete_question_section,name='delete_question_section'),
+    path('delete_question_modal',views.delete_question_modal,name='delete_question_modal'),
+    path('save_section_question_action',views.save_section_question_action,name='save_section_question_action'),
+
+
+
 
 
     # ------------------jiyad url---------------

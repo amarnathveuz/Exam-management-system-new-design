@@ -115,13 +115,20 @@
                                                     <td>
                                                         <input type="hidden" name="remove_status[]" value="0" id="remove_id{{i.id}}">
 
-                                                        
+                                                        <div class="input-group uploadFile1 upload_image_address{{i.id}}" {% if i.Imagefield %} style="display: none;" {% endif %} >
+                                                            <input type="file" class="inputfile form-control mb-0"
+                                                                name="exam_choice_image[]" onchange="image_upload({{i.id}})" >
+                                                            <div class="input-group-append" >
+                                                                <span class="input-group-text" > <i
+                                                                        class="fas fa-paperclip" ></i></span>
+                                                            </div>
+                                                        </div>
 
-                                                        {% if i.Imagefield == " " or i.Imagefield == None %}
+                                                        {% if i.Imagefield == "" or i.Imagefield == None %}
 
                                                         {% else %}
+                                                        
                                                         <!-- image  -->
-
                                                         <div class="input-group uploadFile1 image_address_view{{i.id}}">
                                                             <input type="text"  value="{{i.Imagefield}}"  class="inputfile form-control mb-0"
                                                                 name="file" >
@@ -132,15 +139,6 @@
                                                         </div>
 
                                                         {% endif %}
-                                                        
-                                                        <div class="input-group uploadFile1 upload_image_address{{i.id}}" {% if i.Imagefield == " " or i.Imagefield == None %}  style="display: block;" {% else %} style="display: none;" {% endif %} >
-                                                            <input type="file" class="inputfile form-control mb-0"
-                                                                name="exam_choice_image[]" onchange="image_upload({{i.id}})" >
-                                                            <div class="input-group-append" >
-                                                                <span class="input-group-text" > <i
-                                                                        class="fas fa-paperclip" ></i></span>
-                                                            </div>
-                                                        </div>
 
                                                     </td>
 

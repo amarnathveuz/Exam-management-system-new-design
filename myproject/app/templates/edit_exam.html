@@ -152,7 +152,7 @@
                                                             Add a Section
                                                         </button>
                                                         <button type="button" class="btn btn-prim pay"
-                                                            data-toggle="modal" data-target="#question-modal">
+                                                            onclick="direct_question_btn('{{data.id}}')">
                                                             Add a question
                                                         </button>
                                                     </div>
@@ -180,7 +180,7 @@
                                                                     </td>
 
                                                                     <td style="background-color: #f3f6f8">    <button type="button" class="btn btn-prim pay"
-                                                                    onclick="section_question({{i.id}})">
+                                                                    onclick="section_question(`{{i.id}}`)">
                                                                         Add a question
                                                                         </button></td>
                                                                 <td style="background-color: #f3f6f8">
@@ -188,9 +188,11 @@
 
                                                                     <div class="action-tbl d-flex justify-content-end">
                                                                         
-                                                                        <i class="fa fa-trash-o mx-1 trash-btn"
+                                                                        <i style="cursor: pointer;"
+                                                                            class="fa fa-trash-o mx-1 trash-btn"
                                                                             data-toggle="tooltip" data-placement="top"
-                                                                            title="" data-original-title="Delete"></i>
+                                                                            title="" data-original-title="Delete"
+                                                                            onclick="section_question_delete_btn(`{{i.id}}`)"> </i>
                                                                     </div>
                                                                 </td>
                                                             </tr>
@@ -199,7 +201,6 @@
                                                                     <table class="table-bordered"
                                                                         style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                                                                         <thead class="border-class">
-
                                                                             <tr class="heading-text">
                                                                                 <th>Title</th>
                                                                                 <th>Question Type</th>
@@ -211,18 +212,20 @@
 
                                                                             <tr>
                                                                                 <td> <a href="#" onclick="section_Question_view({{j.Question_id.id}})" style="text-decoration: none; color: black;"> 
-                                                                                    {{j.Question_id.Question}}  </a>
+                                                                                    {{j.Question_id.Question}}</a>
                                                                                 </td>
                                                                                 <td>{% if j.Question_id.Question_type == "Radio" %} Multiple choice: only one answer  {% else %}  Multiple choice: multiple answers allowed {% endif %}
                                                                                 </td>
                                                                                 <td>
                                                                                     <div
                                                                                         class="action-tbl d-flex justify-content-end">
-                                                                                        <i class="fa fa-trash-o mx-1 trash-btn"
+                                                                                        <i  style="cursor: pointer;"
+                                                                                            class="fa fa-trash-o mx-1 trash-btn"
                                                                                             data-toggle="tooltip"
                                                                                             data-placement="top"
                                                                                             title=""
-                                                                                            data-original-title="Delete"></i>
+                                                                                            data-original-title="Delete" 
+                                                                                            onclick="question_delete_btn(`{{j.Question_id.id}}`)"></i>
 
                                                                                     </div>
                                                                                 </td>
@@ -237,15 +240,14 @@
 
                                                             <tr>
                                                                 <td> <a href="#" onclick="section_Question_view({{i.Question_bank_id.id}})" style="text-decoration: none; color: black;">
-                                                                    {{i.Question_bank_id.Question}}</a>
+                                                                    {{i.Question_bank_id.Question}} </a>
                                                                 </td>
                                                                 <td>{% if i.Question_id.Question_type == "Radio" %} Multiple choice: only one answer  {% else %}  Multiple choice: multiple answers allowed {% endif %}</td>
                                                                 <td>
                                                                     <div class="action-tbl d-flex justify-content-end">
-
-                                                                        <i class="fa fa-trash-o mx-1 trash-btn"
+                                                                        <i style="cursor: pointer;" class="fa fa-trash-o mx-1 trash-btn"
                                                                             data-toggle="tooltip" data-placement="top"
-                                                                            title="" data-original-title="Delete"></i>
+                                                                            title="" data-original-title="Delete" onclick="section_question_delete_btn(`{{i.id}}`)"> </i>
                                                                     </div>
                                                                 </td>
                                                             </tr>
@@ -598,7 +600,6 @@
                                                                 <th style="width: 300px">Type</th>
                                                                 <th>Inputs</th>
                                                                 <th></th>
-
                                                             </tr>
                                                         </thead>
 
@@ -612,8 +613,8 @@
                                                                 <td>
                                                                     <select name="initial_type" id=""
                                                                         class="form-control">
-                                                                        <option value="selection" selected>
-                                                                            {{i.field_type}}</option>
+                                                                        <option value="selection" selected >
+                                                                        {{i.field_type}}</option>
                                                                         {% if "selection" == i.field_type %}
                                                                         <option value="Text Input">Text Input</option>
                                                                         <option value="Date Input">Date Input</option>
@@ -626,6 +627,7 @@
                                                                         {% endif %}
                                                                     </select>
                                                                 </td>
+                                                                
                                                                 <td>
                                                                     {% for j in i.Exam_inital_field_id.all %}
                                                                     <input type="text" name="" id=""
@@ -685,9 +687,8 @@
 
 </div>
 
-<div  class="append_child">
 
-</div>
+
 
 <div id="share-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
     style="display: none">
@@ -947,7 +948,6 @@
                                                     <th>Choices</th>
                                                     <th>Image</th>
                                                     <th></th>
-
                                                 </tr>
                                             </thead>
 
@@ -959,7 +959,6 @@
                                                     </td>
                                                     <td>
                                                         <div class="input-group uploadFile1">
-
                                                             <input type="file" class="inputfile form-control mb-0"
                                                                 name="file">
                                                             <div class="input-group-append">
@@ -970,7 +969,6 @@
                                                     </td>
                                                     <td>
                                                         <div class="action-tbl d-flex justify-content-end">
-
                                                             <i class="fa fa-trash-o mx-1 trash-btn"
                                                                 data-toggle="tooltip" data-placement="top" title=""
                                                                 data-original-title="Delete"></i>
@@ -1164,8 +1162,7 @@
 
         <script>
         function section_question(data_id){
-            alert("sss")
-            var modal_id = $("#section_id"+data_id).val();
+            var modal_id = data_id;
             var modal_name = data_id+"-"+modal_id
             var section_status = $(".section_status"+data_id).val();
             if (section_status == "False"){
@@ -1173,12 +1170,12 @@
             if (value == "second"){
             modal_id_new = parseInt(modal_id)-parseInt(1)
             var modal_name2 = data_id+"-"+modal_id_new
-            $('.question-modal-'+modal_name2).modal('show');
+            $('#question-modal').modal('show');
             }
             else{
                 var isClassExist = document.getElementsByClassName('question-modal-'+modal_name);
                 if (isClassExist.length > 0) {
-                    $('.question-modal-'+modal_name).modal('show');
+                    $('#question-modal').modal('show');
                     $('.first_open'+data_id).val("new")
                 }
                 else{
@@ -1188,13 +1185,15 @@
                 url: "open_section_based_question_edit",
                 data:{
                         modal_id: modal_id,
-                        data_id:data_id
+                        data_id:data_id,
+                        button_status:'section_question'
+
                 },
                 success: function( data ) 
                 {
                     var modal_name = data_id+"-"+modal_id
-                    $("#append_child").append(data)
-                    $('.question-modal-'+modal_name).modal('show');
+                    $(".section_Question_view_modal").append(data)
+                    $("#question-modal").modal('show');
                     let total = parseInt(modal_id) + 1
                     $("#section_id"+data_id).val(total);
                 }
@@ -1210,13 +1209,15 @@
                 url: "open_section_based_question_edit",
                 data:{
                         modal_id: modal_id,
-                        data_id:data_id
+                        data_id:data_id,
+                        button_status:'section_question'
+
                 },
                 success: function( data ) 
                 {
                     var modal_name = data_id+"-"+modal_id
-                    $("#append_child").append(data)
-                    $('.question-modal-'+modal_name).modal('show');
+                    $(".section_Question_view_modal").append(data)
+                    $('#question-modal').modal('show');
                     let total = parseInt(modal_id) + 1
                     $("#section_id"+data_id).val(total);
                 }
@@ -1225,8 +1226,30 @@
             } 
             }
 
-            </script>
 
+
+            function direct_question_btn(data_id){
+                var modal_name1 = data_id
+                $.ajax(
+                {
+                    type:"GET",
+                    url: "open_section_based_question_edit",
+                    data:{
+                        modal_id: data_id,
+                        data_id:data_id,
+                        button_status:'direct_question'
+                    },
+                    success: function( data ) 
+                    {
+
+                    $(".section_Question_view_modal").append(data)
+                    $('#question-modal').modal('show');
+                        
+                    } 
+                })
+                }
+
+            </script>
 
             <script>
     
@@ -1287,7 +1310,6 @@
             </script>
 
             <script>
-
             function section_Question_view(data_id){
                 var data_id = data_id
                 $.ajax({
@@ -1365,6 +1387,36 @@
                         }
                     });
                 }
+
+
+                function section_question_delete_btn(id) {
+                    var url = "delete_question_section";
+                    $.ajax({
+                        url: url,
+                        data: {
+                            'id': id
+                        },
+                        success: function (data) {
+                            $("#delete_initial_field_div").html(data);
+                            $('#delete_initial_field_modal').modal('show');
+                        }
+                    });
+                }
+
+                function question_delete_btn(id) {
+                    var url = "delete_question_modal";
+                    $.ajax({
+                        url: url,
+                        data: {
+                            'id': id
+                        },
+                        success: function (data) {
+                            $("#delete_initial_field_div").html(data);
+                            $('#delete_initial_field_modal').modal('show');
+                        }
+                    });
+                }
+
             </script>
 
 
@@ -1462,6 +1514,7 @@
                     this.setAttribute("placeholder", `${this.getAttribute("data")}`)
                 }
             </script>
+            
             <script>
                 const progressContainer = document.querySelector('.progress-container');
                 setPercentage();
@@ -1477,6 +1530,7 @@
                     percentageEl.style.left = percentage;
                 }
             </script>
+
             <script>
                 const TagsInput1 = props => {
                     const [tags1, setTags1] = React.useState(props.tags1);
@@ -1510,20 +1564,14 @@
                                             onClick: () => removeTags1(index)
                                         }, "x")))), /*#__PURE__*/
 
-
-
-
-
-
                             React.createElement("input", {
                                 type: "text",
                                 onKeyUp: event => event.key === "Enter" ? addTags1(event) : null,
                                 placeholder: "Mail id"
                             })));
 
-
-
                 };
+
 
                 const App1 = () => {
                     const selectedTags1 = tags1 => {
@@ -1537,8 +1585,6 @@
                                 selectedTags1: selectedTags1,
                                 tags1: ['user@gmail.com']
                             })));
-
-
                 };
 
                 ReactDOM.render( /*#__PURE__*/ React.createElement(App1, null), document.getElementById("root1"));
