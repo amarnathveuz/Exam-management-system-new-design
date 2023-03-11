@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+<div class="content">
+    <div class="container-fluid margin-class-this">
+        <div class="row">
+            <div class="col-md-12 px-0">
+                <div class="card card-shadow">
+
+                    <div class="card-body body-change card-border">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <h2 class="main-heading-txt">Exam Attended User details</h2>
+                           
+                        </div>
+
+                        <div class="row mt-4">
+
+                            <div class="col-md-12 col-sm-12 col-12 px-0">
+                                <table id="datatable" class="table table-striped dt-responsive table-bordered nowrap table-padd" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+
+                                    <thead class="border-class">
+
+                                        <tr class="heading-text">
+                                            <th>S/No</th>                                                     
+                                            <th>Exam Title</th>
+                                            <th>Details</th>
+                                            <th>See Result</th>
+                                            
+                                           
+                                        </tr>
+                                    </thead>
+
+
+                                    <tbody class="body-textcls vertcle-center">
+                                        {% for i in attend_user_details %}
+                                        <tr>
+                                            <td>{{forloop.counter}}.</td>
+                                            <td>{{i.exam_id.Exam_title}}</td>
+                                            <td>
+                                                {% if i.user_type == "non_login_user" %}
+                                                    {% for n in i.exam_attend_user_initial_field_attend_id.all %}
+                                                    {{n.Exam_inital_field_id.title}} : {{n.answer}}<br>
+                                                       
+                                                    {% endfor %}
+                                                {% else %}
+
+                                                {{i.auth_user.username}}
+
+                                                    {% endif %}
+                          
+                                            </td>
+                                            <td>
+                                                <a href="see_result_admin?user_id={{i.id}}&exam_id={{i.exam_id.id}}"><button type="button" class="btn btn-see waves-effect m-b-5 exm-btns">See Result</button></a>
+                                            </td>
+                                            
+                                        </tr>
+
+                                        {% endfor %}
+
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          </div>
+
+    </div>
+</div>
+
+
+{% endblock %}

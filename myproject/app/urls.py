@@ -27,6 +27,8 @@ urlpatterns = [
     path('exam_save_action',views.exam_save_action,name='exam_save_action'),
     path('open_section_based_question',views.open_section_based_question,name='open_section_based_question'),
     path('validation_check',views.validation_check,name='validation_check'),
+    path('see_result_admin',views.see_result_admin,name='see_result_admin'),
+    path('attend_user',views.attend_user,name='attend_user'),
 
 
      # ------------amrith url end--------------------------

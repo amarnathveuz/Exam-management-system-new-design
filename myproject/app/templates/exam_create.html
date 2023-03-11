@@ -186,6 +186,8 @@
                                                        
 
                                                     </tbody>
+
+                                                    
                                                 </table>
                                                 
                                             </div>
@@ -210,16 +212,16 @@
                                                         <div class="col-md-9 py-2">
                                                             <div class="form-group d-flex align-items-center">
                                                                 <input type="radio" value="0" checked  name="layout" id="customer">
-                                                                <label for="customer">One page with all the questions</label>
+                                                                <label >One page with all the questions</label>
                                                                
                                                             </div>
                                                             <div class="form-group d-flex align-items-center">
                                                                 <input type="radio" value="1"  name="layout" id="customer">
-                                                                <label for="customer">One page per section</label>
+                                                                <label>One page per section</label>
                                                             </div>
                                                             <div class="form-group d-flex align-items-center">
                                                                 <input type="radio" value="2"  name="layout" id="customer">
-                                                                <label for="customer">One page per question</label>
+                                                                <label>One page per question</label>
                                                                 
                                                             </div>
                                                           
@@ -233,11 +235,11 @@
                                                         <div class="col-md-9 py-2">
                                                             <div class="form-group d-flex align-items-center">
                                                                 <input type="radio" checked value="Percentage" name="progression" id="customer">
-                                                                <label for="customer">Percentage left</label>
+                                                                <label>Percentage left</label>
                                                             </div>
                                                             <div class="form-group d-flex align-items-center">
                                                                 <input type="radio" value="Number" name="progression" id="customer">
-                                                                <label for="customer">Number</label>
+                                                                <label>Number</label>
                                                             </div>
                                                         
                                                           
@@ -251,11 +253,11 @@
                                                         <div class="col-md-9 py-2">
                                                             <div class="form-group d-flex align-items-center">
                                                                 <input type="radio" checked value="All questions" id="customer" name="selection_mode">
-                                                                <label for="customer">All questions</label>
+                                                                <label>All questions</label>
                                                             </div>
                                                             <div class="form-group d-flex align-items-center">
                                                                 <input type="radio" value="Randomized per section" id="customer" name="selection_mode">
-                                                                <label for="customer">Randomized per Section</label>
+                                                                <label>Randomized per Section</label>
                                                             </div>
                                                         
                                                           
@@ -355,15 +357,15 @@
                                                         <div class="col-md-9 py-2">
                                                             <div class="form-group d-flex align-items-center">
                                                                 <input type="radio" id="no_score" checked value="0" name="Scoring">
-                                                                <label for="no_score">No scoring</label>
+                                                                <label>No scoring</label>
                                                             </div>
                                                             <div class="form-group d-flex align-items-center">
                                                                 <input type="radio" id="scoring_ans" value="1" name="Scoring">
-                                                                <label for="scoring_ans">Scoring with answers at the end</label>
+                                                                <label>Scoring with answers at the end</label>
                                                             </div>
                                                             <div class="form-group d-flex align-items-center">
                                                                 <input type="radio" id="customer" value="2" name="Scoring">
-                                                                <label for="customer">Scoring without answers at the end</label>
+                                                                <label >Scoring without answers at the end</label>
                                                             </div>
                                                           
                                                         </div>
@@ -900,6 +902,8 @@ aria-hidden="true" style="display: none">
       var section_string = $(".section_title").val();
       if(section_string == ''){
 
+
+
       }
       else{
 
@@ -911,7 +915,7 @@ aria-hidden="true" style="display: none">
             <input type="hidden" value=`+i+` id="section_id`+i+`">
             <input type="hidden" name='section_line_count' value=`+i+`>
             <input type="hidden" name="modal_status" value = "False">
-            <input type="hidden" class="section_status`+i+`" name="section_status" value = "False">
+            
             <input type="hidden" class="section_line" value="`+section_string+`" name='section_line'>
             <input type="hidden" class="first_open`+i+`" value="first">
             
@@ -943,6 +947,8 @@ aria-hidden="true" style="display: none">
                   <tbody class="body-textcls vertcle-center" id="apppend_child`+i+`">
 
                   </tbody>
+                
+
                   
               </table>
           </td>
@@ -975,7 +981,6 @@ aria-hidden="true" style="display: none">
     }
 
     function instruction_field_remove(val){
-    
     var tr_id = val
     $('.instruct_remove'+tr_id).hide()
     div_update = document.getElementsByClassName("instruct_remove"+tr_id).innerHTML = "";
@@ -983,28 +988,21 @@ aria-hidden="true" style="display: none">
    
     }
  
- 
+
 
     function section_question(data_id){
 
-      var modal_id = $("#section_id"+data_id).val();
-      var modal_name = data_id+"-"+modal_id
-      var section_status = $(".section_status"+data_id).val();
-      if (section_status == "False"){
-        value = $('.first_open'+data_id).val()
-        if (value == "second"){
-        modal_id_new = parseInt(modal_id)-parseInt(1)
-        var modal_name2 = data_id+"-"+modal_id_new
-        $('.question-modal-'+modal_name2).modal('show');
+        var modal_id = $("#section_id"+data_id).val();
+        var modal_name = data_id+"-"+modal_id
+        var isClassExist = document.getElementsByClassName('question-modal-'+modal_name);
+        if (isClassExist.length > 0) {
+                
+        $('.question-modal-'+modal_name).modal('show');
+
         }
         else{
-            var isClassExist = document.getElementsByClassName('question-modal-'+modal_name);
-            if (isClassExist.length > 0) {
-                $('.question-modal-'+modal_name).modal('show');
-                $('.first_open'+data_id).val("new")
-            }
-          else{
-          $.ajax(
+
+            $.ajax(
         {
             type:"GET",
             url: "open_section_based_question",
@@ -1014,39 +1012,19 @@ aria-hidden="true" style="display: none">
             },
             success: function( data ) 
             {
-              var modal_name = data_id+"-"+modal_id
-              $("#apppend_child"+data_id).append(data)
-              $('.question-modal-'+modal_name).modal('show');
-              let total = parseInt(modal_id) + 1
-              $("#section_id"+data_id).val(total);
+                var modal_name = data_id+"-"+modal_id
+
+                $("#apppend_child"+data_id).append(data)
+                $('.question-modal-'+modal_name).modal('show');
+                let total = parseInt(modal_id) + 1
+                $("#section_id"+data_id).val(total);
             }
         })
-          $('.first_open'+data_id).val("second")
         }
     }
-      }
-      else{
 
-        $.ajax(
-        {
-            type:"GET",
-            url: "open_section_based_question",
-            data:{
-                    modal_id: modal_id,
-                    data_id:data_id
-            },
-            success: function( data ) 
-            {
-              var modal_name = data_id+"-"+modal_id
-              $("#apppend_child"+data_id).append(data)
-              $('.question-modal-'+modal_name).modal('show');
-              let total = parseInt(modal_id) + 1
-              $("#section_id"+data_id).val(total);
-            }
-        })
-        $('.first_open'+data_id).val("second")
-      } 
-    }
+
+
 
     function direct_question_btn(){
       var modal_name1 = i+"-"+i

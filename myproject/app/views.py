@@ -591,7 +591,7 @@ def exam_save_action(request):
                         section_type = "Question",created_by = request.user
                         )
             #  Main_Question_Bank save    
-            print("section_count::::::",section_count)
+            section_question_status = request.POST.getlist("section_question_status"+str(section_count))
             question = request.POST.getlist("question_name"+str(section_count))
             eng_question = request.POST.getlist("eng_question"+str(section_count))
             ar_question = request.POST.getlist("ar_question"+str(section_count))
@@ -601,86 +601,91 @@ def exam_save_action(request):
             question_description = request.POST.getlist("qstn_descriptn"+str(section_count))
             question_comment = request.POST.getlist("question_comment"+str(section_count))
             model_count = request.POST.getlist("question_model_name"+str(section_count))
-            question_zip = zip(question,eng_question,ar_question,hi_question,ur_question,ta_question,question_description,question_comment,model_count)
-            for  question,eng_question,ar_question,hi_question,ur_question,ta_question,question_description,question_comment,model_count in question_zip:
-                question_type = request.POST.get("question_type"+model_count)
-                question_mandatory = request.POST.get("question_mandatory"+model_count,False)
-                try:
-                    question_image = request.FILES['question_image'+model_count]
-                    import os
-                    extension = os.path.splitext(str(question_image))[1]
-                    print("extension:::",extension)
-                    if extension == ".pdf" or extension == ".txt" or extension == ".doc" or extension == ".docx" :
-                        image_new1 = question_image
-                    else:
-                        fixed_height = 171
-                        image = Image.open(question_image)
-                        print("image.size",image.size)
-                        width_size = int(fixed_height/image.height * image.width)
-                        resized_image = image.resize((width_size,fixed_height))
-                        print("resizeeeeeed:",resized_image.size)
-                        from django.conf import settings
-                        resized_image.save("media/user_image/"+question_image.name)
-                        image_new1 = 'user_image/'+question_image.name
-                    question_save = Main_Question_Bank.objects.create(Question=question,question_ar=ar_question,question_en=eng_question,question_hi=hi_question,question_ur=ur_question,question_ta=ta_question,
-                        Description =  question_description, Question_type = question_type,created_by = request.user,
-                        comments = question_comment,Imagefield =image_new1,manadatory = question_mandatory)
-                except:
-                    question_save = Main_Question_Bank.objects.create(Question=question,question_ar=ar_question,question_en=eng_question,question_hi=hi_question,question_ur=ur_question,question_ta=ta_question,
-                        Description =  question_description, Question_type = question_type,created_by = request.user,
-                        comments = question_comment,manadatory = question_mandatory)
-                if modal_status == "direct_question":
-                        section_save.Question_bank_id_id = question_save.id
-                        section_save.save()
-                        Section_Question_Mapping.objects.create(Section_id_id = section_save.id,Question_id_id = question_save.id,created_by = request.user)
-                else:
-                    Section_Question_Mapping.objects.create(Section_id_id = section_save.id,Question_id_id = question_save.id,created_by = request.user)
+            question_zip = zip(section_question_status,question,eng_question,ar_question,hi_question,ur_question,ta_question,question_description,question_comment,model_count)
+            for  section_question_status,question,eng_question,ar_question,hi_question,ur_question,ta_question,question_description,question_comment,model_count in question_zip:
+                if(section_question_status == "False"):
                     pass
-                # Question_Bank_multiple_choice save 
-                question_line_count = request.POST.getlist("question_line_count"+model_count)
-                total_score = 0
-                for  choice_count in question_line_count:
-                    choice_data = request.POST.get("question_choice"+choice_count+'-'+model_count)
-                    eng_choice = request.POST.get("eng_choice"+choice_count+'-'+model_count)
-                    ar_choice = request.POST.get("ar_choice"+choice_count+'-'+model_count)
-                    hi_choice = request.POST.get("hi_choice"+choice_count+'-'+model_count)
-                    ur_choice = request.POST.get("ur_choice"+choice_count+'-'+model_count)
-                    ta_choice = request.POST.get("ta_choice"+choice_count+'-'+model_count)
-                    result_status = request.POST.get("addline_check"+choice_count+'-'+model_count,False)
-                    Score = request.POST.get("Score"+choice_count+'-'+model_count,False)
-                    if (result_status == "True"):
-                        total_score += int(Score)
+                else:
+                    question_type = request.POST.get("question_type"+model_count)
+                    question_mandatory = request.POST.get("question_mandatory"+model_count,False)
                     try:
-                        file_data = request.FILES['question_image_choice'+choice_count+'-'+model_count]
+                        question_image = request.FILES['question_image'+model_count]
                         import os
-                        extension = os.path.splitext(str(file_data))[1]
-                        print("extension:::",extension)
+                        extension = os.path.splitext(str(question_image))[1]
                         if extension == ".pdf" or extension == ".txt" or extension == ".doc" or extension == ".docx" :
-                            image_new1 = file_data
+                            image_new1 = question_image
                         else:
                             fixed_height = 171
-                            image = Image.open(file_data)
+                            image = Image.open(question_image)
                             print("image.size",image.size)
                             width_size = int(fixed_height/image.height * image.width)
                             resized_image = image.resize((width_size,fixed_height))
                             print("resizeeeeeed:",resized_image.size)
                             from django.conf import settings
-                            resized_image.save("media/user_image/"+file_data.name)
-                            image_new1 = 'user_image/'+file_data.name
-                        question_choices = Question_Bank_multiple_choice.objects.create(Question_id_id=question_save.id,choice= choice_data,choice_ar=ar_choice,choice_en=eng_choice,choice_hi=hi_choice,choice_ur=ur_choice,choice_ta=ta_choice,
-                            Imagefield =  image_new1, file_type = extension, Mark = Score,result_status=result_status,created_by = request.user
-                            )
-                        if(result_status == "True"):
-                            question_save.answer_id.add(question_choices.id)
+                            resized_image.save("media/user_image/"+question_image.name)
+                            image_new1 = 'user_image/'+question_image.name
+                        question_save = Main_Question_Bank.objects.create(Question=question,question_ar=ar_question,question_en=eng_question,question_hi=hi_question,question_ur=ur_question,question_ta=ta_question,
+                            Description =  question_description, Question_type = question_type,created_by = request.user,
+                            comments = question_comment,Imagefield =image_new1,manadatory = question_mandatory)
                     except:
-                        question_choices = Question_Bank_multiple_choice.objects.create(Question_id_id=question_save.id,choice= choice_data,choice_ar=ar_choice,choice_en=eng_choice,choice_hi=hi_choice,choice_ur=ur_choice,choice_ta=ta_choice,
-                            Mark = Score,result_status=result_status,created_by = request.user
-                            )
-                        if(result_status == "True"):
-                            question_save.answer_id.add(question_choices.id)
-                            pass
-                question_save.total_mark = total_score
-                question_save.save()
+                        question_save = Main_Question_Bank.objects.create(Question=question,question_ar=ar_question,question_en=eng_question,question_hi=hi_question,question_ur=ur_question,question_ta=ta_question,
+                            Description =  question_description, Question_type = question_type,created_by = request.user,
+                            comments = question_comment,manadatory = question_mandatory)
+                    if modal_status == "direct_question":
+                            section_save.Question_bank_id_id = question_save.id
+                            section_save.save()
+                            Section_Question_Mapping.objects.create(Section_id_id = section_save.id,Question_id_id = question_save.id,created_by = request.user)
+                    else:
+                        Section_Question_Mapping.objects.create(Section_id_id = section_save.id,Question_id_id = question_save.id,created_by = request.user)
+                        pass
+                # Question_Bank_multiple_choice save 
+                if(section_question_status == "False"):
+                    pass
+                else:
+                    question_line_count = request.POST.getlist("question_line_count"+model_count)
+                    total_score = 0
+                    for  choice_count in question_line_count:
+                        choice_data = request.POST.get("question_choice"+choice_count+'-'+model_count)
+                        eng_choice = request.POST.get("eng_choice"+choice_count+'-'+model_count)
+                        ar_choice = request.POST.get("ar_choice"+choice_count+'-'+model_count)
+                        hi_choice = request.POST.get("hi_choice"+choice_count+'-'+model_count)
+                        ur_choice = request.POST.get("ur_choice"+choice_count+'-'+model_count)
+                        ta_choice = request.POST.get("ta_choice"+choice_count+'-'+model_count)
+                        result_status = request.POST.get("addline_check"+choice_count+'-'+model_count,False)
+                        Score = request.POST.get("Score"+choice_count+'-'+model_count,False)
+                        if (result_status == "True"):
+                            total_score += int(Score)
+                        try:
+                            file_data = request.FILES['question_image_choice'+choice_count+'-'+model_count]
+                            import os
+                            extension = os.path.splitext(str(file_data))[1]
+                            print("extension:::",extension)
+                            if extension == ".pdf" or extension == ".txt" or extension == ".doc" or extension == ".docx" :
+                                image_new1 = file_data
+                            else:
+                                fixed_height = 171
+                                image = Image.open(file_data)
+                                print("image.size",image.size)
+                                width_size = int(fixed_height/image.height * image.width)
+                                resized_image = image.resize((width_size,fixed_height))
+                                print("resizeeeeeed:",resized_image.size)
+                                from django.conf import settings
+                                resized_image.save("media/user_image/"+file_data.name)
+                                image_new1 = 'user_image/'+file_data.name
+                            question_choices = Question_Bank_multiple_choice.objects.create(Question_id_id=question_save.id,choice= choice_data,choice_ar=ar_choice,choice_en=eng_choice,choice_hi=hi_choice,choice_ur=ur_choice,choice_ta=ta_choice,
+                                Imagefield =  image_new1, file_type = extension, Mark = Score,result_status=result_status,created_by = request.user
+                                )
+                            if(result_status == "True"):
+                                question_save.answer_id.add(question_choices.id)
+                        except:
+                            question_choices = Question_Bank_multiple_choice.objects.create(Question_id_id=question_save.id,choice= choice_data,choice_ar=ar_choice,choice_en=eng_choice,choice_hi=hi_choice,choice_ur=ur_choice,choice_ta=ta_choice,
+                                Mark = Score,result_status=result_status,created_by = request.user
+                                )
+                            if(result_status == "True"):
+                                question_save.answer_id.add(question_choices.id)
+                                pass
+                    question_save.total_mark = total_score
+                    question_save.save()
         # Exam_inital_field save
         initial_line_count = request.POST.getlist("initial_count")
         for initial_count in initial_line_count:
@@ -695,8 +700,6 @@ def exam_save_action(request):
                 pass
         messages.success(request,"Successfully added Exam details")
         return redirect('exam')
-
-
 
 def open_section_based_question(request):
 
@@ -718,7 +721,32 @@ def open_section_based_question(request):
 
 
 
-
+def attend_user(request):
+    exam_id = request.GET.get("exam_id")
+    attend_user_details = Exam_attend_user.objects.filter(exam_id=exam_id)
+    context = {
+        "attend_user_details":attend_user_details,
+    }
+    return render(request,'attend_user.html',context)
+def see_result_admin(request):
+    user_id = request.GET.get("user_id")
+    exam_id = request.GET.get("exam_id")
+    data_main_exam = Main_Exam_Master.objects.get(id=exam_id)
+    data_answer1 = exam_attend_user_score.objects.filter(exam_attend_user_id_id=user_id)
+    if data_answer1:
+        question_list = list(data_answer1.values_list('Question_id', flat=True))
+        data_question = Main_Question_Bank.objects.filter(id__in=question_list)
+        total_mark = sum(data_question.values_list('total_mark', flat=True))
+        total_score = sum(data_answer1.values_list('Mark', flat=True))
+        if total_mark == 0:
+            exam_per = 0
+        else:
+            exam_per = (total_score/total_mark)*100
+        return render(request, 'see_result_admin.html',
+                      {'data_main_exam': data_main_exam,'total_mark':total_mark,'total_score': total_score,
+                       'data_answer': data_answer1,'exam_per':exam_per})
+    else:
+        return render(request,'see_result_admin.html')
 # --------------------amritha end method------------------------
 
 

@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+<div class="content">
+    <div class="container-fluid margin-class-this">
+        <div class="row">
+            <div class="col-md-12 px-0">
+                <div class="card card-shadow">
+                    <div class="card-body body-change card-border">
+
+                                    <div class="summary">
+                                        <div class="wrapper">
+                                            {% if data_main_exam.Success_per == None or total_mark == 0 %}
+                                            {% else %}
+                                            {% if data_main_exam.Success_per > exam_per %}
+                                            <h2>Result : <span style="color: #df1313;">Failed </span></h2>
+                                            {% else %}
+                                            <h2>Result : <span style="color: #06f706;">Passed </span></h2>
+                                            {% endif %}
+                                            {% endif %}
+                                            {% if data_main_exam.scoring_mode == "2" %}
+                                            <h2>Score : {{total_score}}&nbsp;/&nbsp;<span style="color: #df1313;">{{total_mark}}</span></h2>
+                                            {% endif %}
+                                            {% if data_main_exam.scoring_mode == "1" %}
+                                            <h2>Score : {{total_score}}&nbsp;/&nbsp;<span style="color: #df1313;">{{total_mark}}</span></h2>
+                                            <a style="color:blue;border-radius: 10px;cursor: pointer;" onclick="answer_button()" type="button"><b>Click here to review answers</b></a>
+                                            <div class="answer_data" style="display:none;">
+                                            {% for i in data_answer %}
+                                            <div class="form-group">
+                                                <div class="row d-flex justify-content-center">
+                                                    <div class="col-sm-6">
+                                                        <input type="hidden" value="{{i.Question_id.id}}" name="question_id">
+                                                        <h3 style="margin: 20px 0px 10px">{{i.Question_id.Question}}&nbsp;&nbsp;&nbsp;&nbsp;Mark - {{i.Mark}}</h3>
+                                                    </div>
+                                                </div>
+                                                {% for j in i.Question_id.Exam_section_exam_id.all %}
+                                                <label>
+                                                    {% if j in i.user_select_choice.all %}
+                                                        {% if j.result_status == True %}
+                                                        <input type="text" style="background-color:#b2ebb2;" name="answer" value="&nbsp;&nbsp;{{forloop.counter}}&nbsp;.&nbsp;{{j.choice}}" class="input-radio" readonly/><br>
+                                                        {% else %}
+                                                        <input type="text" style="background-color:#ff1a1a;" name="answer" value="&nbsp;&nbsp;{{forloop.counter}}&nbsp;.&nbsp;{{j.choice}}" class="input-radio" readonly/><br>
+                                                        {% endif %}
+                                                    {% else %}
+                                                    <input type="text" name="answer" value="&nbsp;&nbsp;{{forloop.counter}}&nbsp;.&nbsp;{{j.choice}}" class="input-radio" readonly/><br>
+                                                    {% endif %}
+                                                </label>
+                                                {% endfor %}
+                                                {% if i.user_select_choice.count > i.Question_id.answer_id.count %}
+                                                <p>You have attended {{i.user_select_choice.count}} answers but only {{i.Question_id.answer_id.count}} are correct , so mark is 0</p>
+                                                {% endif %}
+
+                                                {% if i.user_select_choice.count < i.Question_id.answer_id.count %}
+                                                <p>Answer is not complete..There is more correct Option</p>
+                                                {% endif %}
+                                            </div>
+                                            {% endfor %}
+                                        </div>
+                                            {% endif %}
+                                        </div>
+                                        <div style="padding: 15px 0px 0px 0px">
+                                          
+                                        </div>
+                                    </div>
+
+                    </div>
+                                <!-- /step last-->
+
+                          
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    function answer_button() {
+        $(".answer_data").show()
+    }
+    </script>
+
+
+{% endblock %}
+
+
+
+    <!-- COMMON SCRIPTS -->
+    <script src="{% static 'exam_page/js/jquery-3.6.0.min.js' %}"></script>
+    <script src="{% static 'exam_page/js/common_scripts.min.js' %}"></script>
+    <script src="{% static 'exam_page/js/common_functions.js' %}"></script>
+    <script src="{% static 'exam_page/js/wizard_with_branch.js' %}"></script>
+  
+
+  

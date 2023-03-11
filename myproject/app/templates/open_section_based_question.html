@@ -18,7 +18,7 @@ aria-hidden="true" style="display: none">
                     <div class="form-group">
                         <label for="field-1" class="control-label">Question</label>
                         <div class="input-group">
-                      
+                            <input type="hidden" class="section_question_status{{value1}}" name="section_question_status{{data_id}}" value = "False">
                             <input type="text"  onchange="question_value(this,`{{value1}}`)" class="form-control modal_question{{value1}}" name="question_name{{data_id}}" placeholder="eg: What is the...">
                             <div class="input-group-append">
                                 <button type="button"
@@ -559,6 +559,7 @@ aria-hidden="true" style="display: none">
           $('.question-modal-'+val1).modal('hide');
           $('.remove_onclick'+val1).hide()
           $('.remove_onclick1'+val1).show()
+          $('.section_question_status'+val1).val("True")
           }
         }
     
@@ -566,8 +567,8 @@ aria-hidden="true" style="display: none">
     
           if(question == '')
           {
-  
-    
+           
+
           }
           else{
      
@@ -575,6 +576,7 @@ aria-hidden="true" style="display: none">
 
             <tr class="tr_remove{{value1}}">
                 <td>
+                    
                     <a href="#"  style="text-decoration: none;
                     color: black;
                     font-size: 12px;" data-toggle="modal" data-target=".question-modal-{{value1}}">
@@ -598,6 +600,7 @@ aria-hidden="true" style="display: none">
          $('.remove_onclick'+val1).hide()
          $('.remove_onclick1'+val1).show()
          $('.section_status'+val2).val("True")
+         $('.section_question_status'+val1).val("True")
     }
     }
       }

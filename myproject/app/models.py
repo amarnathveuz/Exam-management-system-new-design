@@ -42,6 +42,8 @@ scoring_choices =(
 access_choices =(
     ("0","Anyone with the link"),
     ("1","Invited people only"),
+    ('2','Link_based'),
+    ('2','Secret_key')
    
 )
 
@@ -69,6 +71,7 @@ class Main_Exam_Master(common_table):
     Success_per = models.IntegerField(null=True)
     slug = models.SlugField(max_length=50, unique=True)
     back_button = models.BooleanField(default=False)
+
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify(rand_slug() + "-" + self.Exam_title)
@@ -82,6 +85,11 @@ def rand_slug():
 question_type_choices =(
     ("Radio","Multiple choice: only one answer"),
     ("Checkbox","Multiple choice: multiple answers allowed"),
+    ('text','Single Line Text Box'),
+    ('num_text','Numerical Value'),
+    ('Date_type','Date_type'),
+    ('Datetime_type','Datetime_type'),
+    ('Matrix_type','Matrix_type')
    
 )
 
@@ -99,7 +107,8 @@ class Main_Question_Bank(common_table):
     question_en = models.TextField(null=True)
     question_hi  = models.TextField(null=True) 
     question_ur  = models.TextField(null=True) 
-    question_ta  = models.TextField(null=True)   
+    question_ta  = models.TextField(null=True)
+    random_type = models.BooleanField(default=False)   
     
 
 
@@ -135,7 +144,36 @@ class Question_Bank_multiple_choice(common_table):
     choice_en = models.TextField(null=True)
     choice_hi  = models.TextField(null=True) 
     choice_ur  = models.TextField(null=True) 
-    choice_ta  = models.TextField(null=True)   
+    choice_ta  = models.TextField(null=True)  
+
+
+class Question_Bank_Matrix_answer(common_table):
+    Question_id = models.ForeignKey(Main_Question_Bank,related_name ="Question_Bank_Matrix_answer_exam_id",on_delete=models.CASCADE,null=True)
+    choice = models.CharField(max_length=50,null=True)
+    Mark = models.IntegerField(null=True)
+    result_status = models.BooleanField(default=False)
+    choice_ar = models.TextField(null=True)
+    choice_en = models.TextField(null=True)
+    choice_hi  = models.TextField(null=True) 
+    choice_ur  = models.TextField(null=True) 
+    choice_ta  = models.TextField(null=True)  
+
+
+
+class Question_Bank_matrix_rows(common_table):
+    Question_id = models.ForeignKey(Main_Question_Bank,related_name ="Question_Bank_matrix_rows_exam_id",on_delete=models.CASCADE,null=True)
+    choice = models.CharField(max_length=50,null=True)
+    Mark = models.IntegerField(null=True)
+    result_status = models.BooleanField(default=False)
+    choice_ar = models.TextField(null=True)
+    choice_en = models.TextField(null=True)
+    choice_hi  = models.TextField(null=True) 
+    choice_ur  = models.TextField(null=True) 
+    choice_ta  = models.TextField(null=True)  
+
+
+
+
 
 class Section_Question_Mapping(common_table):
     Section_id = models.ForeignKey(Main_Exam_section,related_name ="Section_Question_Mapping_id",on_delete=models.CASCADE,null=True)
