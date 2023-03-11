@@ -117,6 +117,7 @@ class Main_Exam_section(common_table):
     section_title = models.CharField(max_length=50,null=True)
     section_type = models.CharField(max_length=20,choices=section_choices,null=True)
     Question_bank_id = models.ForeignKey(Main_Question_Bank,related_name='Main_Exam_Master_question_id',on_delete=models.CASCADE,null=True)
+    order = models.IntegerField(null=True)
 
 
 
@@ -178,6 +179,7 @@ class Question_Bank_matrix_rows(common_table):
 class Section_Question_Mapping(common_table):
     Section_id = models.ForeignKey(Main_Exam_section,related_name ="Section_Question_Mapping_id",on_delete=models.CASCADE,null=True)
     Question_id = models.ForeignKey(Main_Question_Bank,related_name ="Question_Bank_id",on_delete=models.CASCADE,null=True)
+    order = models.IntegerField(null=True)
 
 
 Exam_start_field=(
@@ -310,3 +312,8 @@ class user_permission_mapping(common_table):
 class Exam_general_instruction(models.Model):
     exam_id  = models.ForeignKey(Main_Exam_Master, related_name="Exam_general_instruction_exam_id", on_delete=models.CASCADE,null=True)
     instruction = models.CharField(max_length=50,null=True)
+
+
+
+
+    

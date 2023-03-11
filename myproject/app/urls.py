@@ -52,6 +52,8 @@ urlpatterns = [
     path('wizard_new',views.wizard_new,name='wizard_new'),
     path('exam_result_new',views.exam_result_new,name='exam_result_new'),
 
+
+
     
 
 

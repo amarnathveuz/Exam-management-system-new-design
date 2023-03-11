@@ -1066,70 +1066,8 @@ def exam_result_new(request):
         data_attend = Exam_attend_user.objects.filter(id=uid).update(attend_status=True)
         data_answer = exam_attend_user_score.objects.filter(exam_attend_user_id_id=uid)
         return render(request, 'exam_result_new.html', {'data_main_exam': data_main_exam,'total_mark':total_mark,'total_score':total_score,'data_answer':data_answer,'exam_per':exam_per})
-    uid = request.session['uid']
-    slug = request.GET.get("type")
-    data_main_exam = Main_Exam_Master.objects.get(slug=slug)
-    data_answer1 = exam_attend_user_score.objects.filter(exam_attend_user_id_id=uid)
-    if data_answer1:
-        question_list = list(data_answer1.values_list('Question_id', flat=True))
-        data_question = Main_Question_Bank.objects.filter(id__in=question_list)
-        total_mark = sum(data_question.values_list('total_mark', flat=True))
-        total_score = sum(data_answer1.values_list('Mark', flat=True))
-        exam_per = (total_score/total_mark)*100
-        return render(request, 'exam_result_new.html',
-                      {'data_main_exam': data_main_exam,'total_mark':total_mark,'total_score': total_score,
-                       'data_answer': data_answer1,'exam_per':exam_per})
-    else:
-        total_mark = 0
-        total_score = 0
-        if request.method == "POST":
-            question_id = request.POST.getlist("question_id")
-            for i in question_id:
-                data = Main_Question_Bank.objects.get(id=i)
-                print("data.total_mark",data.total_mark)
-                Section_Question = Section_Question_Mapping.objects.get(Question_id=data)
-                data_create = exam_attend_user_score.objects.create(exam_attend_user_id_id=uid,
-                                                                    section_question_id=Section_Question,
-                                                                    Mark=0, result_status=False,
-                                                                    Question_id=data)
-                if data.Question_type == "Checkbox":
-                    answer = request.POST.getlist("answer"+i)
-                    for j in answer:
-                        try:
-                            data_option = Question_Bank_multiple_choice.objects.get(id=j)
-                            if (data.answer_id.count() < len(answer)):
-                                data_create.user_select_choice.add(data_option.id)
-                            else:
-                                if (data_option.result_status == True):
-                                    total_score += data_option.Mark
-                                    data_create_mark = exam_attend_user_score.objects.get(id=data_create.id)
-                                    mark = data_create_mark.Mark + data_option.Mark
-                                    data_create_new = exam_attend_user_score.objects.filter(id=data_create.id).update(Mark=mark)
-                                    data_create.correct_answer.add(data_option.id)
-                                    data_create.user_select_choice.add(data_option.id)
-                                else:
-                                    data_create.user_select_choice.add(data_option.id)
-                        except:
-                            pass
-                else:
-                    answer = request.POST.get("answer"+i)
-                    try:
-                        data_option = Question_Bank_multiple_choice.objects.get(id=answer)
-                        if (data_option.result_status == True):
-                            total_score += data_option.Mark
-                            data_create_mark = exam_attend_user_score.objects.get(id=data_create.id)
-                            mark = data_create_mark.Mark + data_option.Mark
-                            data_create_new = exam_attend_user_score.objects.filter(id=data_create.id).update(Mark=mark)
-                            data_create.correct_answer.add(data_option.id)
-                            data_create.user_select_choice.add(data_option.id)
-                        else:
-                            data_create.user_select_choice.add(data_option.id)
-                    except:
-                        pass
-                total_mark += data.total_mark
-            print("total_mark",total_mark)
-            print("total_score",total_score)
-        exam_per = (total_score / total_mark) * 100
-        data_attend = Exam_attend_user.objects.filter(id=uid).update(attend_status=True)
-        data_answer = exam_attend_user_score.objects.filter(exam_attend_user_id_id=uid)
-        return render(request, 'exam_result_new.html', {'data_main_exam': data_main_exam,'total_mark':total_mark,'total_score':total_score,'data_answer':data_answer,'exam_per':exam_per})
+    
+
+
+
+

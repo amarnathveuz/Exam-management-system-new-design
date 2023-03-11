@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <script src='main.js'></script>
+    <head>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.min.js"></script>
+    </head>
+</head>
+<body>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Order</th>
+            </tr>
+        </thead>
+        <tbody id="items">
+            {% for item in items %}
+                <tr data-id="{{ item.id }}" data-order="{{ item.order }}">
+                    <td>{{ item.name }}</td>
+                    <td>{{ item.order }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+
+
+  
+    <script>
+        $(function() {
+            $('#items').sortable({
+                axis: 'y',
+                stop: function(event, ui) {
+                    var item_id = ui.item.data('id');
+                    var new_order = ui.item.index() + 1;
+                    $.post('{% url "update_order" %}', {
+                        csrfmiddlewaretoken: '{{ csrf_token }}',
+                        item_id: item_id,
+                        new_order: new_order,
+                    }, function(data) {
+                        if (!data.success) {
+                            alert('Failed to update order.');
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
