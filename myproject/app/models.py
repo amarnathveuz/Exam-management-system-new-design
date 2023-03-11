@@ -191,7 +191,7 @@ class Exam_inital_field(common_table):
     Exam_id = models.ForeignKey(Main_Exam_Master,related_name ="Exam_inital_field_exam_id",on_delete=models.CASCADE,null=True)
     title = models.TextField()
     field_type = models.CharField(max_length=20,choices=Exam_start_field,null=True)
-
+    unique_type = models.BooleanField(default=False)
 class Exam_inital_field_choice(common_table):
     initial_field_id = models.ForeignKey(Exam_inital_field,related_name ="Exam_inital_field_id",on_delete=models.CASCADE,null=True)
     choice_name = models.CharField(max_length=25,null=True)
@@ -224,7 +224,7 @@ class exam_attend_user_initial_field(models.Model):
     exam_attend_user_id  = models.ForeignKey(Exam_attend_user, related_name="exam_attend_user_initial_field_attend_id", on_delete=models.CASCADE,null=True)
     Exam_inital_field_id = models.ForeignKey(Exam_inital_field, related_name="exam_attend_user_initial_field_id_Exam_inital_field", on_delete=models.CASCADE,null=True)
     answer = models.CharField(max_length=25,null=True)
-
+    
 
 
 class exam_attend_user_score(models.Model):
