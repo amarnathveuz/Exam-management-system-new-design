@@ -981,9 +981,10 @@ def wizard_new(request):
         question_list = list(data1.values_list('Question_id', flat=True))
         data_question = Main_Question_Bank.objects.filter(id__in=question_list)
         total_mark = sum(data_question.values_list('total_mark', flat=True))
+        lang = 'question_ar'
         return render(request, 'wizard_new1.html',
                       {'data_main_exam': data_main_exam, 'data': data, 'data_count': data_count,
-                       'total_mark': total_mark,'y':y})
+                       'total_mark': total_mark,'y':y,'my_model_field_name':lang,'my_var':'id'})
     else:
         if (data_main_exam.selection_mode == "All questions"):
             data = Section_Question_Mapping.objects.filter(Section_id__Exam_id=data_main_exam)

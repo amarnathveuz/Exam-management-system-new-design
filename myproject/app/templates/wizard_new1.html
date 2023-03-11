@@ -101,10 +101,23 @@
                                         <h2>{{i.section_title}}</h2>
                                     </div>
                                     {% endif %}
+                                   
+                                  sssssssssss:::::::::: 
                                     {% for j in i.Section_Question_Mapping_id.all %}
                                     <div class="qstn">
                                         <input type="hidden" value="{{j.Question_id.id}}" name="question_id">
-                                        <h3 class="main_question"><i class="arrow_right"></i>{{forloop.counter}}) {{j.Question_id.Question}}</h3>
+
+data:{{my_model_field_name}}:
+                                   
+                                 
+
+                                        <h3 class="main_question"><i class="arrow_right"></i>{{forloop.counter}})
+                                            {{j.Question_id.Question}}
+
+                                          
+ 
+                                        
+                                          </h3>
                                         <small class="center-small"> {{j.Question_id.Description}} </small>
                                         {% if j.Question_id.Imagefield == "" %}
                                         {% else %}
@@ -298,12 +311,7 @@
         window.onunload = function () { null };
     </script>
 
-    <script>
-        function userCheated() {
-            document.getElementById("form1").submit();
-        }
-        window.onblur = userCheated;
-    </script>
+ 
 
 </body>
 

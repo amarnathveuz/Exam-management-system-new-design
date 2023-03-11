@@ -109,6 +109,7 @@ class Main_Question_Bank(common_table):
     question_ur  = models.TextField(null=True) 
     question_ta  = models.TextField(null=True)
     random_type = models.BooleanField(default=False)   
+    Question_time_limit = models.TimeField(null=True)
     
 
 
