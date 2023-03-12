@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% load static %}
+{% load static %} 
 
 {% block content %}
 <div class="content">
@@ -1170,12 +1170,12 @@
             if (value == "second"){
             modal_id_new = parseInt(modal_id)-parseInt(1)
             var modal_name2 = data_id+"-"+modal_id_new
-            $('#question-modal').modal('show');
+            $('.question-modal-'+modal_name2).modal('show');
             }
             else{
                 var isClassExist = document.getElementsByClassName('question-modal-'+modal_name);
                 if (isClassExist.length > 0) {
-                    $('#question-modal').modal('show');
+                    $('.question-modal-'+modal_name).modal('show');
                     $('.first_open'+data_id).val("new")
                 }
                 else{
@@ -1193,7 +1193,7 @@
                 {
                     var modal_name = data_id+"-"+modal_id
                     $(".section_Question_view_modal").append(data)
-                    $("#question-modal").modal('show');
+                    $('.question-modal-'+modal_name).modal('show');
                     let total = parseInt(modal_id) + 1
                     $("#section_id"+data_id).val(total);
                 }
@@ -1217,7 +1217,7 @@
                 {
                     var modal_name = data_id+"-"+modal_id
                     $(".section_Question_view_modal").append(data)
-                    $('#question-modal').modal('show');
+                    $('.question-modal-'+modal_name).modal('show');
                     let total = parseInt(modal_id) + 1
                     $("#section_id"+data_id).val(total);
                 }
@@ -1229,7 +1229,14 @@
 
 
             function direct_question_btn(data_id){
-                var modal_name1 = data_id
+                var modal_name1 = data_id+"-"+data_id
+
+                var isClassExist = document.getElementsByClassName('question-modal-'+modal_name1);
+                if (isClassExist.length > 0) {
+                    $('.question-modal-'+modal_name1).modal('show');
+                    }
+                else{
+
                 $.ajax(
                 {
                     type:"GET",
@@ -1243,10 +1250,11 @@
                     {
 
                     $(".section_Question_view_modal").append(data)
-                    $('#question-modal').modal('show');
+                    $('.question-modal-'+modal_name).modal('show');
                         
                     } 
                 })
+                }
                 }
 
             </script>

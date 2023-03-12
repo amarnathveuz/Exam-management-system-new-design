@@ -32,6 +32,7 @@ urlpatterns = [
      # ------------amrith url end--------------------------
 
     # ---------------anirudh url------------------------
+    
     path('section_title_edit',views.section_title_edit,name='section_title_edit'),
     path('update_exam_details',views.update_exam_details,name='update_exam_details'),
     path('delete_initial_field',views.delete_initial_field,name='delete_initial_field'),
@@ -44,9 +45,6 @@ urlpatterns = [
     path('delete_question_section',views.delete_question_section,name='delete_question_section'),
     path('delete_question_modal',views.delete_question_modal,name='delete_question_modal'),
     path('save_section_question_action',views.save_section_question_action,name='save_section_question_action'),
-
-
-
 
 
     # ------------------jiyad url---------------

@@ -1,5 +1,5 @@
 
-<div id="question-modal" class="modal fade question-modal-{{value1}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+<div id="" class="modal fade question-modal-{{value1}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
 aria-hidden="true" style="display: none">
 <form class="forms-sample" action="save_section_question_action" method="POST" enctype="multipart/form-data">
                 {% csrf_token %}   
@@ -7,7 +7,7 @@ aria-hidden="true" style="display: none">
 <div class="modal-dialog modal-lg">
     <div class="modal-content">
         <input type="hidden" value="{{modal_id}}" class="add_line_count{{value1}}">
-        <input type="hidden" value="{{value1}}" name="question_model_name{{data_id}}">
+        <input type="hidden" value="{{value1}}" name="question_model_name">
         <div class="modal-header">
             <h4 class="modal-title mt-0">Add a Question</h4>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -25,7 +25,7 @@ aria-hidden="true" style="display: none">
                             <input type="hidden" name="exam_id" value="{{data_id}}">
 
 
-                            <input type="text" required onchange="question_value(this,`{{value1}}`)" class="form-control modal_question{{value1}}" name="question_name{{data_id}}" placeholder="eg: What is the...">
+                            <input type="text" required onchange="question_value(this,`{{value1}}`)" class="form-control modal_question{{value1}}" name="question_name" placeholder="eg: What is the...">
                             <div class="input-group-append">
                                 <button type="button"
                             class="input-group-text" data-toggle="modal"
@@ -41,7 +41,7 @@ aria-hidden="true" style="display: none">
                     <div class="form-group">
                         <label for="field-1" class="control-label"></label>
                         <div class="input-group mt-1">
-                            <input type="file" accept="image/*,.pdf,.txt,.doc,.docx," name="question_image{{value1}}" class="inputfile form-control">                             
+                            <input type="file" accept="image/*,.pdf,.txt,.doc,.docx," name="question_image" class="inputfile form-control">                             
                         </div>
                     </div>
                 </div>
@@ -54,11 +54,11 @@ aria-hidden="true" style="display: none">
                         </div>
                         <div class="col-md-9 px-2">
                             <div class="form-group d-flex align-items-center">
-                                <input type="radio" checked  class="question_type_radio{{value1}}" name="question_type{{value1}}" value="Radio">
+                                <input type="radio" checked  class="question_type_radio{{value1}}" name="question_type" value="Radio">
                                 <label for="customer">Multiple choice: only one answer</label>
                             </div>
                             <div class="form-group d-flex align-items-center">
-                                <input type="radio" class="question_type_checkbox{{value1}}" name="question_type{{value1}}" value="Checkbox">
+                                <input type="radio" class="question_type_checkbox{{value1}}" name="question_type" value="Checkbox">
                                 <label for="customer">Multiple choice: multiple answers allowed</label>
                             </div>
                         </div>
@@ -69,21 +69,21 @@ aria-hidden="true" style="display: none">
                 <div class="paytab">
                     <ul class="nav nav-tabs nav-pay mb-2" role="tablist">
                         <li class="nav-item d-flex align-items-center">
-                            <a class="nav-link active" data-toggle="tab" href="#Answers1{{value1}}"
+                            <a class="nav-link active" data-toggle="tab" href="#Answers1"
                                 role="tab">
                                 Answers
                             </a>
                         </li>
 
                         <li class="nav-item d-flex align-items-center">
-                            <a class="nav-link" data-toggle="tab" href="#Description1{{value1}}"
+                            <a class="nav-link" data-toggle="tab" href="#Description1"
                                 role="tab">
                                 Description
                             </a>
                         </li>
 
                         <li class="nav-item d-flex align-items-center">
-                            <a class="nav-link" data-toggle="tab" href="#Options1{{value1}}"
+                            <a class="nav-link" data-toggle="tab" href="#Options1"
                                 role="tab">
                                 Options
                             </a>
@@ -94,7 +94,7 @@ aria-hidden="true" style="display: none">
 
                         <!-- Answers1 tab -->
 
-                        <div class="tab-pane active" id="Answers1{{value1}}" role="tabpanel">
+                        <div class="tab-pane active" id="Answers1" role="tabpanel">
                             <div class="mt-3">
                                 <div class="mb-2">
                                     <button type="button" onclick="choice_add_fun(`{{value1}}`)"
@@ -125,11 +125,11 @@ aria-hidden="true" style="display: none">
 
                         <!-- Description1 tab -->
 
-                        <div class="tab-pane descptn" id="Description1{{value1}}" role="tabpanel">
+                        <div class="tab-pane descptn" id="Description1" role="tabpanel">
                             <div class="row">
                                 <div class="col-md-12 px-0">
                                     <textarea  id="" cols="30" rows="5"
-                                        class="form-control border-0" name="qstn_descriptn{{data_id}}"
+                                        class="form-control border-0" name="qstn_descriptn"
                                         placeholder="e.g. Guidelines, instructions, picture, ... to help attendees answer"></textarea>
                                 </div>
                             </div>
@@ -138,7 +138,7 @@ aria-hidden="true" style="display: none">
 
                         <!-- Options1 tab -->
 
-                        <div class="tab-pane sales_purchase" id="Options1{{value1}}" role="tabpanel">
+                        <div class="tab-pane sales_purchase" id="Options1" role="tabpanel">
                             <div class="row mb-2 question-options">
                                 <div class="col-md-6 px-0">
                                     <h5>Answers</h5>
@@ -149,7 +149,7 @@ aria-hidden="true" style="display: none">
                                         </div>
                                         <div class="col-md-7">
                                             <div class="form-group mt-2 d-flex align-items-center">
-                                                <input type="checkbox" onclick="image_filed_btn(`{{value1}}`)" class="file_field{{value1}}" name="choice_image_check{{data_id}}" value="True">
+                                                <input type="checkbox" onclick="image_filed_btn(`{{value1}}`)" class="file_field{{value1}}" name="choice_image_check" value="True">
                                                
                                             </div>
                                         </div>
@@ -165,7 +165,7 @@ aria-hidden="true" style="display: none">
                                         </div>
                                         <div
                                             class="col-md-7 d-flex align-items-center r-day">
-                                            <input type="text" name="question_comment{{data_id}}" class="form-control">
+                                            <input type="text" name="question_comment" class="form-control">
                                         </div>
                                     </div>
                                 </div>
@@ -182,7 +182,7 @@ aria-hidden="true" style="display: none">
                                         </div>
                                         <div
                                         class="col-md-7 d-flex align-items-center r-day">
-                                        <input type="checkbox" value="True" name="question_mandatory{{value1}}"id="r-day">
+                                        <input type="checkbox" value="True" name="question_mandatory"id="r-day">
                                     </div>
                                     </div>
                                    
@@ -212,7 +212,7 @@ aria-hidden="true" style="display: none">
                 </div>
              </div>
             </div>
-            <input type="hidden" name="" class="modal_status{{value1}}" value="{{status}}" >
+            <input type="hidden" name="" class="modal_status" value="{{status}}" >
         </div>
         <div class="modal-footer">
 
@@ -344,140 +344,144 @@ aria-hidden="true" style="display: none">
     }
   
 
+    
     $("#choice_add"+val1).append(`<tr class="tr_choice_remove`+add_line_count+`" >
-        <td>
-            <div class="input-group">
-            <input type="text" onchange="choice_value(this,`+add_line_count+`)"  name="question_choice`+add_line_count+``+'-'+`{{value1}}"  class="form-control">
+
+    <td>
+    <div class="input-group">
+    <input type="text" onchange="choice_value(this,`+add_line_count+`)"  name="question_choice`+add_line_count+``+'-'+`{{value1}}"  class="form-control">
+    <div class="input-group-append">
+        <button type="button" style="margin-bottom: 7px;"
+        class="input-group-text" data-toggle="modal"
+        data-target="#choice_modal-`+add_line_count+`-{{value1}}">
+        <i class="fas fa-language"></i>
+        </button>
+    </div>
+    </div> 
+    <input type="hidden" value=`+add_line_count+` name="question_line_count">
+    </td>
+    <td style="display:`+file_status+`;" class="file_td`+val1+`">
+        <div class="input-group uploadFile1">
+            <input type="file" accept="image/*,.pdf,.txt,.doc,.docx," name="question_image_choice`+add_line_count+``+'-'+`{{value1}}" class="inputfile form-control mb-0" >
             <div class="input-group-append">
-                <button type="button" style="margin-bottom: 7px;"
-                class="input-group-text" data-toggle="modal"
-                data-target="#choice_modal-`+add_line_count+`-{{value1}}">
-                <i class="fas fa-language"></i>
+                <span class="input-group-text"> <i class="fas fa-paperclip"></i></span>
+            </div>
+        </div>
+    </td>
+    <td>
+        <div style="margin-left:47px;" class="input-group date">
+        <input  type="checkbox"  name="addline_check`+add_line_count+``+'-'+`{{value1}}" value="True">
+        </div></td>
+    <td>
+          
+    <input style="border: 1px solid #e8ecf1; 
+    font-size: 0.8125rem;" name="Score`+add_line_count+``+'-'+`{{value1}}" value="0" class="form-control" type="number" >
+    </td>
+
+    <td>
+        <div class="action-tbl d-flex justify-content-end">
+            <i class="fa fa-trash-o mx-1 trash-btn" onclick="choice_remove(`+add_line_count+`)"
+            title="" data-original-title="Delete"></i>
+        </div>
+   
+
+    <div id="choice_modal-`+add_line_count+`-{{value1}}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+    aria-hidden="true" style="display: none">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title mt-0">Language</h4>
+                <button type="button" class="close" data-dismiss-modal="modal3" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            </div> 
-            <input type="hidden" value=`+add_line_count+` name="question_line_count{{value1}}">
-            </td>
-            <td style="display:`+file_status+`;" class="file_td`+val1+`">
-                <div class="input-group uploadFile1">
-                    <input type="file" accept="image/*,.pdf,.txt,.doc,.docx," name="question_image_choice`+add_line_count+``+'-'+`{{value1}}" class="inputfile form-control mb-0" >
-                    <div class="input-group-append">
-                        <span class="input-group-text"> <i class="fas fa-paperclip"></i></span>
-                    </div>
-                </div>
-            </td>
-            <td>
-                <div style="margin-left:47px;" class="input-group date">
-                <input  type="checkbox"  name="addline_check`+add_line_count+``+'-'+`{{value1}}" value="True">
-                </div></td>
-            <td>
-                  
-            <input style="border: 1px solid #e8ecf1; 
-            font-size: 0.8125rem;" name="Score`+add_line_count+``+'-'+`{{value1}}" value="0" class="form-control" type="number" >
-            </td>
-
-            <td>
-                <div class="action-tbl d-flex justify-content-end">
-                    <i class="fa fa-trash-o mx-1 trash-btn" onclick="choice_remove(`+add_line_count+`)"
-                    title="" data-original-title="Delete"></i>
-                </div>
-           
-
-            <div id="choice_modal-`+add_line_count+`-{{value1}}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-            aria-hidden="true" style="display: none">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title mt-0">Language</h4>
-                        <button type="button" class="close" data-dismiss-modal="modal3" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label for="field-1" class="control-label">English</label>
-                                    <div class="input-group">
-                                
-                                        <input type="text"  name="eng_choice`+add_line_count+`-{{value1}}"  class="inputfile form-control mb-0 choice_val-`+add_line_count+`-{{value1}}"  placeholder="">
-                                        <div class="input-group-append">
-                                            <span  class="input-group-text"><img src="img/language/english.jpg" alt="" style="height: 20px;"></span>
-                                        </div> 
-                                    </div>
-                                </div>
-
-                            <div class="col-md-12" >
-                                <div class="form-group langar" style="display: none;">
-                                    <label for="field-1" class="control-label">Arabic</label>
-                                    <div class="input-group">
-                                
-                                        <input type="text" name="ar_choice`+add_line_count+`-{{value1}}" class="inputfile form-control mb-0 choice_val-`+add_line_count+`-{{value1}}"  placeholder="">
-                                        <div class="input-group-append">
-                                            <span  class="input-group-text"><img src="img/language/arabic.jpg" alt="" style="height: 20px;"></span>
-                                        </div> 
-                                </div>
-                            </div>
-
-                            <div class="col-md-12" >
-                                <div class="form-group langhi" style="display: none;">
-                                    <label for="field-1" class="control-label">Hindi</label>
-                                    <div class="input-group">
-                                
-                                        <input type="text" name="hi_choice`+add_line_count+`-{{value1}}" class="inputfile form-control mb-0 choice_val-`+add_line_count+`-{{value1}}"  placeholder="">
-                                        <div class="input-group-append">
-                                            <span  class="input-group-text"><img src="img/language/hindi.jpg" alt="" style="height: 20px;"></span>
-                                        </div> 
-                                </div>
-                            </div>
-                            </div>
-
-                            <div class="col-md-12" >
-                                <div class="form-group langta" style="display: none;">
-                                    <label for="field-1" class="control-label">Tamil</label>
-                                    <div class="input-group">
-                                
-                                    <input type="text" name="ta_choice`+add_line_count+`-{{value1}}" class="inputfile form-control mb-0 choice_val-`+add_line_count+`-{{value1}}"  placeholder="">
-                                    <div class="input-group-append">
-                                        <span  class="input-group-text"><img src="img/language/hindi.jpg" alt="" style="height: 20px;"></span>
-                                    </div> 
-                                </div>
-                            </div>
-                            </div>
-
-                            <div class="col-md-12" >
-                                <div class="form-group langur" style="display: none;">
-                                    <label for="field-1" class="control-label">Urdu</label>
-                                    <div class="input-group">
-                                
-                                        <input type="text" name="ur_choice`+add_line_count+`-{{value1}}" class="inputfile form-control mb-0 choice_val-`+add_line_count+`-{{value1}}"  placeholder="">
-                                        <div class="input-group-append">
-                                            <span  class="input-group-text"><img src="img/language/hindi.jpg" alt="" style="height: 20px;"></span>
-                                        </div> 
-                                    </div>
-                                </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="field-1" class="control-label">English</label>
+                            <div class="input-group">
+                        
+                                <input type="text"  name="eng_choice`+add_line_count+`-{{value1}}"  class="inputfile form-control mb-0 choice_val-`+add_line_count+`-{{value1}}"  placeholder="">
+                                <div class="input-group-append">
+                                    <span  class="input-group-text"><img src="img/language/english.jpg" alt="" style="height: 20px;"></span>
+                                </div> 
                             </div>
                         </div>
 
-                    <div class="modal-footer">
-                        <button type="button" data-dismiss-modal="modal3" style="background-color:#f9365f!important;border: none!important;"
-                        class="btn btn-info waves-effect waves-light">Save </button>
+                    <div class="col-md-12" >
+                        <div class="form-group langar" style="display: none;">
+                            <label for="field-1" class="control-label">Arabic</label>
+                            <div class="input-group">
+                        
+                                <input type="text" name="ar_choice`+add_line_count+`-{{value1}}" class="inputfile form-control mb-0 choice_val-`+add_line_count+`-{{value1}}"  placeholder="">
+                                <div class="input-group-append">
+                                    <span  class="input-group-text"><img src="img/language/arabic.jpg" alt="" style="height: 20px;"></span>
+                                </div> 
+                        </div>
+                    </div>
+
+                    <div class="col-md-12" >
+                        <div class="form-group langhi" style="display: none;">
+                            <label for="field-1" class="control-label">Hindi</label>
+                            <div class="input-group">
+                        
+                                <input type="text" name="hi_choice`+add_line_count+`-{{value1}}" class="inputfile form-control mb-0 choice_val-`+add_line_count+`-{{value1}}"  placeholder="">
+                                <div class="input-group-append">
+                                    <span  class="input-group-text"><img src="img/language/hindi.jpg" alt="" style="height: 20px;"></span>
+                                </div> 
+                        </div>
+                    </div>
+                    </div>
+
+                    <div class="col-md-12" >
+                        <div class="form-group langta" style="display: none;">
+                            <label for="field-1" class="control-label">Tamil</label>
+                            <div class="input-group">
+                        
+                            <input type="text" name="ta_choice`+add_line_count+`-{{value1}}" class="inputfile form-control mb-0 choice_val-`+add_line_count+`-{{value1}}"  placeholder="">
+                            <div class="input-group-append">
+                                <span  class="input-group-text"><img src="img/language/hindi.jpg" alt="" style="height: 20px;"></span>
+                            </div> 
+                        </div>
+                    </div>
+                    </div>
+
+                    <div class="col-md-12" >
+                        <div class="form-group langur" style="display: none;">
+                            <label for="field-1" class="control-label">Urdu</label>
+                            <div class="input-group">
+                        
+                                <input type="text" name="ur_choice`+add_line_count+`-{{value1}}" class="inputfile form-control mb-0 choice_val-`+add_line_count+`-{{value1}}"  placeholder="">
+                                <div class="input-group-append">
+                                    <span  class="input-group-text"><img src="img/language/hindi.jpg" alt="" style="height: 20px;"></span>
+                                </div> 
+                            </div>
+                        </div>
                     </div>
                 </div>
+
+            <div class="modal-footer">
+                <button type="button" data-dismiss-modal="modal3" style="background-color:#f9365f!important;border: none!important;"
+                class="btn btn-info waves-effect waves-light">Save </button>
             </div>
-                    </div>
-                </div>
+        </div>
+    </div>
             </div>
-            </div>
-        </td>
-        
-          </tr>`)
-  
-          var checks = $('.lang_class:checked').map(function() {
-          var data =  $(this).val()
-          $(".lang"+data).show()
-          }).get()
-  
+        </div>
+    </div>
+    </div>
+</td>
+
+  </tr>`)
+
+  var checks = $('.lang_class:checked').map(function() {
+  var data =  $(this).val()
+  $(".lang"+data).show()
+  }).get()
+
+
+
   
     $("button[data-dismiss-modal=modal3]").click(function(){
       var modal_name = add_line_count+"-"+`{{value1}}`
@@ -665,6 +669,13 @@ aria-hidden="true" style="display: none">
     }
   
   </script>
+
+
+
+
+
+
+
   
   
 
