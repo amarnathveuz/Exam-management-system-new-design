@@ -993,8 +993,7 @@ def delete_question_modal(request):
         data = Main_Question_Bank.objects.get(id=id)
         return render(request,"delete_question_modal.html",{'data':data})
     
-
-
+    
 
 def save_section_question_action(request):
     if request.method == "POST":
@@ -1021,24 +1020,7 @@ def save_section_question_action(request):
         print("ar_question::::::::::::::::",ar_question)
         
         try:
-            print("qaaaaaaaaaaaaooo")
-            question_image = request.FILES['question_image']
-            print("qaaaaaaaaaaaaooo11")
-            import os
-            extension = os.path.splitext(str(question_image))[1]
-            print("extension:::",extension)
-            if extension == ".pdf" or extension == ".txt" or extension == ".doc" or extension == ".docx" :
-                image_new1 = question_image
-            else:
-                fixed_height = 758
-                image = Image.open(question_image)
-                print("image.size",image.size)
-                width_size = int(fixed_height/image.height * image.width)
-                resized_image = image.resize((width_size,fixed_height))
-                print("resizeeeeeed:",resized_image.size)
-                from django.conf import settings
-                resized_image.save("media/user_image/"+question_image.name)
-                image_new1 = 'user_image/'+question_image.name
+            question_image_status = request.POST.get("question_image_status")
 
             if button_status == "direct_question" :
                 section_save = Main_Exam_section.objects.create(Exam_id_id = exam_id ,section_title = question,
@@ -1046,12 +1028,38 @@ def save_section_question_action(request):
                         created_by = request.user
                         )
             else:   
-
                pass
 
-            question_save = Main_Question_Bank.objects.create(Question=question,question_ar=ar_question,question_en=eng_question,question_hi=hi_question,question_ur=ur_question,question_ta=ta_question,
-                Description =  question_description, Question_type = question_type,created_by = request.user,
-                comments = question_comment,Imagefield =image_new1,manadatory = question_mandatory)
+            if question_image_status == "1":
+                question_image = request.FILES['question_image']
+                print("qaaaaaaaaaaaaooo11")
+                import os
+                extension = os.path.splitext(str(question_image))[1]
+                print("extension:::",extension)
+                if extension == ".pdf" or extension == ".txt" or extension == ".doc" or extension == ".docx" :
+                    image_new1 = question_image
+                else:
+                    fixed_height = 758
+                    image = Image.open(question_image)
+                    print("image.size",image.size)
+                    width_size = int(fixed_height/image.height * image.width)
+                    resized_image = image.resize((width_size,fixed_height))
+                    print("resizeeeeeed:",resized_image.size)
+                    from django.conf import settings
+                    resized_image.save("media/Question_Bank_image/"+question_image.name)
+                    image_new1 = 'Question_Bank_image/'+question_image.name
+
+
+                question_save = Main_Question_Bank.objects.create(Question=question,question_ar=ar_question,question_en=eng_question,question_hi=hi_question,question_ur=ur_question,question_ta=ta_question,
+                    Description =  question_description, Question_type = question_type,created_by = request.user,
+                    comments = question_comment,Imagefield =image_new1,manadatory = question_mandatory)
+
+            else:
+
+                question_save = Main_Question_Bank.objects.create(Question=question,question_ar=ar_question,question_en=eng_question,question_hi=hi_question,question_ur=ur_question,question_ta=ta_question,
+                    Description =  question_description, Question_type = question_type,created_by = request.user,
+                    comments = question_comment,manadatory = question_mandatory)
+
 
             if button_status == "direct_question":
                 section_save.Question_bank_id_id = question_save.id
@@ -1126,10 +1134,6 @@ def open_section_based_question_edit(request):
     print("data_id:::::::::",data_id)
 
 
-
-
-
-
     if button_status == "section_question":
         section_id = Main_Exam_section.objects.get(id=data_id)
     else:
@@ -1146,9 +1150,6 @@ def open_section_based_question_edit(request):
     }
     
     return render(request,'open_section_based_question_edit.html',context)
-
-
-
 
 
 # /////////////////////////////////////////////////////////////////////////

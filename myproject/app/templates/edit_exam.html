@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% load static %} 
-
+{% load  edit_language %}
 {% block content %}
 <div class="content">
     <div class="container-fluid margin-class-this" >
@@ -80,17 +80,40 @@
                                                 <label for="">Language <span style="color: red;
                                                   font-weight: bold;">(Default English)</span></label>
                                                 <br>
+                                                {% if data.id|check_edit_language:"ar" %}
                                                 <input type="checkbox" name="language_type" value="ar"
-                                                    class="lang_class"> <span style="font-size: 12px;">Arabic</span>
+                                                    class="lang_class" checked ><span style="font-size: 12px;">Arabic</span>
                                                 &nbsp; &nbsp;
+                                                {% else %}
+                                                <input type="checkbox" name="language_type" value="ar"
+                                                    class="lang_class" ><span style="font-size: 12px;">Arabic</span>
+                                                &nbsp; &nbsp;
+                                                {% endif %}
+                                                {% if data.id|check_edit_language:"hi" %}
+                                                <input type="checkbox" name="language_type" value="hi"
+                                                    class="lang_class" checked> <span style="font-size: 12px;">Hindi </span>
+                                                &nbsp; &nbsp;
+                                                {% else %}
                                                 <input type="checkbox" name="language_type" value="hi"
                                                     class="lang_class"> <span style="font-size: 12px;">Hindi </span>
                                                 &nbsp; &nbsp;
+                                                {% endif %}
+                                                {% if data.id|check_edit_language:"ur" %}
                                                 <input type="checkbox" name="language_type" value="ur"
-                                                    class="lang_class"> <span style="font-size: 12px;">Urdu </span>
+                                                    class="lang_class" checked > <span style="font-size: 12px;">Urdu </span>
                                                 &nbsp; &nbsp;
+                                                {% else %}
+                                                <input type="checkbox" name="language_type" value="ur"
+                                                    class="lang_class" > <span style="font-size: 12px;">Urdu </span>
+                                                &nbsp; &nbsp;
+                                                {% endif %}
+                                                {% if data.id|check_edit_language:"ta" %}
+                                                <input type="checkbox" name="language_type" value="ta"
+                                                    class="lang_class" checked > <span style="font-size: 12px;">Tamil </span>
+                                                {% else %}
                                                 <input type="checkbox" name="language_type" value="ta"
                                                     class="lang_class"> <span style="font-size: 12px;">Tamil </span>
+                                                {% endif %}
                                             </div>
                                         </div>
                                     </div>
