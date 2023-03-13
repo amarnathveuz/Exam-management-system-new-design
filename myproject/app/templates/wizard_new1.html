@@ -297,9 +297,11 @@
         startTimer(time_id); // 5 minutes in seconds
     </script>
 
-    <script type = "text/javascript" >    function preventBack() { window.history.forward(); }
-        setTimeout("preventBack()", 0);
-        window.onunload = function () { null };
+    <script type = "text/javascript" >
+        history.pushState(null, null, location.href);
+        window.addEventListener('popstate', function(event) {
+            history.pushState(null, null, location.href);
+        });
     </script>
 
     <script>

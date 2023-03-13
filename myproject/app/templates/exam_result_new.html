@@ -105,6 +105,7 @@
                                                     {% endif %}
                                                 </label>
                                                 {% endfor %}
+                                               
                                                 {% if i.user_select_choice.count > i.Question_id.answer_id.count %}
                                                 <p>You have attended {{i.user_select_choice.count}} answers but only {{i.Question_id.answer_id.count}} are correct , so mark is 0</p>
                                                 {% endif %}

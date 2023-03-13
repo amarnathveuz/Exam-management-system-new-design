@@ -18,18 +18,13 @@
                                 <h2 class="main-heading-txt"></h2>
                                 <div class="d-flex">
                                           
-                        {% if data.Login_required == True %}
+                     
                                     <a target="_blank" href="exam_login_new?type={{data.slug}}"><button type="button"
                                         class="btn btn-outline-pink waves-effect waves-light m-b-5 mx-1"
                                         data-toggle="modal" data-target=""><i
                                             class="fa fa-share mr-1"></i>Test Link</button></a>
 
-                                            {% else %}
-                                            <a target="_blank" href="customer_using_link_new?type={{data.slug}}"><button type="button"
-                                                class="btn btn-outline-pink waves-effect waves-light m-b-5 mx-1"
-                                                data-toggle="modal" data-target=""><i
-                                                    class="fa fa-share mr-1"></i>Test Link</button></a>
-                                                    {% endif %}
+                                           
                                     <button type="button"
                                         class="btn btn-outline-pink waves-effect waves-light m-b-5 mx-1"><i
                                             class="fa fa-print mr-1"></i>Print</button>
@@ -152,7 +147,7 @@
                                                             Add a Section
                                                         </button>
                                                         <button type="button" class="btn btn-prim pay"
-                                                            onclick="direct_question_btn('{{data.id}}')">
+                                                            onclick="direct_question_btn(`{{data.id}}`)">
                                                             Add a question
                                                         </button>
                                                     </div>
@@ -1250,7 +1245,7 @@
                     {
 
                     $(".section_Question_view_modal").append(data)
-                    $('.question-modal-'+modal_name).modal('show');
+                    $('.question-modal-'+modal_name1).modal('show');
                         
                     } 
                 })

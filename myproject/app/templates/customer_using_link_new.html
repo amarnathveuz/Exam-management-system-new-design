@@ -39,7 +39,7 @@
             <div class="row d-flex align-items-center">
                 <div class="col-lg-8">
                     <img src="{% static 'exam_page/img/logo.png' %}" class="img-fluid logo-of-this">
-                    <h3 class="first-head">Welcome to the <span>{{data.Exam_title}}</span> questionnaire.
+                    <h3 class="first-head">Welcome to the <span>{{data_exam.Exam_title}}</span> questionnaire.
                     </h3>
                     <h4 class="first-head2">Compulsory questionnaire to test your basic know-how.</h4>
                 </div>
@@ -78,6 +78,7 @@
                 {% endif %}
                 {% endfor %}
                 <div class="col-lg-12 text-center">
+                    {{data}}
                     <button type="submit" class="submit-button-class">Submit</button>
                 </div>
 

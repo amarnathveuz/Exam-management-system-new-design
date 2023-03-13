@@ -860,7 +860,7 @@ def Question_Management_update(request):
                     )
             else:
                   Question_Bank_multiple_choice.objects.filter(id=choice_update[i]).update(
-                        Imagefield = " "
+                        Imagefield = ""
                     )
     for i in range(len(choice_update)):
         print("question_choice::::::::",str(question_choice[i]))
@@ -1068,6 +1068,7 @@ def open_section_based_question_edit(request):
 def exam_login_new(request):
     slug = request.GET.get("type")
     data = Main_Exam_Master.objects.get(slug=slug)
+    data_count = Exam_attend_user.objects.filter(exam_id=data).count()
     if data.Login_required == True:
         return render(request,'exam_login_new.html',{'data':data})
     else:
@@ -1087,9 +1088,12 @@ def attend_exam_new(request,slug):
     data_count = Exam_attend_user.objects.filter(exam_id=data).count()
     uid = request.session['uid']
     data_attend = Exam_attend_user.objects.get(id=uid)
-    data_attend1 = Exam_attend_user.objects.filter(id=uid).update(attend_status=True)
     data_language = Main_exam_language.objects.filter(Exam_id=data)
+    if (data.Login_required == True and data_count > data.attempt_limit):
+        data_attend.delete()
     return render(request,'attend_exam_new.html',{'data':data,'data_attend':data_attend,'data_language':data_language,'data_count':data_count})
+
+
 
 def exam_login_action_new(request):
     if request.method == "POST":
@@ -1122,72 +1126,89 @@ def exam_login_action_new(request):
 
 def exam_link_action_new(request):
     if request.method == "POST":
+        print("jippppppppppppppppppppp")
         exam_id = request.POST.get('exam_details')
         data_exam = Main_Exam_Master.objects.get(slug=exam_id)
-        data = Exam_attend_user.objects.create(
-            exam_id=data_exam,
-            user_type="non_login_user",
-        )
-        request.session['uid'] = data.id
         attend_user_id = request.POST.getlist('attend_user_id')
         title = request.POST.getlist('title')
         zip_objects = zip(attend_user_id, title)
         for i, j in zip_objects:
+            data_inetial = Exam_inital_field.objects.get(id=i)
+            if data_inetial.unique_type == True:
+                if exam_attend_user_initial_field.objects.filter(Exam_inital_field_id_id=i,answer=j).exists():
+                    messages.error(request, str(data_inetial.title + " " + "already exists"))
+                    return redirect(request.META['HTTP_REFERER'])
+                else:
+                    pass
+        data = Exam_attend_user.objects.create(
+            exam_id=data_exam,
+            user_type="non_login_user",
+        )
+        print("data",data)
+        request.session['uid'] = data.id
+        for k, l in zip_objects:
+            print("amar")
             data_new = exam_attend_user_initial_field.objects.create(
                 exam_attend_user_id = data,
-                Exam_inital_field_id_id=i,
-                answer=j
+                Exam_inital_field_id_id=k,
+                answer=l
             )
         url = "attend_exam_new/" + exam_id
         return redirect(url)
 
 
 def wizard_new(request):
-    slug = request.GET.get("type")
-    data_main_exam = Main_Exam_Master.objects.get(slug=slug)
-    try:
-        z = str(data_main_exam.Exam_time_limit) + str(',000')
-        import datetime
-        import time
-        x = time.strptime(z.split(',')[0], '%H:%M:%S')
-        y = datetime.timedelta(hours=x.tm_hour, minutes=x.tm_min, seconds=x.tm_sec).total_seconds()
-    except:
-        y = ""
-    data_count = ""
-    if (data_main_exam.layout == "0"):
-        if (data_main_exam.selection_mode == "All questions"):
-            data = Section_Question_Mapping.objects.filter(Section_id__Exam_id=data_main_exam)
+    if request.method == "POST":
+        slug = request.POST.get("slug_value")
+        language_value = request.POST.get("language_value")
+        print(":::::::::::::::::::",language_value)
+        data_main_exam = Main_Exam_Master.objects.get(slug=slug)
+        uid = request.session['uid']
+        data_attend1 = Exam_attend_user.objects.filter(id=uid).update(attend_status=True)
+        try:
+            z = str(data_main_exam.Exam_time_limit) + str(',000')
+            import datetime
+            import time
+            x = time.strptime(z.split(',')[0], '%H:%M:%S')
+            y = datetime.timedelta(hours=x.tm_hour, minutes=x.tm_min, seconds=x.tm_sec).total_seconds()
+        except:
+            y = ""
+        data_count = ""
+        if (data_main_exam.layout == "0"):
+            if (data_main_exam.selection_mode == "All questions"):
+                data = Section_Question_Mapping.objects.filter(Section_id__Exam_id=data_main_exam)
+            else:
+                data = Section_Question_Mapping.objects.filter(Section_id__Exam_id=data_main_exam).order_by("?")
+            question_list = list(data.values_list('Question_id', flat=True))
+            data_question = Main_Question_Bank.objects.filter(id__in=question_list)
+            total_mark = sum(data_question.values_list('total_mark', flat=True))
+            return render(request, 'wizard_new0.html',
+                          {'data_main_exam': data_main_exam, 'data': data, 'data_count': data_count,
+                           'total_mark': total_mark,'y':y})
+        elif (data_main_exam.layout == "1"):
+            if (data_main_exam.selection_mode == "All questions"):
+                data = Main_Exam_section.objects.filter(Exam_id=data_main_exam)
+            else:
+                data = Main_Exam_section.objects.filter(Exam_id=data_main_exam).order_by("?")
+            data1 = Section_Question_Mapping.objects.filter(Section_id__Exam_id=data_main_exam)
+            question_list = list(data1.values_list('Question_id', flat=True))
+            data_question = Main_Question_Bank.objects.filter(id__in=question_list)
+            total_mark = sum(data_question.values_list('total_mark', flat=True))
+            return render(request, 'wizard_new1.html',
+                          {'data_main_exam': data_main_exam, 'data': data, 'data_count': data_count,
+                           'total_mark': total_mark,'y':y})
         else:
-            data = Section_Question_Mapping.objects.filter(Section_id__Exam_id=data_main_exam).order_by("?")
-        question_list = list(data.values_list('Question_id', flat=True))
-        data_question = Main_Question_Bank.objects.filter(id__in=question_list)
-        total_mark = sum(data_question.values_list('total_mark', flat=True))
-        return render(request, 'wizard_new0.html',
-                      {'data_main_exam': data_main_exam, 'data': data, 'data_count': data_count,
-                       'total_mark': total_mark,'y':y})
-    elif (data_main_exam.layout == "1"):
-        if (data_main_exam.selection_mode == "All questions"):
-            data = Main_Exam_section.objects.filter(Exam_id=data_main_exam)
-        else:
-            data = Main_Exam_section.objects.filter(Exam_id=data_main_exam).order_by("?")
-        data1 = Section_Question_Mapping.objects.filter(Section_id__Exam_id=data_main_exam)
-        question_list = list(data1.values_list('Question_id', flat=True))
-        data_question = Main_Question_Bank.objects.filter(id__in=question_list)
-        total_mark = sum(data_question.values_list('total_mark', flat=True))
-        lang = 'question_ar'
-        return render(request, 'wizard_new1.html',
-                      {'data_main_exam': data_main_exam, 'data': data, 'data_count': data_count,
-                       'total_mark': total_mark,'y':y,'my_model_field_name':lang,'my_var':'id'})
-    else:
-        if (data_main_exam.selection_mode == "All questions"):
-            data = Section_Question_Mapping.objects.filter(Section_id__Exam_id=data_main_exam)
-        else:
-            data = Section_Question_Mapping.objects.filter(Section_id__Exam_id=data_main_exam).order_by("?")
-        data_count = data.count()
-        question_list = list(data.values_list('Question_id', flat=True))
-        data_question = Main_Question_Bank.objects.filter(id__in=question_list)
-        total_mark = sum(data_question.values_list('total_mark', flat=True))
-        return render(request, 'wizard_new2.html', {'data_main_exam': data_main_exam, 'data': data,'data_count':data_count,'total_mark':total_mark,'y':y})
+            if (data_main_exam.selection_mode == "All questions"):
+                data = Section_Question_Mapping.objects.filter(Section_id__Exam_id=data_main_exam)
+            else:
+                data = Section_Question_Mapping.objects.filter(Section_id__Exam_id=data_main_exam).order_by("?")
+            data_count = data.count()
+            question_list = list(data.values_list('Question_id', flat=True))
+            data_question = Main_Question_Bank.objects.filter(id__in=question_list)
+            total_mark = sum(data_question.values_list('total_mark', flat=True))
+            return render(request, 'wizard_new2.html', {'data_main_exam': data_main_exam, 'data': data,'data_count':data_count,'total_mark':total_mark,'y':y})
+    
+
 def exam_result_new(request):
     uid = request.session['uid']
     slug = request.GET.get("type")
@@ -1212,7 +1233,6 @@ def exam_result_new(request):
             question_id = request.POST.getlist("question_id")
             for i in question_id:
                 data = Main_Question_Bank.objects.get(id=i)
-                print("data.total_mark",data.total_mark)
                 Section_Question = Section_Question_Mapping.objects.get(Question_id=data)
                 data_create = exam_attend_user_score.objects.create(exam_attend_user_id_id=uid,
                                                                     section_question_id=Section_Question,
@@ -1257,7 +1277,6 @@ def exam_result_new(request):
             exam_per = 0
         else:
             exam_per = (total_score / total_mark) * 100
-        data_attend = Exam_attend_user.objects.filter(id=uid).update(attend_status=True)
         data_answer = exam_attend_user_score.objects.filter(exam_attend_user_id_id=uid)
         return render(request, 'exam_result_new.html', {'data_main_exam': data_main_exam,'total_mark':total_mark,'total_score':total_score,'data_answer':data_answer,'exam_per':exam_per})
     
