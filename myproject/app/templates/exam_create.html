@@ -5,7 +5,7 @@
 {% block content %}
 
 <style>
-    #scoring_ans, #no_score{
+    #scoring_ans, #no_score,#scoring_end{
         accent-color: #1e4561; 
     }
 </style>
@@ -88,9 +88,9 @@
                                     <div class="responsbl d-flex">
 
                                     <input type="hidden" name="language_type" value="en"  >  
-                                    <input type="checkbox" name="language_type" value="ar" data-id="ar" class="lang_class">&ensp; <span style="font-size: 12px;" >Arabic</span>  &ensp;
-                                    <input type="checkbox" name="language_type" value="hi" data-id="hi" class="lang_class">&ensp; <span style="font-size: 12px;" >Hindi </span>  &ensp;
-                                    <input type="checkbox" name="language_type" value="ur" data-id="ur" class="lang_class">&ensp; <span style="font-size: 12px;" >Urdu </span> &ensp;
+                                    <input type="checkbox" name="language_type" value="ar" data-id="ar" class="lang_class">&ensp; <span style="font-size: 12px;" >Arabic</span>&ensp;
+                                    <input type="checkbox" name="language_type" value="hi" data-id="hi" class="lang_class">&ensp; <span style="font-size: 12px;" >Hindi </span>&ensp;
+                                    <input type="checkbox" name="language_type" value="ur" data-id="ur" class="lang_class">&ensp; <span style="font-size: 12px;" >Urdu </span>&ensp;
                                     <input type="checkbox" name="language_type" value="ta" data-id="ta" class="lang_class">&ensp; <span style="font-size: 12px;" >Tamil </span>
                                     </div>                                            
                                            
@@ -134,12 +134,7 @@
                                                 Initial Fields
                                             </a>
                                         </li>
-                                        <li class="nav-item d-flex align-items-center">
-                                            <a class="nav-link" data-toggle="tab" href="#generalinstructions"
-                                                role="tab">
-                                                General Instructions
-                                            </a>
-                                        </li>
+                                       
                                     </ul>
                                     <div class="tab-content small-form">
                                         <div class="tab-pane active" id="Questions" role="tabpanel">
@@ -150,23 +145,12 @@
                                                     data-target="#addsection">
                                                     Add a Section
                                                 </button>
-                                                <button type="button" style="cursor: pointer;"  class="btn btn-prim pay dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"  >
-                                                            <div style="padding: 18px 5px 10px;" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                                <div style="padding: 3px 2px;
-                                                                background: black;
-                                                                color: white;
-                                                                font-size: 12px;
-                                                                margin: 7px 1px; border-radius: 5px;" onclick="direct_question_btn()"><span style="margin:4px 4px;">Direct Question</span>  </div>
-                                                                
-                                                                <div style="padding: 3px 2px;
-                                                                background: black;
-                                                                color: white;
-                                                                font-size: 12px;
-                                                                margin: 7px 1px; border-radius: 5px;"><span style="margin:4px 4px;">Pick from question bank</span>  </div>
-                                                                
-                                                            </div>
+                                                <button type="button" class="btn btn-prim pay" onclick="direct_question_btn()">
                                                 
-                                                Add a question
+                                                    Add a question
+                                                </button>
+                                                <button type="button" class="btn btn-prim pay" onclick="question_bank_btn()">
+                                                    Question Bank
                                                 </button>
                                                 </div>
                                                 <table  class="table table-qstn dt-responsive table-bordered nowrap table-padd" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
@@ -264,18 +248,18 @@
                                                         </div>
                                                     </div>
 
-                                                    <!-- <div class="row">
+                                                    <div class="row">
                                                         <div
                                                             class="col-md-3 br-right d-flex align-items-center px-0">
                                                             <h6>Back Button</h6>
                                                         </div>
                                                         <div class="col-md-9">
                                                             <div class="form-group mt-2 d-flex align-items-center">
-                                                                <input type="checkbox" id="customer">
+                                                                <input type="checkbox" value="True" name="back_button" id="customer">
                                                                
                                                             </div>
                                                         </div>
-                                                    </div> -->
+                                                    </div>
                                                     
                                                 </div>
                                                 <div class="col-md-6">
@@ -356,15 +340,15 @@
                                                         </div>
                                                         <div class="col-md-9 py-2">
                                                             <div class="form-group d-flex align-items-center">
-                                                                <input type="radio" id="no_score" checked value="0" name="Scoring">
+                                                                <input type="radio" id="no_score" class="scoring_check" checked value="0" name="Scoring">
                                                                 <label>No scoring</label>
                                                             </div>
                                                             <div class="form-group d-flex align-items-center">
-                                                                <input type="radio" id="scoring_ans" value="1" name="Scoring">
+                                                                <input type="radio" id="scoring_ans" class="scoring_check" value="1" name="Scoring">
                                                                 <label>Scoring with answers at the end</label>
                                                             </div>
                                                             <div class="form-group d-flex align-items-center">
-                                                                <input type="radio" id="customer" value="2" name="Scoring">
+                                                                <input type="radio" id="scoring_end" class="scoring_check" value="2" name="Scoring">
                                                                 <label >Scoring without answers at the end</label>
                                                             </div>
                                                           
@@ -487,8 +471,10 @@
     
                                                         <tr class="heading-text">                                                        
                                                             <th style="width: 300px">Input Title</th>
+                                                            <th>Unique Field</th>
                                                             <th style="width: 300px">Input Type</th>
                                                             <th>Inputs</th>
+                                                           
                                                             <th></th>
                                                            
                                                         </tr>
@@ -511,45 +497,9 @@
                                         </div>
 
 
-                                         <!-- generalinstructions tab -->
+                                        
 
-                                         <div class="tab-pane" id="generalinstructions" role="tabpanel">
-                                            <div class="mt-4">
-                                                <div class="mb-2">
-                                                    <button type="button"
-                                                    class="btn btn-prim pay add_instruction">
-                                                    Add a Line
-                                                    </button>
-                                              
-                                                </div>
-                                                <table  class="table table-qstn table-input dt-responsive table-bordered nowrap table-padd" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
-
-                                                    <thead class="border-class">
-    
-                                                        <tr class="heading-text">                                                        
-                                                            <th style="width: 300px">Instruction</th>
-                                                           
-                                                            <th></th>
-                                                           
-                                                        </tr>
-                                                    </thead>
-    
-    
-                                                    <tbody id="append_instruction" class="body-textcls vertcle-center">
-                                                        
-                                                        
-                                                  
-                                                    </tbody>
-
-                                                </table>
-                                                
-                                                
-                                                
-                                              
-                                            </div>
-
-                                        </div>
-
+                                       
                                        
 
                                     </div>
@@ -599,6 +549,64 @@ aria-hidden="true" style="display: none">
             <button type="button" style="background-color:#f9365f!important;border: none!important;"
                 class="btn btn-info waves-effect waves-light section_btn">Save </button>
         </div>
+    </div>
+</div>
+</div>
+
+
+<div id="question_bank-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+aria-hidden="true" style="display: none">
+<div class="modal-dialog modal-lg">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h4 class="modal-title mt-0">Question Bank</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+
+                {% for i in exam_section %}
+
+                {% if i.section_type == "Section" %} 
+
+                    <div class="col-md-12">
+                            <input type="checkbox" name="">&ensp;
+                            <label style="color: black;" for="field-1" class="control-label"><b>{{i.section_title}}</b></label>
+                    </div>
+
+                    {% for j in i.Section_Question_Mapping_id.all %}
+
+                    <div style="padding-left: 18px;" class="col-md-12">
+                            <input type="checkbox" name="">&ensp;
+                            <label for="field-1" class="control-label"><h5>{{j.Question_id.Question}}</h5></label>
+                    </div>
+                    {% endfor %}
+
+
+                {% elif i.section_type == "Question" %}
+
+                <div class="col-md-12">
+                    <input type="checkbox" name="">&ensp;
+                    <label for="field-1" class="control-label">{{i.Question_bank_id.Question}}</label>
+                </div>
+
+                {% endif %}
+
+                {% endfor %}
+
+
+            </div>
+
+        <div class="modal-footer">
+
+            <button type="submit" style="background-color:#f9365f!important;border: none!important;"
+                class="btn btn-info waves-effect waves-light" data-dismiss="modal">Save </button>
+        </div>
+    </div>
+    </div>
+    </div>
     </div>
 </div>
 </div>
@@ -806,7 +814,7 @@ aria-hidden="true" style="display: none">
         })
 
 
-        $("#scoring_ans").click(function() {
+        $("#no_score").click(function() {
             no_score = $("#no_score").is(":checked")
 
             if(no_score == true){
@@ -814,7 +822,6 @@ aria-hidden="true" style="display: none">
 
         }
     })
-
 
  
      </script>
@@ -832,8 +839,16 @@ aria-hidden="true" style="display: none">
                 <td>
                     <input type="text" placeholder="Title" name="initial_label`+intital_value+`" id="" class="form-control">
                     <input type="hidden" class="initial_count" name="initial_count" value='`+intital_value+`'>
-                    </td>
+                </td>
+                
                 <td>
+                    <div style="margin-left:47px;margin-top: 12px;" class="input-group">
+                    <input  type="checkbox"  name="unique`+intital_value+`" value="True">
+                    </div>
+                </td>
+
+
+                <td>    
                     <select class="form-control initial_type`+intital_value+`" name="initial_type`+intital_value+`">
                         <option value="Text Input" selected="">Text Input</option>
                         <option value="selection">Selection</option>
@@ -857,30 +872,6 @@ aria-hidden="true" style="display: none">
              
       )
       intital_value = intital_value + 1
-    })
-
-
-    instruction_value = 1
-    $(".add_instruction").click(function(){
-     
-      $("#append_instruction").append(
-
-        ` <tr class="instruct_remove`+instruction_value+`">
-                <td>
-                    <input type="text" placeholder="Instruction" name="instruction_label`+instruction_value+`" id="" class="form-control">
-                    <input type="hidden" class="instruction_count" name="instruction_count" value='`+instruction_value+`'>
-                    </td>
-                
-                    <td><div class="action-tbl d-flex justify-content-end mt-1">
-                        
-                    <i class="fa fa-trash-o mx-1 trash-btn"  onclick="instruction_field_remove(`+instruction_value+`)" data-original-title="Delete"></i>
-                
-                </div></td>
-           
-            </tr>`                       
-             
-      )
-      instruction_value = instruction_value + 1
     })
 
 
@@ -922,7 +913,11 @@ aria-hidden="true" style="display: none">
             <button type="button" onclick="section_question(`+i+`)"
               class="btn btn-prim pay">
               Add a question
-            </button></td>
+            </button>
+            <button type="button" class="btn btn-prim pay" onclick="question_bank_btn()">                           
+                Question Bank
+            </button>
+            </td>
           <td style="background-color: #f3f6f8">
             
               <div class="action-tbl d-flex justify-content-end">
@@ -1013,7 +1008,6 @@ aria-hidden="true" style="display: none">
             success: function( data ) 
             {
                 var modal_name = data_id+"-"+modal_id
-
                 $("#apppend_child"+data_id).append(data)
                 $('.question-modal-'+modal_name).modal('show');
                 let total = parseInt(modal_id) + 1
@@ -1024,9 +1018,15 @@ aria-hidden="true" style="display: none">
     }
 
 
+    function question_bank_btn(){
+
+        $('#question_bank-modal').modal('show');
+
+    }
 
 
     function direct_question_btn(){
+
       var modal_name1 = i+"-"+i
            var isClassExist = document.getElementsByClassName('question-modal-'+modal_name1);
             if (isClassExist.length > 0) {
@@ -1061,13 +1061,10 @@ aria-hidden="true" style="display: none">
 
 <script>
     $(".submit_action").submit(function(){
-  
       event.preventDefault()
       $.ajax({   
-  
       url: "validation_check",                    
       data: {
-  
         section_line : $(".section_line").val(),
         initial_count : $(".initial_count").val(),
        
@@ -1098,7 +1095,6 @@ aria-hidden="true" style="display: none">
                   });
               }
               else{
-                 
                 document.forms["exam_form"].submit();
                  
              }
@@ -1108,36 +1104,32 @@ aria-hidden="true" style="display: none">
   
   </script>
   
-  
   <script>
 
 
 $(".lang_class").click(function(){
-   
     var val1 = $(this).attr('data-id')
-
     if ($(this).is(':checked')) {
         $(".lang"+val1).show()
-      
     } else {
         $(".lang"+val1).hide()
-      
     }
 })
 
 
 
-    function lang_class(){
+$(".scoring_check").click(function(){
+   if ($("#no_score").is(':checked')) {
+       $(".score_th").hide()
+       $(".score_td").hide()
+   } else  {
+    $(".score_th").show()
+    $(".score_td").show()
+   } 
+})
 
-      var checks = $('.lang_class:checked').map(function() {
-        preferred_lang = $(this).val();
-  
-      return $(this).val();
-    }).get()
-   
-    console.log(checks);
-    }
-  </script>
+        
+</script>
   
   
 

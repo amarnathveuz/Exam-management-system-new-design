@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 {% load static %}
-{% load my_filters %}
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -21,7 +20,7 @@
 
 </head>
 
-<body>
+<body onload="myFunction()">
 
     <div id="preloader">
         <div data-loader="circle-side"></div>
@@ -102,25 +101,11 @@
                                         <h2>{{i.section_title}}</h2>
                                     </div>
                                     {% endif %}
-                                   
-                                  sssssssssss:::::::::: 
-    
-                                  {{ obj.my_field|stringformat:"{}_"|add:my_var }}
                                     {% for j in i.Section_Question_Mapping_id.all %}
                                     <div class="qstn">
-                                        <input type="hidden" value="{{j.Question_id.id}}" name="question_id">
-
-data:{{my_model_field_name}}:
-                                   
-                                 
-
-                                        <h3 class="main_question"><i class="arrow_right"></i>{{forloop.counter}})
-                                            {{j.Question_id.Question}}
-
-                                          
- 
-                                        
-                                          </h3>
+                                        <input type="hidden" value="{{j.Question_id.id}}" name="question_id" class="mandatory_id">
+                                        <h3 class="main_question"><i class="arrow_right"></i>{{forloop.counter}}) {{j.Question_id.Question}}</h3>
+                                        <input type="hidden" value="{{j.Question_id.manadatory}}" class="mandatory_value">
                                         <small class="center-small"> {{j.Question_id.Description}} </small>
                                         {% if j.Question_id.Imagefield == "" %}
                                         {% else %}
@@ -137,7 +122,7 @@ data:{{my_model_field_name}}:
                                                         <div class="form-group">
                                                             <label class="container_radio version_2 opt-img">
                                                                     <img src="./media/{{k.Imagefield}}" alt="">
-                                                                    <input type="radio" name="answer{{i.Question_id.id}}" value="{{k.id}}" class="required">
+                                                                    <input type="radio" name="answer{{j.Question_id.id}}" value="{{k.id}}" class="{{j.Question_id.id}}option_value_checkbox">
                                                                     <span class="checkmark"></span>
                                                             </label>
                                                         </div>
@@ -147,7 +132,7 @@ data:{{my_model_field_name}}:
                                                 <div class="col-lg-3">
                                                     <div class="form-group">
                                                         <label class="container_radio version_2">{{k.choice}}
-                                                            <input type="radio" name="answer{{j.Question_id.id}}" value="{{k.id}}" class="required">
+                                                            <input type="radio" name="answer{{j.Question_id.id}}" value="{{k.id}}" class="{{j.Question_id.id}}option_value_checkbox">
                                                             <span class="checkmark"></span>
                                                         </label>
                                                         {% if k.Imagefield == "" %}
@@ -171,7 +156,7 @@ data:{{my_model_field_name}}:
                                                     <div class="form-group">
                                                         <label class="container_radio version_2 opt-img">
                                                                 <img src="./media/{{k.Imagefield}}" alt="">
-                                                                <input type="checkbox" name="answer{{i.Question_id.id}}" value="{{k.id}}" class="required">
+                                                                <input type="checkbox" name="answer{{j.Question_id.id}}" value="{{k.id}}" class="{{j.Question_id.id}}option_value_radio">
                                                                 <span class="checkmark"></span>
                                                         </label>
                                                     </div>
@@ -181,8 +166,8 @@ data:{{my_model_field_name}}:
                                             <div class="col-lg-3">
                                                 <div class="form-group">
                                                     <label class="container_check version_2">{{k.choice}}
-														<input type="checkbox" name="answer{{i.Question_id.id}}" value="{{k.id}}"
-															class="required">
+														<input type="checkbox" name="answer{{j.Question_id.id}}" value="{{k.id}}"
+															class="{{j.Question_id.id}}option_value_radio">
 														<span class="checkmark"></span>
 													</label>
                                                     {% if k.Imagefield == "" %}
@@ -219,7 +204,10 @@ data:{{my_model_field_name}}:
                             </div>
                             <!-- /middle-wizard -->
                             <div id="bottom-wizard">
+                                {% if data_main_exam.back_button == False %}
+                                {% else %}
                                 <button type="button" name="backward" class="backward">Prev</button>
+                                {% endif %}
                                 <button type="button" name="forward" class="forward">Next</button>
                                 <button type="submit" name="process" class="submit">Submit</button>
                             </div>
@@ -314,7 +302,35 @@ data:{{my_model_field_name}}:
         window.onunload = function () { null };
     </script>
 
- 
+    <script>
+        function userCheated() {
+            document.getElementById("form1").submit();
+        }
+        window.onblur = userCheated;
+    </script>
+
+    <script>
+        function myFunction() {
+            var inputBoxes = document.getElementsByClassName("mandatory_value");
+            var inputBoxes_id = document.getElementsByClassName("mandatory_id");
+            for (var i = 0; i < inputBoxes.length; i++) {
+                var value = inputBoxes[i].value;
+                var value_new = inputBoxes_id[i].value;
+                if (value == "True"){
+                    var inputBoxes1 = document.getElementsByClassName(value_new+"option_value_radio");
+                    var inputBoxes2 = document.getElementsByClassName(value_new+"option_value_checkbox");
+                    for (var j = 0; j < inputBoxes1.length; j++) {
+                        var value1 = inputBoxes1[j].value;
+                        inputBoxes1[j].classList.add("required");
+                    }
+                    for (var k = 0; k < inputBoxes2.length; k++) {
+                        var value2 = inputBoxes2[k].value;
+                        inputBoxes2[k].classList.add("required");
+                    }
+                }
+            }
+        }
+    </script>
 
 </body>
 

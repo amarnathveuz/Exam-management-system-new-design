@@ -482,8 +482,10 @@ from django.http import JsonResponse
 
 def exam_create(request):
     user_details = User.objects.all()
+    exam_section = Main_Exam_section.objects.all()
     context = {
-        "user_details":user_details
+        "user_details":user_details,
+        "exam_section":exam_section
     }
     return render(request,'exam_create.html',context)
 
@@ -517,8 +519,8 @@ def exam_save_action(request):
             resized_image = image.resize((width_size,fixed_height))
             print("resizeeeeeed:",resized_image.size)
             from django.conf import settings
-            resized_image.save("media/user_image/"+exam_background.name)
-            image_new1 = 'user_image/'+exam_background.name
+            resized_image.save("media/exam_background/"+exam_background.name)
+            image_new1 = 'exam_background/'+exam_background.name
         except:
             pass
         responsible_name = request.POST.get("responsible_name",False)
@@ -533,6 +535,7 @@ def exam_save_action(request):
         start_message = request.POST.get("start_message",False)
         end_message = request.POST.get("end_message",False)
         selection = request.POST.get("selection_mode",False)
+        back_button = request.POST.get("back_button",False)
         Scoring = request.POST.get("Scoring",False)
         required_score = request.POST.get("required_score",False)
         if Scoring == "0":
@@ -569,7 +572,8 @@ def exam_save_action(request):
         Login_required = login_required,
         attempt_limit = attempt_limit,
         created_by = request.user,
-        Success_per = required_score
+        Success_per = required_score,
+        back_button = back_button
         )
         language_type = request.POST.getlist("language_type",False)   
         try: 
@@ -608,6 +612,15 @@ def exam_save_action(request):
                 else:
                     question_type = request.POST.get("question_type"+model_count)
                     question_mandatory = request.POST.get("question_mandatory"+model_count,False)
+                    question_time_limit = request.POST.get("question_time_limit"+model_count,False)
+                    question_time = request.POST.get("question_time"+model_count,False)
+                    randomized_check = request.POST.get("randomized_check"+model_count,False)
+                    print("randomized_check:::;",randomized_check)
+                    print("question_time",question_time)
+                    if question_time == False:
+                        question_time_limit = "00:00"
+                    else:
+                        pass
                     try:
                         question_image = request.FILES['question_image'+model_count]
                         import os
@@ -622,14 +635,14 @@ def exam_save_action(request):
                             resized_image = image.resize((width_size,fixed_height))
                             print("resizeeeeeed:",resized_image.size)
                             from django.conf import settings
-                            resized_image.save("media/user_image/"+question_image.name)
-                            image_new1 = 'user_image/'+question_image.name
+                            resized_image.save("media/Question_Bank_image/"+question_image.name)
+                            image_new1 = 'Question_Bank_image/'+question_image.name
                         question_save = Main_Question_Bank.objects.create(Question=question,question_ar=ar_question,question_en=eng_question,question_hi=hi_question,question_ur=ur_question,question_ta=ta_question,
-                            Description =  question_description, Question_type = question_type,created_by = request.user,
+                            Description =  question_description, Question_type = question_type,created_by = request.user,Question_time_limit = question_time_limit,random_type=randomized_check,
                             comments = question_comment,Imagefield =image_new1,manadatory = question_mandatory)
                     except:
                         question_save = Main_Question_Bank.objects.create(Question=question,question_ar=ar_question,question_en=eng_question,question_hi=hi_question,question_ur=ur_question,question_ta=ta_question,
-                            Description =  question_description, Question_type = question_type,created_by = request.user,
+                            Description =  question_description, Question_type = question_type,created_by = request.user,Question_time_limit = question_time_limit,random_type=randomized_check,
                             comments = question_comment,manadatory = question_mandatory)
                     if modal_status == "direct_question":
                             section_save.Question_bank_id_id = question_save.id
@@ -670,8 +683,8 @@ def exam_save_action(request):
                                 resized_image = image.resize((width_size,fixed_height))
                                 print("resizeeeeeed:",resized_image.size)
                                 from django.conf import settings
-                                resized_image.save("media/user_image/"+file_data.name)
-                                image_new1 = 'user_image/'+file_data.name
+                                resized_image.save("media/Question_Bank_multiple/"+file_data.name)
+                                image_new1 = 'Question_Bank_multiple/'+file_data.name
                             question_choices = Question_Bank_multiple_choice.objects.create(Question_id_id=question_save.id,choice= choice_data,choice_ar=ar_choice,choice_en=eng_choice,choice_hi=hi_choice,choice_ur=ur_choice,choice_ta=ta_choice,
                                 Imagefield =  image_new1, file_type = extension, Mark = Score,result_status=result_status,created_by = request.user
                                 )
@@ -690,8 +703,9 @@ def exam_save_action(request):
         initial_line_count = request.POST.getlist("initial_count")
         for initial_count in initial_line_count:
             initial_label =  request.POST.get("initial_label"+initial_count)
+            unique =  request.POST.get("unique"+initial_count,False)
             initial_type =  request.POST.get("initial_type"+initial_count)
-            exam_initial_save = Exam_inital_field.objects.create(Exam_id_id = exam_save.id,title = initial_label,field_type = initial_type  )
+            exam_initial_save = Exam_inital_field.objects.create(Exam_id_id = exam_save.id,title = initial_label,field_type = initial_type,unique_type = unique  )
             if initial_type == "selection":
                 initial_answer =  request.POST.getlist("initial_answer"+initial_count)
                 for i in initial_answer:
@@ -754,54 +768,68 @@ def see_result_admin(request):
 
 # ---------------anirudh ----------------------------------
 def update_exam_details(request):
-    updated_id = request.POST.get("updated_id",False)
-    exam_title = request.POST.get("exam_title",False)
-    responsible_person = request.POST.get("responsible_person",False)
-    start_message = request.POST.get("start_message",False)
-    end_message = request.POST.get("end_message",False)
-    layout = request.POST.get("layout",False)
-    access_mode = request.POST.get("access_mode",False)
-    progression_mode = request.POST.get("progression_mode",False)
-    login_required = bool(request.POST.get('login_required', False))
-    attempt_limit = request.POST.get("attempt_limit",False)
-    attempt_check = request.POST.get("Attempt_check",False)
-    required_score = request.POST.get("required_score",False)
-    if attempt_check == False:
-        attempt_limit = 0
-    else:
-        pass
-    if login_required == False:
-        attempt_limit = 0
-    else:
-        pass
-    exam_time_limit = request.POST.get("exam_time_limit",False)
-    section = request.POST.get("section",False)
-    scoring_mode = request.POST.get("scoring_mode",False)
-    if exam_time_limit == "":
-        exam_time_limit = "00:00:00"
-    else:
-        pass        
-    data_update = Main_Exam_Master.objects.filter(id=updated_id).update(
-        responsible_person_id = responsible_person,
-        Exam_title = exam_title,
-        start_message = start_message,
-        end_message = end_message,
-        layout = layout,
-        progression_mode = progression_mode,
-        Exam_time_limit = exam_time_limit,
-        selection_mode = section,
-        scoring_mode = scoring_mode,
-        access_mode = access_mode,
-        Login_required = login_required,
-        attempt_limit = attempt_limit,
-        Success_per = required_score
-    )
-    messages.success(request,str("Updated"))
-    return redirect(request.META['HTTP_REFERER'])
+    if request.method == "POST":
+        updated_id = request.POST.get("updated_id",False)
+        exam_title = request.POST.get("exam_title",False)
+        responsible_person = request.POST.get("responsible_person",False)
+        start_message = request.POST.get("start_message",False)
+        end_message = request.POST.get("end_message",False)
+        layout = request.POST.get("layout",False)
+        access_mode = request.POST.get("access_mode",False)
+        progression_mode = request.POST.get("progression_mode",False)
+        login_required = bool(request.POST.get('login_required', False))
+        attempt_limit = request.POST.get("attempt_limit",False)
+        attempt_check = request.POST.get("Attempt_check",False)
+        required_score = request.POST.get("required_score",False)
+        if attempt_check == False:
+            attempt_limit = 0
+        else:
+            pass
+        if login_required == False:
+            attempt_limit = 0
+        else:
+            pass
+        exam_time_limit = request.POST.get("exam_time_limit",False)
+        section = request.POST.get("section",False)
+        scoring_mode = request.POST.get("scoring_mode",False)
+        if exam_time_limit == "":
+            exam_time_limit = "00:00:00"
+        else:
+            pass   
+            #  initail field #######
+        initial_line_count = request.POST.getlist("initial_count")
+        for initial_count in initial_line_count:
+            initial_label =  request.POST.get("initial_label"+initial_count)
+            initial_type =  request.POST.get("initial_type"+initial_count)
+            exam_initial_save = Exam_inital_field.objects.create(Exam_id_id = updated_id,title = initial_label,field_type = initial_type  )
+            if initial_type == "selection":
+                initial_answer =  request.POST.getlist("initial_answer"+initial_count)
+                for i in initial_answer:
+                    Exam_inital_field_choice.objects.create(initial_field_id_id = exam_initial_save.id,choice_name = i)
+            else:
+                pass
+        data_update = Main_Exam_Master.objects.filter(id=updated_id).update(
+            responsible_person_id = responsible_person,
+            Exam_title = exam_title,
+            start_message = start_message,
+            end_message = end_message,
+            layout = layout,
+            progression_mode = progression_mode,
+            Exam_time_limit = exam_time_limit,
+            selection_mode = section,
+            scoring_mode = scoring_mode,
+            access_mode = access_mode,
+            Login_required = login_required,
+            attempt_limit = attempt_limit,
+            Success_per = required_score
+        )
+        messages.success(request,str("Updated"))
+        return redirect(request.META['HTTP_REFERER'])
 def section_Question_view_modal(request):
     data_id = request.GET.get("data_id")
     data = Main_Question_Bank.objects.get(id=data_id)
     value1 = data_id
+    print("value1:::::::::::::",value1)
     return render(request,'section_Question_view_modal.html',{'data':data,'value1':value1})
 def Question_Management_update(request):
     updated_id = request.POST.get("updated_id",False)
@@ -869,7 +897,170 @@ def delete_initial_field(request):
         id = request.GET.get("id")
         data = Exam_inital_field.objects.get(id=id)
         return render(request,"delete_initial_field.html",{'data':data})
+def New_section_add(request):
+    if request.method == "POST":
+        exam_id = request.POST.get("exam_id")
+        section_title = request.POST.get("section_title")
+        section_save = Main_Exam_section.objects.create(
+                        Exam_id_id = exam_id,
+                        section_title = section_title,
+                        section_type = "Section",
+                        created_by = request.user
+                    )
+        return redirect(request.META['HTTP_REFERER'])
+def delete_question_section(request):
+    if request.method == "POST":
+        field_id = request.POST.get("field_id")
+        field = Main_Exam_section.objects.get(id=field_id)
+        field.delete()
+        messages.success(request, "Field Deleted Successfully..")
+        return redirect(request.META['HTTP_REFERER'])
+    else:
+        id = request.GET.get("id")
+        data = Main_Exam_section.objects.get(id=id)
+        return render(request,"delete_question_section.html",{'data':data})
+def delete_question_modal(request):
+    if request.method == "POST":
+        field_id = request.POST.get("field_id")
+        field = Main_Question_Bank.objects.get(id=field_id)
+        field.delete()
+        messages.success(request, "Question Deleted Successfully..")
+        return redirect(request.META['HTTP_REFERER'])
+    else:
+        id = request.GET.get("id")
+        data = Main_Question_Bank.objects.get(id=id)
+        return render(request,"delete_question_modal.html",{'data':data})
     
+def save_section_question_action(request):
+    if request.method == "POST":
+        updated_id = request.POST.get("updated_id")
+        button_status =  request.POST.get("button_status")
+        exam_id =  request.POST.get("exam_id")
+        section_line = request.POST.getlist("section_line")
+        section_line_count = request.POST.getlist("section_line_count")
+        section_count = updated_id
+        question = request.POST.get("question_name")
+        eng_question = request.POST.get("eng_question")
+        ar_question = request.POST.get("ar_question")
+        hi_question = request.POST.get("hi_question")
+        ur_question = request.POST.get("ur_question")
+        ta_question = request.POST.get("ta_question")
+        question_description = request.POST.get("qstn_descriptn")
+        question_comment = request.POST.get("question_comment")
+        model_count = request.POST.get("question_model_name")
+        question_type = request.POST.get("question_type")
+        question_mandatory = request.POST.get("question_mandatory",False)
+        print("question::::::::::::::::",question)
+        print("eng_question::::::::::::::::",eng_question)
+        print("ar_question::::::::::::::::",ar_question)
+        try:
+            question_image = request.FILES['question_image']
+            import os
+            extension = os.path.splitext(str(question_image))[1]
+            print("extension:::",extension)
+            if extension == ".pdf" or extension == ".txt" or extension == ".doc" or extension == ".docx" :
+                image_new1 = question_image
+            else:
+                fixed_height = 758
+                image = Image.open(question_image)
+                print("image.size",image.size)
+                width_size = int(fixed_height/image.height * image.width)
+                resized_image = image.resize((width_size,fixed_height))
+                print("resizeeeeeed:",resized_image.size)
+                from django.conf import settings
+                resized_image.save("media/user_image/"+question_image.name)
+                image_new1 = 'user_image/'+question_image.name
+            if button_status == "direct_question" :
+                section_save = Main_Exam_section.objects.create(Exam_id_id = exam_id ,section_title = question,
+                        section_type = "Question",
+                        created_by = request.user
+                        )
+            else:   
+               pass
+            question_save = Main_Question_Bank.objects.create(Question=question,question_ar=ar_question,question_en=eng_question,question_hi=hi_question,question_ur=ur_question,question_ta=ta_question,
+                Description =  question_description, Question_type = question_type,created_by = request.user,
+                comments = question_comment,Imagefield =image_new1,manadatory = question_mandatory)
+            if button_status == "direct_question":
+                section_save.Question_bank_id_id = question_save.id
+                section_save.save()
+                Section_Question_Mapping.objects.create(Section_id_id = section_save.id,Question_id_id = question_save.id,created_by = request.user,status="True")
+            else:
+                Section_Question_Mapping.objects.create(Section_id_id = updated_id,Question_id_id = question_save.id,created_by = request.user,status="True")
+             # Question_Bank_multiple_choice save 
+            question_line_count = request.POST.getlist("question_line_count")
+            total_score = 0
+            for  choice_count in question_line_count:
+                choice_data = request.POST.get("question_choice"+choice_count+'-'+model_count)
+                eng_choice = request.POST.get("eng_choice"+choice_count+'-'+model_count)
+                ar_choice = request.POST.get("ar_choice"+choice_count+'-'+model_count)
+                hi_choice = request.POST.get("hi_choice"+choice_count+'-'+model_count)
+                ur_choice = request.POST.get("ur_choice"+choice_count+'-'+model_count)
+                ta_choice = request.POST.get("ta_choice"+choice_count+'-'+model_count)
+                result_status = request.POST.get("addline_check"+choice_count+'-'+model_count,False)
+                Score = request.POST.get("Score"+choice_count+'-'+model_count,False)
+                if (result_status == "True"):
+                    total_score += int(Score)
+                try:
+                    file_data = request.FILES['question_image_choice'+choice_count+'-'+model_count]
+                    import os
+                    extension = os.path.splitext(str(file_data))[1]
+                    print("extension:::",extension)
+                    if extension == ".pdf" or extension == ".txt" or extension == ".doc" or extension == ".docx" :
+                        image_new1 = file_data
+                    else:
+                        fixed_height = 758
+                        image = Image.open(file_data)
+                        print("image.size",image.size)
+                        width_size = int(fixed_height/image.height * image.width)
+                        resized_image = image.resize((width_size,fixed_height))
+                        print("resizeeeeeed:",resized_image.size)
+                        from django.conf import settings
+                        resized_image.save("media/Question_Bank_image/"+file_data.name)
+                        image_new1 = 'Question_Bank_image/'+file_data.name
+                    question_choices = Question_Bank_multiple_choice.objects.create(Question_id_id=question_save.id,choice= choice_data,choice_ar=ar_choice,choice_en=eng_choice,choice_hi=hi_choice,choice_ur=ur_choice,choice_ta=ta_choice,
+                        Imagefield =  image_new1, file_type = extension, Mark = Score,result_status=result_status,created_by = request.user
+                        )
+                    if(result_status == "True"):
+                        question_save.answer_id.add(question_choices.id)
+                except:
+                    question_choices = Question_Bank_multiple_choice.objects.create(Question_id_id=question_save.id,choice= choice_data,choice_ar=ar_choice,choice_en=eng_choice,choice_hi=hi_choice,choice_ur=ur_choice,choice_ta=ta_choice,
+                        Mark = Score,result_status=result_status,created_by = request.user
+                        )
+                    if(result_status == "True"):
+                        question_save.answer_id.add(question_choices.id)
+                        pass
+            question_save.total_mark = total_score
+            question_save.save()
+        except:
+            pass
+        messages.success(request, "Added Successfully")
+        return redirect(request.META['HTTP_REFERER'])
+    
+def open_section_based_question_edit(request):
+    button_status = request.GET.get("button_status")
+    modal_id = request.GET.get("modal_id")
+    data_id = request.GET.get("data_id")
+    value1 = str(data_id)+"-"+str(modal_id)
+    status = request.GET.get("status")
+    print("value:::::::::",value1)
+    print("modal_id:::::::::",modal_id)
+    print("data_id:::::::::",data_id)
+    if button_status == "section_question":
+        section_id = Main_Exam_section.objects.get(id=data_id)
+    else:
+        section_id = 0
+    context = {
+        "value1":value1,
+        "modal_id":modal_id,
+        "data_id":data_id,
+        "status":status,
+        "section_id":section_id,
+        "button_status":button_status
+    }
+    return render(request,'open_section_based_question_edit.html',context)
+    
+
+
 
 
 
@@ -893,10 +1084,12 @@ def customer_using_link_new(request):
 
 def attend_exam_new(request,slug):
     data = Main_Exam_Master.objects.get(slug=slug)
+    data_count = Exam_attend_user.objects.filter(exam_id=data).count()
     uid = request.session['uid']
     data_attend = Exam_attend_user.objects.get(id=uid)
+    data_attend1 = Exam_attend_user.objects.filter(id=uid).update(attend_status=True)
     data_language = Main_exam_language.objects.filter(Exam_id=data)
-    return render(request,'attend_exam_new.html',{'data':data,'data_attend':data_attend,'data_language':data_language})
+    return render(request,'attend_exam_new.html',{'data':data,'data_attend':data_attend,'data_language':data_language,'data_count':data_count})
 
 def exam_login_action_new(request):
     if request.method == "POST":

@@ -59,18 +59,28 @@
                                     <div class="summary">
                                         <div class="wrapper">
                                             <h3>Thank you for your time !</h3>
-                                            {% if data_main_exam.Success_per == None or total_mark == 0 %}
-                                            {% else %}
-                                            {% if data_main_exam.Success_per > exam_per %}
-                                            <h2>Result : <span style="color: #df1313;">Failed </span></h2>
-                                            {% else %}
-                                            <h2>Result : <span style="color: #06f706;">Passed </span></h2>
-                                            {% endif %}
-                                            {% endif %}
                                             {% if data_main_exam.scoring_mode == "2" %}
-                                            <h2>Your Score : {{total_score}}&nbsp;/&nbsp;<span style="color: #df1313;">{{total_mark}}</span></h2>
+                                                {% if data_main_exam.Success_per == None or total_mark == 0 %}
+                                                {% else %}
+                                                {% if data_main_exam.Success_per > exam_per %}
+                                                <h2>Result : <span style="color: #df1313;">Failed </span></h2>
+                                                {% else %}
+                                                <h2>Result : <span style="color: #06f706;">Passed </span></h2>
+                                                {% endif %}
+                                                {% endif %}
+                                                <h2>Your Score : {{total_score}}&nbsp;/&nbsp;<span style="color: #df1313;">{{total_mark}}</span></h2>
                                             {% endif %}
+
+
                                             {% if data_main_exam.scoring_mode == "1" %}
+                                                {% if data_main_exam.Success_per == None or total_mark == 0 %}
+                                                {% else %}
+                                                {% if data_main_exam.Success_per > exam_per %}
+                                                <h2>Result : <span style="color: #df1313;">Failed </span></h2>
+                                                {% else %}
+                                                <h2>Result : <span style="color: #06f706;">Passed </span></h2>
+                                                {% endif %}
+                                                {% endif %}
                                             <h2>Your Score : {{total_score}}&nbsp;/&nbsp;<span style="color: #df1313;">{{total_mark}}</span></h2>
                                             <a style="color:blue;border-radius: 10px;cursor: pointer;" onclick="answer_button()" type="button"><b>If you wish, click here to review your answers</b></a>
                                             <div class="answer_data" style="display:none;">
@@ -108,7 +118,7 @@
                                             {% endif %}
                                         </div>
                                         <div style="padding: 15px 0px 0px 0px">
-                                          
+                                            <a href="view_exams"><button class="submit-button-class" type="button"><b>BACK TO HOME</b></button></a>
                                         </div>
                                     </div>
                                 </div>

@@ -39,6 +39,11 @@ urlpatterns = [
     path('delete_initial_field',views.delete_initial_field,name='delete_initial_field'),
     path('section_Question_view_modal',views.section_Question_view_modal,name='section_Question_view_modal'),
     path('Question_Management_update',views.Question_Management_update,name='Question_Management_update'),
+    path('New_section_add',views.New_section_add,name='New_section_add'),
+    path('open_section_based_question_edit',views.open_section_based_question_edit,name='open_section_based_question_edit'),
+    path('delete_question_section',views.delete_question_section,name='delete_question_section'),
+    path('delete_question_modal',views.delete_question_modal,name='delete_question_modal'),
+    path('save_section_question_action',views.save_section_question_action,name='save_section_question_action'),
 
 
 
