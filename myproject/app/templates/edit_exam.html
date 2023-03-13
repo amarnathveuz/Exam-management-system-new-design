@@ -4,7 +4,7 @@
 
 {% block content %}
 <div class="content">
-    <div class="container-fluid margin-class-this">
+    <div class="container-fluid margin-class-this" >
         <div class="row">
             <div class="col-md-12 px-0">
                 <div class="card card-shadow">
@@ -17,19 +17,12 @@
                             <div class="d-flex align-items-center justify-content-between">
                                 <h2 class="main-heading-txt"></h2>
                                 <div class="d-flex">
+                                                          
+                                <a target="_blank" href="exam_login_new?type={{data.slug}}"><button type="button"
+                                    class="btn btn-outline-pink waves-effect waves-light m-b-5 mx-1"
+                                    data-toggle="modal" data-target=""><i
+                                        class="fa fa-share mr-1"></i>Test Link</button></a>
                                           
-                        {% if data.Login_required == True %}
-                                    <a target="_blank" href="exam_login_new?type={{data.slug}}"><button type="button"
-                                        class="btn btn-outline-pink waves-effect waves-light m-b-5 mx-1"
-                                        data-toggle="modal" data-target=""><i
-                                            class="fa fa-share mr-1"></i>Test Link</button></a>
-
-                                            {% else %}
-                                            <a target="_blank" href="customer_using_link_new?type={{data.slug}}"><button type="button"
-                                                class="btn btn-outline-pink waves-effect waves-light m-b-5 mx-1"
-                                                data-toggle="modal" data-target=""><i
-                                                    class="fa fa-share mr-1"></i>Test Link</button></a>
-                                                    {% endif %}
                                     <button type="button"
                                         class="btn btn-outline-pink waves-effect waves-light m-b-5 mx-1"><i
                                             class="fa fa-print mr-1"></i>Print</button>
@@ -1154,12 +1147,7 @@
                     </div>
                 </div>
             </div>
-
-
-
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
-
         <script>
         function section_question(data_id){
             var modal_id = data_id;
@@ -1175,6 +1163,7 @@
             else{
                 var isClassExist = document.getElementsByClassName('question-modal-'+modal_name);
                 if (isClassExist.length > 0) {
+                    alert("sssssssssss")
                     $('.question-modal-'+modal_name).modal('show');
                     $('.first_open'+data_id).val("new")
                 }
@@ -1201,6 +1190,7 @@
             }
             }
             }
+
             else{
 
             $.ajax(
@@ -1250,7 +1240,7 @@
                     {
 
                     $(".section_Question_view_modal").append(data)
-                    $('.question-modal-'+modal_name).modal('show');
+                    $('.question-modal-'+modal_name1).modal('show');
                         
                     } 
                 })
@@ -1320,18 +1310,33 @@
             <script>
             function section_Question_view(data_id){
                 var data_id = data_id
+                var modal_name = data_id+"-"+data_id
+
+                var isClassExist = document.getElementsByClassName('question-modal-'+modal_name);
+                if (isClassExist.length > 0) {
+                    $('.question-modal-'+modal_name).modal('show');
+                    }
+
+                else{
+
                 $.ajax({
                         type: "GET",
                         url: "section_Question_view_modal",
                         data: {
-                            data_id: data_id
+                            data_id: data_id,
+                            modal_id:data_id
+                            
                         },
                         success: function (data) {
+                            var modal_name = data_id+"-"+data_id
                             $(".section_Question_view_modal").append(data);
-                            $('.question-modal-'+data_id).modal('show');
+                            $('.question-modal-'+modal_name).modal('show');
                         }
                     })
                 }
+                }
+
+
 
                 $(document).on("click", ".title_edit", function () {
                     var myid = $(this).attr("data-id") ;

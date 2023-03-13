@@ -15,6 +15,7 @@ def dashboard(request):
     total_role = Role_master.objects.all().count()
     user_data = User_details.objects.filter(status=True)
     current_exam = Main_Exam_Master.objects.all()
+
     context = {
         'total_exam_count':total_exam_count,
         'total_closed_exam':total_closed_exam,
@@ -24,7 +25,10 @@ def dashboard(request):
         'user_data':user_data,
         'current_exam':current_exam
     }
+
     return render(request,'dashboard.html',context)
+
+
 
 def index(request):
     if request.method == "POST":
@@ -551,7 +555,6 @@ def exam_save_action(request):
         else:
             pass
 
-
         initial_line_count = request.POST.getlist("initial_count")
         for initial_count in initial_line_count:
             initial_label =  request.POST.get("initial_label"+initial_count)
@@ -723,7 +726,6 @@ def open_section_based_question(request):
 
 
 
-
 # --------------------amritha end method------------------------
 
 
@@ -794,17 +796,18 @@ def update_exam_details(request):
         return redirect(request.META['HTTP_REFERER'])
 
 
-
 def section_Question_view_modal(request):
     data_id = request.GET.get("data_id")
     data = Main_Question_Bank.objects.get(id=data_id)
-    value1 = data_id
+    value1 = str(data_id)+"-"+str(data_id)
+    modal_id = request.GET.get("modal_id")
 
     print("value1:::::::::::::",value1)
-    return render(request,'section_Question_view_modal.html',{'data':data,'value1':value1})
+    return render(request,'section_Question_view_modal.html',{'data':data,'value1':value1,'modal_id':modal_id})
 
 def Question_Management_update(request):
     updated_id = request.POST.get("updated_id",False)
+    model_count = request.POST.get("question_model_name")
     question_name = request.POST.get("question_name",False)
     remove_status = request.POST.getlist("remove_status[]")
     Question_type = request.POST.get("Question_type",False)
@@ -815,6 +818,10 @@ def Question_Management_update(request):
     question_choice = request.POST.getlist("question_choice[]",False)
     answer = request.POST.getlist("answer[]",False)
     Score = request.POST.getlist("Score[]",False)
+    Qmain=Main_Question_Bank.objects.get(id=updated_id)
+
+    total_score = 0
+
     data_save1=Main_Question_Bank.objects.filter(id=updated_id).update(
                 Question =  question_name,
                 Question_type = Question_type,
@@ -824,31 +831,100 @@ def Question_Management_update(request):
     )
 
     image_field = request.FILES.getlist('exam_choice_image[]')
-    print("image_field L:::::::::::::::::",image_field)
+
     for i in range(len(choice_update)):
-        if int(remove_status[i]) == int(1): 
-            if image_field != []:
-                Question_Bank_multiple_choice.objects.filter(id=choice_update[i]).update(
-                        Imagefield = image_field[i]
-                    )
+        if int(remove_status[i]) == 1: 
+            if image_field :
+                for k in range(len(image_field)):
+                    Question_Bank_multiple_choice.objects.filter(id=choice_update[i]).update(
+                            Imagefield = image_field[k]
+                        )
             else:
-                  Question_Bank_multiple_choice.objects.filter(id=choice_update[i]).update(
-                        Imagefield = " "
+
+                Question_Bank_multiple_choice.objects.filter(id=choice_update[i]).update(
+                        Imagefield = ""
                     )
+              
     for i in range(len(choice_update)):
-        print("question_choice::::::::",str(question_choice[i]))
-        print("Score::::::::",Score[i])
         Question_Bank_multiple_choice.objects.filter(id=choice_update[i]).update(
                     choice = question_choice[i],
                     Mark = Score[i],
+                )
+
+        print("answer;;;;;;;;;;;;;;;;;;",answer)
+        total_score += int(Score[i])
+
+        if answer == False:
+            Question_Bank_multiple_choice.objects.filter(id=choice_update[i]).update(
                     result_status = False
                 )
-        for j in range(len(answer)):
-            if answer[j] == choice_update[i]:
-                print("answer:qqqqqq:::::",answer[j]) 
-                Question_Bank_multiple_choice.objects.filter(id=choice_update[i]).update(
-                    result_status = True
-                )
+        else:
+
+            for j in range(len(answer)):
+                if answer[j] == choice_update[i]:
+                    print("answer:qqqqqq:::::",answer[j]) 
+                    update_result=Question_Bank_multiple_choice.objects.filter(id=choice_update[i]).update(
+                        result_status = True
+                    )
+                    data_choice_id = Question_Bank_multiple_choice.objects.get(id=choice_update[i])
+                    
+                    Qmain.answer_id.add(data_choice_id.id)
+                    Qmain.save()
+
+ 
+
+    question_line_count = request.POST.getlist("question_line_count"+model_count)
+    print("question_line_count::::::::::::",question_line_count)
+    if question_line_count :
+        question_save = Main_Question_Bank.objects.get(id=updated_id)
+        total_score = 0
+        for  choice_count in question_line_count:
+            choice_data = request.POST.get("question_choice"+choice_count+'-'+model_count)
+            eng_choice = request.POST.get("eng_choice"+choice_count+'-'+model_count)
+            ar_choice = request.POST.get("ar_choice"+choice_count+'-'+model_count)
+            hi_choice = request.POST.get("hi_choice"+choice_count+'-'+model_count)
+            ur_choice = request.POST.get("ur_choice"+choice_count+'-'+model_count)
+            ta_choice = request.POST.get("ta_choice"+choice_count+'-'+model_count)
+            result_status = request.POST.get("addline_check"+choice_count+'-'+model_count,False)
+            Score = request.POST.get("Score"+choice_count+'-'+model_count,False)
+            if (result_status == "True"):
+                total_score += int(Score)
+            try:
+                file_data = request.FILES['question_image_choice'+choice_count+'-'+model_count]
+                import os
+                extension = os.path.splitext(str(file_data))[1]
+                print("extension:::",extension)
+                if extension == ".pdf" or extension == ".txt" or extension == ".doc" or extension == ".docx" :
+                    image_new1 = file_data
+                else:
+                    fixed_height = 758
+                    image = Image.open(file_data)
+                    print("image.size",image.size)
+                    width_size = int(fixed_height/image.height * image.width)
+                    resized_image = image.resize((width_size,fixed_height))
+                    print("resizeeeeeed:",resized_image.size)
+
+                    from django.conf import settings
+                    resized_image.save("media/Question_Bank_image/"+file_data.name)
+                    image_new1 = 'Question_Bank_image/'+file_data.name
+                    
+                question_choices = Question_Bank_multiple_choice.objects.create(Question_id_id=question_save.id,choice= choice_data,choice_ar=ar_choice,choice_en=eng_choice,choice_hi=hi_choice,choice_ur=ur_choice,choice_ta=ta_choice,
+                    Imagefield =  image_new1, file_type = extension, Mark = Score,result_status=result_status,created_by = request.user
+                    )
+
+                if(result_status == "True"):
+                    question_save.answer_id.add(question_choices.id)
+            except:
+                question_choices = Question_Bank_multiple_choice.objects.create(Question_id_id=question_save.id,choice= choice_data,choice_ar=ar_choice,choice_en=eng_choice,choice_hi=hi_choice,choice_ur=ur_choice,choice_ta=ta_choice,
+                    Mark = Score,result_status=result_status,created_by = request.user
+                    )
+
+                if(result_status == "True"):
+                    question_save.answer_id.add(question_choices.id)
+                    pass
+
+    question_save.total_mark = total_score
+    question_save.save()
 
     messages.success(request,str("Updated"))
     return redirect(request.META['HTTP_REFERER'])
@@ -945,7 +1021,9 @@ def save_section_question_action(request):
         print("ar_question::::::::::::::::",ar_question)
         
         try:
+            print("qaaaaaaaaaaaaooo")
             question_image = request.FILES['question_image']
+            print("qaaaaaaaaaaaaooo11")
             import os
             extension = os.path.splitext(str(question_image))[1]
             print("extension:::",extension)
@@ -1042,9 +1120,14 @@ def open_section_based_question_edit(request):
     status = request.GET.get("status")
 
 
+
     print("value:::::::::",value1)
     print("modal_id:::::::::",modal_id)
     print("data_id:::::::::",data_id)
+
+
+
+
 
 
     if button_status == "section_question":
