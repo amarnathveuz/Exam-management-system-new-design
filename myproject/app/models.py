@@ -16,7 +16,6 @@ class common_table(models.Model):
         abstract = True
 
 
-
 layout_choice = (
     ("0","One page with all the questions"),
     ("1","One page per section"),
@@ -81,6 +80,7 @@ import string
 import random
 def rand_slug():
     return ''.join(random.choice(string.ascii_letters + string.digits) for _ in range(1))
+
 
 question_type_choices =(
     ("Radio","Multiple choice: only one answer"),
@@ -179,8 +179,11 @@ class Question_Bank_matrix_rows(common_table):
 
 class Section_Question_Mapping(common_table):
     Section_id = models.ForeignKey(Main_Exam_section,related_name ="Section_Question_Mapping_id",on_delete=models.CASCADE,null=True,db_index=True)
+    Exam_id = models.ForeignKey(Main_Exam_Master,related_name ="Section_Question_Mapping_exam_id",on_delete=models.CASCADE,null=True)
     Question_id = models.ForeignKey(Main_Question_Bank,related_name ="Question_Bank_id",on_delete=models.CASCADE,null=True,db_index=True)
     order = models.IntegerField(null=True,db_index=True)
+
+    
 
 
 Exam_start_field=(
@@ -195,14 +198,11 @@ class Exam_inital_field(common_table):
     title = models.TextField(db_index=True)
     field_type = models.CharField(max_length=20,choices=Exam_start_field,null=True,db_index=True)
     unique_type = models.BooleanField(default=False,db_index=True)
+
+
 class Exam_inital_field_choice(common_table):
     initial_field_id = models.ForeignKey(Exam_inital_field,related_name ="Exam_inital_field_id",on_delete=models.CASCADE,null=True,db_index=True)
     choice_name = models.CharField(max_length=25,null=True,db_index=True)
-
-
-
-
-
 
 
 Exam_attend_user_type=(

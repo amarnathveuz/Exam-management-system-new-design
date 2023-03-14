@@ -227,7 +227,7 @@
                                                                             {% for j in i.Section_Question_Mapping_id.all %}
 
                                                                             <tr>
-                                                                                <td> <a href="#"  onclick="section_Question_view({{j.Question_id.id}})" style="text-decoration: none; color: black;"> 
+                                                                                <td> <a href="#"  onclick="section_Question_view(`{{j.Question_id.id}}`)" style="text-decoration: none; color: black;"> 
                                                                                     {{j.Question_id.Question}}</a>
                                                                                 </td>
                                                                                 <td>{% if j.Question_id.Question_type == "Radio" %} Multiple choice: only one answer  {% else %}  Multiple choice: multiple answers allowed {% endif %}
@@ -255,7 +255,7 @@
                                                             {% elif i.section_type == "Question" %}
 
                                                             <tr>
-                                                                <td> <a href="#" onclick="section_Question_view({{i.Question_bank_id.id}})" style="text-decoration: none; color: black;">
+                                                                <td> <a href="#" onclick="section_Question_view(`{{i.Question_bank_id.id}}`)" style="text-decoration: none; color: black;">
                                                                     {{i.Question_bank_id.Question}} </a>
                                                                 </td>
                                                                 <td>{% if i.Question_id.Question_type == "Radio" %} Multiple choice: only one answer  {% else %}  Multiple choice: multiple answers allowed {% endif %}</td>
@@ -263,7 +263,7 @@
                                                                     <div class="action-tbl d-flex justify-content-end">
                                                                         <i style="cursor: pointer;" class="fa fa-trash-o mx-1 trash-btn"
                                                                             data-toggle="tooltip" data-placement="top"
-                                                                            title="" data-original-title="Delete" onclick="section_question_delete_btn(`{{i.Question_bank_id.id}}`)"> </i>
+                                                                            title="" data-original-title="Delete" onclick="section_question_delete_btn(`{{i.id}}`)"> </i>
                                                                     </div>
                                                                 </td>
                                                             </tr>
@@ -346,35 +346,32 @@
                                                             </div>
                                                             <div class="col-md-9 py-2">
                                                                 <div class="form-group d-flex align-items-center">
-                                                                    <input type="radio" id="customer" name="section"
+                                                                    <input type="radio" id="section1" name="section"
                                                                         {% if data.selection_mode == "All questions" %}
                                                                         checked {% endif %} value="All questions">
-                                                                    <label for="customer">All questions</label>
+                                                                    <label for="section1">All questions</label>
                                                                 </div>
                                                                 <div class="form-group d-flex align-items-center">
-                                                                    <input type="radio" id="customer" name="section"
+                                                                    <input type="radio" id="section2" name="section"
                                                                         {% if data.selection_mode == "Randomized per section" %}
                                                                         checked {% endif %}
                                                                         value="Randomized per section">
-                                                                    <label for="customer">Randomized per Section</label>
+                                                                    <label for="section2">Randomized per Section</label>
                                                                 </div>
-
-
                                                             </div>
                                                         </div>
                                                         <div class="row">
+
                                                             <div
                                                                 class="col-md-3 br-right d-flex align-items-center px-0">
                                                                 <h6>Back Button</h6>
                                                             </div>
+
                                                             <div class="col-md-9">
                                                                 <div class="form-group mt-2 d-flex align-items-center">
-                                                                    <input type="checkbox" id="customer">
-
+                                                                    <input type="checkbox" id="" name="back_button" {% if data.back_button %}
+                                                                    checked {% endif %}>
                                                                 </div>
-
-
-
                                                             </div>
                                                         </div>
 
@@ -613,6 +610,7 @@
 
                                                             <tr class="heading-text">
                                                                 <th style="width: 300px">Title</th>
+                                                                <th>Unique Field</th>
                                                                 <th style="width: 300px">Type</th>
                                                                 <th>Inputs</th>
                                                                 <th></th>
@@ -624,8 +622,19 @@
 
                                                             {% for i in intial_field %}
                                                             <tr>
-                                                                <td><input type="text" name="initial_title" id=""
-                                                                        value="{{i.title}}" class="form-control"></td>
+                                                                <td>
+                                                                    <input type="text" name="initial_title" id=""
+                                                                        value="{{i.title}}" class="form-control">
+                                                                </td>
+
+                                                                <td>
+                                                                    <div  class="input-group" >
+                                                                    <input {% if i.unique_type %} checked
+                                                                    {% endif %}   type="checkbox" name="unique_field"
+                                                                        value="" class="form-control" >
+                                                                    </div>
+                                                                </td>
+
                                                                 <td>
                                                                     <select name="initial_type" id=""
                                                                         class="form-control">
@@ -1283,7 +1292,14 @@
                         <td>
                             <input type="text" placeholder="Title" name="initial_label`+intital_value+`" id="" class="form-control">
                             <input type="hidden" class="initial_count" name="initial_count" value='`+intital_value+`'>
-                            </td>
+                        </td>
+
+                        <td>
+                            <div style="margin-left:47px;margin-top: 12px;" class="input-group">
+                                <input type="checkbox"  name="unique`+intital_value+`" value="True">
+                            </div>
+                        </td>
+
                         <td>
                             <select class="form-control initial_type`+intital_value+`" name="initial_type`+intital_value+`">
                                 <option value="Text Input" selected="">Text Input</option>
@@ -1424,11 +1440,7 @@
                     });
                 }
 
-
                 function section_question_delete_btn(id) {
-                    alert("section_question_delete_btn")
-                    alert(id)
-
                     var url = "delete_question_section";
                     $.ajax({
                         url: url,
@@ -1443,8 +1455,6 @@
                 }
 
                 function question_delete_btn(id) {
-                    alert("question_delete_btn")
-                    alert(id)
                     var url = "delete_question_modal";
                     $.ajax({
                         url: url,

@@ -219,7 +219,6 @@ def user_management(request):
                 if manager_id == False:
                     manager_id = request.user.id 
 
-                
                 user_data = User_details.objects.create(
                    
                     auth_user = user,
@@ -469,9 +468,6 @@ def edit_exam(request):
         'lang':lang
     } 
     return render(request,'edit_exam.html' ,context)
-
-
-
 
 
 
@@ -778,6 +774,7 @@ def update_exam_details(request):
         access_mode = request.POST.get("access_mode",False)
         progression_mode = request.POST.get("progression_mode",False)
         login_required = bool(request.POST.get('login_required', False))
+        back_button =  bool(request.POST.get('back_button', False))
         attempt_limit = request.POST.get("attempt_limit",False)
         attempt_check = request.POST.get("Attempt_check",False)
         required_score = request.POST.get("required_score",False)
@@ -801,7 +798,8 @@ def update_exam_details(request):
         for initial_count in initial_line_count:
             initial_label =  request.POST.get("initial_label"+initial_count)
             initial_type =  request.POST.get("initial_type"+initial_count)
-            exam_initial_save = Exam_inital_field.objects.create(Exam_id_id = updated_id,title = initial_label,field_type = initial_type  )
+            unique =  request.POST.get("unique"+initial_count,False)
+            exam_initial_save = Exam_inital_field.objects.create(Exam_id_id = updated_id,title = initial_label,unique_type = unique,field_type = initial_type  )
             if initial_type == "selection":
                 initial_answer =  request.POST.getlist("initial_answer"+initial_count)
                 for i in initial_answer:
@@ -820,9 +818,11 @@ def update_exam_details(request):
             scoring_mode = scoring_mode,
             access_mode = access_mode,
             Login_required = login_required,
+            back_button = back_button,
             attempt_limit = attempt_limit,
             Success_per = required_score
         )
+
         messages.success(request,str("Updated"))
         return redirect(request.META['HTTP_REFERER'])
 
@@ -843,6 +843,11 @@ def Question_Management_update(request):
     Question_type = request.POST.get("Question_type",False)
     Description = request.POST.get("Description",False)
     manadatory = bool(request.POST.get('manadatory', False))
+    randomized_check =  bool(request.POST.get('randomized_check', False))
+
+    print("manadatory::::::::",manadatory)
+    print("randomized_check::::::::",randomized_check)
+
     comments = request.POST.get("comments",False)
     choice_update = request.POST.getlist("choice_update[]",False)
     question_choice = request.POST.getlist("question_choice[]",False)
@@ -851,12 +856,14 @@ def Question_Management_update(request):
     Qmain=Main_Question_Bank.objects.get(id=updated_id)
     question_remove_status =  request.POST.get("question_remove_status")
     total_score = 0
+    
     data_save1=Main_Question_Bank.objects.filter(id=updated_id).update(
                 Question =  question_name,
                 Question_type = Question_type,
                 Description = Description,
                 manadatory = manadatory,
-                comments =  comments
+                comments =  comments,
+                random_type=randomized_check
     )
     print("question_remove_status:::::",question_remove_status)
     if question_remove_status == "0":
@@ -867,14 +874,13 @@ def Question_Management_update(request):
         question_image = request.FILES.get('question_image')
         print("question_image:::::",question_image)
         if question_image :
-            print("sssssss")
             import os
             extension = os.path.splitext(str(question_image))[1]
             print("extension:::",extension)
             if extension == ".pdf" or extension == ".txt" or extension == ".doc" or extension == ".docx" :
                 image_new1 = question_image
             else:
-                fixed_height = 758
+                fixed_height = 171
                 image = Image.open(question_image)
                 print("image.size",image.size)
                 width_size = int(fixed_height/image.height * image.width)
@@ -948,7 +954,7 @@ def Question_Management_update(request):
                 if extension == ".pdf" or extension == ".txt" or extension == ".doc" or extension == ".docx" :
                     image_new1 = file_data
                 else:
-                    fixed_height = 758
+                    fixed_height = 171
                     image = Image.open(file_data)
                     print("image.size",image.size)
                     width_size = int(fixed_height/image.height * image.width)
@@ -1010,16 +1016,15 @@ def New_section_add(request):
 def delete_question_section(request):
     if request.method == "POST":
         field_id = request.POST.get("field_id")
-        field = Main_Question_Bank.objects.get(id=field_id)
+        field = Main_Exam_section.objects.get(id=field_id)
         field.delete()
         messages.success(request,"Field Deleted Successfully..")
         return redirect(request.META['HTTP_REFERER'])
     else:
         id = request.GET.get("id")
-        data = Main_Question_Bank.objects.get(id=id)
+        data = Main_Exam_section.objects.get(id=id)
         return render(request,"delete_question_section.html",{'data':data})
 
-    
 
 
 def delete_question_modal(request):
