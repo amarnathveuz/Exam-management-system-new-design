@@ -61,6 +61,10 @@ urlpatterns = [
 
 
 
+    path('test_api',views.test_api,name='test_api'),
+
+
+
     
 
 

@@ -1415,3 +1415,12 @@ def choice_option_delete(request):
         id = request.GET.get("id")
         data = Question_Bank_multiple_choice.objects.get(id=id)
         return render(request,"choice_option_delete.html",{'data':data})
+    
+
+
+
+def test_api(request):
+    print("--------------------------------------")
+    name = request.GET.get("name")
+    print("name:::::::::",str(name))
+    return JsonResponse({'message':'success'})

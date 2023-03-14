@@ -179,6 +179,7 @@ class Question_Bank_matrix_rows(common_table):
 
 class Section_Question_Mapping(common_table):
     Section_id = models.ForeignKey(Main_Exam_section,related_name ="Section_Question_Mapping_id",on_delete=models.CASCADE,null=True,db_index=True)
+    Exam_id = models.ForeignKey(Main_Exam_Master,related_name ="Section_Question_Mapping_exam_id",on_delete=models.CASCADE,null=True)
     Question_id = models.ForeignKey(Main_Question_Bank,related_name ="Question_Bank_id",on_delete=models.CASCADE,null=True,db_index=True)
     order = models.IntegerField(null=True,db_index=True)
 
