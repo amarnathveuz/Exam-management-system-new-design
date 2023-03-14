@@ -1,10 +1,10 @@
 {% extends 'base.html' %}
 
 {% load static %} 
-
+{% load  edit_language %}
 {% block content %}
 <div class="content">
-    <div class="container-fluid margin-class-this">
+    <div class="container-fluid margin-class-this" >
         <div class="row">
             <div class="col-md-12 px-0">
                 <div class="card card-shadow">
@@ -17,14 +17,12 @@
                             <div class="d-flex align-items-center justify-content-between">
                                 <h2 class="main-heading-txt"></h2>
                                 <div class="d-flex">
+                                                          
+                                <a target="_blank" href="exam_login_new?type={{data.slug}}"><button type="button"
+                                    class="btn btn-outline-pink waves-effect waves-light m-b-5 mx-1"
+                                    data-toggle="modal" data-target=""><i
+                                        class="fa fa-share mr-1"></i>Test Link</button></a>
                                           
-                     
-                                    <a target="_blank" href="exam_login_new?type={{data.slug}}"><button type="button"
-                                        class="btn btn-outline-pink waves-effect waves-light m-b-5 mx-1"
-                                        data-toggle="modal" data-target=""><i
-                                            class="fa fa-share mr-1"></i>Test Link</button></a>
-
-                                           
                                     <button type="button"
                                         class="btn btn-outline-pink waves-effect waves-light m-b-5 mx-1"><i
                                             class="fa fa-print mr-1"></i>Print</button>
@@ -82,17 +80,40 @@
                                                 <label for="">Language <span style="color: red;
                                                   font-weight: bold;">(Default English)</span></label>
                                                 <br>
+                                                {% if data.id|check_edit_language:"ar" %}
                                                 <input type="checkbox" name="language_type" value="ar"
-                                                    class="lang_class"> <span style="font-size: 12px;">Arabic</span>
+                                                    class="lang_class" checked ><span style="font-size: 12px;">Arabic</span>
                                                 &nbsp; &nbsp;
+                                                {% else %}
+                                                <input type="checkbox" name="language_type" value="ar"
+                                                    class="lang_class" ><span style="font-size: 12px;">Arabic</span>
+                                                &nbsp; &nbsp;
+                                                {% endif %}
+                                                {% if data.id|check_edit_language:"hi" %}
+                                                <input type="checkbox" name="language_type" value="hi"
+                                                    class="lang_class" checked> <span style="font-size: 12px;">Hindi </span>
+                                                &nbsp; &nbsp;
+                                                {% else %}
                                                 <input type="checkbox" name="language_type" value="hi"
                                                     class="lang_class"> <span style="font-size: 12px;">Hindi </span>
                                                 &nbsp; &nbsp;
+                                                {% endif %}
+                                                {% if data.id|check_edit_language:"ur" %}
                                                 <input type="checkbox" name="language_type" value="ur"
-                                                    class="lang_class"> <span style="font-size: 12px;">Urdu </span>
+                                                    class="lang_class" checked > <span style="font-size: 12px;">Urdu </span>
                                                 &nbsp; &nbsp;
+                                                {% else %}
+                                                <input type="checkbox" name="language_type" value="ur"
+                                                    class="lang_class" > <span style="font-size: 12px;">Urdu </span>
+                                                &nbsp; &nbsp;
+                                                {% endif %}
+                                                {% if data.id|check_edit_language:"ta" %}
+                                                <input type="checkbox" name="language_type" value="ta"
+                                                    class="lang_class" checked > <span style="font-size: 12px;">Tamil </span>
+                                                {% else %}
                                                 <input type="checkbox" name="language_type" value="ta"
                                                     class="lang_class"> <span style="font-size: 12px;">Tamil </span>
+                                                {% endif %}
                                             </div>
                                         </div>
                                     </div>
@@ -147,7 +168,7 @@
                                                             Add a Section
                                                         </button>
                                                         <button type="button" class="btn btn-prim pay"
-                                                            onclick="direct_question_btn(`{{data.id}}`)">
+                                                            onclick="direct_question_btn('{{data.id}}')">
                                                             Add a question
                                                         </button>
                                                     </div>
@@ -206,7 +227,7 @@
                                                                             {% for j in i.Section_Question_Mapping_id.all %}
 
                                                                             <tr>
-                                                                                <td> <a href="#" onclick="section_Question_view({{j.Question_id.id}})" style="text-decoration: none; color: black;"> 
+                                                                                <td> <a href="#"  onclick="section_Question_view({{j.Question_id.id}})" style="text-decoration: none; color: black;"> 
                                                                                     {{j.Question_id.Question}}</a>
                                                                                 </td>
                                                                                 <td>{% if j.Question_id.Question_type == "Radio" %} Multiple choice: only one answer  {% else %}  Multiple choice: multiple answers allowed {% endif %}
@@ -242,7 +263,7 @@
                                                                     <div class="action-tbl d-flex justify-content-end">
                                                                         <i style="cursor: pointer;" class="fa fa-trash-o mx-1 trash-btn"
                                                                             data-toggle="tooltip" data-placement="top"
-                                                                            title="" data-original-title="Delete" onclick="section_question_delete_btn(`{{i.id}}`)"> </i>
+                                                                            title="" data-original-title="Delete" onclick="section_question_delete_btn(`{{i.Question_bank_id.id}}`)"> </i>
                                                                     </div>
                                                                 </td>
                                                             </tr>
@@ -273,22 +294,22 @@
                                                             </div>
                                                             <div class="col-md-9 py-2">
                                                                 <div class="form-group d-flex align-items-center">
-                                                                    <input type="radio" id="customer" name="layout"
+                                                                    <input type="radio" id="layout1" name="layout"
                                                                         {% if data.layout == "2" %} checked {% endif %}
                                                                         value="2">
-                                                                    <label for="customer">One page per question</label>
+                                                                    <label for="layout1">One page per question</label>
                                                                 </div>
                                                                 <div class="form-group d-flex align-items-center">
-                                                                    <input type="radio" id="customer" name="layout"
+                                                                    <input type="radio" id="layout2" name="layout"
                                                                         {% if data.layout == "1" %} checked {% endif %}
                                                                         value="1">
-                                                                    <label for="customer">One page per section</label>
+                                                                    <label for="layout2">One page per section</label>
                                                                 </div>
                                                                 <div class="form-group d-flex align-items-center">
-                                                                    <input type="radio" id="customer" name="layout"
+                                                                    <input type="radio" id="layout3" name="layout"
                                                                         {% if data.layout == "0" %} checked {% endif %}
                                                                         value="0">
-                                                                    <label for="customer">One page with all the
+                                                                    <label for="layout3">One page with all the
                                                                         questions</label>
                                                                 </div>
 
@@ -463,26 +484,26 @@
                                                             </div>
                                                             <div class="col-md-9 py-2">
                                                                 <div class="form-group d-flex align-items-center">
-                                                                    <input type="radio" id="customer"
+                                                                    <input type="radio" id="scoring_mode1"
                                                                         name="scoring_mode"
                                                                         {% if data.scoring_mode == "0" %} checked
                                                                         {% endif %} value="0">
-                                                                    <label for="customer">No scoring</label>
+                                                                    <label for="scoring_mode1">No scoring</label>
                                                                 </div>
                                                                 <div class="form-group d-flex align-items-center">
-                                                                    <input type="radio" id="customer"
+                                                                    <input type="radio" id="scoring_mode2"
                                                                         name="scoring_mode"
                                                                         {% if data.scoring_mode == "1" %} checked
                                                                         {% endif %} value="1">
-                                                                    <label for="customer">Scoring with answers at the
+                                                                    <label for="scoring_mode2">Scoring with answers at the
                                                                         end</label>
                                                                 </div>
                                                                 <div class="form-group d-flex align-items-center">
-                                                                    <input type="radio" id="customer"
+                                                                    <input type="radio" id="scoring_mode3"
                                                                         name="scoring_mode"
                                                                         {% if data.scoring_mode == "2" %} checked
                                                                         {% endif %} value="2">
-                                                                    <label for="customer">Scoring without answers at the
+                                                                    <label for="scoring_mode3">Scoring without answers at the
                                                                         end</label>
                                                                 </div>
 
@@ -1149,12 +1170,7 @@
                     </div>
                 </div>
             </div>
-
-
-
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
-
         <script>
         function section_question(data_id){
             var modal_id = data_id;
@@ -1170,6 +1186,7 @@
             else{
                 var isClassExist = document.getElementsByClassName('question-modal-'+modal_name);
                 if (isClassExist.length > 0) {
+                    alert("sssssssssss")
                     $('.question-modal-'+modal_name).modal('show');
                     $('.first_open'+data_id).val("new")
                 }
@@ -1196,6 +1213,7 @@
             }
             }
             }
+
             else{
 
             $.ajax(
@@ -1315,18 +1333,33 @@
             <script>
             function section_Question_view(data_id){
                 var data_id = data_id
+                var modal_name = data_id+"-"+data_id
+
+                var isClassExist = document.getElementsByClassName('question-modal-'+modal_name);
+                if (isClassExist.length > 0) {
+                    $('.question-modal-'+modal_name).modal('show');
+                    }
+
+                else{
+
                 $.ajax({
                         type: "GET",
                         url: "section_Question_view_modal",
                         data: {
-                            data_id: data_id
+                            data_id: data_id,
+                            modal_id:data_id
+                            
                         },
                         success: function (data) {
+                            var modal_name = data_id+"-"+data_id
                             $(".section_Question_view_modal").append(data);
-                            $('.question-modal-'+data_id).modal('show');
+                            $('.question-modal-'+modal_name).modal('show');
                         }
                     })
                 }
+                }
+
+
 
                 $(document).on("click", ".title_edit", function () {
                     var myid = $(this).attr("data-id") ;
@@ -1393,6 +1426,9 @@
 
 
                 function section_question_delete_btn(id) {
+                    alert("section_question_delete_btn")
+                    alert(id)
+
                     var url = "delete_question_section";
                     $.ajax({
                         url: url,
@@ -1407,6 +1443,8 @@
                 }
 
                 function question_delete_btn(id) {
+                    alert("question_delete_btn")
+                    alert(id)
                     var url = "delete_question_modal";
                     $.ajax({
                         url: url,

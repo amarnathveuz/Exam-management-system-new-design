@@ -41,7 +41,8 @@ aria-hidden="true" style="display: none">
                     <div class="form-group">
                         <label for="field-1" class="control-label"></label>
                         <div class="input-group mt-1">
-                            <input type="file" accept="image/*,.pdf,.txt,.doc,.docx," name="question_image" class="inputfile form-control">                             
+                            <input type="hidden" name="question_image_status" value="0" id="question_image_status">
+                            <input type="file" accept="image/*,.pdf,.txt,.doc,.docx," name="question_image" class="inputfile form-control" id="question_image_file" >                             
                         </div>
                     </div>
                 </div>
@@ -323,9 +324,9 @@ aria-hidden="true" style="display: none">
   </script>
   
     
-    <script>
+
+<script>
     function choice_add_fun(val1){
-     
     var add_line_count = $(".add_line_count"+val1).val();
     if ($(".question_type_radio"+val1).is(":checked")){
       question_type = "radio"
@@ -667,7 +668,17 @@ aria-hidden="true" style="display: none">
     $(".choice_val-"+modal_name).val(choice_val)
   
     }
+
+
   
+  </script>
+
+  <script>
+
+    $("#question_image_file").change(function(){
+        $("#question_image_status").val(1)
+    });
+
   </script>
 
 

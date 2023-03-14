@@ -944,7 +944,6 @@ aria-hidden="true" style="display: none">
                   </tbody>
                 
 
-                  
               </table>
           </td>
       </tr>
@@ -991,10 +990,26 @@ aria-hidden="true" style="display: none">
         var modal_name = data_id+"-"+modal_id
         var isClassExist = document.getElementsByClassName('question-modal-'+modal_name);
         if (isClassExist.length > 0) {
-                
-        $('.question-modal-'+modal_name).modal('show');
-
+            let modal_id1 = parseInt(modal_id) + 1
+            $.ajax(
+        {
+            type:"GET",
+            url: "open_section_based_question",
+            data:{
+                    modal_id: modal_id1,
+                    data_id:data_id
+            },
+            success: function( data ) 
+            {
+                var modal_name = data_id+"-"+modal_id1
+                $("#apppend_child"+data_id).append(data)
+                $('.question-modal-'+modal_name).modal('show');
+                let total = parseInt(modal_id) + 1
+                $("#section_id"+data_id).val(total);
+            }
+        })
         }
+
         else{
 
             $.ajax(
@@ -1024,9 +1039,7 @@ aria-hidden="true" style="display: none">
 
     }
 
-
     function direct_question_btn(){
-
       var modal_name1 = i+"-"+i
            var isClassExist = document.getElementsByClassName('question-modal-'+modal_name1);
             if (isClassExist.length > 0) {
@@ -1047,10 +1060,8 @@ aria-hidden="true" style="display: none">
         success: function( data ) 
         {
           var modal_name = i+"-"+i
-           
           $(".direct_question_modal").append(data)
-          $('.question-modal-'+modal_name).modal('show');
-            
+          $('.question-modal-'+modal_name).modal('show'); 
         } 
      })
     }
@@ -1063,14 +1074,14 @@ aria-hidden="true" style="display: none">
     $(".submit_action").submit(function(){
       event.preventDefault()
       $.ajax({   
+
       url: "validation_check",                    
       data: {
+
         section_line : $(".section_line").val(),
         initial_count : $(".initial_count").val(),
-       
         // initial_type : $(".initial_type`+initial_count+`").val(),
         // initial_answer : $(".initial_answer").val(),
-  
       },
           success: function (data) {  
               status = data['message']
@@ -1095,8 +1106,9 @@ aria-hidden="true" style="display: none">
                   });
               }
               else{
+
                 document.forms["exam_form"].submit();
-                 
+
              }
             }
     })
@@ -1104,15 +1116,21 @@ aria-hidden="true" style="display: none">
   
   </script>
   
-  <script>
+<script>
 
 
 $(".lang_class").click(function(){
+
     var val1 = $(this).attr('data-id')
+
     if ($(this).is(':checked')) {
+
         $(".lang"+val1).show()
-    } else {
+    } 
+    else {
+
         $(".lang"+val1).hide()
+
     }
 })
 

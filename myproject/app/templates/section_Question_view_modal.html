@@ -14,10 +14,14 @@
 
             <div class="modal-body">
                 <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-md-6">
                         <div class="form-group">
                             <input type="hidden"
                             name="updated_id" value="{{data.id}}">
+                            <input type="hidden" value="{{modal_id}}" class="add_line_count{{value1}}">
+                            <input type="hidden" value="{{value1}}" name="question_model_name">
+
+                            
                             <label for="field-1" class="control-label">Question</label>
                             <div class="input-group">
                                 <input type="text" class="inputfile form-control mb-0" name="question_name"
@@ -30,9 +34,38 @@
                                 </div>
                             </div>
                         </div>
-
-
                     </div>
+
+                    <input type="hidden" name="question_remove_status" value="0" id="question_remove_id{{data.id}}">
+
+                    <div class="col-md-6 input-group uploadFile1 question_upload_image_address"  {% if data.Imagefield %} style="display: none;" {% endif %} >
+                        <div class="form-group">
+                            <label for="field-1" class="control-label"></label>
+                            <div class="input-group mt-1">
+                                <input type="file" accept="image/*,.pdf,.txt,.doc,.docx," name="question_image" class="inputfile form-control" onchange="question_image_upload(`{{data.id}}`)">                             
+                            </div>
+                        </div>
+                    </div>
+
+                    {% if data.Imagefield == "" or data.Imagefield == None %}
+
+                    {% else %}
+
+                    <div class="col-md-6 input-group uploadFile1 question_image_address_view">
+                        <div class="form-group">
+                            <label for="field-1" class="control-label"></label>
+                            <div class="input-group mt-1">
+                                <input type="text"  value="{{data.Imagefield}}"  class="inputfile form-control" name="file" >
+                                <span class="input-group-text" onclick="question_remove_image(`{{data.id}}`)" ><i class="fa fa-trash" style="cursor: pointer;" ></i></span>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    {% endif %}
+
+
                     <div class="col-md-12">
                         <div class="row answer-type">
                             <div class="col-md-3 br-right d-flex align-items-start px-0">
@@ -56,24 +89,24 @@
                         <div class="paytab">
                             <ul class="nav nav-tabs nav-pay mb-2" role="tablist">
                                 <li class="nav-item d-flex align-items-center">
-                                    <a class="nav-link active" data-toggle="tab" href="#Answers1" role="tab">
+                                    <a class="nav-link active" data-toggle="tab" href="#Answers1{{value1}}" role="tab">
                                         Answers
                                     </a>
                                 </li>
                                 <li class="nav-item d-flex align-items-center">
-                                    <a class="nav-link" data-toggle="tab" href="#Options1" role="tab">
+                                    <a class="nav-link" data-toggle="tab" href="#Options1{{value1}}" role="tab">
                                         Options
                                     </a>
                                 </li>
                                 <li class="nav-item d-flex align-items-center">
-                                    <a class="nav-link" data-toggle="tab" href="#Description1" role="tab">
+                                    <a class="nav-link" data-toggle="tab" href="#Description1{{value1}}" role="tab">
                                         Description
                                     </a>
                                 </li>
 
                             </ul>
                             <div class="tab-content small-form">
-                                <div class="tab-pane active" id="Answers1" role="tabpanel">
+                                <div class="tab-pane active" id="Answers1{{value1}}" role="tabpanel">
                                     <div class="mt-3">
                                         <div class="mb-2">
                                             <button type="button" class="btn btn-prim pay" onclick="choice_add_fun(`{{value1}}`)">
@@ -117,7 +150,7 @@
 
                                                         <div class="input-group uploadFile1 upload_image_address{{i.id}}" {% if i.Imagefield %} style="display: none;" {% endif %} >
                                                             <input type="file" class="inputfile form-control mb-0"
-                                                                name="exam_choice_image[]" onchange="image_upload({{i.id}})" >
+                                                                name="exam_choice_image[]" onchange="image_upload(`{{i.id}}`)" >
                                                             <div class="input-group-append" >
                                                                 <span class="input-group-text"> <i
                                                                         class="fas fa-paperclip" ></i></span>
@@ -133,7 +166,7 @@
                                                             <input type="text"  value="{{i.Imagefield}}"  class="inputfile form-control mb-0"
                                                                 name="file" >
                                                             <div class="input-group-append">
-                                                                <span class="input-group-text" onclick="remove_image({{i.id}})" ><i
+                                                                <span class="input-group-text" onclick="remove_image(`{{i.id}}`)" ><i
                                                                         class="fa fa-trash" ></i></span>
                                                             </div>
                                                         </div>
@@ -144,9 +177,10 @@
 
                                                     <td>
                                                         <div class="action-tbl d-flex justify-content-end">
-                                                            <i class="fa fa-trash-o mx-1 trash-btn"
+                                                            <i class="fa fa-trash-o mx-1 trash-btn" style="cursor: pointer;"
                                                                 data-toggle="tooltip" data-placement="top" title=""
-                                                                data-original-title="Delete"></i>
+                                                                data-original-title="Delete" onclick="choice_option_delete_btn(`{{i.id}}`)"></i>
+
                                                         </div>
                                                     </td>
 
@@ -162,7 +196,7 @@
                                         </table>
                                     </div>
                                 </div>
-                                <div class="tab-pane sales_purchase" id="Options1" role="tabpanel">
+                                <div class="tab-pane sales_purchase" id="Options1{{value1}}" role="tabpanel">
 
                                     <div class="row mb-2 question-options">
                                         <div class="col-md-6 px-0">
@@ -223,7 +257,7 @@
                                     </div>
                                 </div>
 
-                                <div class="tab-pane descptn" id="Description1" role="tabpanel">
+                                <div class="tab-pane descptn" id="Description1{{value1}}" role="tabpanel">
                                     <div class="row">
                                         <div class="col-md-12 px-0">
                                             <textarea name="Description" id="" cols="30" rows="5" class="form-control border-0"
@@ -246,6 +280,10 @@
     </div>
 </div>
 
+<div id="delete_initial_field_div12">
+
+</div>
+
 
 
 
@@ -259,6 +297,39 @@
 
     function image_upload(data){
         $("#remove_id"+data).val(1)
+    }
+
+
+
+    function question_remove_image(data) {
+      $("#question_remove_id"+data).val(1)
+      $(".question_image_address_view").hide()
+      $(".question_upload_image_address").show()
+    }
+
+    function question_image_upload(data){
+        $("#question_remove_id"+data).val(1)
+    }
+
+
+</script>
+
+
+
+<script>
+    function choice_option_delete_btn(data){
+
+        var url = "choice_option_delete";
+                    $.ajax({
+                        url: url,
+                        data: {
+                            'id': data
+                        },
+                        success: function (data) {
+                            $("#delete_initial_field_div12").html(data);
+                            $('#delete_initial_field_modal12').modal('show');
+                        }
+                    });
     }
 </script>
 
@@ -278,6 +349,7 @@
         }
   
       var file_status = 'none'
+
     if($(".file_field"+val1).is(":checked")){
       file_status = 'show'
   

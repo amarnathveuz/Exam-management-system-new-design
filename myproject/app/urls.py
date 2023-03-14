@@ -44,6 +44,8 @@ urlpatterns = [
     path('delete_question_section',views.delete_question_section,name='delete_question_section'),
     path('delete_question_modal',views.delete_question_modal,name='delete_question_modal'),
     path('save_section_question_action',views.save_section_question_action,name='save_section_question_action'),
+    path('exam_details_delete',views.exam_details_delete,name='exam_details_delete'),
+    path('choice_option_delete',views.choice_option_delete,name='choice_option_delete'),
 
 
 
