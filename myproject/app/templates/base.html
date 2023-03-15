@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="en">
-    {% load static %}
+
+{% load static %}
 
 <head>
     <meta charset="utf-8" />
@@ -20,7 +21,7 @@
     <link href="./static/admin/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <link href="./static/admin/css/icons.css" rel="stylesheet" type="text/css" />
     <link href="./static/admin/css/style.css" rel="stylesheet" type="text/css" />
-    <link href="./static/admin/plugins/datatables/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+    <!-- <link href="plugins/datatables/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" /> -->
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -44,21 +45,11 @@
                     <ul class="" id="side-menu">
                         <li>
 
-                            <a class="splnav" href="dashboard"> <i class="fa fa-home"></i>
+                            <a class="splnav" href=""> <i class="fa fa-home"></i>
                                 <p>Home</p>
                             </a>
                         </li>
-                        <li>
-                            <a href="user_management" class="splnav"> <i class="fa fa-address-book"></i>
-                                <p>User Management</p>
-                            </a>                         
 
-                        </li>
-                        <li>
-                            <a class="splnav" href="role"> <i class="fa fa-calendar"></i>
-                                <p>Role Management</p>
-                            </a>
-                        </li>
                         <li>
                             <a href="exam" class="splnav"> <i class="fa fa-user-circle"></i>
                                 <p>Exam Management</p>
@@ -67,7 +58,12 @@
                       
 
 
+                        <li class="bootm_toggle_settings_button ">
+                            <a class="splnav bdr_btmnone_nav" href="user_management"> <i class="fa fa-cog"></i>
+                                <p>Settings</p>
+                            </a>
 
+                        </li>
                        
 
 
@@ -91,7 +87,7 @@
 
                     <div class="d-flex">
                         <div class="binance">
-                            <img src="./static/admin/img/logo.png" alt="">
+                            <a href="index"> <img src="./static/admin/img/logo.png" alt=""></a> 
                         </div>
 
 
@@ -107,7 +103,13 @@
 
 
 
-                      
+                        <div class="search-bar">
+                            <div class="search-bar__search-icon"><i class="fas fa-search"></i></div>
+                            <div class="search-bar__search-input">
+                                <input type="text" placeholder="type some text..." />
+                            </div>
+                            <div class="search-bar__close-icon"><i class="far fa-times-circle"></i></div>
+                        </div>
 
 
                        
@@ -126,14 +128,15 @@
                             <span class="d-flex align-items-center drpdown-toggle">
                                 <img class="header-profile-user" src="./static/admin/img/users/avatar-7.jpg" alt="Header Avatar">
                                 <span class="text-start ms-xl-2">
-                                    <span class="d-none d-xl-inline-block ms-1 fw-medium user-name-text">{{request.user}}</span>
+                                    <span class="d-none d-xl-inline-block ms-1 fw-medium user-name-text">King Abdul
+                                        Aziz</span>
                                     <i class="pro-icn fa fa-angle-down"></i>
                                 </span>
                             </span>
 
                             <div class="drpdown-menu">
 
-                                <h6 class="dropdown-header">Welcome {{request.user}}!</h6>
+                                <h6 class="dropdown-header">Welcome King Abdul Aziz!</h6>
                                 <a class="dropdown-item" href="#"><i
                                         class="mdi mdi-account-circle text-muted fs-16 align-middle me-1"></i> <span
                                         class="align-middle">Profile</span></a>
@@ -163,14 +166,15 @@
 
             <!-- Start Page content -->
             <div class="content">
-              
+          
+               
 
                 {% block content %}
 
                 {% endblock %}
-            </div>
+        
+              </div>
 
-      
 
         </div>
         <!-- container -->
@@ -178,124 +182,11 @@
     <!-- content -->
 
 
-    <div id="user-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-    aria-hidden="true" style="display: none">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title mt-0">Create New User</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="field-1" class="control-label">Name</label>
-                            <input type="text" class="form-control" id="field-1" placeholder="Yourname">
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="field-1" class="control-label">User Image</label>
-                            <div class="input-group uploadFile1">
-                               
-                                <input type="file" class="inputfile form-control" name="file" >
-                                <div class="input-group-append">
-                                    <span class="input-group-text"> <i class="fas fa-paperclip"></i></span>
-                                </div>
-                            </div>
-           
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="field-1" class="control-label">Company Name</label>
-                            <input type="text" class="form-control" placeholder="Azure Interior">
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="field-1" class="control-label">Username</label>
-                            <input type="text" class="form-control" placeholder="Userame">
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="field-1" class="control-label">Phone</label>
-                            <input type="text" class="form-control" placeholder="9988776655">
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="field-1" class="control-label">Email</label>
-                            <input type="text" class="form-control" id="field-1" placeholder="yourmail@gmail.com">
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="field-1" class="control-label">Password Option</label>
-                            <div class="my-1 mx-1">
-                                <div class="radio form-check-inline">
-                                    <input type="radio" id="inlineRadio1" value="option1" name="radioInline" checked="checked">
-                                    <label for="inlineRadio1"> Manual </label>
-                                </div>
-                                <div class="radio form-check-inline">
-                                    <input type="radio" id="inlineRadio2" value="option2" name="radioInline">
-                                    <label for="inlineRadio2"> Automatic </label>
-                                </div>
-                            </div>
-                            <input type="text" class="form-control" id="field-1" placeholder="Enter Password">
-                           
-                        </div>
-                    </div>
-                   
-
-    
-                </div>
-
-
-
-            </div>
-            <div class="modal-footer">
-
-                <button type="button" style="background-color:#f9365f!important;border: none!important;"
-                    class="btn btn-info waves-effect waves-light">Save </button>
-            </div>
-        </div>
-    </div>
-</div>
 
     <script src="./static/admin/js/jquery.min.js"></script>
     <script src="./static/admin/js/custome.js"></script>
     <script src="./static/admin/js/bootstrap.bundle.min.js"></script>
-    <script src="./static/admin/plugins/datatables/jquery.dataTables.min.js"></script>
-    <script src="./static/admin/plugins/datatables/dataTables.bootstrap4.min.js"></script>
-    <script src="./static/admin/plugins/datatables/dataTables.responsive.min.js"></script>
-    <script src="./static/admin/plugins/datatables/responsive.bootstrap4.min.js"></script>
-    <script src="./static/admin/plugins/datatables/datatables.init.js"></script>
 
-    <script>
-        $(document).ready(function() {
-            $('#datatable').dataTable();
-            $('#datatable-keytable').DataTable({
-                keys: true
-            });
-            $('#datatable-responsive').DataTable();
-            $('#datatable-scroller').DataTable({
-                ajax: "plugins/datatables/json/scroller-demo.json",
-                deferRender: true,
-                scrollY: 380,
-                scrollCollapse: true,
-                scroller: true
-            });
-            var table = $('#datatable-fixed-header').DataTable({
-                fixedHeader: true
-            });
-        });
-        TableManageButtons.init();
-    </script>
 
 
     <script>
@@ -362,12 +253,29 @@
             this.setAttribute("placeholder", `${this.getAttribute("data")}`)
         }
     </script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
 
-<style>
-    #swal2-title{
-        font-size: 12px!important;
-    }
-</style>
+      function drawChart() {
+
+        var data = google.visualization.arrayToDataTable([
+          ['Task', 'Hours per Day'],
+          ['Total Exams',     50],
+          ['Completed Exams',      20],
+          ['Pending Exams',  30]
+        ]);
+
+        var options = {
+          title: ''
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+        chart.draw(data, options);
+      }
+    </script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 {% if messages %}

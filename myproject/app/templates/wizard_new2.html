@@ -94,7 +94,8 @@
 
 
                                 {% for i in data %}
-                                <div class="step">
+                               <input type="text" class="question_tym{{forloop.counter}}" value="{{i.Question_id.Question_time_limit|safe}}">
+                                <div class="step" >
                                     <input type="hidden" value="{{i.Question_id.id}}" name="question_id" class="mandatory_id">
                                     <h3 class="main_question"><i class="arrow_right"></i>{{forloop.counter}}) {{i.Question_id.Question}}</h3>
                                     <input type="hidden" value="{{i.Question_id.manadatory}}" class="mandatory_value">
@@ -193,7 +194,7 @@
                                 {% else %}
                                 <button type="button" name="backward" class="backward">Prev</button>
                                 {% endif %}
-                                <button type="button" name="forward" class="forward">Next</button>
+                                <button type="button" onclick="next_btn()" id="new2222"  name="forward" class="forward">Next</button>
                                 <button type="submit" name="process" class="submit">Submit</button>
                             </div>
                             <!-- /bottom-wizard -->
@@ -317,6 +318,27 @@
                     }
                 }
             }
+        }
+    </script>
+
+    <script>
+
+        i = 2
+
+        var data = $(".question_tym1").val()
+        // alert(data)
+
+
+        function next_btn(){
+            var data = $(".question_tym"+i).val()
+
+
+
+            i = i + 1
+            
+            console.log(data)
+           console.log("hellllllllllllllll")
+           document.getElementById("new2222").click();
         }
     </script>
 

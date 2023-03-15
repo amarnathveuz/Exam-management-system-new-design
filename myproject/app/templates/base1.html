@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="en">
+
+{% load static %}
+
+<head>
+    <meta charset="utf-8" />
+    <title>Veuz</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta content="" name="description" />
+    <meta content="Coderthemes" name="author" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="./static/admin/img/favicon.svg">
+
+
+
+    <link rel="stylesheet" href="./static/admin/css/morris.css">
+    <!-- App css -->
+    <link href="./static/admin/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="./static/admin/css/icons.css" rel="stylesheet" type="text/css" />
+    <link href="./static/admin/css/style.css" rel="stylesheet" type="text/css" />
+    <!-- <link href="plugins/datatables/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" /> -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+        rel="stylesheet">
+        <script src="https://kit.fontawesome.com/6adc82e575.js" crossorigin="anonymous"></script>
+</head>
+
+<body class="">
+   
+    <!-- Begin page -->
+    <div id="wrapper">
+        <!-- ========== Left Sidebar Start ========== -->
+        <div class="left side-menu">
+            <div class="slimscroll-menu" id="remove-scroll">
+                <!-- LOGO -->
+
+                <div id="sidebar-menu" class="sidaber_menu">
+                    <ul class="" id="side-menu">
+                        <li>
+
+                            <a class="splnav" href="index"> <i class="fa fa-home"></i>
+                                <p>Home</p>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="user_management" class="splnav"> <i class="fa fa-address-book"></i>
+                                <p>User Management</p>
+                            </a>                         
+    
+                        </li>
+                        <li>
+                            <a class="splnav" href="role"> <i class="fa fa-calendar"></i>
+                                <p>Role Management</p>
+                            </a>
+                        </li>
+
+
+                    </ul>
+                </div>
+
+
+
+                <div class="clearfix"></div>
+            </div>
+            <!-- Sidebar -left -->
+        </div>
+        <!-- Left Sidebar End -->
+        <!-- ============================================================== -->
+        <!-- Start right Content here -->
+        <!-- ============================================================== -->
+        <div class="content-page">
+            <div class="topbar">
+
+                <div class="navbar-header">
+
+                    <div class="d-flex">
+                        <div class="binance">
+                            <a href="index"> <img src="./static/admin/img/logo.png" alt=""></a> 
+                        </div>
+
+
+
+
+                    </div>
+
+                 
+
+
+
+                    <div class="d-flex align-items-center icns">
+
+
+
+                        <div class="search-bar">
+                            <div class="search-bar__search-icon"><i class="fas fa-search"></i></div>
+                            <div class="search-bar__search-input">
+                                <input type="text" placeholder="type some text..." />
+                            </div>
+                            <div class="search-bar__close-icon"><i class="far fa-times-circle"></i></div>
+                        </div>
+
+
+                       
+
+                        <div class="dropdown topbar-head-dropdown ms-1 header-item">
+
+                            <i class="fas fa-bell fs-icn">
+                                <span
+                                    class="position-absolute topbar-badge fs-9 translate-middle badge rounded-pill bg-red">04</span></i>
+
+
+                        </div>
+
+                        <div class="dropdown header-item topbar-user king button-drpdown">
+
+                            <span class="d-flex align-items-center drpdown-toggle">
+                                <img class="header-profile-user" src="./static/admin/img/users/avatar-7.jpg" alt="Header Avatar">
+                                <span class="text-start ms-xl-2">
+                                    <span class="d-none d-xl-inline-block ms-1 fw-medium user-name-text">King Abdul
+                                        Aziz</span>
+                                    <i class="pro-icn fa fa-angle-down"></i>
+                                </span>
+                            </span>
+
+                            <div class="drpdown-menu">
+
+                                <h6 class="dropdown-header">Welcome King Abdul Aziz!</h6>
+                                <a class="dropdown-item" href="#"><i
+                                        class="mdi mdi-account-circle text-muted fs-16 align-middle me-1"></i> <span
+                                        class="align-middle">Profile</span></a>
+                                <a class="dropdown-item" href="#"><i
+                                        class="mdi mdi-message-text-outline text-muted fs-16 align-middle me-1"></i>
+                                    <span class="align-middle">Messages</span></a>
+
+                                <a class="dropdown-item" href="#"><i
+                                        class="fas fa-info-circle text-muted fs-16 align-middle me-1"></i> <span
+                                        class="align-middle">Help</span></a>
+
+                                <a class="dropdown-item" href="settings.html"><i
+                                        class="fas fa-cog text-muted fs-16 align-middle me-1"></i> <span
+                                        class="align-middle">Settings</span></a>
+
+                                <a class="dropdown-item" href="#"><i
+                                        class="mdi mdi-logout text-muted fs-16 align-middle me-1"></i> <span
+                                        class="align-middle" data-key="t-logout">Logout</span></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+
+            <!-- Start Page content -->
+            <div class="content">
+          
+               
+
+                {% block content %}
+
+                {% endblock %}
+        
+              </div>
+
+
+        </div>
+        <!-- container -->
+    </div>
+    <!-- content -->
+
+
+
+    <script src="./static/admin/js/jquery.min.js"></script>
+    <script src="./static/admin/js/custome.js"></script>
+    <script src="./static/admin/js/bootstrap.bundle.min.js"></script>
+
+
+
+    <script>
+        $("a.splnav").click(function () {
+            $("a.splnav").css("background-color", "#222");
+            $(this).css("background-color", "black");
+            // $(this).css("border-left", "3px solid #6e56a3");
+        });
+    </script>
+    <script>
+        jQuery(document).ready(function (e) {
+            function t(t) {
+                e(t).bind("click", function (t) {
+                    t.preventDefault();
+                    e(this).parent().fadeOut()
+                })
+            }
+            e(".drpdown-toggle").click(function () {
+                var t = e(this).parents(".button-drpdown").children(".drpdown-menu").is(":hidden");
+                e(".button-drpdown .drpdown-menu").hide();
+                e(".button-drpdown .drpdown-toggle").removeClass("active");
+                if (t) {
+                    e(this).parents(".button-drpdown").children(".drpdown-menu").toggle().parents(
+                        ".button-drpdown").children(".drpdown-toggle").addClass("active")
+                }
+            });
+            e(document).bind("click", function (t) {
+                var n = e(t.target);
+                if (!n.parents().hasClass("button-drpdown")) e(".button-drpdown .drpdown-menu").hide();
+            });
+            e(document).bind("click", function (t) {
+                var n = e(t.target);
+                if (!n.parents().hasClass("button-drpdown")) e(".button-drpdown .drpdown-toggle")
+                    .removeClass("active");
+            })
+        });
+    </script>
+    <script>
+        let searchIcon = document.querySelector(".search-bar__search-icon"),
+            closeIcon = document.querySelector(".search-bar__close-icon .far"),
+            searchBar = document.querySelector(".search-bar"),
+            searchInput = document.querySelector(".search-bar__search-input input")
+
+
+        searchIcon.onclick = () => {
+            searchBar.classList.toggle("search-bar--active")
+        }
+
+
+        closeIcon.onclick = () => {
+            searchInput.value = ""
+            searchInput.focus()
+        }
+
+
+
+        searchInput.onfocus = function () {
+            let place = this.getAttribute("placeholder")
+            this.setAttribute("data", `${place}`)
+            this.removeAttribute("placeholder")
+        }
+
+        searchInput.onblur = function () {
+            this.setAttribute("placeholder", `${this.getAttribute("data")}`)
+        }
+    </script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+
+        var data = google.visualization.arrayToDataTable([
+          ['Task', 'Hours per Day'],
+          ['Total Exams',     50],
+          ['Completed Exams',      20],
+          ['Pending Exams',  30]
+        ]);
+
+        var options = {
+          title: ''
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+        chart.draw(data, options);
+      }
+    </script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+{% if messages %}
+<script>
+    {% for message in messages %}
+ 
+
+    var toastMixin = Swal.mixin({
+    toast: true,
+    icon: '{{message.tags}}',
+    title: 'General Title',
+    animation: false,
+    position: 'top-right',
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+    toast.addEventListener('mouseenter', Swal.stopTimer)
+    toast.addEventListener('mouseleave', Swal.resumeTimer)
+    }
+    });
+    toastMixin.fire({
+    animation: true,
+    title: "{{message}}"
+    });
+    {% endfor %}
+
+</script>
+{% endif %}
+</body>
+
+</html>

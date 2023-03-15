@@ -489,18 +489,9 @@
 
                                                 </table>
                                                 
-                                                
-                                                
-                                              
                                             </div>
 
                                         </div>
-
-
-                                        
-
-                                       
-                                       
 
                                     </div>
                                 </div>
@@ -554,6 +545,40 @@ aria-hidden="true" style="display: none">
 </div>
 
 
+
+<div id="editsection" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+aria-hidden="true" style="display: none">
+<div class="modal-dialog modal-md modal-dialog-centered">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h4 class="modal-title mt-0">Edit a Section</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <input type="hidden" name="name1" class="section_edit_id">
+                        <label for="field-1" class="control-label">Section Name</label>
+                        <input type="text" class="form-control section_title section_edit_name" id="field-1" placeholder="Section Name">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal-footer">
+            <button type="button" style="background-color:#f9365f!important;border: none!important;"
+                class="btn btn-info waves-effect waves-light section_edit_btn">Save </button>
+        </div>
+    </div>
+</div>
+</div>
+
+
+
 <div id="question_bank-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
 aria-hidden="true" style="display: none">
 <div class="modal-dialog modal-lg">
@@ -567,41 +592,37 @@ aria-hidden="true" style="display: none">
         <div class="modal-body">
             <div class="row">
 
-                {% for i in exam_section %}
-
-                {% if i.section_type == "Section" %} 
-
-                    <div class="col-md-12">
-                            <input type="checkbox" name="">&ensp;
-                            <label style="color: black;" for="field-1" class="control-label"><b>{{i.section_title}}</b></label>
-                    </div>
-
-                    {% for j in i.Section_Question_Mapping_id.all %}
-
-                    <div style="padding-left: 18px;" class="col-md-12">
-                            <input type="checkbox" name="">&ensp;
-                            <label for="field-1" class="control-label"><h5>{{j.Question_id.Question}}</h5></label>
-                    </div>
-                    {% endfor %}
-
-
-                {% elif i.section_type == "Question" %}
-
                 <div class="col-md-12">
-                    <input type="checkbox" name="">&ensp;
-                    <label for="field-1" class="control-label">{{i.Question_bank_id.Question}}</label>
+                    
+                        <table  class="table-bordered" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                            <thead class="border-class">
+                                <tr class="heading-text">                                                        
+                                  <th></th>
+                                  <th></th>
+                                  <th>Questions</th>
+                                  <th>Question Type</th>
+                                </tr>
+                            </thead>
+          
+                            <tbody class="body-textcls vertcle-center" >
+                                {% for i in question_bank %}
+                                <tr>
+                                    <td></td>
+                                    <td> <input type="checkbox" onclick="question_checklist(`{{i.id}}`,`{{i.Question}}`,`{{i.Question_type}}`)"  id="check_btn{{i.id}}" value="{{i.id}}" name="">&ensp;</td>
+                                    <td> <span  id="modal_question" class="control-label">{{i.Question}}</span></td>
+                                    <td> <label for="field-1" class="control-label">{{i.Question_type}}</label></td>
+                                </tr>
+                                {% endfor %}
+          
+                            </tbody>
+                        </table>
                 </div>
-
-                {% endif %}
-
-                {% endfor %}
-
-
+                <input type="hidden" name="" class="modal_status" value="question_bank" >
             </div>
 
         <div class="modal-footer">
 
-            <button type="submit" style="background-color:#f9365f!important;border: none!important;"
+            <button type="submit" style="background-color:#f9365f!important;border: none!important;" onclick="question_bank_save()"
                 class="btn btn-info waves-effect waves-light" data-dismiss="modal">Save </button>
         </div>
     </div>
@@ -893,21 +914,22 @@ aria-hidden="true" style="display: none">
       var section_string = $(".section_title").val();
       if(section_string == ''){
 
-
-
       }
       else{
 
         $("#append_table").append(`
         
         <tr class="tr_remove`+i+`">
-          <td  style="background-color: #f3f6f8"><b>`+section_string+`</b>  </td>
+          <td  style="background-color: #f3f6f8">
+            <a href="#" data-id=`+i+` class="section_edit section_edit_new`+i+`"  data-sname="`+section_string+`" style="text-decoration: none;
+                  color: black;">
+            <span class="section_span-`+i+`"><b>`+section_string+`</b></span></a></td> 
           <td style="background-color: #f3f6f8">
             <input type="hidden" value=`+i+` id="section_id`+i+`">
             <input type="hidden" name='section_line_count' value=`+i+`>
             <input type="hidden" name="modal_status" value = "False">
             
-            <input type="hidden" class="section_line" value="`+section_string+`" name='section_line'>
+            <input type="hidden" id="section_line" class="section_line`+i+`" value="`+section_string+`" name='section_line'>
             <input type="hidden" class="first_open`+i+`" value="first">
             
             <button type="button" onclick="section_question(`+i+`)"
@@ -921,10 +943,12 @@ aria-hidden="true" style="display: none">
           <td style="background-color: #f3f6f8">
             
               <div class="action-tbl d-flex justify-content-end">
-                  
                 <i class="fa fa-trash-o mx-1 trash-btn" onclick="section_remove(`+i+`)" data-toggle="tooltip" data-original-title="Delete"></i>
-              
               </div>
+
+
+
+              
           </td>
       </tr>
       <tr class="tr_remove2`+i+`">
@@ -935,7 +959,6 @@ aria-hidden="true" style="display: none">
                         <th>Title</th>
                         <th>Question Type</th>
                         <th></th>
-                          
                       </tr>
                   </thead>
 
@@ -1078,7 +1101,7 @@ aria-hidden="true" style="display: none">
       url: "validation_check",                    
       data: {
 
-        section_line : $(".section_line").val(),
+        section_line : $("#section_line").val(),
         initial_count : $(".initial_count").val(),
         // initial_type : $(".initial_type`+initial_count+`").val(),
         // initial_answer : $(".initial_answer").val(),
@@ -1137,16 +1160,134 @@ $(".lang_class").click(function(){
 
 
 $(".scoring_check").click(function(){
+
    if ($("#no_score").is(':checked')) {
+
+    $(".correct_th").hide()
+    $(".correct_td").hide()
+
        $(".score_th").hide()
        $(".score_td").hide()
    } else  {
     $(".score_th").show()
     $(".score_td").show()
+
+    $(".correct_th").show()
+    $(".correct_td").show()
    } 
 })
 
         
+</script>
+
+<script>
+
+        $(document).on("click", ".section_edit", function () {
+         
+         var s_count = $(this).attr("data-id") ;
+        
+        var s_name = $(this).attr("data-sname") ;
+         $(".section_edit_id").val(s_count)
+         $(".section_edit_name").val(s_name)
+        $('#editsection').modal('show');
+    })
+
+    // function section_edit(s_title){
+    //     var title = s_title.value;
+       
+    //     alert(title)
+    //     $(".sect_title").val(title)
+    //     $('#editsection').modal('show');
+    // }
+
+
+    function section_update_save(s_count){
+
+        var section_string = $(".sect_title").val();
+        if(section_string == ''){
+
+        }
+        else
+        {
+            $(".section_span-"+s_count).empty().append(`<b>`+section_string+`</b>`)
+            $('#editsection').modal('hide');
+
+            
+        }
+    }
+
+
+
+
+$(".section_edit_btn").click(function(){
+  
+    var id = $(".section_edit_id").val()
+    var name =  $(".section_edit_name").val()
+  
+    $(".section_span-"+id).empty().append(`<b>`+name+`</b>`)
+    $('.section_edit_new'+id).attr('data-sname',name); 
+    $(".section_line"+id).val(name)
+      
+    $('#editsection').modal('hide');
+   
+})
+</script>
+
+
+<script>
+    check_list = []
+    function question_checklist(count,question,question_type){
+
+        var checkBox = document.getElementById("check_btn"+count);
+        if (checkBox.checked == true){
+            check_list.push(count)
+        } 
+        else {
+           var index = check_list.indexOf(count);
+           if (index > -1) {
+                check_list.splice(index, 1);
+            }
+        }
+    }
+
+        function question_bank_save(){
+            var modal_status = $(".modal_status").val();
+            var question =  $("#modal_question").text();
+
+        if(modal_status == "question_bank"){
+
+
+        $("#append_table").append(`
+
+            <tr class="tr_remove`+i+`">
+
+                <td>
+                `+question+`</td>
+
+                <td>`+question_type+`
+                    <input type="hidden" value=`+i+` id="section_id`+i+`">
+                    <input type="hidden" name='section_line_count' value=`+i+`>
+                    <input type="hidden" name="modal_status" value =`+modal_status+`>
+                    <input type="hidden" id="section_line" value="`+question+`" name='section_line'>
+                </td>
+                <td>
+                    <div class="action-tbl d-flex justify-content-end">
+                        
+                        <i data-modal-id="{{value1}}" data-tr = "`+i+`" class="fa fa-trash-o mx-1 trash-btn" onclick="question_remove('{{value1}}',`+i+`)"></i>
+                    
+                    </div>
+                </td>
+            </tr>
+                    
+        `)
+
+        i = i + 1
+        $('#question_bank-modal').modal('hide');
+
+        }
+        }
+
+    
 </script>
   
   

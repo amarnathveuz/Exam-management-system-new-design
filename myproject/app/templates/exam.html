@@ -22,7 +22,6 @@
                                 <table id="datatable" class="table table-striped dt-responsive table-bordered nowrap table-padd" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
 
                                     <thead class="border-class">
-
                                         <tr class="heading-text">
                                             <th>S/No</th>                                                     
                                             <th>Exam Title</th>
@@ -35,7 +34,6 @@
                                             <th>Status</th>
                                             <th></th>
                                             <th></th>
-                                           
                                         </tr>
                                     </thead>
 
@@ -47,16 +45,29 @@
                                             <td>{{i.Exam_title}}</td>
                                             <td>
                                                 <div class="created-user d-flex align-items-center">
-                                                    <img src="./static/admin/img/users/avatar-5.jpg" alt="">
+                                                    <img src="./static/admin/img/users/user-dummy-img.jpg" alt="">
                                                     <h6>{{i.responsible_person}}</h6>
                                                 </div>
                                             </td>
                                           
                                             <td>{{i.created_dt|safe}}</td>
-                                            <td>20</td>
-                                            <td>02:00</td>
-                                            <td>5</td> 
+                                            <td>
+                                                {{i.Section_Question_Mapping_exam_id.all.count}}
+                                            </td>
+                                            <td>
+                                                {% if i.Exam_time_limit|safe == "00:00:00" %}
+                                                    -:-:-
+                                                {% else %}
+                                                    {{ i.Exam_time_limit|safe }} Min
+                                                {% endif %}
+                                            </td>
+
+                                            <td>
+                                                {{i.Exam_attend_user_exam_id.all.count}}
+                                            </td> 
+
                                             <td>4</td>
+
                                             <td>
                                                 <h6 class="mt-0 mb-1">Certified</h6>
                                                 <div class="progress-container" data-percentage='50'>

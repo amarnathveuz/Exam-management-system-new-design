@@ -8,6 +8,7 @@ from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('',views.index,name='index'),
+    path('index',views.dashboard,name='dashboard'),
     path('dashboard',views.dashboard,name='dashboard'),
     path('role',views.role,name='role'),
     path('edit_role_management',views.edit_role_management,name='edit_role_management'),

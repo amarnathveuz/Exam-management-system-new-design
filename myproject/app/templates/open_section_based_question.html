@@ -57,24 +57,24 @@ aria-hidden="true" style="display: none">
                                 <label for="customer">Multiple choice: multiple answers allowed</label>
                             </div>
                             <div class="form-group d-flex align-items-center">
-                                <input type="radio" class="question_type_checkbox{{value1}}" name="question_type{{value1}}" value="text">
+                                <input type="radio" class="question_type_text{{value1}}" name="question_type{{value1}}" value="text">
                                 <label for="customer">Single Line Text Box</label>
                             </div>
                             <div class="form-group d-flex align-items-center">
-                                <input type="radio" class="question_type_checkbox{{value1}}" name="question_type{{value1}}" value="Checkbox">
+                                <input type="radio" class="question_type_numtext{{value1}}" name="question_type{{value1}}" value="num_text">
                                 <label for="customer">Numerical Value</label>
                             </div>
                             <div class="form-group d-flex align-items-center">
-                                <input type="radio" class="question_type_checkbox{{value1}}" name="question_type{{value1}}" value="Checkbox">
-                                <label for="customer">Date_type</label>
+                                <input type="radio" class="question_type_datetype{{value1}}" name="question_type{{value1}}" value="Date_type">
+                                <label for="customer">Date type</label>
                             </div>
                             <div class="form-group d-flex align-items-center">
-                                <input type="radio" class="question_type_checkbox{{value1}}" name="question_type{{value1}}" value="Checkbox">
-                                <label for="customer">Datetime_type</label>
+                                <input type="radio" class="question_type_datetime{{value1}}" name="question_type{{value1}}" value="Datetime_type">
+                                <label for="customer">Datetime type</label>
                             </div>
                             <div class="form-group d-flex align-items-center">
-                                <input type="radio" class="question_type_checkbox{{value1}}" name="question_type{{value1}}" value="Checkbox">
-                                <label for="customer">Matrix_type</label>
+                                <input type="radio" class="question_type_matrix{{value1}}" name="question_type{{value1}}" value="Matrix_type">
+                                <label for="customer">Matrix type</label>
                             </div>
                         </div>
                     </div>
@@ -109,7 +109,9 @@ aria-hidden="true" style="display: none">
 
                         <!-- Answers1 tab -->
 
+
                         <div class="tab-pane active" id="Answers1{{value1}}" role="tabpanel">
+
                             <div class="mt-3">
                                 <div class="mb-2">
                                     <button type="button" onclick="choice_add_fun(`{{value1}}`)"
@@ -120,29 +122,13 @@ aria-hidden="true" style="display: none">
                                 </div>
 
 
-                                <!-- <table  class="table table-qstn dt-responsive table-bordered nowrap table-padd" style="border-collapse: collapse; border-spacing: 0; width: 100%;display:none;">
-
-                                    <thead class="border-class">
-                                        <tr class="heading-text">  
-                                            <th>Choices</th>
-                                            <th></th>
-                                        </tr>
-                                    </thead>
-
-                                    <tbody class="body-textcls vertcle-center" id="choice_add{{value1}}">
-                             
-
-                                    </tbody>
-                                </table> -->
-
-
                                 <table  class="table table-qstn dt-responsive table-bordered nowrap table-padd" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
 
                                     <thead class="border-class">
                                         <tr class="heading-text">  
                                             <th>Choices</th>
                                             <th class="file_th{{value1}}" style="display:none;">File</th>
-                                            <th>Is a correct answer</th>
+                                            <th style="display: none;" class="correct_th">Is a correct answer</th>
                                             <th style="display: none;" class="score_th">Score for this choice</th>
                                             <th></th>
                                         </tr>
@@ -155,7 +141,10 @@ aria-hidden="true" style="display: none">
                                 </table>
 
                             </div>
+
                         </div>
+
+
 
                         <!-- Description1 tab -->
 
@@ -241,7 +230,7 @@ aria-hidden="true" style="display: none">
                                         <div class="col-md-2 d-flex align-items-center r-day">
                                             
                                             <input style="border: 1px solid #e8ecf1;display:none;" class="qstn_time"
-                                             value="00:00" name="question_time_limit{{value1}}"   type="text" placeholder="">
+                                             value="00:00:00" name="question_time_limit{{value1}}"   type="text" placeholder="">
                                             <!-- <span style="font-size: 10px;">attempts</span> -->
                                         </div>
                                      </div>
@@ -385,15 +374,10 @@ aria-hidden="true" style="display: none">
     <script>
     
     function choice_add_fun(val1){
+        alert(val1)
      
     var add_line_count = $(".add_line_count"+val1).val();
-    if ($(".question_type_radio"+val1).is(":checked")){
-      question_type = "radio"
-      
-    }
-    else if($(".question_type_checkbox"+val1).is(":checked")){
-        question_type = "checkbox"
-        }
+    
   
       var file_status = 'none'
     if($(".file_field"+val1).is(":checked")){
@@ -410,12 +394,18 @@ aria-hidden="true" style="display: none">
   
         $(".score_th").show()
         $(".score_td").show()
+
+        $(".correct_th").show()
+        $(".correct_td").show()
     }
     else if ($("#scoring_end").is(':checked')) {
         score_status = 'show'
   
         $(".score_th").show()
         $(".score_td").show()
+
+        $(".correct_th").show()
+        $(".correct_td").show()
     }
   
     
@@ -442,7 +432,7 @@ aria-hidden="true" style="display: none">
                     </div>
                 </div>
             </td>
-            <td>
+            <td class="correct_td" style="display:`+score_status+`;">
                 <div style="margin-left:47px;" class="input-group date">
                 <input  type="checkbox"  name="addline_check`+add_line_count+``+'-'+`{{value1}}" value="True">
                 </div></td>
@@ -570,6 +560,7 @@ aria-hidden="true" style="display: none">
 
         var question =  $(".modal_question"+modal_count).val();
         $("#question_span-"+section_count).empty().append(``+question+``)
+
         if ($(".question_type_radio"+modal_count).is(":checked")){
               question_type = "Multiple choice: only one answer"
             }
@@ -578,7 +569,6 @@ aria-hidden="true" style="display: none">
             }
         $("#questiontype_span-"+section_count).empty().append(``+question_type+``)
         $('.question-modal-'+modal_count).modal('hide');
-
 
       }
 
@@ -589,11 +579,28 @@ aria-hidden="true" style="display: none">
         var modal_status = $(".modal_status"+val1).val();
   
         if ($(".question_type_radio"+val1).is(":checked")){
-              question_type = "Multiple choice: only one answer"
-            }
-           else if($(".question_type_checkbox"+val1).is(":checked")){
-              question_type = "Multiple choice: multiple answers allowed"
-            }
+            question_type = "Multiple choice: only one answer"
+        }
+        else if($(".question_type_checkbox"+val1).is(":checked")){
+            question_type = "Multiple choice: multiple answers allowed"
+        }
+        else if($(".question_type_text"+val1).is(":checked")){
+            question_type = "Single Line Text Box"
+        }
+        else if($(".question_type_numtext"+val1).is(":checked")){
+            question_type = "Numerical Value"
+        }
+        else if($(".question_type_datetype"+val1).is(":checked")){
+            question_type = "Date type"
+        }
+        else if($(".question_type_datetime"+val1).is(":checked")){
+            question_type = "Datetime type"
+        }
+        else if($(".question_type_matrix"+val1).is(":checked")){
+            question_type = "Matrix"
+        }
+
+
            else{
   
               $(".alertshow").show()
@@ -619,7 +626,7 @@ aria-hidden="true" style="display: none">
                         <input type="hidden" value=`+i+` id="section_id`+i+`">
                         <input type="hidden" name='section_line_count' value=`+i+`>
                         <input type="hidden" name="modal_status" value =`+modal_status+`>
-                        <input type="hidden" class="section_line" value="`+question+`" name='section_line'>
+                        <input type="hidden" id="section_line" value="`+question+`" name='section_line'>
                     </td>
                     <td>
                         <div class="action-tbl d-flex justify-content-end">
@@ -639,6 +646,9 @@ aria-hidden="true" style="display: none">
           $('.section_question_status'+val1).val("True")
           }
         }
+
+
+        
     
         else{
     
@@ -751,11 +761,6 @@ aria-hidden="true" style="display: none">
   
     }
 
-
-
-    
-
-
     $(".qstn_check").click(function() {
     
     qstn_check =  $(".qstn_check").is(":checked")
@@ -772,6 +777,133 @@ aria-hidden="true" style="display: none">
   
    
   </script>
+
+
+<script>
+
+  val1 = `{{value1}}`  
+
+$(".question_type_matrix"+val1).click(function() {
+    alert("hy_matrix")
+    alert(val1)
+    $("#Answers1"+val1).empty().append(`
+
+            <div class="mt-3">
+                <div class="mb-2">
+                    <b>Answers</b>&nbsp;
+                    <button type="button" onclick="choice_matrix_add('{{value1}}')"
+                    class="btn btn-prim pay" >
+                    Add a Line
+                    </button>
+                
+                </div>
+
+            <table  class="table table-qstn dt-responsive table-bordered nowrap table-padd" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+
+                <thead class="border-class">
+                    <tr class="heading-text">  
+                        <th>Choices</th>
+                        <th></th>
+                    </tr>
+                </thead>
+
+                <tbody class="body-textcls vertcle-center" id="choice_matrix_div{{value1}}">
+            
+
+                </tbody>
+            </table>
+
+            <div class="mb-2">
+                    <b>Matrix Rows</b>&nbsp;
+                    <button type="button" onclick="choice_matrix_rows('{{value1}}')"
+                    class="btn btn-prim pay" >
+                    Add a Line
+                    </button>
+                
+                </div>
+
+            <table  class="table table-qstn dt-responsive table-bordered nowrap table-padd" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+
+                <thead class="border-class">
+                    <tr class="heading-text">  
+                        <th>Rows</th>
+                        <th></th>
+                    </tr>
+                </thead>
+
+                <tbody class="body-textcls vertcle-center" id="choice_matrix_rows_div{{value1}}">
+            
+
+                </tbody>
+            </table>
+
+            </div>
+            `)
+        })
+
+
+        function choice_matrix_add(val1){
+
+            var add_line_count = $(".add_line_count"+val1).val();
+
+            $("#choice_matrix_div"+val1).append(`
+
+            <tr class="tr_choice_remove`+add_line_count+`" >
+
+            <td>
+                <div class="input-group">
+                <input type="text" onchange="choice_value(this,`+add_line_count+`)"  name="question_choice_matrix1`+add_line_count+``+'-'+`{{value1}}"  class="form-control">
+                <div class="input-group-append">
+                    <button type="button" style="margin-bottom: 7px;"
+                    class="input-group-text" data-toggle="modal"
+                    data-target="#choice_modal-`+add_line_count+`-{{value1}}">
+                    <i class="fas fa-language"></i>
+                    </button>
+                </div>
+                </div> 
+                <input type="hidden" value=`+add_line_count+` name="question_line_count{{value1}}">
+                </td>
+
+            `)
+
+        }
+
+
+
+
+
+        function choice_matrix_rows(val1){
+
+            var add_line_count = $(".add_line_count"+val1).val();
+
+            $("#choice_matrix_rows_div"+val1).append(`
+
+            <tr class="tr_choice_remove`+add_line_count+`" >
+
+            <td>
+                <div class="input-group">
+                <input type="text" onchange="choice_value(this,`+add_line_count+`)"  name="question_choice_matrix2`+add_line_count+``+'-'+`{{value1}}"  class="form-control">
+                <div class="input-group-append">
+                    <button type="button" style="margin-bottom: 7px;"
+                    class="input-group-text" data-toggle="modal"
+                    data-target="#choice_modal-`+add_line_count+`-{{value1}}">
+                    <i class="fas fa-language"></i>
+                    </button>
+                </div>
+                </div> 
+                <input type="hidden" value=`+add_line_count+` name="question_line_count{{value1}}">
+                </td>
+
+            `)
+
+        }
+
+
+
+
+
+
+</script>
   
   
 
