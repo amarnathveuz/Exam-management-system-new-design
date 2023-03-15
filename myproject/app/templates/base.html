@@ -305,6 +305,240 @@
 
 </script>
 {% endif %}
+
+<script src="./static/admin/js/jquery.min.js"></script>
+<script src="./static/admin/js/custome.js"></script>
+<script src="./static/admin/js/bootstrap.bundle.min.js"></script>
+<script src="./static/admin/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="./static/admin/plugins/datatables/dataTables.bootstrap4.min.js"></script>
+<script src="./static/admin/plugins/datatables/dataTables.responsive.min.js"></script>
+<script src="./static/admin/plugins/datatables/responsive.bootstrap4.min.js"></script>
+<script src="./static/admin/plugins/datatables/datatables.init.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/16.8.4/umd/react.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.8.4/umd/react-dom.production.min.js"></script>
+
+<script src="./static/admin/plugins/select2/dist/js/select2.min.js"></script>
+
+<link href="https://rawgit.com/select2/select2/master/dist/css/select2.min.css" />
+
+<script>
+    $(document).ready(function() {
+        $('#datatable').dataTable();
+        $('#datatable-keytable').DataTable({
+            keys: true
+        });
+        $('#datatable-responsive').DataTable();
+        $('#datatable-scroller').DataTable({
+            ajax: "plugins/datatables/json/scroller-demo.json",
+            deferRender: true,
+            scrollY: 380,
+            scrollCollapse: true,
+            scroller: true
+        });
+        var table = $('#datatable-fixed-header').DataTable({
+            fixedHeader: true
+        });
+    });
+    TableManageButtons.init();
+</script>
+
+
+<script>
+    $("a.splnav").click(function() {
+        $("a.splnav").css("background-color", "#222");
+        $(this).css("background-color", "black");
+        // $(this).css("border-left", "3px solid #6e56a3");
+    });
+</script>
+<script>
+    jQuery(document).ready(function(e) {
+        function t(t) {
+            e(t).bind("click", function(t) {
+                t.preventDefault();
+                e(this).parent().fadeOut()
+            })
+        }
+        e(".drpdown-toggle").click(function() {
+            var t = e(this).parents(".button-drpdown").children(".drpdown-menu").is(":hidden");
+            e(".button-drpdown .drpdown-menu").hide();
+            e(".button-drpdown .drpdown-toggle").removeClass("active");
+            if (t) {
+                e(this).parents(".button-drpdown").children(".drpdown-menu").toggle().parents(
+                    ".button-drpdown").children(".drpdown-toggle").addClass("active")
+            }
+        });
+        e(document).bind("click", function(t) {
+            var n = e(t.target);
+            if (!n.parents().hasClass("button-drpdown")) e(".button-drpdown .drpdown-menu").hide();
+        });
+        e(document).bind("click", function(t) {
+            var n = e(t.target);
+            if (!n.parents().hasClass("button-drpdown")) e(".button-drpdown .drpdown-toggle")
+                .removeClass("active");
+        })
+    });
+</script>
+<script>
+    let searchIcon = document.querySelector(".search-bar__search-icon"),
+        closeIcon = document.querySelector(".search-bar__close-icon .far"),
+        searchBar = document.querySelector(".search-bar"),
+        searchInput = document.querySelector(".search-bar__search-input input")
+
+
+    searchIcon.onclick = () => {
+        searchBar.classList.toggle("search-bar--active")
+    }
+
+
+    closeIcon.onclick = () => {
+        searchInput.value = ""
+        searchInput.focus()
+    }
+
+
+
+    searchInput.onfocus = function() {
+        let place = this.getAttribute("placeholder")
+        this.setAttribute("data", `${place}`)
+        this.removeAttribute("placeholder")
+    }
+
+    searchInput.onblur = function() {
+        this.setAttribute("placeholder", `${this.getAttribute("data")}`)
+    }
+</script>
+
+<script>
+    const TagsInput1 = props => {
+        const [tags1, setTags1] = React.useState(props.tags1);
+        const removeTags1 = indexToRemove => {
+            setTags1([...tags1.filter((_, index) => index !== indexToRemove)]);
+        };
+        const addTags1 = event => {
+            if (event.target.value !== "") {
+                setTags1([...tags1, event.target.value]);
+                props.selectedTags1([...tags1, event.target.value]);
+                event.target.value = "";
+            }
+        };
+        return /*#__PURE__*/ (
+            React.createElement("div", {
+                    className: "tags-input1"
+                }, /*#__PURE__*/
+                React.createElement("ul", {
+                        id: "tags1"
+                    },
+                    tags1.map((tag1, index) => /*#__PURE__*/
+                        React.createElement("li", {
+                                key: index,
+                                className: "tag1"
+                            }, /*#__PURE__*/
+                            React.createElement("span", {
+                                className: "tag-title1"
+                            }, tag1), /*#__PURE__*/
+                            React.createElement("span", {
+                                className: "tag-close-icon1",
+                                onClick: () => removeTags1(index)
+                            }, "x")))), /*#__PURE__*/
+
+
+
+
+
+
+                React.createElement("input", {
+                    type: "text",
+                    onKeyUp: event => event.key === "Enter" ? addTags1(event) : null,
+                    placeholder: "Mail id"
+                })));
+
+
+
+    };
+
+    const App1 = () => {
+        const selectedTags1 = tags1 => {
+            console.log(tags1);
+        };
+        return /*#__PURE__*/ (
+            React.createElement("div", {
+                    className: "App1"
+                }, /*#__PURE__*/
+                React.createElement(TagsInput1, {
+                    selectedTags1: selectedTags1,
+                    tags1: ['user@gmail.com']
+                })));
+
+
+    };
+
+    ReactDOM.render( /*#__PURE__*/ React.createElement(App1, null), document.getElementById("root1"));
+</script>
+<script>
+    function loading() {
+        document.querySelectorAll(".bar").forEach(function(current) {
+            let startWidth = 0;
+            const endWidth = current.dataset.size;
+            const interval = setInterval(frame, 20);
+
+            function frame() {
+                if (startWidth >= endWidth) {
+                    clearInterval(interval);
+                } else {
+                    startWidth++;
+                    current.style.width = `${endWidth}%`;
+                    current.firstElementChild.innerText = `${startWidth}%`;
+                }
+            }
+        });
+    }
+
+    setTimeout(loading, 1000);
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.14.0-beta2/js/bootstrap-select.min.js"></script>
+<script>
+    $(document).ready(function() {
+
+
+        var readURL1 = function(input) {
+            if (input.files && input.files[0]) {
+                var reader1 = new FileReader();
+
+                reader1.onload = function(e) {
+                    $('.profile-pic1').attr('src', e.target.result);
+                }
+
+                reader1.readAsDataURL(input.files[0]);
+            }
+        }
+
+
+        $(".file-upload1").on('change', function() {
+            readURL1(this);
+        });
+
+        $(".upload-button1").on('click', function() {
+            $(".file-upload1").click();
+        });
+    });
+</script>
+<script>
+    var colors = ["red", "blue", "green", "orange", "yellow"];
+    $(document).ready(function() {
+        var checkList = [1];
+        $("#myList").select2({
+            width: "100%",
+            templateSelection: function(data, container) {
+                var selection = $('#myList').select2('data');
+                var idx = selection.indexOf(data);
+                console.log(">>Selection", data.text, data.idx, idx);
+                data.idx = idx;
+                // $(container).css("background-color", colors[data.idx]);
+                return data.text;
+            },
+        }).val(checkList).trigger("change");
+    })
+</script>
 </body>
 
 </html>
