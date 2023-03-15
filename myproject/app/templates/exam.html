@@ -2,6 +2,32 @@
 
 {% load static %}
 
+{% block content1 %}
+<ul class="navbar-nav1 bg-2 col">
+
+    <li class="nav-item d-none d-sm-inline-block">
+        <a href="" class="nav-link"> Exams</a>
+    </li>
+    <li class="nav-item d-none d-sm-inline-block">
+        <a href="" class="nav-link"> Participations </a>
+    </li>
+    <li class="nav-item d-none d-sm-inline-block dropdown nav-drp">
+        <a href="#" class="nav-link dropdown-toggle" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Questions & Answers </a>
+
+
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <a class="dropdown-item d-flex align-item-center" href="questions.html">Questions</a>
+            <a class="dropdown-item d-flex align-item-center" href="#">Suggested Values</a>
+            <a class="dropdown-item d-flex align-item-center" href="#">Detailed Answers</a>
+        </div>
+
+
+    </li>
+
+</ul>
+
+{% endblock %}
+
 {% block content %}
 <div class="content">
     <div class="container-fluid margin-class-this">
