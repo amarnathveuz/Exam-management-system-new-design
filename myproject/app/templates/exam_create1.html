@@ -1,0 +1,2795 @@
+
+
+
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+<div class="container-fluid px-0">
+    <div class="row">
+        <div class="col-md-12 px-0">
+            <div class="card">
+                <div class="card-body body-change  p-0">
+                    <div class="d-flex align-items-center justify-content-between p-l-10 p-r-10  py-1">
+
+
+
+                        <div class="d-flex align-item-center">
+                            <h2 class="main-heading-txt"><a href="exam.html"><svg style="margin-top: -6px; margin-right:4px;" width="20" height="22" viewBox="0 0 20 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M6 1V4ZM14 1V4ZM19 7.5V16C19 19 17.5 21 14 21H6C2.5 21 1 19 1 16V7.5C1 4.5 2.5 2.5 6 2.5H14C17.5 2.5 19 4.5 19 7.5ZM6 10H14ZM6 15H10Z" fill="#FFD1D1"/>
+                                <path d="M6 1V4M14 1V4M6 10H14M6 15H10M19 7.5V16C19 19 17.5 21 14 21H6C2.5 21 1 19 1 16V7.5C1 4.5 2.5 2.5 6 2.5H14C17.5 2.5 19 4.5 19 7.5Z" stroke="#F14A4A" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                Fire & Safety Satisfaction Survey  </a> <span>/ New</span></h2>
+                            <p class="brud-crumps">Home / <span>Exam Management</span></p>
+                        </div>
+                        <div class="d-flex">
+                            <button type="button" class="btn btn-outline-pink waves-effect waves-light mx-1" data-toggle="modal" data-target="#share-modal"><svg width="14" height="16" viewBox="0 0 20 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M16 7C17.6569 7 19 5.65685 19 4C19 2.34315 17.6569 1 16 1C14.3431 1 13 2.34315 13 4C13 5.65685 14.3431 7 16 7Z" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M4 14C5.65685 14 7 12.6569 7 11C7 9.34315 5.65685 8 4 8C2.34315 8 1 9.34315 1 11C1 12.6569 2.34315 14 4 14Z" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M16 21C17.6569 21 19 19.6569 19 18C19 16.3431 17.6569 15 16 15C14.3431 15 13 16.3431 13 18C13 19.6569 14.3431 21 16 21Z" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M6.58984 12.51L13.4198 16.49" stroke="#1C1D21" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M13.4098 5.51001L6.58984 9.49001" stroke="#1C1D21" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                </button>
+                            <button type="button" class="btn btn-outline-pink waves-effect waves-light mx-1"><svg width="16" height="16" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M5 8V1H17V8" stroke="#1C1D21" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M5 17H3C2.46957 17 1.96086 16.7893 1.58579 16.4142C1.21071 16.0391 1 15.5304 1 15V10C1 9.46957 1.21071 8.96086 1.58579 8.58579C1.96086 8.21071 2.46957 8 3 8H19C19.5304 8 20.0391 8.21071 20.4142 8.58579C20.7893 8.96086 21 9.46957 21 10V15C21 15.5304 20.7893 16.0391 20.4142 16.4142C20.0391 16.7893 19.5304 17 19 17H17" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M17 13H5V21H17V13Z" stroke="#1C1D21" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                </button> &ensp;
+
+                            <a href="exam-create.html"> <button type="button" class="btn btn-pink waves-effect waves-light"><i class="fa fa-plus mr-1" aria-hidden="true"></i>New</button></a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="card card-shadow m-2 ">
+
+                <div class="card-body body-change card-border p-0">
+
+                    <div class="row mt-1 p-3">
+
+                        <div class="col-md-11 col-sm-12 col-12 px-0">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group exam-titl">
+                                        <label for="field-1" class="control-label">Exam Title</label>
+                                        <div class="d-flex align-item-center">
+                                            <input type="text" class="form-control" id="field-1" placeholder="e.g. Satisfaction Survey">
+                                            <button type="button" class="input-group-lang" data-toggle="modal" data-target="#language-modal">
+                                                <svg style="margin-top:-3px;" width="22" height="12" viewBox="0 0 22 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M16.55 9.65002C17.0167 9.65002 17.471 9.54169 17.913 9.32502C18.3543 9.10836 18.7583 8.80002 19.125 8.40002V5.75002C18.7417 5.80002 18.3873 5.85836 18.062 5.92502C17.7373 5.99169 17.4333 6.06669 17.15 6.15002C16.4 6.38336 15.8377 6.67502 15.463 7.02502C15.0877 7.37502 14.9 7.78336 14.9 8.25002C14.9 8.68336 15.05 9.02502 15.35 9.27502C15.65 9.52502 16.05 9.65002 16.55 9.65002ZM15.975 11.35C15.025 11.35 14.275 11.0794 13.725 10.538C13.175 9.99602 12.9 9.25836 12.9 8.32502C12.9 7.45836 13.175 6.75002 13.725 6.20002C14.275 5.65002 15.1583 5.20836 16.375 4.87502C16.7583 4.77502 17.1793 4.68336 17.638 4.60002C18.096 4.51669 18.5917 4.44169 19.125 4.37502C19.0917 3.59169 18.9083 3.02069 18.575 2.66202C18.2417 2.30402 17.725 2.12502 17.025 2.12502C16.5917 2.12502 16.1627 2.20436 15.738 2.36302C15.3127 2.52102 14.7667 2.80002 14.1 3.20002L13.3 1.80002C13.85 1.38336 14.496 1.04569 15.238 0.787024C15.9793 0.529025 16.7333 0.400024 17.5 0.400024C18.6833 0.400024 19.5833 0.766691 20.2 1.50002C20.8167 2.23336 21.125 3.30002 21.125 4.70002V11.125H19.45L19.3 10C18.8333 10.4167 18.321 10.746 17.763 10.988C17.2043 11.2294 16.6083 11.35 15.975 11.35ZM1.625 11.625C1.44167 11.3917 1.28333 11.2 1.15 11.05C1.01667 10.9 0.883333 10.7834 0.75 10.7C2.01667 10.15 3.03333 9.44169 3.8 8.57502C4.56667 7.70836 5.11667 6.52502 5.45 5.02502H1.1V3.85002H5.65C5.71667 3.35002 5.76667 2.81669 5.8 2.25002C5.83333 1.68336 5.85 1.08336 5.85 0.450024H7.1C7.1 1.08336 7.08733 1.67902 7.062 2.23702C7.03733 2.79569 6.98333 3.33336 6.9 3.85002H11.825V5.02502H7.35C7.78333 6.37502 8.40833 7.52902 9.225 8.48702C10.0417 9.44569 10.9917 10.1417 12.075 10.575C11.9417 10.7084 11.8127 10.85 11.688 11C11.5627 11.15 11.4083 11.3584 11.225 11.625C10.175 11.1584 9.24167 10.446 8.425 9.48802C7.60833 8.52936 6.95 7.36669 6.45 6.00002C6.05 7.38336 5.45433 8.52502 4.663 9.42502C3.871 10.325 2.85833 11.0584 1.625 11.625Z" fill="#FF6400"/>
+                                                    </svg> Select Language
+                                                    
+                            </button>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="col-md-5">
+                                    <div class="form-group exam-titl mr-3">
+                                        <label for="field-1" class="control-label">Responsible</label>
+                                        <div class="responsbl d-flex">
+                                            <img src="./static/admin/img/Ellipse 4.png" alt="">
+                                            <select name="" id="" class="form-control">
+                                                <option value="" selected="" disabled="">Mohammed Navab</option>
+                                                <option value="">user2</option>
+                                                <option value="">user3</option>
+                                            
+                                            </select>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="col-md-7">
+                                    <!-- <div class="form-group responsbl">
+                                        <label for="field-1" class="control-label">Language</label>
+
+                                        <select class="selectpicker" multiple aria-label="Default select example" data-live-search="true">
+                                            <option value="1" selected>English</option>
+                                            <option value="2">Arabic</option>
+                                            <option value="3">Hindi</option>
+                                            <option value="4">Urdu</option>
+                                          </select>
+
+
+                                    </div> -->
+
+                                    <label for="field-1" class="control-label">Language</label>
+                                    <div class="labeltag marg-of-this">
+                                        <select multiple="multiple" id="myList">    
+                                            <option value="1">Add Language</option>                                                                                                                     
+                                            <option value="2">English</option>                                                            
+                                            <option value="3">Arabic</option>                                                           
+                                             <option value="4">Urdu</option>                                                            
+                                             <option value="5">Tamil</option>                                                            
+                                            <option value="6">Hindi</option>                                                          
+                                        </select>
+                                    </div>
+
+                                    <script>
+                                        var colors = ["red", "blue", "green", "orange", "yellow"];
+                                        $(document).ready(function() {
+                                            var checkList = [1];
+                                            $("#myList").select2({
+                                                width: "100%",
+                                                templateSelection: function(data, container) {
+                                                    var selection = $('#myList').select2('data');
+                                                    var idx = selection.indexOf(data);
+                                                    console.log(">>Selection", data.text, data.idx, idx);
+                                                    data.idx = idx;
+                                                    // $(container).css("background-color", colors[data.idx]);
+                                                    return data.text;
+                                                },
+                                            }).val(checkList).trigger("change");
+                                        })
+                                    </script>
+                                </div>
+                            </div>
+
+
+                        </div>
+                        <div class="col-md-1 px-0">
+                            <div class="propic">
+                                <div class="small-12 medium-2 large-2 columns">
+                                    <div class="circle">
+                                        <img class="profile-pic1" src="./static/admin/img/placeholder.png">
+                                        <h3>Background Image</h3>
+                                        <div class="p-image">
+                                            <i class="fa fa-camera upload-button1" aria-hidden="true"></i>
+                                            <input class="file-upload1" type="file" accept="image/*">
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="bg-box-white">
+
+                        <div class="row">
+
+
+                            <div class="col-md-12">
+
+                                <div class="nav  nav-pills nav-pills-custom" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                                    <a class="nav-link mb-1 padd-sec border-class active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">
+
+
+                                        <span class="">Questions</span></a>
+
+                                    <a class="nav-link mb-1 padd-sec border-class" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">
+
+
+                                        <span class="text-sizing">Options</span></a>
+
+                                    <a class="nav-link mb-1 padd-sec border-class" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">
+
+
+
+                                        <span class="text-sizing">Start Message</span></a>
+
+                                    <a class="nav-link mb-1 padd-sec border-class" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">
+
+
+                                        <span class="text-sizing">End Message</span></a>
+
+                                    <a class="nav-link mb-1 padd-sec border-class" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-Initial" role="tab" aria-controls="v-pills-settings" aria-selected="false">
+
+
+                                        <span class="text-sizing">Initial Fields</span></a>
+                                </div>
+                                <hr class="line-tab">
+                                <!-- Tabs content -->
+                                <div class="tab-content" id="v-pills-tabContent">
+
+                                    <div class="tab-pane fade rounded bg-white show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+                                        <div class="pad-of-this d-flex align-item-center justify-content-between">
+                                            <div>
+                                                <input type="search" class="inp-search-add" placeholder="Search here">
+                                            </div>
+                                            <div class="mb-2 add-btns">
+                                                <button type="button" class="btn btn-addq" data-toggle="modal" data-target="#addsection">
+                                            Add a Section
+                                        </button>
+                                                <button type="button" class="btn btn-addq" data-toggle="modal" data-target="#question-modal">
+                                        Add a Question
+                                    </button>
+                                            </div>
+
+                                        </div>
+                                        <table class="table table-qstn dt-responsive table-bordered nowrap table-padd" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+
+                                            <thead class="border-class">
+
+                                                <tr class="small-header">
+                                                    <th class="section-main-title heading-custom">Title</th>
+                                                    <th class="section-main-title heading-custom">Question Type</th>
+                                                    <th class="filtr-q">
+                                                        <div class="dropdown">
+                                                            <a class="btn filter-option dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="fa-solid fa-sliders"></i>
+                                                            </a>
+                                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                                                <a class="dropdown-item" href="#">Action</a> <a class="dropdown-item" href="#">Another action</a> <a class="dropdown-item" href="#">Something else here</a>
+                                                            </div>
+                                                        </div>
+                                                    </th>
+
+                                                </tr>
+                                            </thead>
+
+
+                                            <tbody class="body-textcls vertcle-center">
+                                                <tr>
+                                                    <td>what is HTML ?</td>
+                                                    <td>Multiple choice: only one answer</td>
+                                                    <td>
+                                                        <div class="action-tbl d-flex justify-content-end">
+
+                                                            <i class="fa fa-trash-o mx-1 " data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"></i>
+
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>what is HTML ?</td>
+                                                    <td>Multiple choice: only one answer</td>
+                                                    <td>
+                                                        <div class="action-tbl d-flex justify-content-end">
+
+                                                            <i class="fa fa-trash-o mx-1 " data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"></i>
+
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>what is CSS ?</td>
+                                                    <td>Multiple choice: only one answer</td>
+                                                    <td>
+                                                        <div class="action-tbl d-flex justify-content-end">
+
+                                                            <i class="fa fa-trash-o mx-1 " data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"></i>
+
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="section-title" colspan="2">Section 1</td>
+                                                    <td style="background-color: #f5f5f5">
+                                                        <div class="action-tbl d-flex justify-content-end">
+
+                                                            <i class="fa fa-trash-o mx-1 " data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"></i>
+
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <div>
+                                                    <tr>
+                                                        <tr>
+                                                            <td>what is HTML ?</td>
+                                                            <td>Multiple choice: only one answer</td>
+                                                            <td>
+                                                                <div class="action-tbl d-flex justify-content-end">
+
+                                                                    <i class="fa fa-trash-o mx-1 " data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"></i>
+
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>what is CSS ?</td>
+                                                            <td>Multiple choice: only one answer</td>
+                                                            <td>
+                                                                <div class="action-tbl d-flex justify-content-end">
+
+                                                                    <i class="fa fa-trash-o mx-1 " data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"></i>
+
+                                                                </div>
+                                                            </td>
+
+                                                        </tr>
+
+
+                                                        <tr>
+                                                            <td style="padding: 0px 0px 20px;"> <button type="button" class="btn btn-addq2" data-toggle="modal" data-target="#question-modal">
+                                                                    Add New
+                                                                </button></td>
+
+                                                        </tr>
+
+
+
+
+                                                    </tr>
+                                                </div>
+
+                                                <tr>
+                                                    <td class="section-title" colspan="2">Section 2</td>
+                                                    <td style="background-color: #f5f5f5">
+                                                        <div class="action-tbl d-flex justify-content-end">
+
+                                                            <i class="fa fa-trash-o mx-1 " data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"></i>
+
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <div>
+                                                    <tr>
+                                                        <tr>
+                                                            <td>what is HTML ?</td>
+                                                            <td>Multiple choice: only one answer</td>
+                                                            <td>
+                                                                <div class="action-tbl d-flex justify-content-end">
+
+                                                                    <i class="fa fa-trash-o mx-1 " data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"></i>
+
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>what is CSS ?</td>
+                                                            <td>Multiple choice: only one answer</td>
+                                                            <td>
+                                                                <div class="action-tbl d-flex justify-content-end">
+
+                                                                    <i class="fa fa-trash-o mx-1 " data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"></i>
+
+                                                                </div>
+                                                            </td>
+
+                                                        </tr>
+
+
+                                                        <tr>
+                                                            <td style="padding: 0px 0px 20px;"> <button type="button" class="btn btn-addq2" data-toggle="modal" data-target="#question-modal">
+                                                                    Add New
+                                                                </button></td>
+
+                                                        </tr>
+
+
+
+
+                                                    </tr>
+                                                </div>
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                    <div class="tab-pane fade border-class rounded bg-white " id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+                                        <div class="row mb-2 mt-2 question-options">
+                                            <div class="col-md-6 px-0">
+                                                <h5>Questions</h5>
+
+                                                <div class="row">
+                                                    <div class="col-md-3 br-right d-flex align-items-start px-0">
+                                                        <h6>Pagination</h6>
+                                                    </div>
+                                                    <div class="col-md-9 py-2">
+                                                        <div class="form-group d-flex align-items-center">
+                                                            <input type="radio" id="customer" checked>
+                                                            <label for="customer">One page per question</label>
+                                                        </div>
+                                                        <div class="form-group d-flex align-items-center">
+                                                            <input type="radio" id="customer">
+                                                            <label for="customer">One page per section</label>
+                                                        </div>
+                                                        <div class="form-group d-flex align-items-center">
+                                                            <input type="radio" id="customer">
+                                                            <label for="customer">One page with all the questions</label>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-3 br-right d-flex align-items-start px-0">
+                                                        <h6>Display Progress as</h6>
+                                                    </div>
+                                                    <div class="col-md-9 py-2">
+                                                        <div class="form-group d-flex align-items-center">
+                                                            <input type="radio" id="customer" checked>
+                                                            <label for="customer">Percentage left</label>
+                                                        </div>
+                                                        <div class="form-group d-flex align-items-center">
+                                                            <input type="radio" id="customer">
+                                                            <label for="customer">Number</label>
+                                                        </div>
+
+
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-3 br-right d-flex align-items-start px-0">
+                                                        <h6>Question Selection</h6>
+                                                    </div>
+                                                    <div class="col-md-9 py-2">
+                                                        <div class="form-group d-flex align-items-center">
+                                                            <input type="radio" id="customer" checked>
+                                                            <label for="customer">All questions</label>
+                                                        </div>
+                                                        <div class="form-group d-flex align-items-center">
+                                                            <input type="radio" id="customer">
+                                                            <label for="customer">Randomized per Section</label>
+                                                        </div>
+
+
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-3 br-right d-flex align-items-center px-0">
+                                                        <h6>Back Button</h6>
+                                                    </div>
+                                                    <div class="col-md-9">
+                                                        <div class="form-group mt-2 d-flex align-items-center">
+                                                            <input type="checkbox" id="customer">
+
+                                                        </div>
+
+
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="col-md-6">
+                                                <h5>Participants</h5>
+
+
+                                                <div class="row">
+                                                    <div class="col-md-3 br-right d-flex align-items-center px-0">
+                                                        <h6>Access Mode</h6>
+                                                    </div>
+                                                    <div class="col-md-6 d-flex align-items-center m-l-10">
+                                                        <select name="" id="" class="form-control">
+                                                            <option value="">Anyone with the link</option>
+                                                            <option value="">Invited people only</option>
+                                                         
+
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-3 br-right d-flex align-items-center px-0">
+                                                        <h6>Require Login</h6>
+                                                    </div>
+                                                    <div class="col-md-9 d-flex align-items-center r-day">
+                                                        <input type="checkbox" id="r-day">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row  question-options">
+                                            <div class="col-md-6 px-0">
+                                                <h5>Time & Scoring</h5>
+
+                                                <div class="row">
+                                                    <div class="col-md-3 br-right d-flex align-items-center px-0 px-0">
+                                                        <h6>Survey Time Limit</h6>
+                                                    </div>
+                                                    <div class="col-md-7 d-flex align-items-center r-day">
+                                                        <input type="checkbox" id="r-day">
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-3 br-right d-flex align-items-start px-0">
+                                                        <h6>Scoring</h6>
+                                                    </div>
+                                                    <div class="col-md-9 py-2">
+                                                        <div class="form-group d-flex align-items-center">
+                                                            <input type="radio" id="customer">
+                                                            <label for="customer">No scoring</label>
+                                                        </div>
+                                                        <div class="form-group d-flex align-items-center">
+                                                            <input type="radio" id="customer" checked>
+                                                            <label for="customer">Scoring with answers at the end</label>
+                                                        </div>
+                                                        <div class="form-group d-flex align-items-center">
+                                                            <input type="radio" id="customer">
+                                                            <label for="customer">Scoring without answers at the end</label>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-3 br-right d-flex align-items-center px-0">
+                                                        <h6>Required Score (%)</h6>
+                                                    </div>
+                                                    <div class="col-md-1">
+                                                        <input type="text" class="form-control" value="80.00">
+
+
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-3 br-right d-flex align-items-center px-0 px-0">
+                                                        <h6>Is a Certification</h6>
+                                                    </div>
+                                                    <div class="col-md-7 d-flex align-items-center r-day">
+                                                        <input type="checkbox" id="r-day">
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="col-md-6">
+                                                <h5>Live Session</h5>
+
+                                                <div class="row">
+                                                    <div class="col-md-3 br-right d-flex align-items-center px-0">
+                                                        <h6>Session Code</h6>
+                                                    </div>
+                                                    <div class="col-md-2 d-flex align-items-center">
+                                                        <input type="text" class="form-control" value="2168">
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-3 br-right d-flex align-items-center px-0">
+                                                        <h6>Session Link</h6>
+                                                    </div>
+                                                    <div class="col-md-9 d-flex align-items-center">
+                                                        <div class="input-group uploadFile1">
+
+                                                            <input type="text" class="form-control" name="url" value="https://demo4.odoo.com/survey/start/b137640d-9876-1234-abcd-344ca256531e">
+                                                            <div class="input-group-append">
+                                                                <span class="input-group-text"> <i class="fas fa-copy" aria-hidden="true"></i></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-3 br-right d-flex align-items-center px-0">
+                                                        <h6>Reward quick answers</h6>
+                                                    </div>
+                                                    <div class="col-md-7 d-flex align-items-center r-day">
+                                                        <input type="checkbox" id="r-day">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="tab-pane border-class fade rounded bg-white" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
+                                        <textarea class="text-area-inp" name="" id="" cols="30" rows="5" class="form-control border-0" placeholder="Start Message..."></textarea>
+                                    </div>
+
+                                    <div class="tab-pane border-class fade   rounded bg-white" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">
+                                        <textarea class="text-area-inp" name="" id="" cols="30" rows="5" class="form-control border-0" placeholder="End Message..."></textarea>
+                                    </div>
+                                    <div class="tab-pane border-class fade  rounded bg-white" id="v-pills-Initial" role="tabpanel" aria-labelledby="v-pills-settings-tab">
+                                        <table class="table table-qstn dt-responsive table-bordered nowrap table-padd" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+
+                                            <thead class="border-class">
+
+                                                <tr class="small-header">
+                                                    <th class="section-main-title heading-custom">Input Title</th>
+                                                    <th class="section-main-title heading-custom">Input Type</th>
+                                                    <th class="section-main-title heading-custom">Inputs</th>
+                                                    <th class="section-main-title heading-custom"></th>
+                                                </tr>
+                                            </thead>
+
+
+                                            <tbody class="body-textcls vertcle-center">
+                                                <tr>
+                                                    <td><input type="text" class="intial-text" placeholder="Type here"></td>
+                                                    <td>
+                                                        <select class="intial-text2">
+                                                            <option>Text</option>
+                                                            <option>Time</option>
+                                                        </select>
+                                                    </td>
+                                                    <td><input type="text" class="intial-text" placeholder="Type here"></td>
+                                                    <td>
+                                                        <div class="action-tbl d-flex justify-content-end">
+
+                                                            <i class="fa fa-trash-o mx-1 " data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"></i>
+
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td><input type="text" class="intial-text" placeholder="Type here"></td>
+                                                    <td>
+                                                        <select class="intial-text2">
+                                                            <option>Text</option>
+                                                            <option>Time</option>
+                                                        </select>
+                                                    </td>
+                                                    <td><input type="text" class="intial-text" placeholder="Type here"></td>
+                                                    <td>
+                                                        <div class="action-tbl d-flex justify-content-end">
+
+                                                            <i class="fa fa-trash-o mx-1 " data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"></i>
+
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td><input type="text" class="intial-text" placeholder="Type here"></td>
+                                                    <td>
+                                                        <select class="intial-text2">
+                                                            <option>Text</option>
+                                                            <option>Time</option>
+                                                        </select>
+                                                    </td>
+                                                    <td><input type="text" class="intial-text" placeholder="Type here"></td>
+                                                    <td>
+                                                        <div class="action-tbl d-flex justify-content-end">
+
+                                                            <i class="fa fa-trash-o mx-1 " data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"></i>
+
+                                                        </div>
+                                                    </td>
+                                                </tr>
+
+                                                <div>
+
+
+
+                                                    <tr>
+                                                        <td style="padding: 0px 0px 20px;"> <button type="button" class="btn btn-addq2" data-toggle="modal" data-target="#question-modal">
+                                                                    Add New
+                                                                </button></td>
+
+                                                    </tr>
+
+                                                    </tr>
+                                                </div>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+
+
+
+
+
+                    </div>
+                </div>
+                <div class="col-lg-4 padd-this">
+                    <div class="bg-box-white2">
+                        <div class="paytab">
+                            <ul class="nav nav-tabs nav-pay" role="tablist">
+                                <li class="nav-item d-flex align-items-center">
+                                    <a class="nav-link active" data-toggle="tab" href="#home4" role="tab">
+                                        Send Message
+                                    </a>
+                                </li>
+                                <li class="nav-item d-flex align-items-center">
+                                    <a class="nav-link" data-toggle="tab" href="#profile4" role="tab">
+                                        Log Note
+                                    </a>
+                                </li>
+
+                                <li class="nav-item d-flex align-items-center" data-toggle="modal" data-target="#schedule">
+                                    <a class="nav-link" data-toggle="tab" href="#settings4" role="tab">
+                                        Activity
+                                    </a>
+                                </li>
+
+
+                            </ul>
+                            <div class="tab-content text-muted activity-pad">
+
+                                <div class="tab-pane active" id="home4" role="tabpanel">
+
+                                    <div class="row msging px-0 my-2 d-flex align-items-center">
+                                        <img src="./static/admin/img/users/avatar-9.jpg" alt="">
+                                        <input type="search" name="q" class="message-input rounded-full" placeholder="Send a message..." autocomplete="off">
+                                        <button class="action-box-submit" type="submit"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+                                        <div class="test-emoji"></div>
+                                        <div class="emoji-panel">
+                                            <button id="emoji-picker" class="chat-input-tool">
+                                                <i class="fa-regular fa-face-smile"></i>
+                                            </button>
+                                        </div>
+
+                                        <button class="chat-input-tool file-msg">
+                                            <i class="fas fa-paperclip" aria-hidden="true"></i>
+                                        </button>
+                                    </div>
+                                    <div class="d-flex align-item-center justify-content-center postion">
+                                        <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+                                        <lottie-player src="https://assets6.lottiefiles.com/private_files/lf30_e3pteeho.json" background="transparent" speed="1" style="width: 300px; height: 300px; margin-top:30px;" loop autoplay></lottie-player>
+                                    </div>
+                                </div>
+                                <div class="tab-pane" id="profile4" role="tabpanel">
+                                    <div class="row msging px-0 my-2 d-flex align-items-center">
+                                        <img src="./static/admin/img/users/avatar-9.jpg" alt="">
+                                        <input type="search" name="q" class="message-input rounded-full" placeholder="Log an internal note..." autocomplete="off">
+                                        <button class="action-box-submit" type="submit"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+                                        <div class="test-emoji"></div>
+                                        <div class="emoji-panel">
+                                            <button id="emoji-picker" class="chat-input-tool">
+                                                <i class="fa-regular fa-face-smile"></i>
+                                            </button>
+                                        </div>
+                                        <div class="intercom-composer-popover intercom-composer-emoji-popover">
+
+                                            <div class="intercom-composer-popover-caret">
+                                            </div>
+                                        </div>
+                                        <button class="chat-input-tool file-msg">
+                                            <i class="fas fa-paperclip" aria-hidden="true"></i>
+                                        </button>
+                                    </div>
+
+
+                                </div>
+
+                                <div class="tab-pane" id="settings4" role="tabpanel">
+                                    <div class="row actvty">
+                                        <h5>Today</h5>
+                                    </div>
+                                    <div class="row msging schdul-box mt-1">
+                                        <img src="./static/admin/img/users/avatar-9.jpg" alt="">
+                                        <div>
+                                            <h5>Mitchell Admin <span>- 10 days ago</span></h5>
+                                            <h6>Exam created</h6>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+</div>
+<div id="share-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title mt-0">Share a Exam</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-1">
+                                <label for="field-1" class="control-label">Exam URL</label>
+                            </div>
+                            <div class="col-md-11">
+                                <div class="form-group">
+
+                                    <div class="input-group uploadFile1">
+
+                                        <input type="text" class="form-control" name="url" value="https://demo4.odoo.com/survey/start/b137640d-9876-1234-abcd-344ca256531e">
+                                        <div class="input-group-append">
+                                            <span class="input-group-text"> <i class="fas fa-copy"></i></span>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row recipient">
+                            <div class="col-md-1">
+                                <label for="field-1" class="control-label">Recipients</label>
+                            </div>
+                            <div class="col-md-11">
+                                <div class="form-group">
+
+                                    <div id="root1"></div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-1">
+                                <label for="field-1" class="control-label">Subject</label>
+                            </div>
+                            <div class="col-md-11">
+                                <div class="form-group">
+
+                                    <input type="text" class="form-control" placeholder="Subject">
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <div class="col-md-12">
+                        <div class="mail-content">
+                            <h5>Dear Participant,</h5>
+                            <p>You have been invited to take a new test.</p>
+                            <p>Please answer the survey for 05/05/2021.</p>
+                            <p>We wish you good luck!</p>
+                        </div>
+                    </div>
+                    <div class="col-md-9">
+                        <div class="row">
+                            <div class="w-10 d-flex align-items-center">
+                                <label for="field-1" class="control-label attachmt-plus">Attachments </label>
+                            </div>
+                            <div class="w-90">
+                                <div class="form-group">
+                                    <div class="input-group uploadFile1">
+
+                                        <input type="file" class="inputfile form-control" name="file">
+                                        <div class="input-group-append">
+                                            <span class="input-group-text"> <i class="fas fa-paperclip"></i></span>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-md-3">
+                        <div class="row">
+                            <div class="mr-2 d-flex align-items-center">
+                                <label for="field-1" class="control-label">Answer deadline</label>
+                            </div>
+                            <div class="">
+                                <div class="form-group">
+                                    <input type="date" class="form-control" id="field-1" placeholder="05/03/2023">
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+
+
+                </div>
+
+
+
+            </div>
+            <div class="modal-footer">
+
+                <button type="button" style="background-color:#199A7E!important;border: none!important;" class="btn btn-info waves-effect waves-light">Send </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="addsection" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none">
+    <div class="modal-dialog modal-md modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title mt-0">Add a Section</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="field-1" class="control-label">Section Name</label>
+                            <input type="text" class="form-control" id="field-1" placeholder="Section Name">
+                        </div>
+                    </div>
+
+                </div>
+
+
+
+            </div>
+            <div class="modal-footer">
+
+                <button type="button" style="background-color:#199A7E!important;border: none!important;" class="btn btn-info waves-effect waves-light">Save </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="question-modal" class="modal right fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title mt-0">Add a Question</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+            </div>
+            <div class="modal-body p-0">
+                <div class="row hght">
+                    <div class="col-3 bg-light1">
+                        <h5>Question Type</h5>
+                        <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                            <a class="nav-link active" id="qtype1-tab" data-toggle="pill" href="#qtype1" role="tab" aria-controls="qtype1" aria-selected="true">Multiple choice: One answer</a>
+                            <a class="nav-link" id="qtype2-tab" data-toggle="pill" href="#qtype2" role="tab" aria-controls="qtype2" aria-selected="false">Multiple choice: Many answers</a>
+                            <a class="nav-link" id="qtype3-tab" data-toggle="pill" href="#qtype3" role="tab" aria-controls="qtype3" aria-selected="false">Multiple Lines Text Box</a>
+                            <a class="nav-link" id="qtype4-tab" data-toggle="pill" href="#qtype4" role="tab" aria-controls="qtype4" aria-selected="false">Single Line Text Box</a>
+                            <a class="nav-link" id="qtype5-tab" data-toggle="pill" href="#qtype5" role="tab" aria-controls="qtype5" aria-selected="false">Numerical Value</a>
+                            <a class="nav-link" id="qtype6-tab" data-toggle="pill" href="#qtype6" role="tab" aria-controls="qtype6" aria-selected="false">Date</a>
+                            <a class="nav-link" id="qtype7-tab" data-toggle="pill" href="#qtype7" role="tab" aria-controls="qtype7" aria-selected="false">Datetime</a>
+                            <a class="nav-link" id="qtype8-tab" data-toggle="pill" href="#qtype8" role="tab" aria-controls="qtype8" aria-selected="false">Matrix</a>
+                        </div>
+                        <img src="./static/admin/img/preview.png" class="img-fluid previw-set">
+                    </div>
+                    <div class="col-9 bg-modal-right">
+
+                        <div class="tab-content" id="v-pills-tabContent">
+                            <div class="tab-pane fade show active" id="qtype1" role="tabpanel" aria-labelledby="qtype1-tab">
+                                <div class="d-flex justify-content-between">
+                                    <h5>Question</h5>
+                                    <div>
+                                        <button type="button" class="input-modal-lang2">
+                                        <i class="fas fa-paperclip" aria-hidden="true"></i> 
+                                     </button>
+                                        <button type="button" class="input-modal-lang" data-toggle="modal" data-target="#language-modal">
+                                    <svg style="margin-top:-3px;" width="22" height="12" viewBox="0 0 22 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M16.55 9.65002C17.0167 9.65002 17.471 9.54169 17.913 9.32502C18.3543 9.10836 18.7583 8.80002 19.125 8.40002V5.75002C18.7417 5.80002 18.3873 5.85836 18.062 5.92502C17.7373 5.99169 17.4333 6.06669 17.15 6.15002C16.4 6.38336 15.8377 6.67502 15.463 7.02502C15.0877 7.37502 14.9 7.78336 14.9 8.25002C14.9 8.68336 15.05 9.02502 15.35 9.27502C15.65 9.52502 16.05 9.65002 16.55 9.65002ZM15.975 11.35C15.025 11.35 14.275 11.0794 13.725 10.538C13.175 9.99602 12.9 9.25836 12.9 8.32502C12.9 7.45836 13.175 6.75002 13.725 6.20002C14.275 5.65002 15.1583 5.20836 16.375 4.87502C16.7583 4.77502 17.1793 4.68336 17.638 4.60002C18.096 4.51669 18.5917 4.44169 19.125 4.37502C19.0917 3.59169 18.9083 3.02069 18.575 2.66202C18.2417 2.30402 17.725 2.12502 17.025 2.12502C16.5917 2.12502 16.1627 2.20436 15.738 2.36302C15.3127 2.52102 14.7667 2.80002 14.1 3.20002L13.3 1.80002C13.85 1.38336 14.496 1.04569 15.238 0.787024C15.9793 0.529025 16.7333 0.400024 17.5 0.400024C18.6833 0.400024 19.5833 0.766691 20.2 1.50002C20.8167 2.23336 21.125 3.30002 21.125 4.70002V11.125H19.45L19.3 10C18.8333 10.4167 18.321 10.746 17.763 10.988C17.2043 11.2294 16.6083 11.35 15.975 11.35ZM1.625 11.625C1.44167 11.3917 1.28333 11.2 1.15 11.05C1.01667 10.9 0.883333 10.7834 0.75 10.7C2.01667 10.15 3.03333 9.44169 3.8 8.57502C4.56667 7.70836 5.11667 6.52502 5.45 5.02502H1.1V3.85002H5.65C5.71667 3.35002 5.76667 2.81669 5.8 2.25002C5.83333 1.68336 5.85 1.08336 5.85 0.450024H7.1C7.1 1.08336 7.08733 1.67902 7.062 2.23702C7.03733 2.79569 6.98333 3.33336 6.9 3.85002H11.825V5.02502H7.35C7.78333 6.37502 8.40833 7.52902 9.225 8.48702C10.0417 9.44569 10.9917 10.1417 12.075 10.575C11.9417 10.7084 11.8127 10.85 11.688 11C11.5627 11.15 11.4083 11.3584 11.225 11.625C10.175 11.1584 9.24167 10.446 8.425 9.48802C7.60833 8.52936 6.95 7.36669 6.45 6.00002C6.05 7.38336 5.45433 8.52502 4.663 9.42502C3.871 10.325 2.85833 11.0584 1.625 11.625Z" fill="#FF6400"></path>
+                                        </svg> Select Language
+                                        
+                                 </button>
+                                    </div>
+                                </div>
+
+                                <textarea class="text-question" name="" id="" cols="30" rows="3" class="form-control" placeholder="e.g. What is the ..."></textarea>
+                                <div class="ans-tab">
+                                    <h5>Answer</h5>
+
+                                    <table class="table table-qstn dt-responsive table-bordered nowrap table-padd" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+
+                                        <thead class="border-class">
+
+                                            <tr class="heading-text">
+                                                <th>Choices</th>
+                                                <th width="200px">Image</th>
+                                                <th width="40px"></th>
+
+                                            </tr>
+                                        </thead>
+
+
+                                        <tbody class="body-textcls vertcle-center">
+                                            <tr>
+                                                <td colspan="3">
+                                                    <a class="addq">
+                                                    Add a Line
+                                                </a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="input-group">
+
+                                                        <input type="text" class="inputfile form-control mb-0" name="file" placeholder="Type here">
+
+                                                        <div class="input-group-append">
+                                                            <button type="button" class="input-group-text" data-toggle="modal" data-target="#language-modal">
+                                                            <i class="fas fa-language" aria-hidden="true"></i>
+                                                        </button>
+
+                                                        </div>
+                                                    </div>
+
+                                                </td>
+                                                <td class="dropdown">
+                                                    <button type="button" class="attach-btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                  <i class="fas fa-paperclip mr-1"></i>  Add attachment
+                                                </button>
+
+
+
+                                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                                        <a class="dropdown-item d-flex align-item-center" href="#">From Computer</a>
+                                                        <a class="dropdown-item d-flex align-item-center" href="#">From Cloud</a>
+                                                        <a class="dropdown-item d-flex align-item-center" href="#">A link to a URL</a>
+                                                    </div>
+
+
+
+
+                                                </td>
+                                                <td>
+                                                    <div class="action-tbl d-flex justify-content-end">
+
+                                                        <i class="fa fa-trash-o mx-1 " data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" aria-hidden="true"></i>
+
+                                                    </div>
+                                                </td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+
+                                    <h5>Description</h5>
+                                    <textarea name="" id="" cols="30" rows="3" class="form-control" placeholder="e.g. Guidelines, instructions ... to help attendees answer"></textarea>
+
+                                    <h5>Options</h5>
+                                    <hr class="m-0">
+                                    <div class="row question-options">
+                                        <div class="col-md-6 px-0">
+                                            <h5>Answers</h5>
+
+                                            <div class="row">
+                                                <div class="col-md-4 d-flex align-items-center px-0">
+                                                    <h6>Show Comments Field</h6>
+                                                </div>
+                                                <div class="col-md-7">
+                                                    <div class="form-group mt-2 d-flex align-items-center">
+                                                        <div class="toggle-switch">
+                                                            <input id="toggle" class="toggle-input" type='checkbox' />
+                                                            <label for="toggle" class="toggle-label" />
+                                                        </div>
+
+                                                    </div>
+
+
+
+                                                </div>
+                                            </div>
+
+
+
+                                        </div>
+                                        <div class="col-md-6">
+                                            <h5>Layout</h5>
+
+                                            <div class="row">
+                                                <div class="col-md-4 d-flex align-items-center px-0">
+                                                    <h6>Conditional Display</h6>
+                                                </div>
+                                                <div class="col-md-7 d-flex align-items-center r-day">
+                                                    <div class="toggle-switch">
+                                                        <input id="toggle" class="toggle-input" type='checkbox' />
+                                                        <label for="toggle" class="toggle-label" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-1 mt-2 question-options">
+                                        <div class="col-md-6 px-0">
+                                            <h5>Constraints</h5>
+
+                                            <div class="row">
+                                                <div class="col-md-4 d-flex align-items-center px-0 px-0">
+                                                    <h6>Mandatory Answer</h6>
+                                                </div>
+                                                <div class="col-md-7 d-flex align-items-center r-day">
+                                                    <div class="toggle-switch">
+                                                        <input id="toggle" class="toggle-input" type='checkbox' checked/>
+                                                        <label for="toggle" class="toggle-label" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-4 d-flex align-items-center px-0 px-0">
+                                                    <h6>Error Message</h6>
+                                                </div>
+                                                <div class="col-md-7 d-flex align-items-center plachldr">
+                                                    <input type="text" class="form-control" placeholder="This question requires an answer.">
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-6">
+                                            <h5>Live Session</h5>
+
+                                            <div class="row">
+                                                <div class="col-md-4 d-flex align-items-center px-0">
+                                                    <h6>Question Time Limit</h6>
+                                                </div>
+                                                <div class="col-md-7 d-flex align-items-center r-day">
+                                                    <div class="toggle-switch">
+                                                        <input id="toggle" class="toggle-input" type='checkbox' checked/>
+                                                        <label for="toggle" class="toggle-label" />
+                                                    </div>
+
+                                                    <input type="text" class="form-control secnd-frm" placeholder="05"> Seconds
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="tab-pane fade" id="qtype2" role="tabpanel" aria-labelledby="qtype2-tab">
+                                <div class="d-flex justify-content-between">
+                                    <h5>Question</h5>
+                                    <button type="button" class="input-modal-lang" data-toggle="modal" data-target="#language-modal">
+                                    <svg style="margin-top:-3px;" width="22" height="12" viewBox="0 0 22 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M16.55 9.65002C17.0167 9.65002 17.471 9.54169 17.913 9.32502C18.3543 9.10836 18.7583 8.80002 19.125 8.40002V5.75002C18.7417 5.80002 18.3873 5.85836 18.062 5.92502C17.7373 5.99169 17.4333 6.06669 17.15 6.15002C16.4 6.38336 15.8377 6.67502 15.463 7.02502C15.0877 7.37502 14.9 7.78336 14.9 8.25002C14.9 8.68336 15.05 9.02502 15.35 9.27502C15.65 9.52502 16.05 9.65002 16.55 9.65002ZM15.975 11.35C15.025 11.35 14.275 11.0794 13.725 10.538C13.175 9.99602 12.9 9.25836 12.9 8.32502C12.9 7.45836 13.175 6.75002 13.725 6.20002C14.275 5.65002 15.1583 5.20836 16.375 4.87502C16.7583 4.77502 17.1793 4.68336 17.638 4.60002C18.096 4.51669 18.5917 4.44169 19.125 4.37502C19.0917 3.59169 18.9083 3.02069 18.575 2.66202C18.2417 2.30402 17.725 2.12502 17.025 2.12502C16.5917 2.12502 16.1627 2.20436 15.738 2.36302C15.3127 2.52102 14.7667 2.80002 14.1 3.20002L13.3 1.80002C13.85 1.38336 14.496 1.04569 15.238 0.787024C15.9793 0.529025 16.7333 0.400024 17.5 0.400024C18.6833 0.400024 19.5833 0.766691 20.2 1.50002C20.8167 2.23336 21.125 3.30002 21.125 4.70002V11.125H19.45L19.3 10C18.8333 10.4167 18.321 10.746 17.763 10.988C17.2043 11.2294 16.6083 11.35 15.975 11.35ZM1.625 11.625C1.44167 11.3917 1.28333 11.2 1.15 11.05C1.01667 10.9 0.883333 10.7834 0.75 10.7C2.01667 10.15 3.03333 9.44169 3.8 8.57502C4.56667 7.70836 5.11667 6.52502 5.45 5.02502H1.1V3.85002H5.65C5.71667 3.35002 5.76667 2.81669 5.8 2.25002C5.83333 1.68336 5.85 1.08336 5.85 0.450024H7.1C7.1 1.08336 7.08733 1.67902 7.062 2.23702C7.03733 2.79569 6.98333 3.33336 6.9 3.85002H11.825V5.02502H7.35C7.78333 6.37502 8.40833 7.52902 9.225 8.48702C10.0417 9.44569 10.9917 10.1417 12.075 10.575C11.9417 10.7084 11.8127 10.85 11.688 11C11.5627 11.15 11.4083 11.3584 11.225 11.625C10.175 11.1584 9.24167 10.446 8.425 9.48802C7.60833 8.52936 6.95 7.36669 6.45 6.00002C6.05 7.38336 5.45433 8.52502 4.663 9.42502C3.871 10.325 2.85833 11.0584 1.625 11.625Z" fill="#673ab7"></path>
+                                        </svg> Select Language
+                                        
+                                 </button>
+                                </div>
+
+                                <div class="formatter">
+                                    <button class="btn btn-editr" data-command="bold">
+                                 <i class="fa fa-bold"></i>
+                                </button>
+                                    <button class="btn btn-editr" data-command="italic">
+                                  <i class="fa fa-italic"></i>
+                                </button>
+                                    <button class="btn btn-editr" data-command="underline">
+                                 <i class="fa fa-underline"></i>
+                                </button>
+                                    <button class="btn btn-editr" data-command="strikeThrough">
+                                 <i class="fa fa-strikethrough"></i>
+                                </button>
+                                    <button class="btn btn-editr" data-command="justifyLeft">
+                                 <i class="fa fa-align-left"></i>
+                                </button>
+                                    <button class="btn btn-editr" data-command="justifyCenter">
+                                 <i class="fa fa-align-center"></i>    
+                                </button>
+                                    <button class="btn btn-editr" data-command="justifyRight">
+                                 <i class="fa fa-align-right"></i>
+                                </button>
+                                    <button class="btn btn-editr" data-command="justifyFull">
+                                 <i class="fa fa-align-justify"></i>
+                                </button>
+                                    <button class="btn btn-editr" data-command="indent">
+                                 <i class="fa fa-indent"></i>
+                                </button>
+                                    <button class="btn btn-editr" data-command="outdent">
+                                 <i class="fa fa-outdent"></i>
+                                </button>
+                                    <button class="btn btn-editr" data-command="insertUnorderedList">
+                                 <i class="fa fa-list-ul"></i>
+                                </button>
+                                    <button class="btn btn-editr" data-command="insertOrderedList">
+                                 <i class="fa fa-list-ol"></i>
+                                </button>
+                                    <button class="btn btn-editr" data-command="h1">H1</button>
+                                    <button class="btn btn-editr" data-command="h2">H2</button>
+                                    <button class="btn btn-editr" data-command="p">P</button>
+                                    <button class="btn btn-editr" data-command="createlink">
+                                 <i class="fa fa-link"></i>
+                                </button>
+                                    <button class="btn btn-editr" data-command="unlink">
+                                 <i class="fa fa-unlink"></i>
+                                </button>
+
+                                    <p class="edit-text" contenteditable="true" rows="15">Text Goes Here</p>
+                                </div>
+                                <div class="ans-tab">
+                                    <h5>Answer</h5>
+
+                                    <table class="table table-qstn dt-responsive table-bordered nowrap table-padd" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+
+                                        <thead class="border-class">
+
+                                            <tr class="heading-text">
+                                                <th>Choices</th>
+                                                <th width="200px">Image</th>
+                                                <th width="40px"></th>
+
+                                            </tr>
+                                        </thead>
+
+
+                                        <tbody class="body-textcls vertcle-center">
+                                            <tr>
+                                                <td colspan="3">
+                                                    <a class="addq">
+                                                    Add a Line
+                                                </a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="input-group">
+
+                                                        <input type="text" class="inputfile form-control mb-0" name="file" placeholder="Type here">
+
+                                                        <div class="input-group-append">
+                                                            <button type="button" class="input-group-text" data-toggle="modal" data-target="#language-modal">
+                                                            <i class="fas fa-language" aria-hidden="true"></i>
+                                                        </button>
+
+                                                        </div>
+                                                    </div>
+
+                                                </td>
+                                                <td class="dropdown">
+                                                    <button type="button" class="attach-btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                  <i class="fas fa-paperclip mr-1"></i>  Add attachment
+                                                </button>
+
+
+
+                                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                                        <a class="dropdown-item d-flex align-item-center" href="#">From Computer</a>
+                                                        <a class="dropdown-item d-flex align-item-center" href="#">From Cloud</a>
+                                                        <a class="dropdown-item d-flex align-item-center" href="#">A link to a URL</a>
+                                                    </div>
+
+
+
+
+                                                </td>
+                                                <td>
+                                                    <div class="action-tbl d-flex justify-content-end">
+
+                                                        <i class="fa fa-trash-o mx-1 " data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" aria-hidden="true"></i>
+
+                                                    </div>
+                                                </td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+
+                                    <h5>Description</h5>
+                                    <textarea name="" id="" cols="30" rows="3" class="form-control" placeholder="e.g. Guidelines, instructions ... to help attendees answer"></textarea>
+
+                                    <h5>Options</h5>
+                                    <hr class="m-0">
+                                    <div class="row question-options">
+                                        <div class="col-md-6 px-0">
+                                            <h5>Answers</h5>
+
+                                            <div class="row">
+                                                <div class="col-md-4 d-flex align-items-center px-0">
+                                                    <h6>Show Comments Field</h6>
+                                                </div>
+                                                <div class="col-md-7">
+                                                    <div class="form-group mt-2 d-flex align-items-center">
+                                                        <div class="toggle-switch">
+                                                            <input id="toggle" class="toggle-input" type='checkbox' />
+                                                            <label for="toggle" class="toggle-label" />
+                                                        </div>
+
+                                                    </div>
+
+
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-6">
+                                            <h5>Layout</h5>
+
+                                            <div class="row">
+                                                <div class="col-md-4 d-flex align-items-center px-0">
+                                                    <h6>Conditional Display</h6>
+                                                </div>
+                                                <div class="col-md-7 d-flex align-items-center r-day">
+                                                    <div class="toggle-switch">
+                                                        <input id="toggle" class="toggle-input" type='checkbox' />
+                                                        <label for="toggle" class="toggle-label" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-1 mt-2 question-options">
+                                        <div class="col-md-6 px-0">
+                                            <h5>Constraints</h5>
+
+                                            <div class="row">
+                                                <div class="col-md-4 d-flex align-items-center px-0 px-0">
+                                                    <h6>Mandatory Answer</h6>
+                                                </div>
+                                                <div class="col-md-7 d-flex align-items-center r-day">
+                                                    <div class="toggle-switch">
+                                                        <input id="toggle" class="toggle-input" type='checkbox' checked/>
+                                                        <label for="toggle" class="toggle-label" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-4 d-flex align-items-center px-0 px-0">
+                                                    <h6>Error Message</h6>
+                                                </div>
+                                                <div class="col-md-7 d-flex align-items-center plachldr">
+                                                    <input type="text" class="form-control" placeholder="This question requires an answer.">
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-6">
+                                            <h5>Live Session</h5>
+
+                                            <div class="row">
+                                                <div class="col-md-4 d-flex align-items-center px-0">
+                                                    <h6>Question Time Limit</h6>
+                                                </div>
+                                                <div class="col-md-7 d-flex align-items-center r-day">
+                                                    <div class="toggle-switch">
+                                                        <input id="toggle" class="toggle-input" type='checkbox' />
+                                                        <label for="toggle" class="toggle-label" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="qtype3" role="tabpanel" aria-labelledby="qtype3-tab">
+                                <div class="d-flex justify-content-between">
+                                    <h5>Question</h5>
+                                    <button type="button" class="input-modal-lang" data-toggle="modal" data-target="#language-modal">
+                                    <svg style="margin-top:-3px;" width="22" height="12" viewBox="0 0 22 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M16.55 9.65002C17.0167 9.65002 17.471 9.54169 17.913 9.32502C18.3543 9.10836 18.7583 8.80002 19.125 8.40002V5.75002C18.7417 5.80002 18.3873 5.85836 18.062 5.92502C17.7373 5.99169 17.4333 6.06669 17.15 6.15002C16.4 6.38336 15.8377 6.67502 15.463 7.02502C15.0877 7.37502 14.9 7.78336 14.9 8.25002C14.9 8.68336 15.05 9.02502 15.35 9.27502C15.65 9.52502 16.05 9.65002 16.55 9.65002ZM15.975 11.35C15.025 11.35 14.275 11.0794 13.725 10.538C13.175 9.99602 12.9 9.25836 12.9 8.32502C12.9 7.45836 13.175 6.75002 13.725 6.20002C14.275 5.65002 15.1583 5.20836 16.375 4.87502C16.7583 4.77502 17.1793 4.68336 17.638 4.60002C18.096 4.51669 18.5917 4.44169 19.125 4.37502C19.0917 3.59169 18.9083 3.02069 18.575 2.66202C18.2417 2.30402 17.725 2.12502 17.025 2.12502C16.5917 2.12502 16.1627 2.20436 15.738 2.36302C15.3127 2.52102 14.7667 2.80002 14.1 3.20002L13.3 1.80002C13.85 1.38336 14.496 1.04569 15.238 0.787024C15.9793 0.529025 16.7333 0.400024 17.5 0.400024C18.6833 0.400024 19.5833 0.766691 20.2 1.50002C20.8167 2.23336 21.125 3.30002 21.125 4.70002V11.125H19.45L19.3 10C18.8333 10.4167 18.321 10.746 17.763 10.988C17.2043 11.2294 16.6083 11.35 15.975 11.35ZM1.625 11.625C1.44167 11.3917 1.28333 11.2 1.15 11.05C1.01667 10.9 0.883333 10.7834 0.75 10.7C2.01667 10.15 3.03333 9.44169 3.8 8.57502C4.56667 7.70836 5.11667 6.52502 5.45 5.02502H1.1V3.85002H5.65C5.71667 3.35002 5.76667 2.81669 5.8 2.25002C5.83333 1.68336 5.85 1.08336 5.85 0.450024H7.1C7.1 1.08336 7.08733 1.67902 7.062 2.23702C7.03733 2.79569 6.98333 3.33336 6.9 3.85002H11.825V5.02502H7.35C7.78333 6.37502 8.40833 7.52902 9.225 8.48702C10.0417 9.44569 10.9917 10.1417 12.075 10.575C11.9417 10.7084 11.8127 10.85 11.688 11C11.5627 11.15 11.4083 11.3584 11.225 11.625C10.175 11.1584 9.24167 10.446 8.425 9.48802C7.60833 8.52936 6.95 7.36669 6.45 6.00002C6.05 7.38336 5.45433 8.52502 4.663 9.42502C3.871 10.325 2.85833 11.0584 1.625 11.625Z" fill="#673ab7"></path>
+                                        </svg> Select Language
+                                        
+                                 </button>
+                                </div>
+
+                                <div class="formatter">
+                                    <button class="btn btn-editr" data-command="bold">
+                                 <i class="fa fa-bold"></i>
+                                </button>
+                                    <button class="btn btn-editr" data-command="italic">
+                                  <i class="fa fa-italic"></i>
+                                </button>
+                                    <button class="btn btn-editr" data-command="underline">
+                                 <i class="fa fa-underline"></i>
+                                </button>
+                                    <button class="btn btn-editr" data-command="strikeThrough">
+                                 <i class="fa fa-strikethrough"></i>
+                                </button>
+                                    <button class="btn btn-editr" data-command="justifyLeft">
+                                 <i class="fa fa-align-left"></i>
+                                </button>
+                                    <button class="btn btn-editr" data-command="justifyCenter">
+                                 <i class="fa fa-align-center"></i>    
+                                </button>
+                                    <button class="btn btn-editr" data-command="justifyRight">
+                                 <i class="fa fa-align-right"></i>
+                                </button>
+                                    <button class="btn btn-editr" data-command="justifyFull">
+                                 <i class="fa fa-align-justify"></i>
+                                </button>
+                                    <button class="btn btn-editr" data-command="indent">
+                                 <i class="fa fa-indent"></i>
+                                </button>
+                                    <button class="btn btn-editr" data-command="outdent">
+                                 <i class="fa fa-outdent"></i>
+                                </button>
+                                    <button class="btn btn-editr" data-command="insertUnorderedList">
+                                 <i class="fa fa-list-ul"></i>
+                                </button>
+                                    <button class="btn btn-editr" data-command="insertOrderedList">
+                                 <i class="fa fa-list-ol"></i>
+                                </button>
+                                    <button class="btn btn-editr" data-command="h1">H1</button>
+                                    <button class="btn btn-editr" data-command="h2">H2</button>
+                                    <button class="btn btn-editr" data-command="p">P</button>
+                                    <button class="btn btn-editr" data-command="createlink">
+                                 <i class="fa fa-link"></i>
+                                </button>
+                                    <button class="btn btn-editr" data-command="unlink">
+                                 <i class="fa fa-unlink"></i>
+                                </button>
+
+                                    <p class="edit-text" contenteditable="true" rows="15">Text Goes Here</p>
+                                </div>
+                                <div class="ans-tab">
+
+
+                                    <h5>Description</h5>
+                                    <textarea name="" id="" cols="30" rows="3" class="form-control" placeholder="e.g. Guidelines, instructions ... to help attendees answer"></textarea>
+
+                                    <h5>Options</h5>
+                                    <hr class="m-0">
+                                    <div class="row question-options">
+                                        <div class="col-md-6 px-0">
+                                            <h5>Answers</h5>
+
+                                            <div class="row">
+                                                <div class="col-md-4 d-flex align-items-center px-0">
+                                                    <h6>Placeholder</h6>
+                                                </div>
+                                                <div class="col-md-7 d-flex align-items-center plachldr">
+                                                    <input type="text" class="form-control" placeholder="Help Participants know what to write.">
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-6">
+                                            <h5>Layout</h5>
+
+                                            <div class="row">
+                                                <div class="col-md-4 d-flex align-items-center px-0">
+                                                    <h6>Conditional Display</h6>
+                                                </div>
+                                                <div class="col-md-7 d-flex align-items-center r-day">
+                                                    <div class="toggle-switch">
+                                                        <input id="toggle" class="toggle-input" type='checkbox' />
+                                                        <label for="toggle" class="toggle-label" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-1 mt-2 question-options">
+                                        <div class="col-md-6 px-0">
+                                            <h5>Constraints</h5>
+
+                                            <div class="row">
+                                                <div class="col-md-4 d-flex align-items-center px-0 px-0">
+                                                    <h6>Mandatory Answer</h6>
+                                                </div>
+                                                <div class="col-md-7 d-flex align-items-center r-day">
+                                                    <div class="toggle-switch">
+                                                        <input id="toggle" class="toggle-input" type='checkbox' checked/>
+                                                        <label for="toggle" class="toggle-label" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-4 d-flex align-items-center px-0 px-0">
+                                                    <h6>Error Message</h6>
+                                                </div>
+                                                <div class="col-md-7 d-flex align-items-center plachldr">
+                                                    <input type="text" class="form-control" placeholder="This question requires an answer.">
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-6">
+                                            <h5>Live Session</h5>
+
+                                            <div class="row">
+                                                <div class="col-md-4 d-flex align-items-center px-0">
+                                                    <h6>Question Time Limit</h6>
+                                                </div>
+                                                <div class="col-md-7 d-flex align-items-center r-day">
+                                                    <div class="toggle-switch">
+                                                        <input id="toggle" class="toggle-input" type='checkbox' />
+                                                        <label for="toggle" class="toggle-label" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="qtype4" role="tabpanel" aria-labelledby="qtype4-tab">
+
+                                <div class="d-flex justify-content-between">
+                                    <h5>Question</h5>
+                                    <button type="button" class="input-modal-lang" data-toggle="modal" data-target="#language-modal">
+                                        <svg style="margin-top:-3px;" width="22" height="12" viewBox="0 0 22 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M16.55 9.65002C17.0167 9.65002 17.471 9.54169 17.913 9.32502C18.3543 9.10836 18.7583 8.80002 19.125 8.40002V5.75002C18.7417 5.80002 18.3873 5.85836 18.062 5.92502C17.7373 5.99169 17.4333 6.06669 17.15 6.15002C16.4 6.38336 15.8377 6.67502 15.463 7.02502C15.0877 7.37502 14.9 7.78336 14.9 8.25002C14.9 8.68336 15.05 9.02502 15.35 9.27502C15.65 9.52502 16.05 9.65002 16.55 9.65002ZM15.975 11.35C15.025 11.35 14.275 11.0794 13.725 10.538C13.175 9.99602 12.9 9.25836 12.9 8.32502C12.9 7.45836 13.175 6.75002 13.725 6.20002C14.275 5.65002 15.1583 5.20836 16.375 4.87502C16.7583 4.77502 17.1793 4.68336 17.638 4.60002C18.096 4.51669 18.5917 4.44169 19.125 4.37502C19.0917 3.59169 18.9083 3.02069 18.575 2.66202C18.2417 2.30402 17.725 2.12502 17.025 2.12502C16.5917 2.12502 16.1627 2.20436 15.738 2.36302C15.3127 2.52102 14.7667 2.80002 14.1 3.20002L13.3 1.80002C13.85 1.38336 14.496 1.04569 15.238 0.787024C15.9793 0.529025 16.7333 0.400024 17.5 0.400024C18.6833 0.400024 19.5833 0.766691 20.2 1.50002C20.8167 2.23336 21.125 3.30002 21.125 4.70002V11.125H19.45L19.3 10C18.8333 10.4167 18.321 10.746 17.763 10.988C17.2043 11.2294 16.6083 11.35 15.975 11.35ZM1.625 11.625C1.44167 11.3917 1.28333 11.2 1.15 11.05C1.01667 10.9 0.883333 10.7834 0.75 10.7C2.01667 10.15 3.03333 9.44169 3.8 8.57502C4.56667 7.70836 5.11667 6.52502 5.45 5.02502H1.1V3.85002H5.65C5.71667 3.35002 5.76667 2.81669 5.8 2.25002C5.83333 1.68336 5.85 1.08336 5.85 0.450024H7.1C7.1 1.08336 7.08733 1.67902 7.062 2.23702C7.03733 2.79569 6.98333 3.33336 6.9 3.85002H11.825V5.02502H7.35C7.78333 6.37502 8.40833 7.52902 9.225 8.48702C10.0417 9.44569 10.9917 10.1417 12.075 10.575C11.9417 10.7084 11.8127 10.85 11.688 11C11.5627 11.15 11.4083 11.3584 11.225 11.625C10.175 11.1584 9.24167 10.446 8.425 9.48802C7.60833 8.52936 6.95 7.36669 6.45 6.00002C6.05 7.38336 5.45433 8.52502 4.663 9.42502C3.871 10.325 2.85833 11.0584 1.625 11.625Z" fill="#673ab7"></path>
+                                            </svg> Select Language
+                                            
+                                     </button>
+                                </div>
+
+                                <div class="formatter">
+                                    <button class="btn btn-editr" data-command="bold">
+                                     <i class="fa fa-bold"></i>
+                                    </button>
+                                    <button class="btn btn-editr" data-command="italic">
+                                      <i class="fa fa-italic"></i>
+                                    </button>
+                                    <button class="btn btn-editr" data-command="underline">
+                                     <i class="fa fa-underline"></i>
+                                    </button>
+                                    <button class="btn btn-editr" data-command="strikeThrough">
+                                     <i class="fa fa-strikethrough"></i>
+                                    </button>
+                                    <button class="btn btn-editr" data-command="justifyLeft">
+                                     <i class="fa fa-align-left"></i>
+                                    </button>
+                                    <button class="btn btn-editr" data-command="justifyCenter">
+                                     <i class="fa fa-align-center"></i>    
+                                    </button>
+                                    <button class="btn btn-editr" data-command="justifyRight">
+                                     <i class="fa fa-align-right"></i>
+                                    </button>
+                                    <button class="btn btn-editr" data-command="justifyFull">
+                                     <i class="fa fa-align-justify"></i>
+                                    </button>
+                                    <button class="btn btn-editr" data-command="indent">
+                                     <i class="fa fa-indent"></i>
+                                    </button>
+                                    <button class="btn btn-editr" data-command="outdent">
+                                     <i class="fa fa-outdent"></i>
+                                    </button>
+                                    <button class="btn btn-editr" data-command="insertUnorderedList">
+                                     <i class="fa fa-list-ul"></i>
+                                    </button>
+                                    <button class="btn btn-editr" data-command="insertOrderedList">
+                                     <i class="fa fa-list-ol"></i>
+                                    </button>
+                                    <button class="btn btn-editr" data-command="h1">H1</button>
+                                    <button class="btn btn-editr" data-command="h2">H2</button>
+                                    <button class="btn btn-editr" data-command="p">P</button>
+                                    <button class="btn btn-editr" data-command="createlink">
+                                     <i class="fa fa-link"></i>
+                                    </button>
+                                    <button class="btn btn-editr" data-command="unlink">
+                                     <i class="fa fa-unlink"></i>
+                                    </button>
+
+                                    <p class="edit-text" contenteditable="true" rows="15">Text Goes Here</p>
+                                </div>
+                                <div class="ans-tab">
+                                    <h5>Answer</h5>
+                                    <hr class="m-0">
+                                    <div class="row question-options">
+                                        <div class="col-md-7 px-0 mb-2">
+                                            <div class="row">
+                                                <div class="col-md-4 d-flex align-items-center px-0">
+                                                    <h6>Input must be an email</h6>
+                                                </div>
+                                                <div class="col-md-7">
+                                                    <div class="form-group mt-2 d-flex align-items-center">
+                                                        <div class="toggle-switch">
+                                                            <input id="toggle" class="toggle-input" type='checkbox' checked/>
+                                                            <label for="toggle" class="toggle-label" />
+                                                        </div>
+
+                                                    </div>
+
+
+
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-4 d-flex align-items-center px-0">
+                                                    <h6>Save as user email</h6>
+                                                </div>
+                                                <div class="col-md-7">
+                                                    <div class="form-group mt-2 d-flex align-items-center">
+                                                        <div class="toggle-switch">
+                                                            <input id="toggle" class="toggle-input" type='checkbox' />
+                                                            <label for="toggle" class="toggle-label" />
+                                                        </div>
+
+                                                    </div>
+
+
+
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-4 d-flex align-items-center px-0">
+                                                    <h6>Save as user nickname</h6>
+                                                </div>
+                                                <div class="col-md-7">
+                                                    <div class="form-group mt-2 d-flex align-items-center">
+                                                        <div class="toggle-switch">
+                                                            <input id="toggle" class="toggle-input" type='checkbox' />
+                                                            <label for="toggle" class="toggle-label" />
+                                                        </div>
+
+                                                    </div>
+
+
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <h5>Description</h5>
+                                    <textarea name="" id="" cols="30" rows="3" class="form-control" placeholder="e.g. Guidelines, instructions ... to help attendees answer"></textarea>
+
+                                    <h5>Options</h5>
+                                    <hr class="m-0">
+                                    <div class="row question-options">
+                                        <div class="col-md-6 px-0">
+                                            <h5>Answers</h5>
+
+                                            <div class="row">
+                                                <div class="col-md-4 d-flex align-items-center px-0">
+                                                    <h6>Validate entry</h6>
+                                                </div>
+                                                <div class="col-md-7">
+                                                    <div class="form-group mt-2 d-flex align-items-center">
+                                                        <div class="toggle-switch">
+                                                            <input id="toggle" class="toggle-input" type='checkbox' checked/>
+                                                            <label for="toggle" class="toggle-label" />
+                                                        </div>
+
+                                                    </div>
+
+
+
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-4 d-flex align-items-center px-0">
+                                                    <h6>Min/Max Limits</h6>
+                                                </div>
+                                                <div class="col-md-7 limit-inpt">
+                                                    <div class="form-group mt-2 d-flex align-items-center">
+                                                        <input type="text" class="form-control mr-1" placeholder="1"> to
+                                                        <input type="text" class="form-control ml-1" placeholder="10">
+                                                    </div>
+
+
+
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-4 d-flex align-items-center px-0 px-0">
+                                                    <h6>Validation Error</h6>
+                                                </div>
+                                                <div class="col-md-7 d-flex align-items-center plachldr">
+                                                    <input type="text" class="form-control" placeholder="Displayed when the answer entered is not valid.">
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-4 d-flex align-items-center px-0 px-0">
+                                                    <h6>Placeholder</h6>
+                                                </div>
+                                                <div class="col-md-7 d-flex align-items-center plachldr">
+                                                    <input type="text" class="form-control" placeholder="Help Participants know what to write.">
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-6">
+                                            <h5>Layout</h5>
+
+                                            <div class="row">
+                                                <div class="col-md-4 d-flex align-items-center px-0">
+                                                    <h6>Conditional Display</h6>
+                                                </div>
+                                                <div class="col-md-7 d-flex align-items-center r-day">
+                                                    <div class="toggle-switch">
+                                                        <input id="toggle" class="toggle-input" type='checkbox' />
+                                                        <label for="toggle" class="toggle-label" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-1 mt-2 question-options">
+                                        <div class="col-md-6 px-0">
+                                            <h5>Constraints</h5>
+
+                                            <div class="row">
+                                                <div class="col-md-4 d-flex align-items-center px-0 px-0">
+                                                    <h6>Mandatory Answer</h6>
+                                                </div>
+                                                <div class="col-md-7 d-flex align-items-center r-day">
+                                                    <div class="toggle-switch">
+                                                        <input id="toggle" class="toggle-input" type='checkbox' checked/>
+                                                        <label for="toggle" class="toggle-label" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-4 d-flex align-items-center px-0 px-0">
+                                                    <h6>Error Message</h6>
+                                                </div>
+                                                <div class="col-md-7 d-flex align-items-center plachldr">
+                                                    <input type="text" class="form-control" placeholder="This question requires an answer.">
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-6">
+                                            <h5>Live Session</h5>
+
+                                            <div class="row">
+                                                <div class="col-md-4 d-flex align-items-center px-0">
+                                                    <h6>Question Time Limit</h6>
+                                                </div>
+                                                <div class="col-md-7 d-flex align-items-center r-day">
+                                                    <div class="toggle-switch">
+                                                        <input id="toggle" class="toggle-input" type='checkbox' />
+                                                        <label for="toggle" class="toggle-label" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="tab-pane fade" id="qtype5" role="tabpanel" aria-labelledby="qtype5-tab">
+                                <div class="d-flex justify-content-between">
+                                    <h5>Question</h5>
+                                    <button type="button" class="input-modal-lang" data-toggle="modal" data-target="#language-modal">
+                                    <svg style="margin-top:-3px;" width="22" height="12" viewBox="0 0 22 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M16.55 9.65002C17.0167 9.65002 17.471 9.54169 17.913 9.32502C18.3543 9.10836 18.7583 8.80002 19.125 8.40002V5.75002C18.7417 5.80002 18.3873 5.85836 18.062 5.92502C17.7373 5.99169 17.4333 6.06669 17.15 6.15002C16.4 6.38336 15.8377 6.67502 15.463 7.02502C15.0877 7.37502 14.9 7.78336 14.9 8.25002C14.9 8.68336 15.05 9.02502 15.35 9.27502C15.65 9.52502 16.05 9.65002 16.55 9.65002ZM15.975 11.35C15.025 11.35 14.275 11.0794 13.725 10.538C13.175 9.99602 12.9 9.25836 12.9 8.32502C12.9 7.45836 13.175 6.75002 13.725 6.20002C14.275 5.65002 15.1583 5.20836 16.375 4.87502C16.7583 4.77502 17.1793 4.68336 17.638 4.60002C18.096 4.51669 18.5917 4.44169 19.125 4.37502C19.0917 3.59169 18.9083 3.02069 18.575 2.66202C18.2417 2.30402 17.725 2.12502 17.025 2.12502C16.5917 2.12502 16.1627 2.20436 15.738 2.36302C15.3127 2.52102 14.7667 2.80002 14.1 3.20002L13.3 1.80002C13.85 1.38336 14.496 1.04569 15.238 0.787024C15.9793 0.529025 16.7333 0.400024 17.5 0.400024C18.6833 0.400024 19.5833 0.766691 20.2 1.50002C20.8167 2.23336 21.125 3.30002 21.125 4.70002V11.125H19.45L19.3 10C18.8333 10.4167 18.321 10.746 17.763 10.988C17.2043 11.2294 16.6083 11.35 15.975 11.35ZM1.625 11.625C1.44167 11.3917 1.28333 11.2 1.15 11.05C1.01667 10.9 0.883333 10.7834 0.75 10.7C2.01667 10.15 3.03333 9.44169 3.8 8.57502C4.56667 7.70836 5.11667 6.52502 5.45 5.02502H1.1V3.85002H5.65C5.71667 3.35002 5.76667 2.81669 5.8 2.25002C5.83333 1.68336 5.85 1.08336 5.85 0.450024H7.1C7.1 1.08336 7.08733 1.67902 7.062 2.23702C7.03733 2.79569 6.98333 3.33336 6.9 3.85002H11.825V5.02502H7.35C7.78333 6.37502 8.40833 7.52902 9.225 8.48702C10.0417 9.44569 10.9917 10.1417 12.075 10.575C11.9417 10.7084 11.8127 10.85 11.688 11C11.5627 11.15 11.4083 11.3584 11.225 11.625C10.175 11.1584 9.24167 10.446 8.425 9.48802C7.60833 8.52936 6.95 7.36669 6.45 6.00002C6.05 7.38336 5.45433 8.52502 4.663 9.42502C3.871 10.325 2.85833 11.0584 1.625 11.625Z" fill="#FF6400"></path>
+                                        </svg> Select Language
+                                        
+                                 </button>
+                                </div>
+
+                                <div class="formatter">
+                                    <button class="btn btn-editr" data-command="bold">
+                                 <i class="fa fa-bold"></i>
+                                </button>
+                                    <button class="btn btn-editr" data-command="italic">
+                                  <i class="fa fa-italic"></i>
+                                </button>
+                                    <button class="btn btn-editr" data-command="underline">
+                                 <i class="fa fa-underline"></i>
+                                </button>
+                                    <button class="btn btn-editr" data-command="strikeThrough">
+                                 <i class="fa fa-strikethrough"></i>
+                                </button>
+                                    <button class="btn btn-editr" data-command="justifyLeft">
+                                 <i class="fa fa-align-left"></i>
+                                </button>
+                                    <button class="btn btn-editr" data-command="justifyCenter">
+                                 <i class="fa fa-align-center"></i>    
+                                </button>
+                                    <button class="btn btn-editr" data-command="justifyRight">
+                                 <i class="fa fa-align-right"></i>
+                                </button>
+                                    <button class="btn btn-editr" data-command="justifyFull">
+                                 <i class="fa fa-align-justify"></i>
+                                </button>
+                                    <button class="btn btn-editr" data-command="indent">
+                                 <i class="fa fa-indent"></i>
+                                </button>
+                                    <button class="btn btn-editr" data-command="outdent">
+                                 <i class="fa fa-outdent"></i>
+                                </button>
+                                    <button class="btn btn-editr" data-command="insertUnorderedList">
+                                 <i class="fa fa-list-ul"></i>
+                                </button>
+                                    <button class="btn btn-editr" data-command="insertOrderedList">
+                                 <i class="fa fa-list-ol"></i>
+                                </button>
+                                    <button class="btn btn-editr" data-command="h1">H1</button>
+                                    <button class="btn btn-editr" data-command="h2">H2</button>
+                                    <button class="btn btn-editr" data-command="p">P</button>
+                                    <button class="btn btn-editr" data-command="createlink">
+                                 <i class="fa fa-link"></i>
+                                </button>
+                                    <button class="btn btn-editr" data-command="unlink">
+                                 <i class="fa fa-unlink"></i>
+                                </button>
+
+                                    <p class="edit-text" contenteditable="true" rows="15">Text Goes Here</p>
+                                </div>
+                                <div class="ans-tab">
+
+
+                                    <h5>Description</h5>
+                                    <textarea name="" id="" cols="30" rows="3" class="form-control" placeholder="e.g. Guidelines, instructions ... to help attendees answer"></textarea>
+
+                                    <h5>Options</h5>
+                                    <hr class="m-0">
+
+
+
+
+                                    <div class="row question-options">
+                                        <div class="col-md-6 px-0">
+                                            <h5>Answers</h5>
+                                            <div class="row">
+                                                <div class="col-md-4 d-flex align-items-center px-0">
+                                                    <h6>Validate entry</h6>
+                                                </div>
+                                                <div class="col-md-7">
+                                                    <div class="form-group mt-2 d-flex align-items-center">
+                                                        <div class="toggle-switch">
+                                                            <input id="toggle" class="toggle-input" type='checkbox' checked/>
+                                                            <label for="toggle" class="toggle-label" />
+                                                        </div>
+
+                                                    </div>
+
+
+
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-4 d-flex align-items-center px-0">
+                                                    <h6>Placeholder</h6>
+                                                </div>
+                                                <div class="col-md-7 d-flex align-items-center plachldr">
+                                                    <input type="text" class="form-control" placeholder="Help Participants know what to write.">
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-6">
+                                            <h5>Layout</h5>
+
+                                            <div class="row">
+                                                <div class="col-md-4 d-flex align-items-center px-0">
+                                                    <h6>Conditional Display</h6>
+                                                </div>
+                                                <div class="col-md-7 d-flex align-items-center r-day">
+                                                    <div class="toggle-switch">
+                                                        <input id="toggle" class="toggle-input" type='checkbox' />
+                                                        <label for="toggle" class="toggle-label" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-1 mt-2 question-options">
+                                        <div class="col-md-6 px-0">
+                                            <h5>Constraints</h5>
+
+                                            <div class="row">
+                                                <div class="col-md-4 d-flex align-items-center px-0 px-0">
+                                                    <h6>Mandatory Answer</h6>
+                                                </div>
+                                                <div class="col-md-7 d-flex align-items-center r-day">
+                                                    <div class="toggle-switch">
+                                                        <input id="toggle" class="toggle-input" type='checkbox' />
+                                                        <label for="toggle" class="toggle-label" />
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                        <div class="col-md-6">
+                                            <h5>Live Session</h5>
+
+                                            <div class="row">
+                                                <div class="col-md-4 d-flex align-items-center px-0">
+                                                    <h6>Question Time Limit</h6>
+                                                </div>
+                                                <div class="col-md-7 d-flex align-items-center r-day">
+                                                    <div class="toggle-switch">
+                                                        <input id="toggle" class="toggle-input" type='checkbox' />
+                                                        <label for="toggle" class="toggle-label" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="qtype6" role="tabpanel" aria-labelledby="qtype6-tab">
+
+                                <div class="d-flex justify-content-between">
+                                    <h5>Question</h5>
+                                    <button type="button" class="input-modal-lang" data-toggle="modal" data-target="#language-modal">
+                                    <svg style="margin-top:-3px;" width="22" height="12" viewBox="0 0 22 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M16.55 9.65002C17.0167 9.65002 17.471 9.54169 17.913 9.32502C18.3543 9.10836 18.7583 8.80002 19.125 8.40002V5.75002C18.7417 5.80002 18.3873 5.85836 18.062 5.92502C17.7373 5.99169 17.4333 6.06669 17.15 6.15002C16.4 6.38336 15.8377 6.67502 15.463 7.02502C15.0877 7.37502 14.9 7.78336 14.9 8.25002C14.9 8.68336 15.05 9.02502 15.35 9.27502C15.65 9.52502 16.05 9.65002 16.55 9.65002ZM15.975 11.35C15.025 11.35 14.275 11.0794 13.725 10.538C13.175 9.99602 12.9 9.25836 12.9 8.32502C12.9 7.45836 13.175 6.75002 13.725 6.20002C14.275 5.65002 15.1583 5.20836 16.375 4.87502C16.7583 4.77502 17.1793 4.68336 17.638 4.60002C18.096 4.51669 18.5917 4.44169 19.125 4.37502C19.0917 3.59169 18.9083 3.02069 18.575 2.66202C18.2417 2.30402 17.725 2.12502 17.025 2.12502C16.5917 2.12502 16.1627 2.20436 15.738 2.36302C15.3127 2.52102 14.7667 2.80002 14.1 3.20002L13.3 1.80002C13.85 1.38336 14.496 1.04569 15.238 0.787024C15.9793 0.529025 16.7333 0.400024 17.5 0.400024C18.6833 0.400024 19.5833 0.766691 20.2 1.50002C20.8167 2.23336 21.125 3.30002 21.125 4.70002V11.125H19.45L19.3 10C18.8333 10.4167 18.321 10.746 17.763 10.988C17.2043 11.2294 16.6083 11.35 15.975 11.35ZM1.625 11.625C1.44167 11.3917 1.28333 11.2 1.15 11.05C1.01667 10.9 0.883333 10.7834 0.75 10.7C2.01667 10.15 3.03333 9.44169 3.8 8.57502C4.56667 7.70836 5.11667 6.52502 5.45 5.02502H1.1V3.85002H5.65C5.71667 3.35002 5.76667 2.81669 5.8 2.25002C5.83333 1.68336 5.85 1.08336 5.85 0.450024H7.1C7.1 1.08336 7.08733 1.67902 7.062 2.23702C7.03733 2.79569 6.98333 3.33336 6.9 3.85002H11.825V5.02502H7.35C7.78333 6.37502 8.40833 7.52902 9.225 8.48702C10.0417 9.44569 10.9917 10.1417 12.075 10.575C11.9417 10.7084 11.8127 10.85 11.688 11C11.5627 11.15 11.4083 11.3584 11.225 11.625C10.175 11.1584 9.24167 10.446 8.425 9.48802C7.60833 8.52936 6.95 7.36669 6.45 6.00002C6.05 7.38336 5.45433 8.52502 4.663 9.42502C3.871 10.325 2.85833 11.0584 1.625 11.625Z" fill="#673ab7"></path>
+                                        </svg> Select Language
+                                        
+                                 </button>
+                                </div>
+
+                                <div class="formatter">
+                                    <button class="btn btn-editr" data-command="bold">
+                                 <i class="fa fa-bold"></i>
+                                </button>
+                                    <button class="btn btn-editr" data-command="italic">
+                                  <i class="fa fa-italic"></i>
+                                </button>
+                                    <button class="btn btn-editr" data-command="underline">
+                                 <i class="fa fa-underline"></i>
+                                </button>
+                                    <button class="btn btn-editr" data-command="strikeThrough">
+                                 <i class="fa fa-strikethrough"></i>
+                                </button>
+                                    <button class="btn btn-editr" data-command="justifyLeft">
+                                 <i class="fa fa-align-left"></i>
+                                </button>
+                                    <button class="btn btn-editr" data-command="justifyCenter">
+                                 <i class="fa fa-align-center"></i>    
+                                </button>
+                                    <button class="btn btn-editr" data-command="justifyRight">
+                                 <i class="fa fa-align-right"></i>
+                                </button>
+                                    <button class="btn btn-editr" data-command="justifyFull">
+                                 <i class="fa fa-align-justify"></i>
+                                </button>
+                                    <button class="btn btn-editr" data-command="indent">
+                                 <i class="fa fa-indent"></i>
+                                </button>
+                                    <button class="btn btn-editr" data-command="outdent">
+                                 <i class="fa fa-outdent"></i>
+                                </button>
+                                    <button class="btn btn-editr" data-command="insertUnorderedList">
+                                 <i class="fa fa-list-ul"></i>
+                                </button>
+                                    <button class="btn btn-editr" data-command="insertOrderedList">
+                                 <i class="fa fa-list-ol"></i>
+                                </button>
+                                    <button class="btn btn-editr" data-command="h1">H1</button>
+                                    <button class="btn btn-editr" data-command="h2">H2</button>
+                                    <button class="btn btn-editr" data-command="p">P</button>
+                                    <button class="btn btn-editr" data-command="createlink">
+                                 <i class="fa fa-link"></i>
+                                </button>
+                                    <button class="btn btn-editr" data-command="unlink">
+                                 <i class="fa fa-unlink"></i>
+                                </button>
+
+                                    <p class="edit-text" contenteditable="true" rows="15">Text Goes Here</p>
+                                </div>
+                                <div class="ans-tab">
+
+
+                                    <h5>Description</h5>
+                                    <textarea name="" id="" cols="30" rows="3" class="form-control" placeholder="e.g. Guidelines, instructions ... to help attendees answer"></textarea>
+
+                                    <h5>Options</h5>
+                                    <hr class="m-0">
+
+
+
+
+                                    <div class="row question-options">
+                                        <div class="col-md-6 px-0">
+                                            <h5>Answers</h5>
+                                            <div class="row">
+                                                <div class="col-md-4 d-flex align-items-center px-0">
+                                                    <h6>Validate entry</h6>
+                                                </div>
+                                                <div class="col-md-7">
+                                                    <div class="form-group mt-2 d-flex align-items-center">
+                                                        <div class="toggle-switch">
+                                                            <input id="toggle" class="toggle-input" type='checkbox' checked/>
+                                                            <label for="toggle" class="toggle-label" />
+                                                        </div>
+
+                                                    </div>
+
+
+
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-4 d-flex align-items-center px-0">
+                                                    <h6>Placeholder</h6>
+                                                </div>
+                                                <div class="col-md-7 d-flex align-items-center plachldr">
+                                                    <input type="text" class="form-control" placeholder="Help Participants know what to write.">
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-6">
+                                            <h5>Layout</h5>
+
+                                            <div class="row">
+                                                <div class="col-md-4 d-flex align-items-center px-0">
+                                                    <h6>Conditional Display</h6>
+                                                </div>
+                                                <div class="col-md-7 d-flex align-items-center r-day">
+                                                    <div class="toggle-switch">
+                                                        <input id="toggle" class="toggle-input" type='checkbox' />
+                                                        <label for="toggle" class="toggle-label" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-1 mt-2 question-options">
+                                        <div class="col-md-6 px-0">
+                                            <h5>Constraints</h5>
+
+                                            <div class="row">
+                                                <div class="col-md-4 d-flex align-items-center px-0 px-0">
+                                                    <h6>Mandatory Answer</h6>
+                                                </div>
+                                                <div class="col-md-7 d-flex align-items-center r-day">
+                                                    <div class="toggle-switch">
+                                                        <input id="toggle" class="toggle-input" type='checkbox' />
+                                                        <label for="toggle" class="toggle-label" />
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                        <div class="col-md-6">
+                                            <h5>Live Session</h5>
+
+                                            <div class="row">
+                                                <div class="col-md-4 d-flex align-items-center px-0">
+                                                    <h6>Question Time Limit</h6>
+                                                </div>
+                                                <div class="col-md-7 d-flex align-items-center r-day">
+                                                    <div class="toggle-switch">
+                                                        <input id="toggle" class="toggle-input" type='checkbox' />
+                                                        <label for="toggle" class="toggle-label" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="qtype7" role="tabpanel" aria-labelledby="qtype7-tab">
+                                <div class="d-flex justify-content-between">
+                                    <h5>Question</h5>
+                                    <button type="button" class="input-modal-lang" data-toggle="modal" data-target="#language-modal">
+                                    <svg style="margin-top:-3px;" width="22" height="12" viewBox="0 0 22 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M16.55 9.65002C17.0167 9.65002 17.471 9.54169 17.913 9.32502C18.3543 9.10836 18.7583 8.80002 19.125 8.40002V5.75002C18.7417 5.80002 18.3873 5.85836 18.062 5.92502C17.7373 5.99169 17.4333 6.06669 17.15 6.15002C16.4 6.38336 15.8377 6.67502 15.463 7.02502C15.0877 7.37502 14.9 7.78336 14.9 8.25002C14.9 8.68336 15.05 9.02502 15.35 9.27502C15.65 9.52502 16.05 9.65002 16.55 9.65002ZM15.975 11.35C15.025 11.35 14.275 11.0794 13.725 10.538C13.175 9.99602 12.9 9.25836 12.9 8.32502C12.9 7.45836 13.175 6.75002 13.725 6.20002C14.275 5.65002 15.1583 5.20836 16.375 4.87502C16.7583 4.77502 17.1793 4.68336 17.638 4.60002C18.096 4.51669 18.5917 4.44169 19.125 4.37502C19.0917 3.59169 18.9083 3.02069 18.575 2.66202C18.2417 2.30402 17.725 2.12502 17.025 2.12502C16.5917 2.12502 16.1627 2.20436 15.738 2.36302C15.3127 2.52102 14.7667 2.80002 14.1 3.20002L13.3 1.80002C13.85 1.38336 14.496 1.04569 15.238 0.787024C15.9793 0.529025 16.7333 0.400024 17.5 0.400024C18.6833 0.400024 19.5833 0.766691 20.2 1.50002C20.8167 2.23336 21.125 3.30002 21.125 4.70002V11.125H19.45L19.3 10C18.8333 10.4167 18.321 10.746 17.763 10.988C17.2043 11.2294 16.6083 11.35 15.975 11.35ZM1.625 11.625C1.44167 11.3917 1.28333 11.2 1.15 11.05C1.01667 10.9 0.883333 10.7834 0.75 10.7C2.01667 10.15 3.03333 9.44169 3.8 8.57502C4.56667 7.70836 5.11667 6.52502 5.45 5.02502H1.1V3.85002H5.65C5.71667 3.35002 5.76667 2.81669 5.8 2.25002C5.83333 1.68336 5.85 1.08336 5.85 0.450024H7.1C7.1 1.08336 7.08733 1.67902 7.062 2.23702C7.03733 2.79569 6.98333 3.33336 6.9 3.85002H11.825V5.02502H7.35C7.78333 6.37502 8.40833 7.52902 9.225 8.48702C10.0417 9.44569 10.9917 10.1417 12.075 10.575C11.9417 10.7084 11.8127 10.85 11.688 11C11.5627 11.15 11.4083 11.3584 11.225 11.625C10.175 11.1584 9.24167 10.446 8.425 9.48802C7.60833 8.52936 6.95 7.36669 6.45 6.00002C6.05 7.38336 5.45433 8.52502 4.663 9.42502C3.871 10.325 2.85833 11.0584 1.625 11.625Z" fill="#673ab7"></path>
+                                        </svg> Select Language
+                                        
+                                 </button>
+                                </div>
+
+                                <div class="formatter">
+                                    <button class="btn btn-editr" data-command="bold">
+                                 <i class="fa fa-bold"></i>
+                                </button>
+                                    <button class="btn btn-editr" data-command="italic">
+                                  <i class="fa fa-italic"></i>
+                                </button>
+                                    <button class="btn btn-editr" data-command="underline">
+                                 <i class="fa fa-underline"></i>
+                                </button>
+                                    <button class="btn btn-editr" data-command="strikeThrough">
+                                 <i class="fa fa-strikethrough"></i>
+                                </button>
+                                    <button class="btn btn-editr" data-command="justifyLeft">
+                                 <i class="fa fa-align-left"></i>
+                                </button>
+                                    <button class="btn btn-editr" data-command="justifyCenter">
+                                 <i class="fa fa-align-center"></i>    
+                                </button>
+                                    <button class="btn btn-editr" data-command="justifyRight">
+                                 <i class="fa fa-align-right"></i>
+                                </button>
+                                    <button class="btn btn-editr" data-command="justifyFull">
+                                 <i class="fa fa-align-justify"></i>
+                                </button>
+                                    <button class="btn btn-editr" data-command="indent">
+                                 <i class="fa fa-indent"></i>
+                                </button>
+                                    <button class="btn btn-editr" data-command="outdent">
+                                 <i class="fa fa-outdent"></i>
+                                </button>
+                                    <button class="btn btn-editr" data-command="insertUnorderedList">
+                                 <i class="fa fa-list-ul"></i>
+                                </button>
+                                    <button class="btn btn-editr" data-command="insertOrderedList">
+                                 <i class="fa fa-list-ol"></i>
+                                </button>
+                                    <button class="btn btn-editr" data-command="h1">H1</button>
+                                    <button class="btn btn-editr" data-command="h2">H2</button>
+                                    <button class="btn btn-editr" data-command="p">P</button>
+                                    <button class="btn btn-editr" data-command="createlink">
+                                 <i class="fa fa-link"></i>
+                                </button>
+                                    <button class="btn btn-editr" data-command="unlink">
+                                 <i class="fa fa-unlink"></i>
+                                </button>
+
+                                    <p class="edit-text" contenteditable="true" rows="15">Text Goes Here</p>
+                                </div>
+                                <div class="ans-tab">
+
+
+                                    <h5>Description</h5>
+                                    <textarea name="" id="" cols="30" rows="3" class="form-control" placeholder="e.g. Guidelines, instructions ... to help attendees answer"></textarea>
+
+                                    <h5>Options</h5>
+                                    <hr class="m-0">
+
+
+
+
+                                    <div class="row question-options">
+                                        <div class="col-md-6 px-0">
+                                            <h5>Answers</h5>
+                                            <div class="row">
+                                                <div class="col-md-4 d-flex align-items-center px-0">
+                                                    <h6>Validate entry</h6>
+                                                </div>
+                                                <div class="col-md-7">
+                                                    <div class="form-group mt-2 d-flex align-items-center">
+                                                        <div class="toggle-switch">
+                                                            <input id="toggle" class="toggle-input" type='checkbox' checked/>
+                                                            <label for="toggle" class="toggle-label" />
+                                                        </div>
+
+                                                    </div>
+
+
+
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-4 d-flex align-items-center px-0">
+                                                    <h6>Placeholder</h6>
+                                                </div>
+                                                <div class="col-md-7 d-flex align-items-center plachldr">
+                                                    <input type="text" class="form-control" placeholder="Help Participants know what to write.">
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-6">
+                                            <h5>Layout</h5>
+
+                                            <div class="row">
+                                                <div class="col-md-4 d-flex align-items-center px-0">
+                                                    <h6>Conditional Display</h6>
+                                                </div>
+                                                <div class="col-md-7 d-flex align-items-center r-day">
+                                                    <div class="toggle-switch">
+                                                        <input id="toggle" class="toggle-input" type='checkbox' />
+                                                        <label for="toggle" class="toggle-label" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-1 mt-2 question-options">
+                                        <div class="col-md-6 px-0">
+                                            <h5>Constraints</h5>
+
+                                            <div class="row">
+                                                <div class="col-md-4 d-flex align-items-center px-0 px-0">
+                                                    <h6>Mandatory Answer</h6>
+                                                </div>
+                                                <div class="col-md-7 d-flex align-items-center r-day">
+                                                    <div class="toggle-switch">
+                                                        <input id="toggle" class="toggle-input" type='checkbox' />
+                                                        <label for="toggle" class="toggle-label" />
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                        <div class="col-md-6">
+                                            <h5>Live Session</h5>
+
+                                            <div class="row">
+                                                <div class="col-md-4 d-flex align-items-center px-0">
+                                                    <h6>Question Time Limit</h6>
+                                                </div>
+                                                <div class="col-md-7 d-flex align-items-center r-day">
+                                                    <div class="toggle-switch">
+                                                        <input id="toggle" class="toggle-input" type='checkbox' />
+                                                        <label for="toggle" class="toggle-label" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="qtype8" role="tabpanel" aria-labelledby="qtype8-tab">
+                                <div class="d-flex justify-content-between">
+                                    <h5>Question</h5>
+                                    <button type="button" class="input-modal-lang" data-toggle="modal" data-target="#language-modal">
+                                    <svg style="margin-top:-3px;" width="22" height="12" viewBox="0 0 22 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M16.55 9.65002C17.0167 9.65002 17.471 9.54169 17.913 9.32502C18.3543 9.10836 18.7583 8.80002 19.125 8.40002V5.75002C18.7417 5.80002 18.3873 5.85836 18.062 5.92502C17.7373 5.99169 17.4333 6.06669 17.15 6.15002C16.4 6.38336 15.8377 6.67502 15.463 7.02502C15.0877 7.37502 14.9 7.78336 14.9 8.25002C14.9 8.68336 15.05 9.02502 15.35 9.27502C15.65 9.52502 16.05 9.65002 16.55 9.65002ZM15.975 11.35C15.025 11.35 14.275 11.0794 13.725 10.538C13.175 9.99602 12.9 9.25836 12.9 8.32502C12.9 7.45836 13.175 6.75002 13.725 6.20002C14.275 5.65002 15.1583 5.20836 16.375 4.87502C16.7583 4.77502 17.1793 4.68336 17.638 4.60002C18.096 4.51669 18.5917 4.44169 19.125 4.37502C19.0917 3.59169 18.9083 3.02069 18.575 2.66202C18.2417 2.30402 17.725 2.12502 17.025 2.12502C16.5917 2.12502 16.1627 2.20436 15.738 2.36302C15.3127 2.52102 14.7667 2.80002 14.1 3.20002L13.3 1.80002C13.85 1.38336 14.496 1.04569 15.238 0.787024C15.9793 0.529025 16.7333 0.400024 17.5 0.400024C18.6833 0.400024 19.5833 0.766691 20.2 1.50002C20.8167 2.23336 21.125 3.30002 21.125 4.70002V11.125H19.45L19.3 10C18.8333 10.4167 18.321 10.746 17.763 10.988C17.2043 11.2294 16.6083 11.35 15.975 11.35ZM1.625 11.625C1.44167 11.3917 1.28333 11.2 1.15 11.05C1.01667 10.9 0.883333 10.7834 0.75 10.7C2.01667 10.15 3.03333 9.44169 3.8 8.57502C4.56667 7.70836 5.11667 6.52502 5.45 5.02502H1.1V3.85002H5.65C5.71667 3.35002 5.76667 2.81669 5.8 2.25002C5.83333 1.68336 5.85 1.08336 5.85 0.450024H7.1C7.1 1.08336 7.08733 1.67902 7.062 2.23702C7.03733 2.79569 6.98333 3.33336 6.9 3.85002H11.825V5.02502H7.35C7.78333 6.37502 8.40833 7.52902 9.225 8.48702C10.0417 9.44569 10.9917 10.1417 12.075 10.575C11.9417 10.7084 11.8127 10.85 11.688 11C11.5627 11.15 11.4083 11.3584 11.225 11.625C10.175 11.1584 9.24167 10.446 8.425 9.48802C7.60833 8.52936 6.95 7.36669 6.45 6.00002C6.05 7.38336 5.45433 8.52502 4.663 9.42502C3.871 10.325 2.85833 11.0584 1.625 11.625Z" fill="#FF6400"></path>
+                                        </svg> Select Language
+                                        
+                                 </button>
+                                </div>
+
+                                <div class="formatter">
+                                    <button class="btn btn-editr" data-command="bold">
+                                 <i class="fa fa-bold"></i>
+                                </button>
+                                    <button class="btn btn-editr" data-command="italic">
+                                  <i class="fa fa-italic"></i>
+                                </button>
+                                    <button class="btn btn-editr" data-command="underline">
+                                 <i class="fa fa-underline"></i>
+                                </button>
+                                    <button class="btn btn-editr" data-command="strikeThrough">
+                                 <i class="fa fa-strikethrough"></i>
+                                </button>
+                                    <button class="btn btn-editr" data-command="justifyLeft">
+                                 <i class="fa fa-align-left"></i>
+                                </button>
+                                    <button class="btn btn-editr" data-command="justifyCenter">
+                                 <i class="fa fa-align-center"></i>    
+                                </button>
+                                    <button class="btn btn-editr" data-command="justifyRight">
+                                 <i class="fa fa-align-right"></i>
+                                </button>
+                                    <button class="btn btn-editr" data-command="justifyFull">
+                                 <i class="fa fa-align-justify"></i>
+                                </button>
+                                    <button class="btn btn-editr" data-command="indent">
+                                 <i class="fa fa-indent"></i>
+                                </button>
+                                    <button class="btn btn-editr" data-command="outdent">
+                                 <i class="fa fa-outdent"></i>
+                                </button>
+                                    <button class="btn btn-editr" data-command="insertUnorderedList">
+                                 <i class="fa fa-list-ul"></i>
+                                </button>
+                                    <button class="btn btn-editr" data-command="insertOrderedList">
+                                 <i class="fa fa-list-ol"></i>
+                                </button>
+                                    <button class="btn btn-editr" data-command="h1">H1</button>
+                                    <button class="btn btn-editr" data-command="h2">H2</button>
+                                    <button class="btn btn-editr" data-command="p">P</button>
+                                    <button class="btn btn-editr" data-command="createlink">
+                                 <i class="fa fa-link"></i>
+                                </button>
+                                    <button class="btn btn-editr" data-command="unlink">
+                                 <i class="fa fa-unlink"></i>
+                                </button>
+
+                                    <p class="edit-text" contenteditable="true" rows="15">Text Goes Here</p>
+                                </div>
+                                <div class="ans-tab">
+                                    <h5>Answer</h5>
+
+                                    <table class="table table-qstn dt-responsive table-bordered nowrap table-padd" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+
+                                        <thead class="border-class">
+
+                                            <tr class="heading-text">
+                                                <th>Choices</th>
+
+                                                <th width="40px"></th>
+
+                                            </tr>
+                                        </thead>
+
+
+                                        <tbody class="body-textcls vertcle-center">
+                                            <tr>
+                                                <td colspan="3">
+                                                    <a class="addq">
+                                                    Add a Line
+                                                </a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="input-group">
+
+                                                        <input type="text" class="inputfile form-control mb-0" name="file" placeholder="Type here">
+
+                                                        <div class="input-group-append">
+                                                            <button type="button" class="input-group-text" data-toggle="modal" data-target="#language-modal">
+                                                            <i class="fas fa-language" aria-hidden="true"></i>
+                                                        </button>
+
+                                                        </div>
+                                                    </div>
+
+                                                </td>
+
+                                                <td>
+                                                    <div class="action-tbl d-flex justify-content-end">
+
+                                                        <i class="fa fa-trash-o mx-1 " data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" aria-hidden="true"></i>
+
+                                                    </div>
+                                                </td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+
+                                    <table class="table table-qstn dt-responsive table-bordered nowrap table-padd" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+
+                                        <thead class="border-class">
+
+                                            <tr class="heading-text">
+                                                <th>Rows</th>
+
+                                                <th width="40px"></th>
+
+                                            </tr>
+                                        </thead>
+
+
+                                        <tbody class="body-textcls vertcle-center">
+                                            <tr>
+                                                <td colspan="3">
+                                                    <a class="addq">
+                                                Add a Line
+                                            </a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="input-group">
+
+                                                        <input type="text" class="inputfile form-control mb-0" name="file" placeholder="Type here">
+
+                                                        <div class="input-group-append">
+                                                            <button type="button" class="input-group-text" data-toggle="modal" data-target="#language-modal">
+                                                        <i class="fas fa-language" aria-hidden="true"></i>
+                                                    </button>
+
+                                                        </div>
+                                                    </div>
+
+                                                </td>
+
+                                                <td>
+                                                    <div class="action-tbl d-flex justify-content-end">
+
+                                                        <i class="fa fa-trash-o mx-1 " data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" aria-hidden="true"></i>
+
+                                                    </div>
+                                                </td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+
+                                    <h5>Description</h5>
+                                    <textarea name="" id="" cols="30" rows="3" class="form-control" placeholder="e.g. Guidelines, instructions ... to help attendees answer"></textarea>
+
+                                    <h5>Options</h5>
+                                    <hr class="m-0">
+                                    <div class="row question-options">
+                                        <div class="col-md-6 px-0">
+                                            <h5>Answers</h5>
+
+                                            <div class="row">
+                                                <div class="col-md-4 d-flex align-items-center px-0">
+                                                    <h6>Matrix Type</h6>
+                                                </div>
+                                                <div class="col-md-7 select-plchldr">
+                                                    <select class="form-control">
+                                                    <option value="" selected>One choice per row</option>
+                                                    <option value="">Multiple choices per row</option>
+                                                </select>
+
+
+
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-4 d-flex align-items-center px-0">
+                                                    <h6>Show Comments Field</h6>
+                                                </div>
+                                                <div class="col-md-7">
+                                                    <div class="form-group mt-2 d-flex align-items-center">
+                                                        <div class="toggle-switch">
+                                                            <input id="toggle" class="toggle-input" type='checkbox' />
+                                                            <label for="toggle" class="toggle-label" />
+                                                        </div>
+
+                                                    </div>
+
+
+
+                                                </div>
+                                            </div>
+
+
+
+                                        </div>
+                                        <div class="col-md-6">
+                                            <h5>Layout</h5>
+
+                                            <div class="row">
+                                                <div class="col-md-4 d-flex align-items-center px-0">
+                                                    <h6>Conditional Display</h6>
+                                                </div>
+                                                <div class="col-md-7 d-flex align-items-center r-day">
+                                                    <div class="toggle-switch">
+                                                        <input id="toggle" class="toggle-input" type='checkbox' />
+                                                        <label for="toggle" class="toggle-label" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-1 mt-2 question-options">
+                                        <div class="col-md-6 px-0">
+                                            <h5>Constraints</h5>
+
+                                            <div class="row">
+                                                <div class="col-md-4 d-flex align-items-center px-0 px-0">
+                                                    <h6>Mandatory Answer</h6>
+                                                </div>
+                                                <div class="col-md-7 d-flex align-items-center r-day">
+                                                    <div class="toggle-switch">
+                                                        <input id="toggle" class="toggle-input" type='checkbox' checked/>
+                                                        <label for="toggle" class="toggle-label" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-4 d-flex align-items-center px-0 px-0">
+                                                    <h6>Error Message</h6>
+                                                </div>
+                                                <div class="col-md-7 d-flex align-items-center plachldr">
+                                                    <input type="text" class="form-control" placeholder="This question requires an answer.">
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-6">
+                                            <h5>Live Session</h5>
+
+                                            <div class="row">
+                                                <div class="col-md-4 d-flex align-items-center px-0">
+                                                    <h6>Question Time Limit</h6>
+                                                </div>
+                                                <div class="col-md-7 d-flex align-items-center r-day">
+                                                    <div class="toggle-switch">
+                                                        <input id="toggle" class="toggle-input" type='checkbox' checked/>
+                                                        <label for="toggle" class="toggle-label" />
+                                                    </div>
+
+                                                    <input type="text" class="form-control secnd-frm" placeholder="05"> Seconds
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+
+
+                </div>
+
+
+
+            </div>
+            <div class="modal-footer">
+
+                <button type="button" style="background-color:#95CE1D !important;border: none!important;" class="btn btn-info waves-effect waves-light">Save & Close </button>
+                <button type="button" style="background-color:#95CE1D !important;border: none!important;" class="btn btn-info waves-effect waves-light ml-2">Save & New </button>
+                <button type="button" class="btn btn-info waves-effect waves-light ml-2 mod-close">Close </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="language-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title mt-0">Language</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12 px-0">
+                        <div class="row">
+                            <div class="col-md-1">
+                                <label for="field-1" class="control-label">English</label>
+                            </div>
+                            <div class="col-md-11 pr-0">
+                                <div class="form-group">
+
+                                    <div class="input-group">
+
+                                        <input type="text" class="inputfile form-control mb-0" placeholder="">
+                                        <div class="input-group-append">
+                                            <span class="input-group-text"> <img src="img/language/english.jpg" alt=""
+                                            style="height: 16px;"></span>
+
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-1">
+                                <label for="field-1" class="control-label">Arabic (عربي)</label>
+                            </div>
+                            <div class="col-md-11 pr-0">
+                                <div class="form-group">
+
+                                    <div class="input-group">
+
+                                        <input type="text" class="inputfile form-control mb-0" placeholder="">
+                                        <div class="input-group-append">
+                                            <span class="input-group-text"> <img src="img/language/arabic.jpg" alt=""
+                                        style="height: 16px;"></span>
+
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-1">
+                                <label for="field-1" class="control-label">Hindi (हिंदी)</label>
+                            </div>
+                            <div class="col-md-11 pr-0">
+                                <div class="form-group">
+
+                                    <div class="input-group">
+
+                                        <input type="text" class="inputfile form-control mb-0" placeholder="">
+                                        <div class="input-group-append">
+                                            <span class="input-group-text"> <img src="img/language/hindi.jpg" alt=""
+                                        style="height: 16px;"></span>
+
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="modal-footer">
+
+                <button type="button" style="background-color:#95CE1D!important;border: none!important;" class="btn btn-info waves-effect waves-light">Save </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="./static/admin/js/jquery.min.js"></script>
+<script src="./static/admin/js/custome.js"></script>
+<script src="./static/admin/js/bootstrap.bundle.min.js"></script>
+<script src="./static/admin/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="./static/admin/plugins/datatables/dataTables.bootstrap4.min.js"></script>
+<script src="./static/admin/plugins/datatables/dataTables.responsive.min.js"></script>
+<script src="./static/admin/plugins/datatables/responsive.bootstrap4.min.js"></script>
+<script src="./static/admin/plugins/datatables/datatables.init.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/16.8.4/umd/react.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.8.4/umd/react-dom.production.min.js"></script>
+
+<script src="./static/admin/plugins/select2/dist/js/select2.min.js"></script>
+
+<link href="https://rawgit.com/select2/select2/master/dist/css/select2.min.css" />
+
+<script>
+    $(document).ready(function() {
+        $('#datatable').dataTable();
+        $('#datatable-keytable').DataTable({
+            keys: true
+        });
+        $('#datatable-responsive').DataTable();
+        $('#datatable-scroller').DataTable({
+            ajax: "plugins/datatables/json/scroller-demo.json",
+            deferRender: true,
+            scrollY: 380,
+            scrollCollapse: true,
+            scroller: true
+        });
+        var table = $('#datatable-fixed-header').DataTable({
+            fixedHeader: true
+        });
+    });
+    TableManageButtons.init();
+</script>
+
+
+<script>
+    $("a.splnav").click(function() {
+        $("a.splnav").css("background-color", "#222");
+        $(this).css("background-color", "black");
+        // $(this).css("border-left", "3px solid #6e56a3");
+    });
+</script>
+<script>
+    jQuery(document).ready(function(e) {
+        function t(t) {
+            e(t).bind("click", function(t) {
+                t.preventDefault();
+                e(this).parent().fadeOut()
+            })
+        }
+        e(".drpdown-toggle").click(function() {
+            var t = e(this).parents(".button-drpdown").children(".drpdown-menu").is(":hidden");
+            e(".button-drpdown .drpdown-menu").hide();
+            e(".button-drpdown .drpdown-toggle").removeClass("active");
+            if (t) {
+                e(this).parents(".button-drpdown").children(".drpdown-menu").toggle().parents(
+                    ".button-drpdown").children(".drpdown-toggle").addClass("active")
+            }
+        });
+        e(document).bind("click", function(t) {
+            var n = e(t.target);
+            if (!n.parents().hasClass("button-drpdown")) e(".button-drpdown .drpdown-menu").hide();
+        });
+        e(document).bind("click", function(t) {
+            var n = e(t.target);
+            if (!n.parents().hasClass("button-drpdown")) e(".button-drpdown .drpdown-toggle")
+                .removeClass("active");
+        })
+    });
+</script>
+<script>
+    let searchIcon = document.querySelector(".search-bar__search-icon"),
+        closeIcon = document.querySelector(".search-bar__close-icon .far"),
+        searchBar = document.querySelector(".search-bar"),
+        searchInput = document.querySelector(".search-bar__search-input input")
+
+
+    searchIcon.onclick = () => {
+        searchBar.classList.toggle("search-bar--active")
+    }
+
+
+    closeIcon.onclick = () => {
+        searchInput.value = ""
+        searchInput.focus()
+    }
+
+
+
+    searchInput.onfocus = function() {
+        let place = this.getAttribute("placeholder")
+        this.setAttribute("data", `${place}`)
+        this.removeAttribute("placeholder")
+    }
+
+    searchInput.onblur = function() {
+        this.setAttribute("placeholder", `${this.getAttribute("data")}`)
+    }
+</script>
+
+<script>
+    const TagsInput1 = props => {
+        const [tags1, setTags1] = React.useState(props.tags1);
+        const removeTags1 = indexToRemove => {
+            setTags1([...tags1.filter((_, index) => index !== indexToRemove)]);
+        };
+        const addTags1 = event => {
+            if (event.target.value !== "") {
+                setTags1([...tags1, event.target.value]);
+                props.selectedTags1([...tags1, event.target.value]);
+                event.target.value = "";
+            }
+        };
+        return /*#__PURE__*/ (
+            React.createElement("div", {
+                    className: "tags-input1"
+                }, /*#__PURE__*/
+                React.createElement("ul", {
+                        id: "tags1"
+                    },
+                    tags1.map((tag1, index) => /*#__PURE__*/
+                        React.createElement("li", {
+                                key: index,
+                                className: "tag1"
+                            }, /*#__PURE__*/
+                            React.createElement("span", {
+                                className: "tag-title1"
+                            }, tag1), /*#__PURE__*/
+                            React.createElement("span", {
+                                className: "tag-close-icon1",
+                                onClick: () => removeTags1(index)
+                            }, "x")))), /*#__PURE__*/
+
+
+
+
+
+
+                React.createElement("input", {
+                    type: "text",
+                    onKeyUp: event => event.key === "Enter" ? addTags1(event) : null,
+                    placeholder: "Mail id"
+                })));
+
+
+
+    };
+
+    const App1 = () => {
+        const selectedTags1 = tags1 => {
+            console.log(tags1);
+        };
+        return /*#__PURE__*/ (
+            React.createElement("div", {
+                    className: "App1"
+                }, /*#__PURE__*/
+                React.createElement(TagsInput1, {
+                    selectedTags1: selectedTags1,
+                    tags1: ['user@gmail.com']
+                })));
+
+
+    };
+
+    ReactDOM.render( /*#__PURE__*/ React.createElement(App1, null), document.getElementById("root1"));
+</script>
+<script>
+    function loading() {
+        document.querySelectorAll(".bar").forEach(function(current) {
+            let startWidth = 0;
+            const endWidth = current.dataset.size;
+            const interval = setInterval(frame, 20);
+
+            function frame() {
+                if (startWidth >= endWidth) {
+                    clearInterval(interval);
+                } else {
+                    startWidth++;
+                    current.style.width = `${endWidth}%`;
+                    current.firstElementChild.innerText = `${startWidth}%`;
+                }
+            }
+        });
+    }
+
+    setTimeout(loading, 1000);
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.14.0-beta2/js/bootstrap-select.min.js"></script>
+<script>
+    $(document).ready(function() {
+
+
+        var readURL1 = function(input) {
+            if (input.files && input.files[0]) {
+                var reader1 = new FileReader();
+
+                reader1.onload = function(e) {
+                    $('.profile-pic1').attr('src', e.target.result);
+                }
+
+                reader1.readAsDataURL(input.files[0]);
+            }
+        }
+
+
+        $(".file-upload1").on('change', function() {
+            readURL1(this);
+        });
+
+        $(".upload-button1").on('click', function() {
+            $(".file-upload1").click();
+        });
+    });
+</script>
+<script>
+    var colors = ["red", "blue", "green", "orange", "yellow"];
+    $(document).ready(function() {
+        var checkList = [1];
+        $("#myList").select2({
+            width: "100%",
+            templateSelection: function(data, container) {
+                var selection = $('#myList').select2('data');
+                var idx = selection.indexOf(data);
+                console.log(">>Selection", data.text, data.idx, idx);
+                data.idx = idx;
+                // $(container).css("background-color", colors[data.idx]);
+                return data.text;
+            },
+        }).val(checkList).trigger("change");
+    })
+</script>
+
+{% endblock %}

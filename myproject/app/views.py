@@ -487,7 +487,7 @@ def exam_create(request):
         "user_details":user_details,
         "question_bank":question_bank
     }
-    return render(request,'exam_create.html',context)
+    return render(request,'exam_create1.html',context)
 
 
 def validation_check(request):
