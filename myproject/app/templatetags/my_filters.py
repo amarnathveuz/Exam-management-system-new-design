@@ -7,3 +7,5 @@ register = template.Library()
 def getattr(obj, attr):
     print("helllllllllllllllllllll")
     return getattr(obj, attr)
+
+

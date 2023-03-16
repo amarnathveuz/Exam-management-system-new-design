@@ -1,6 +1,1090 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% load  edit_language %}
+
+{% block content %}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<div class="container-fluid px-0">
+    <div class="row">
+        <div class="col-md-12 px-0">
+            <div class="card">
+                <div class="card-body body-change  p-0">
+                    <div class="d-flex align-items-center justify-content-between p-l-10 p-r-10  py-1">
+
+                        <div class="d-flex align-item-center">
+                            <h2 class="main-heading-txt"><a href="exam.html"><svg
+                                        style="margin-top: -6px; margin-right:4px;" width="20" height="22"
+                                        viewBox="0 0 20 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M6 1V4ZM14 1V4ZM19 7.5V16C19 19 17.5 21 14 21H6C2.5 21 1 19 1 16V7.5C1 4.5 2.5 2.5 6 2.5H14C17.5 2.5 19 4.5 19 7.5ZM6 10H14ZM6 15H10Z"
+                                            fill="#FFD1D1" />
+                                        <path
+                                            d="M6 1V4M14 1V4M6 10H14M6 15H10M19 7.5V16C19 19 17.5 21 14 21H6C2.5 21 1 19 1 16V7.5C1 4.5 2.5 2.5 6 2.5H14C17.5 2.5 19 4.5 19 7.5Z"
+                                            stroke="#F14A4A" stroke-width="1.5" stroke-miterlimit="10"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                    {{data.Exam_title}} </a> <span>/ New</span></h2>
+                            <p class="brud-crumps">Home / <span>Exam Management</span></p>
+                        </div>
 
 
-<div id="question-modal" class="modal right fade question-modal-{{value1}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+       
+
+                        <div class="d-flex">
+                            <button type="button" class="btn btn-outline-pink waves-effect waves-light mx-1"
+                                data-toggle="modal" data-target="#share-modal"><svg width="14" height="16"
+                                    viewBox="0 0 20 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M16 7C17.6569 7 19 5.65685 19 4C19 2.34315 17.6569 1 16 1C14.3431 1 13 2.34315 13 4C13 5.65685 14.3431 7 16 7Z"
+                                        stroke="black" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                    <path
+                                        d="M4 14C5.65685 14 7 12.6569 7 11C7 9.34315 5.65685 8 4 8C2.34315 8 1 9.34315 1 11C1 12.6569 2.34315 14 4 14Z"
+                                        stroke="black" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                    <path
+                                        d="M16 21C17.6569 21 19 19.6569 19 18C19 16.3431 17.6569 15 16 15C14.3431 15 13 16.3431 13 18C13 19.6569 14.3431 21 16 21Z"
+                                        stroke="black" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                    <path d="M6.58984 12.51L13.4198 16.49" stroke="#1C1D21" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                    <path d="M13.4098 5.51001L6.58984 9.49001" stroke="#1C1D21" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                            </button>
+                            <button type="button" class="btn btn-outline-pink waves-effect waves-light mx-1"><svg
+                                    width="16" height="16" viewBox="0 0 22 22" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M5 8V1H17V8" stroke="#1C1D21" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                    <path
+                                        d="M5 17H3C2.46957 17 1.96086 16.7893 1.58579 16.4142C1.21071 16.0391 1 15.5304 1 15V10C1 9.46957 1.21071 8.96086 1.58579 8.58579C1.96086 8.21071 2.46957 8 3 8H19C19.5304 8 20.0391 8.21071 20.4142 8.58579C20.7893 8.96086 21 9.46957 21 10V15C21 15.5304 20.7893 16.0391 20.4142 16.4142C20.0391 16.7893 19.5304 17 19 17H17"
+                                        stroke="black" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                    <path d="M17 13H5V21H17V13Z" stroke="#1C1D21" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                            </button> &ensp;
+    <form class="forms-sample" action="update_exam_details" method="POST" enctype="multipart/form-data">
+        {% csrf_token %} 
+                            <a href="#"> <button type="submit"
+                                    class="btn btn-pink waves-effect waves-light"><i class="fa fa-plus mr-1"
+                                        aria-hidden="true"></i>Save</button></a>
+                                        
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+            
+                <input type="hidden" name="updated_id" value="{{data.id}}">
+            <div class="card card-shadow m-2 ">
+
+                <div class="card-body body-change card-border p-0">
+
+                    <div class="row mt-1 p-3">
+
+                        <div class="col-md-11 col-sm-12 col-12 px-0">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group exam-titl">
+                                        <label for="field-1" class="control-label">Exam Title</label>
+                                        <div class="d-flex align-item-center">
+                                            <input type="text" class="form-control" id="field-1"
+                                                placeholder="e.g. Satisfaction Survey" name="exam_title" value="{{data.Exam_title}}">
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="col-md-5">
+                                    <div class="form-group exam-titl mr-3">
+                                        <label for="field-1" class="control-label">Responsible</label>
+                                        <div class="responsbl d-flex">
+                                            <img src="./static/admin/img/Ellipse 4.png" alt="">
+                                            <select name="responsible_person" id="" class="form-control">
+                                                <option value="{{data.responsible_person.id}}" selected>
+                                                {{data.responsible_person}}</option>
+                                                {% for i in user %}
+                                                    {% if i.id == data.responsible_person.id %}
+
+                                                    {% else %}
+                                                        <option value="{{i.id}}">{{i.username}}</option>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="col-md-7">
+                                    <!-- <div class="form-group responsbl">
+                                        <label for="field-1" class="control-label">Language</label>
+
+                                        <select class="selectpicker" multiple aria-label="Default select example" data-live-search="true">
+                                            <option value="1" selected>English</option>
+                                            <option value="2">Arabic</option>
+                                            <option value="3">Hindi</option>
+                                            <option value="4">Urdu</option>
+                                          </select>
+
+
+                                    </div> -->
+
+                                    <label for="field-1" class="control-label">Language<span style="color: red;
+                                        font-weight: bold;">(Default English)</span></label>
+                                    <div class="form-group">
+                                        <input type="hidden" name="language_type" value="en"
+                                        class="lang_class" checked >
+
+                                        {% if data.id|check_edit_language:"ar" %}
+                                        <input type="checkbox" name="language_type" value="ar"
+                                            class="lang_class" checked ><span style="font-size: 12px;">&nbsp;Arabic</span>
+                                        &nbsp; &nbsp;
+                                        {% else %}
+                                        <input type="checkbox" name="language_type" value="ar"
+                                            class="lang_class" ><span style="font-size: 12px;">&nbsp;Arabic</span>
+                                        &nbsp; &nbsp;
+                                        {% endif %}
+                                        {% if data.id|check_edit_language:"hi" %}
+                                        <input type="checkbox" name="language_type" value="hi"
+                                            class="lang_class" checked> <span style="font-size: 12px;">&nbsp;Hindi</span>
+                                        &nbsp; &nbsp;
+                                        {% else %}
+                                        <input type="checkbox" name="language_type" value="hi"
+                                            class="lang_class"> <span style="font-size: 12px;">&nbsp;Hindi</span>
+                                        &nbsp; &nbsp;
+                                        {% endif %}
+                                        {% if data.id|check_edit_language:"ur" %}
+                                        <input type="checkbox" name="language_type" value="ur"
+                                            class="lang_class" checked > <span style="font-size: 12px;">&nbsp;Urdu</span>
+                                        &nbsp; &nbsp;
+                                        {% else %}
+                                        <input type="checkbox" name="language_type" value="ur"
+                                            class="lang_class" > <span style="font-size: 12px;">&nbsp;Urdu</span>
+                                        &nbsp; &nbsp;
+                                        {% endif %}
+                                        {% if data.id|check_edit_language:"ta" %}
+                                        <input type="checkbox" name="language_type" value="ta"
+                                            class="lang_class" checked > <span style="font-size: 12px;">&nbsp;Tamil</span>
+                                        {% else %}
+                                        <input type="checkbox" name="language_type" value="ta"
+                                            class="lang_class"> <span style="font-size: 12px;">&nbsp;Tamil</span>
+                                        {% endif %}
+                                    </div>
+<!-- 
+                                    <script>
+                                        var colors = ["red", "blue", "green", "orange", "yellow"];
+                                        $(document).ready(function () {
+                                            var checkList = [1];
+                                            $("#myList").select2({
+                                                width: "100%",
+                                                templateSelection: function (data, container) {
+                                                    var selection = $('#myList').select2('data');
+                                                    var idx = selection.indexOf(data);
+                                                    console.log(">>Selection", data.text, data.idx,
+                                                        idx);
+                                                    data.idx = idx;
+                                                    // $(container).css("background-color", colors[data.idx]);
+                                                    return data.text;
+                                                },
+                                            }).val(checkList).trigger("change");
+                                        })
+                                    </script> -->
+                                </div>
+                            </div>
+
+
+                        </div>
+                        <div class="col-md-1 px-0">
+                            <div class="propic">
+                                <div class="small-12 medium-2 large-2 columns">
+                                    <div class="circle">
+                                        <img class="profile-pic1" src="./static/admin/img/placeholder.png">
+                                        <h3>Background Image</h3>
+                                        <div class="p-image">
+                                            <i class="fa fa-camera upload-button1" aria-hidden="true"></i>
+                                            <input class="file-upload1" type="file" accept="image/*">
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="bg-box-white">
+
+                        <div class="row">
+
+
+                            <div class="col-md-12">
+
+                                <div class="nav  nav-pills nav-pills-custom" id="v-pills-tab" role="tablist"
+                                    aria-orientation="vertical">
+                                    <a class="nav-link mb-1 padd-sec border-class active" id="v-pills-home-tab"
+                                        data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home"
+                                        aria-selected="true">
+
+
+                                        <span class="">Questions</span></a>
+
+                                    <a class="nav-link mb-1 padd-sec border-class" id="v-pills-profile-tab"
+                                        data-toggle="pill" href="#v-pills-profile" role="tab"
+                                        aria-controls="v-pills-profile" aria-selected="false">
+                                        <span class="text-sizing">Options</span></a>
+
+                                    <a class="nav-link mb-1 padd-sec border-class" id="v-pills-messages-tab"
+                                        data-toggle="pill" href="#v-pills-messages" role="tab"
+                                        aria-controls="v-pills-messages" aria-selected="false">
+                                        <span class="text-sizing">Start Message</span></a>
+
+                                    <a class="nav-link mb-1 padd-sec border-class" id="v-pills-settings-tab"
+                                        data-toggle="pill" href="#v-pills-settings" role="tab"
+                                        aria-controls="v-pills-settings" aria-selected="false">
+                                        <span class="text-sizing">End Message</span></a>
+
+                                    <a class="nav-link mb-1 padd-sec border-class" id="v-pills-settings-tab"
+                                        data-toggle="pill" href="#v-pills-Initial" role="tab"
+                                        aria-controls="v-pills-settings" aria-selected="false">
+                                        <span class="text-sizing">Initial Fields</span></a>
+                                </div>
+                                <hr class="line-tab">
+                                <!-- Tabs content -->
+                                <div class="tab-content" id="v-pills-tabContent">
+
+                                    <div class="tab-pane fade rounded bg-white show active" id="v-pills-home"
+                                        role="tabpanel" aria-labelledby="v-pills-home-tab">
+                                        <div class="pad-of-this d-flex align-item-center justify-content-between">
+                                            <div>
+                                                <input type="search" class="inp-search-add" placeholder="Search here">
+                                            </div>
+                                            <div class="mb-2 add-btns">
+
+                                                <button type="button" class="btn btn-addq" data-toggle="modal"
+                                                    data-target="#addsectionnew" >
+                                                    Add a Section
+                                                </button>
+
+                                                <button type="button" class="btn btn-addq" data-toggle="modal"
+                                                    data-target="#question-modal">
+                                                    Add a Question
+                                                </button>
+                                            </div>
+
+                                        </div>
+
+                                        <table class="table table-qstn dt-responsive table-bordered nowrap table-padd"
+                                            style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+
+                                            <thead class="border-class">
+
+                                                <tr class="small-header">
+                                                    <th class="section-main-title heading-custom">Title</th>
+                                                    <th class="section-main-title heading-custom">Question Type</th>
+                                                    <th class="filtr-q">
+                                                        <div class="dropdown">
+                                                            <a class="btn filter-option dropdown-toggle" href="#"
+                                                                role="button" id="dropdownMenuLink"
+                                                                data-toggle="dropdown" aria-haspopup="true"
+                                                                aria-expanded="false"> <i
+                                                                    class="fa-solid fa-sliders"></i>
+                                                            </a>
+                                                            <div class="dropdown-menu"
+                                                                aria-labelledby="dropdownMenuLink">
+                                                                <a class="dropdown-item" href="#">Action</a> <a
+                                                                    class="dropdown-item" href="#">Another action</a> 
+                                                                    <a class="dropdown-item" href="#">Something else
+                                                                    here</a>
+                                                            </div>
+                                                        </div>
+                                                    </th>
+                                                </tr>
+
+                                                
+                                            </thead>
+
+
+                                            <tbody class="body-textcls vertcle-center">
+                                                {% for i in data_main %}
+                                                    {% if i.section_type == "Section" %}
+
+                                                    <tr>
+                                                        <td class="section-title" colspan="2">
+                                                            <a data-toggle="modal" href="#editsection" data-id="{{i.id}}" data-title="{{i.section_title}}" class="title_edit" style="text-decoration: none; color: black;">
+                                                            {{i.section_title}}
+                                                        </a>
+                                                        </td>
+                                                        <td style="background-color: #f5f5f5">
+                                                            <div class="action-tbl d-flex justify-content-end">
+    
+                                                                <i style="cursor: pointer;"
+                                                                class="fa fa-trash-o mx-1 " data-toggle="tooltip"
+                                                                    data-placement="top" title=""
+                                                                    data-original-title="Delete"
+                                                                    onclick="section_question_delete_btn(`{{i.id}}`)"></i>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+
+                                                        {% for j in i.Section_Question_Mapping_id.all %}
+
+                                                        <tr>
+                                                            <td >
+                                                                <a href="#"  onclick="section_Question_view(`{{j.Question_id.id}}`)" style="text-decoration: none; color: black;">
+                                                                {{j.Question_id.Question}}</a>
+                                                            </td>
+                                                            <td>{% if j.Question_id.Question_type == "Radio" %} Multiple choice: only one answer  {% else %}  Multiple choice: multiple answers allowed {% endif %}</td>
+                                                            <td>
+                                                                <div class="action-tbl d-flex justify-content-end">
+                                                                    <i class="fa fa-trash-o mx-1 " data-toggle="tooltip"
+                                                                        data-placement="top" title=""
+                                                                        data-original-title="Delete"
+                                                                        style="cursor: pointer;"
+                                                                        onclick="question_delete_btn(`{{j.Question_id.id}}`)"></i>
+
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+
+                                                        {% endfor %}
+
+                                                        <tr>
+                                                            <td style="padding: 0px 0px 20px;"> <button type="button"
+                                                                    class="btn btn-addq2" data-toggle="modal"
+                                                                    data-target="#question-modal"  onclick="section_question(`{{i.id}}`)" >
+                                                                    Add New
+                                                                </button></td>
+                                                        </tr>
+
+
+                                                    {% elif i.section_type == "Question" %}
+
+                                                        <tr>
+                                                            <td>
+                                                                <a href="#" onclick="section_Question_view(`{{i.Question_bank_id.id}}`)" style="text-decoration: none; color: black;">
+                                                                    {{i.Question_bank_id.Question}} </a>
+
+                                                            </td>
+                                                            <td>{% if i.Question_id.Question_type == "Radio" %} Multiple choice: only one answer  {% else %}  Multiple choice: multiple answers allowed {% endif %}</td>
+                                                            <td>
+                                                                <div class="action-tbl d-flex justify-content-end">
+                                                                    <i class="fa fa-trash-o mx-1 " data-toggle="tooltip"
+                                                                        data-placement="top" title=""
+                                                                        data-original-title="Delete"
+                                                                        style="cursor: pointer;"onclick="section_question_delete_btn(`{{i.id}}`)"></i>
+        
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+
+                                                    {% endif %}
+
+                                                {% endfor %}
+
+                                            </tbody>
+                                            
+                                        </table>
+                                    </div>
+
+
+
+
+                                    <div class="tab-pane fade border-class rounded bg-white " id="v-pills-profile"
+                                        role="tabpanel" aria-labelledby="v-pills-profile-tab">
+                                        <div class="row mb-2 mt-2 question-options">
+                                            <div class="col-md-6 px-0">
+                                                <h5>Questions</h5>
+
+                                                <div class="row">
+                                                    <div class="col-md-3 br-right d-flex align-items-start px-0">
+                                                        <h6>Pagination</h6>
+                                                    </div>
+                                                    <div class="col-md-9 py-2">
+                                                        <div class="form-group d-flex align-items-center">
+                                                            <input type="radio" id="Pagination1" name="layout"
+                                                            {% if data.layout == "2" %} checked {% endif %}
+                                                            value="2" >
+                                                            <label for="Pagination1">One page per question</label>
+                                                        </div>
+                                                        <div class="form-group d-flex align-items-center">
+                                                            <input type="radio" id="Pagination2" name="layout"
+                                                            {% if data.layout == "1" %} checked {% endif %}
+                                                            value="1" >
+                                                            <label for="Pagination2">One page per section</label>
+                                                        </div>
+                                                        <div class="form-group d-flex align-items-center">
+                                                            <input type="radio" id="Pagination3" name="layout"
+                                                            {% if data.layout == "0" %} checked {% endif %}
+                                                            value="0" >
+                                                            <label for="Pagination3">One page with all the
+                                                                questions</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row">
+                                                    <div class="col-md-3 br-right d-flex align-items-start px-0">
+                                                        <h6>Display Progress as</h6>
+                                                    </div>
+                                                    <div class="col-md-9 py-2">
+                                                        <div class="form-group d-flex align-items-center">
+
+                                                            <input type="radio" id="Display1" name="progression_mode"
+                                                            {% if data.progression_mode == "Percentage" %}
+                                                            checked {% endif %} value="Percentage">
+
+                                                            <label for="Display1">Percentage left</label>
+                                                        </div>
+                                                        <div class="form-group d-flex align-items-center">
+                                                            <input type="radio" id="Display2" name="progression_mode"
+                                                            {% if data.progression_mode == "Number" %}
+                                                            checked {% endif %} value="Number">
+                                                            <label for="Display2">Number</label>
+                                                        </div>
+
+
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-3 br-right d-flex align-items-start px-0">
+                                                        <h6>Question Selection</h6>
+                                                    </div>
+                                                    <div class="col-md-9 py-2">
+                                                        <div class="form-group d-flex align-items-center">
+                                                            <input type="radio" id="section1" name="section"
+                                                            {% if data.selection_mode == "All questions" %}
+                                                            checked {% endif %} value="All questions">
+                                                            <label for="section1">All questions</label>
+                                                        </div>
+                                                        <div class="form-group d-flex align-items-center">
+                                                            <input type="radio" id="section2" name="section"
+                                                            {% if data.selection_mode == "Randomized per section" %}
+                                                            checked {% endif %}
+                                                                        value="Randomized per section">
+                                                            <label for="section2">Randomized per Section</label>
+                                                        </div>
+
+
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-3 br-right d-flex align-items-center px-0">
+                                                        <h6>Back Button</h6>
+                                                    </div>
+                                                    <div class="col-md-9">
+                                                        <div class="form-group mt-2 d-flex align-items-center">
+                                                            <input type="checkbox" name="back_button" id=""
+                                                            {% if data.back_button %} checked {% endif %} >
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="col-md-6">
+                                                <h5>Participants</h5>
+
+
+                                                <div class="row">
+                                                    <div class="col-md-3 br-right d-flex align-items-center px-0">
+                                                        <h6>Access Mode</h6>
+                                                    </div>
+                                                    <div class="col-md-6 d-flex align-items-center m-l-10">
+                                                        <select name="access_mode" id="select_access_mode" class="form-control">
+
+                                                            <option value="0" {% if data.access_mode == "0" %}
+                                                            selected {% endif %} >Anyone with the link</option>
+                                                            <option value="1" {% if data.access_mode == "1" %}
+                                                            selected {% endif %} >Invited people only</option>
+
+                                                            <option value="2" {% if data.access_mode == "2" %}
+                                                            selected {% endif %} >Link based</option>
+                                                            <option value="3" {% if data.access_mode == "3" %}
+                                                            selected {% endif %} >Secret key</option>
+                                                        </select>
+                                                    </div>
+                                                </div>                                         
+
+                                                <div class="row">
+                                                    <div class="col-md-3 br-right d-flex align-items-center px-0">
+                                                        <h6>Require Login</h6>
+                                                    </div>
+                                                    <div class="col-md-9 d-flex align-items-center r-day">
+                                                        <input type="checkbox"  name="login_required" id="login_required" {% if data.Login_required %}
+                                                        checked {% endif %} >
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="row"  id="attemp_lim"  {% if data.Login_required %}
+                                                style="display:block;" {% else %} style="display:none;"
+                                                {% endif %} >
+                                                    <div class="col-md-3 br-right d-flex align-items-center px-0">
+                                                        <h6>Attempts Limit</h6>
+                                                    </div>
+
+                                                    <div class="col-md-9 d-flex align-items-center r-day">
+                                                        <input type="checkbox" id="Attempts"
+                                                        name="Attempt_check" value="True"
+                                                        {% if data.attempt_limit %} checked {% endif %} >
+                                                        &nbsp;<br>
+                                                        <input type="number" class="form-control col-md-3"
+                                                        attemptsid="attempts_limit" value="1"
+                                                        name="attempt_limit" value="{{data.attempt_limit}}">
+                                                    <span style="font-size: 10px;">attempts</span>
+                                                 
+                                                    </div>                           
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row  question-options">
+                                            <div class="col-md-6 px-0">
+                                                <h5>Time & Scoring</h5>
+
+                                                <div class="row">
+                                                    <div class="col-md-3 br-right d-flex align-items-center px-0 px-0">
+                                                        <h6>Survey Time Limit</h6>
+                                                    </div>
+                                                    <div class="col-md-7 d-flex align-items-center r-day">
+                                                        <input type="checkbox"
+                                                        id="time_limit" name="time_limit"
+                                                        value="True" {% if data.Exam_time_limit|safe != "00:00:00" %}
+                                                        checked {% endif %} >
+
+                                                        <div id="show_timelimit"
+                                                                    {% if data.Exam_time_limit|safe != "00:00:00" and  data.Exam_time_limit != " "  %}
+                                                                    style="display: block;" {% else %}
+                                                                    style="display: none;" {% endif %}>
+                                                                    <input
+                                                                        style="border: 1px solid #e8ecf1; font-size: 0.8125rem;"
+                                                                        type="text" name="exam_time_limit"
+                                                                        id="exam_time_limit"
+                                                                        value="{{data.Exam_time_limit|time:'H:i:s'}}"
+                                                                        placeholder="HH:MM:SS" >
+                                                                    <span style="font-size: 10px;">minutes</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                
+
+                                                <div class="row">
+                                                    <div class="col-md-3 br-right d-flex align-items-start px-0">
+                                                        <h6>Scoring</h6>
+                                                    </div>
+                                                    <div class="col-md-9 py-2">
+                                                        <div class="form-group d-flex align-items-center">
+                                                            <input type="radio" id="scoring_mode1" name="scoring_mode"
+                                                            {% if data.scoring_mode == "0" %} checked
+                                                            {% endif %} value="0">
+                                                            <label for="scoring_mode1">No scoring</label>
+                                                        </div>
+                                                        <div class="form-group d-flex align-items-center">
+                                                            <input type="radio" id="scoring_mode2" name="scoring_mode"
+                                                            {% if data.scoring_mode == "1" %} checked
+                                                            {% endif %} value="1">
+                                                            <label for="scoring_mode2">Scoring with answers at the
+                                                                end</label>
+                                                        </div>
+
+                                                        <div class="form-group d-flex align-items-center">
+                                                            <input type="radio" id="scoring_mode3" name="scoring_mode" 
+                                                            {% if data.scoring_mode == "2" %} checked
+                                                            {% endif %} value="2">
+                                                            <label for="scoring_mode3">Scoring without answers at the
+                                                                end</label>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-3 br-right d-flex align-items-center px-0">
+                                                        <h6>Required Score (%)</h6>
+                                                    </div>
+                                                    <div class="col-md-1">
+                                                        <input type="text" style="width: 100px;"  name="required_score" class="form-control" value="{{data.Success_per}}">
+
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-3 br-right d-flex align-items-center px-0 px-0">
+                                                        <h6>Is a Certification</h6>
+                                                    </div>
+                                                    <div class="col-md-7 d-flex align-items-center r-day">
+                                                        <input type="checkbox" id="r-day">
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="col-md-6">
+                                                <h5>Live Session</h5>
+
+                                                <div class="row">
+                                                    <div class="col-md-3 br-right d-flex align-items-center px-0">
+                                                        <h6>Session Code</h6>
+                                                    </div>
+                                                    <div class="col-md-2 d-flex align-items-center">
+                                                        <input type="text" class="form-control" value="2168">
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-3 br-right d-flex align-items-center px-0">
+                                                        <h6>Session Link</h6>
+                                                    </div>
+                                                    <div class="col-md-9 d-flex align-items-center">
+                                                        <div class="input-group uploadFile1">
+
+                                                            <input type="text" class="form-control" name="url"
+                                                                value="https://10.10.10.140:8000/exam_login_new?type={{data.slug}}">
+                                                            <div class="input-group-append">
+                                                                <span class="input-group-text"> <i class="fas fa-copy"
+                                                                        aria-hidden="true"></i></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-3 br-right d-flex align-items-center px-0">
+                                                        <h6>Reward quick answers</h6>
+                                                    </div>
+                                                    <div class="col-md-7 d-flex align-items-center r-day">
+                                                        <input type="checkbox" id="r-day">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="tab-pane border-class fade rounded bg-white" id="v-pills-messages"
+                                        role="tabpanel" aria-labelledby="v-pills-messages-tab">
+                                        <textarea class="text-area-inp" name="start_message" id="" cols="30" rows="5"
+                                            class="form-control border-0" placeholder="Start Message...">{{data.start_message}}</textarea>
+                                    </div>
+
+                                    <div class="tab-pane border-class fade   rounded bg-white" id="v-pills-settings"
+                                        role="tabpanel" aria-labelledby="v-pills-settings-tab">
+                                        <textarea class="text-area-inp" name="end_message" id="" cols="30" rows="5"
+                                            class="form-control border-0" placeholder="End Message...">{{data.end_message}}</textarea>
+                                    </div>
+                                    <div class="tab-pane border-class fade  rounded bg-white" id="v-pills-Initial"
+                                        role="tabpanel" aria-labelledby="v-pills-settings-tab">
+                                        <table class="table table-qstn dt-responsive table-bordered nowrap table-padd"
+                                            style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+
+                                            <thead class="border-class">
+                                                <tr class="small-header">
+                                                    <th class="section-main-title heading-custom">Input Title</th>
+                                                    <th class="section-main-title heading-custom">Unique Field</th>
+                                                    <th class="section-main-title heading-custom">Input Type</th>
+                                                    <th class="section-main-title heading-custom">Inputs</th>
+                                                    <th class="section-main-title heading-custom"></th>
+                                                </tr>
+                                            </thead>
+
+
+                                            <tbody class="body-textcls vertcle-center">
+                                                {% for i in intial_field %}
+                                                <tr>
+                                                    <td>
+                                                        <input type="text" class="intial-text" name="initial_title" value="{{i.title}}" placeholder="Type here">
+                                                    </td>
+                                                    
+                                                    <td>
+                                                        <div  class="input-group" >
+                                                        <input {% if i.unique_type %} checked
+                                                        {% endif %}   type="checkbox" name="unique_field"
+                                                            value="" class="intial-text" >
+                                                        </div>
+                                                    </td>
+
+                                                    <td>
+                                                        <select name="initial_type" class="intial-text2">
+                                                            <option value="selection" selected >
+                                                                {{i.field_type}}</option>
+                                                                {% if "selection" == i.field_type %}
+                                                                <option value="Text Input">Text Input</option>
+                                                                <option value="Date Input">Date Input</option>
+                                                                {% elif "Text Input" ==  i.field_type %}
+                                                                <option value="selection">Selection</option>
+                                                                <option value="Date Input">Date Input</option>
+                                                                {% else %}
+                                                                <option value="selection">Selection</option>
+                                                                <option value="Text Input">Text Input</option>
+                                                                {% endif %}
+                                                            </select>                                   
+                                                    </td>
+
+                                                    <td>
+                                                        <!-- <input type="text" class="intial-text" placeholder="Type here"> -->
+                                                        {% for j in i.Exam_inital_field_id.all %}
+                                                        <input type="text" name="" id="" class="intial-text" value="{{j.choice_name}}">
+                                                        <br>
+                                                        {% endfor %}
+                                                    </td>
+
+                                                    <td>
+                                                        <div class="action-tbl d-flex justify-content-end">
+                                                            <i style="cursor: pointer;" class="fa fa-trash-o mx-1 " data-toggle="tooltip"
+                                                                data-placement="top" title=""
+                                                                data-original-title="Delete" onclick="delete_btn(`{{i.id}}`)"></i>
+                                                        </div>
+                                                    </td>
+
+                                                </tr>                     
+
+                                               {% endfor %}
+
+                                            </tbody>
+
+                                            <tbody id="append_inital_field" class="body-textcls vertcle-center">
+
+
+                                            </tbody>
+
+                                            <div>
+                                                <tr>
+                                                    <td style="padding: 0px 0px 20px;">
+                                                        <button type="button" class="btn btn-addq2 add_exam_field">
+                                                            Add New
+                                                        </button></td>
+                                                </tr>
+                                            </div>
+                                            
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+
+            
+                <div class="col-lg-4 padd-this">
+                    <div class="bg-box-white2">
+                        <div class="paytab">
+                            <ul class="nav nav-tabs nav-pay" role="tablist">
+                                <li class="nav-item d-flex align-items-center">
+                                    <a class="nav-link active" data-toggle="tab" href="#home4" role="tab">
+                                        Send Message
+                                    </a>
+                                </li>
+                                <li class="nav-item d-flex align-items-center">
+                                    <a class="nav-link" data-toggle="tab" href="#profile4" role="tab">
+                                        Log Note
+                                    </a>
+                                </li>
+
+                                <li class="nav-item d-flex align-items-center" data-toggle="modal"
+                                    data-target="#schedule">
+                                    <a class="nav-link" data-toggle="tab" href="#settings4" role="tab">
+                                        Activity
+                                    </a>
+                                </li>
+
+
+                            </ul>
+                            <div class="tab-content text-muted activity-pad">
+
+                                <div class="tab-pane active" id="home4" role="tabpanel">
+
+                                    <div class="row msging px-0 my-2 d-flex align-items-center">
+                                        <img src="./static/admin/img/users/avatar-9.jpg" alt="">
+                                        <input type="search" name="q" class="message-input rounded-full"
+                                            placeholder="Send a message..." autocomplete="off">
+                                        <button class="action-box-submit" type="submit"><i class="fa fa-paper-plane"
+                                                aria-hidden="true"></i></button>
+                                        <div class="test-emoji"></div>
+                                        <div class="emoji-panel">
+                                            <button id="emoji-picker" class="chat-input-tool">
+                                                <i class="fa-regular fa-face-smile"></i>
+                                            </button>
+                                        </div>
+
+                                        <button class="chat-input-tool file-msg">
+                                            <i class="fas fa-paperclip" aria-hidden="true"></i>
+                                        </button>
+                                    </div>
+                                    <div class="d-flex align-item-center justify-content-center postion">
+                                        <script
+                                            src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js">
+                                        </script>
+                                        <lottie-player
+                                            src="https://assets6.lottiefiles.com/private_files/lf30_e3pteeho.json"
+                                            background="transparent" speed="1"
+                                            style="width: 300px; height: 300px; margin-top:30px;" loop autoplay>
+                                        </lottie-player>
+                                    </div>
+                                </div>
+
+                                <div class="tab-pane" id="profile4" role="tabpanel">
+                                    <div class="row msging px-0 my-2 d-flex align-items-center">
+                                        <img src="./static/admin/img/users/avatar-9.jpg" alt="">
+                                        <input type="search" name="q" class="message-input rounded-full"
+                                            placeholder="Log an internal note..." autocomplete="off">
+                                        <button class="action-box-submit" type="submit"><i class="fa fa-paper-plane"
+                                                aria-hidden="true"></i></button>
+                                        <div class="test-emoji"></div>
+                                        <div class="emoji-panel">
+                                            <button id="emoji-picker" class="chat-input-tool">
+                                                <i class="fa-regular fa-face-smile"></i>
+                                            </button>
+                                        </div>
+                                        <div class="intercom-composer-popover intercom-composer-emoji-popover">
+
+                                            <div class="intercom-composer-popover-caret">
+                                            </div>
+                                        </div>
+                                        <button class="chat-input-tool file-msg">
+                                            <i class="fas fa-paperclip" aria-hidden="true"></i>
+                                        </button>
+                                    </div>
+
+
+                                </div>
+
+                                <div class="tab-pane" id="settings4" role="tabpanel">
+                                    <div class="row actvty">
+                                        <h5>Today</h5>
+                                    </div>
+                                    <div class="row msging schdul-box mt-1">
+                                        <img src="./static/admin/img/users/avatar-9.jpg" alt="">
+                                        <div>
+                                            <h5>Mitchell Admin <span>- 10 days ago</span></h5>
+                                            <h6>Exam created</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="delete_initial_field_div">
+    
+</div>
+
+
+<div class="section_Question_view_modal">
+
+</div>
+
+
+
+
+
+<div id="share-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
+    style="display: none">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title mt-0">Share a Exam</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-1">
+                                <label for="field-1" class="control-label">Exam URL</label>
+                            </div>
+                            <div class="col-md-11">
+                                <div class="form-group">
+
+                                    <div class="input-group uploadFile1">
+
+                                        <input type="text" class="form-control" name="url"
+                                            value="https://demo4.odoo.com/survey/start/b137640d-9876-1234-abcd-344ca256531e">
+                                        <div class="input-group-append">
+                                            <span class="input-group-text"> <i class="fas fa-copy"></i></span>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row recipient">
+                            <div class="col-md-1">
+                                <label for="field-1" class="control-label">Recipients</label>
+                            </div>
+                            <div class="col-md-11">
+                                <div class="form-group">
+
+                                    <div id="root1"></div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-1">
+                                <label for="field-1" class="control-label">Subject</label>
+                            </div>
+                            <div class="col-md-11">
+                                <div class="form-group">
+
+                                    <input type="text" class="form-control" placeholder="Subject">
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <div class="col-md-12">
+                        <div class="mail-content">
+                            <h5>Dear Participant,</h5>
+                            <p>You have been invited to take a new test.</p>
+                            <p>Please answer the survey for 05/05/2021.</p>
+                            <p>We wish you good luck!</p>
+                        </div>
+                    </div>
+                    <div class="col-md-9">
+                        <div class="row">
+                            <div class="w-10 d-flex align-items-center">
+                                <label for="field-1" class="control-label attachmt-plus">Attachments </label>
+                            </div>
+                            <div class="w-90">
+                                <div class="form-group">
+                                    <div class="input-group uploadFile1">
+
+                                        <input type="file" class="inputfile form-control" name="file">
+                                        <div class="input-group-append">
+                                            <span class="input-group-text"> <i class="fas fa-paperclip"></i></span>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-md-3">
+                        <div class="row">
+                            <div class="mr-2 d-flex align-items-center">
+                                <label for="field-1" class="control-label">Answer deadline</label>
+                            </div>
+                            <div class="">
+                                <div class="form-group">
+                                    <input type="date" class="form-control" id="field-1" placeholder="05/03/2023">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+
+                <button type="button" style="background-color:#199A7E!important;border: none!important;"
+                    class="btn btn-info waves-effect waves-light">Send </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div id="editsection" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
+    style="display: none">
+    <form class="forms-sample" action="section_title_edit" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}  
+    <div class="modal-dialog modal-md modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title mt-0">Section</h4>
+                <input value="{{data.id}}" type="hidden" name="updated_id" id="title_updated_id">
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="field-1" class="control-label">Section Name</label>
+                            <input type="text" name="exam_title" value="" id="title_name_update" class="form-control" id="field-1" placeholder="Section Name">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+
+                <button type="submit" style="background-color:#199A7E!important;border: none!important;"
+                    class="btn btn-info waves-effect waves-light">Save </button>
+            </div>
+        </div>
+    </div>
+    </form>
+</div>
+
+<!-- section new add  -->
+
+<div id="addsectionnew" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
+    style="display: none">
+    <form class="forms-sample" action="New_section_add" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}  
+    <div class="modal-dialog modal-md modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title mt-0">Add a Section</h4>
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="field-1" class="control-label">Section Name</label>
+                            <input type="hidden" name="exam_id" value="{{data.id}}">
+                            <input type="text" name="section_title" value="" id="" class="form-control" id="field-1" placeholder="Section Name">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+
+                <button type="submit" style="background-color:#199A7E!important;border: none!important;"
+                    class="btn btn-info waves-effect waves-light">Save </button>
+            </div>
+        </div>
+    </div>
+    </form>
+</div>
+
+
+
+
+<div id="question-modal" class="modal right fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
     aria-hidden="true">
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
@@ -16,21 +1100,21 @@
                         <h5>Question Type</h5>
                         <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist"
                             aria-orientation="vertical">
-                            <a class="nav-link active" id="qtype1-tab" data-toggle="pill" href="#qtype1{{value1}}" role="tab"
+                            <a class="nav-link active" id="qtype1-tab" data-toggle="pill" href="#qtype1" role="tab"
                                 aria-controls="qtype1" aria-selected="true">Multiple choice: One answer</a>
-                            <a class="nav-link" id="qtype2-tab" data-toggle="pill" href="#qtype1{{value1}}" role="tab"
+                            <a class="nav-link" id="qtype2-tab" data-toggle="pill" href="#qtype2" role="tab"
                                 aria-controls="qtype2" aria-selected="false">Multiple choice: Many answers</a>
-                            <a class="nav-link" id="qtype3-tab" data-toggle="pill" href="#qtype3{{value1}}" role="tab"
+                            <a class="nav-link" id="qtype3-tab" data-toggle="pill" href="#qtype3" role="tab"
                                 aria-controls="qtype3" aria-selected="false">Multiple Lines Text Box</a>
-                            <a class="nav-link" id="qtype4-tab" data-toggle="pill" href="#qtype4{{value1}}" role="tab"
+                            <a class="nav-link" id="qtype4-tab" data-toggle="pill" href="#qtype4" role="tab"
                                 aria-controls="qtype4" aria-selected="false">Single Line Text Box</a>
-                            <a class="nav-link" id="qtype5-tab" data-toggle="pill" href="#qtype5{{value1}}" role="tab"
+                            <a class="nav-link" id="qtype5-tab" data-toggle="pill" href="#qtype5" role="tab"
                                 aria-controls="qtype5" aria-selected="false">Numerical Value</a>
-                            <a class="nav-link" id="qtype6-tab" data-toggle="pill" href="#qtype6{{value1}}" role="tab"
+                            <a class="nav-link" id="qtype6-tab" data-toggle="pill" href="#qtype6" role="tab"
                                 aria-controls="qtype6" aria-selected="false">Date</a>
-                            <a class="nav-link" id="qtype7-tab" data-toggle="pill" href="#qtype7{{value1}}" role="tab"
+                            <a class="nav-link" id="qtype7-tab" data-toggle="pill" href="#qtype7" role="tab"
                                 aria-controls="qtype7" aria-selected="false">Datetime</a>
-                            <a class="nav-link" id="qtype8-tab" data-toggle="pill" href="#qtype8{{value1}}" role="tab"
+                            <a class="nav-link" id="qtype8-tab" data-toggle="pill" href="#qtype8" role="tab"
                                 aria-controls="qtype8" aria-selected="false">Matrix</a>
                         </div>
                         <img src="./static/admin/img/preview.png" class="img-fluid previw-set">
@@ -38,7 +1122,7 @@
                     <div class="col-9 bg-modal-right">
 
                         <div class="tab-content" id="v-pills-tabContent">
-                            <div class="tab-pane fade show active" id="qtype1{{value1}}" role="tabpanel"
+                            <div class="tab-pane fade show active" id="qtype1" role="tabpanel"
                                 aria-labelledby="qtype1-tab">
                                 <div class="d-flex justify-content-between">
                                     <h5>Question</h5>
@@ -236,7 +1320,7 @@
                                 </div>
 
                             </div>
-                            <div class="tab-pane fade" id="qtype2{{value1}}" role="tabpanel" aria-labelledby="qtype2-tab">
+                            <div class="tab-pane fade" id="qtype2" role="tabpanel" aria-labelledby="qtype2-tab">
                                 <div class="d-flex justify-content-between">
                                     <h5>Question</h5>
                                     <button type="button" class="input-modal-lang" data-toggle="modal"
@@ -468,7 +1552,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="tab-pane fade" id="qtype3{{value1}}" role="tabpanel" aria-labelledby="qtype3-tab">
+                            <div class="tab-pane fade" id="qtype3" role="tabpanel" aria-labelledby="qtype3-tab">
                                 <div class="d-flex justify-content-between">
                                     <h5>Question</h5>
                                     <button type="button" class="input-modal-lang" data-toggle="modal"
@@ -617,7 +1701,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="tab-pane fade" id="qtype4{{value1}}" role="tabpanel" aria-labelledby="qtype4-tab">
+                            <div class="tab-pane fade" id="qtype4" role="tabpanel" aria-labelledby="qtype4-tab">
 
                                 <div class="d-flex justify-content-between">
                                     <h5>Question</h5>
@@ -867,7 +1951,7 @@
                                 </div>
 
                             </div>
-                            <div class="tab-pane fade" id="qtype5{{value1}}" role="tabpanel" aria-labelledby="qtype5-tab">
+                            <div class="tab-pane fade" id="qtype5" role="tabpanel" aria-labelledby="qtype5-tab">
                                 <div class="d-flex justify-content-between">
                                     <h5>Question</h5>
                                     <button type="button" class="input-modal-lang" data-toggle="modal"
@@ -1028,7 +2112,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="tab-pane fade" id="qtype6{{value1}}" role="tabpanel" aria-labelledby="qtype6-tab">
+                            <div class="tab-pane fade" id="qtype6" role="tabpanel" aria-labelledby="qtype6-tab">
 
                                 <div class="d-flex justify-content-between">
                                     <h5>Question</h5>
@@ -1190,7 +2274,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="tab-pane fade" id="qtype7{{value1}}" role="tabpanel" aria-labelledby="qtype7-tab">
+                            <div class="tab-pane fade" id="qtype7" role="tabpanel" aria-labelledby="qtype7-tab">
                                 <div class="d-flex justify-content-between">
                                     <h5>Question</h5>
                                     <button type="button" class="input-modal-lang" data-toggle="modal"
@@ -1352,7 +2436,7 @@
                                 </div>
                             </div>
 
-                            <div class="tab-pane fade" id="qtype8{{value1}}" role="tabpanel" aria-labelledby="qtype8-tab">
+                            <div class="tab-pane fade" id="qtype8" role="tabpanel" aria-labelledby="qtype8-tab">
                                 <div class="d-flex justify-content-between">
                                     <h5>Question</h5>
                                     <button type="button" class="input-modal-lang" data-toggle="modal"
@@ -1638,7 +2722,16 @@
                             </div>
                         </div>
                     </div>
+
+
+
+
+
+
                 </div>
+
+
+
             </div>
             <div class="modal-footer">
 
@@ -1656,238 +2749,104 @@
 
 
 
-
-
-
-<div id="delete_initial_field_div12">
-
-</div>
-
-
-
-
-<script>
-    function remove_image(data) {
-      
-        $("#remove_id"+data).val(1)
-        $(".image_address_view"+data).hide()
-        $(".upload_image_address"+data).show()
-    }
-
-    function image_upload(data){
-        $("#remove_id"+data).val(1)
-    }
-
-
-
-    function question_remove_image(data) {
-      $("#question_remove_id"+data).val(1)
-      $(".question_image_address_view").hide()
-      $(".question_upload_image_address").show()
-    }
-
-    function question_image_upload(data){
-        $("#question_remove_id"+data).val(1)
-    }
-
-
-</script>
-
-
-
-<script>
-    function choice_option_delete_btn(data){
-
-        var url = "choice_option_delete";
-                    $.ajax({
-                        url: url,
-                        data: {
-                            'id': data
-                        },
-                        success: function (data) {
-                            $("#delete_initial_field_div12").html(data);
-                            $('#delete_initial_field_modal12').modal('show');
-                        }
-                    });
-    }
-</script>
-
-
-<script>
-    
-    function choice_add_fun(val1){
-
-    var add_line_count = $(".add_line_count"+val1).val();
-
-    if ($(".question_type_radio"+val1).is(":checked")){
-      question_type = "radio"
-      
-    }
-    else if($(".question_type_checkbox"+val1).is(":checked")){
-        question_type = "checkbox"
-        }
-  
-      var file_status = 'none'
-
-    if($(".file_field"+val1).is(":checked")){
-      file_status = 'show'
-  
-      $(".file_td"+val1).show()
-      $(".file_th"+val1).show()
-    }
-  
-    
-    $("#choice_add"+val1).append(`<tr class="tr_choice_remove`+add_line_count+`" >
-
-        <td>
-            <div class="input-group">
-            <input type="text" onchange="choice_value(this,`+add_line_count+`)"  name="question_choice`+add_line_count+``+'-'+`{{value1}}"  class="form-control">
-            </div> 
-            <input type="hidden" value=`+add_line_count+` name="question_line_count{{value1}}">
-            </td>
-          
-            <td>
-                <div style="margin-left:47px;" class="input-group date">
-                <input  type="checkbox"  name="addline_check`+add_line_count+``+'-'+`{{value1}}" value="True">
-                </div></td>
-            <td>
-                  
-            <input style="border: 1px solid #e8ecf1; 
-            font-size: 0.8125rem;" name="Score`+add_line_count+``+'-'+`{{value1}}" value="0" class="form-control" type="number" >
-            </td>
-
-            <td  class="file_td`+val1+`">
-                <div class="input-group uploadFile1">
-                    <input type="file" accept="image/*,.pdf,.txt,.doc,.docx," name="question_image_choice`+add_line_count+``+'-'+`{{value1}}" class="inputfile form-control mb-0" >
-                    <div class="input-group-append">
-                        <span class="input-group-text"> <i class="fas fa-paperclip"></i></span>
-                    </div>
-                </div>
-            </td>
-
-            <td>
-                <div class="action-tbl d-flex justify-content-end">
-                    <i class="fa fa-trash-o mx-1 trash-btn" onclick="choice_remove(`+add_line_count+`)"
-                    title="" data-original-title="Delete"></i>
-                </div>
-           
-
-            <div id="choice_modal-`+add_line_count+`-{{value1}}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-            aria-hidden="true" style="display: none">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title mt-0">Language</h4>
-                        <button type="button" class="close" data-dismiss-modal="modal3" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
+<div id="language-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+    aria-hidden="true" style="display: none">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title mt-0">Language</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12 px-0">
                         <div class="row">
-                            <div class="col-md-12">
+                            <div class="col-md-1">
+                                <label for="field-1" class="control-label">English</label>
+                            </div>
+                            <div class="col-md-11 pr-0">
                                 <div class="form-group">
-                                    <label for="field-1" class="control-label">English</label>
+
                                     <div class="input-group">
-                                
-                                        <input type="text"  name="eng_choice`+add_line_count+`-{{value1}}"  class="inputfile form-control mb-0 choice_val-`+add_line_count+`-{{value1}}"  placeholder="">
+
+                                        <input type="text" class="inputfile form-control mb-0" placeholder="">
                                         <div class="input-group-append">
-                                            <span  class="input-group-text"><img src="img/language/english.jpg" alt="" style="height: 20px;"></span>
-                                        </div> 
+                                            <span class="input-group-text"> <img src="img/language/english.jpg" alt=""
+                                                    style="height: 16px;"></span>
+
+                                        </div>
+
+
                                     </div>
                                 </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-1">
+                                <label for="field-1" class="control-label">Arabic (عربي)</label>
+                            </div>
+                            <div class="col-md-11 pr-0">
+                                <div class="form-group">
 
-                            <div class="col-md-12" >
-                                <div class="form-group langar" style="display: none;">
-                                    <label for="field-1" class="control-label">Arabic</label>
                                     <div class="input-group">
-                                
-                                        <input type="text" name="ar_choice`+add_line_count+`-{{value1}}" class="inputfile form-control mb-0 choice_val-`+add_line_count+`-{{value1}}"  placeholder="">
+
+                                        <input type="text" class="inputfile form-control mb-0" placeholder="">
                                         <div class="input-group-append">
-                                            <span  class="input-group-text"><img src="img/language/arabic.jpg" alt="" style="height: 20px;"></span>
-                                        </div> 
-                                </div>
-                            </div>
+                                            <span class="input-group-text"> <img src="img/language/arabic.jpg" alt=""
+                                                    style="height: 16px;"></span>
 
-                            <div class="col-md-12" >
-                                <div class="form-group langhi" style="display: none;">
-                                    <label for="field-1" class="control-label">Hindi</label>
-                                    <div class="input-group">
-                                
-                                        <input type="text" name="hi_choice`+add_line_count+`-{{value1}}" class="inputfile form-control mb-0 choice_val-`+add_line_count+`-{{value1}}"  placeholder="">
-                                        <div class="input-group-append">
-                                            <span  class="input-group-text"><img src="img/language/hindi.jpg" alt="" style="height: 20px;"></span>
-                                        </div> 
-                                </div>
-                            </div>
-                            </div>
+                                        </div>
 
-                            <div class="col-md-12" >
-                                <div class="form-group langta" style="display: none;">
-                                    <label for="field-1" class="control-label">Tamil</label>
-                                    <div class="input-group">
-                                
-                                    <input type="text" name="ta_choice`+add_line_count+`-{{value1}}" class="inputfile form-control mb-0 choice_val-`+add_line_count+`-{{value1}}"  placeholder="">
-                                    <div class="input-group-append">
-                                        <span  class="input-group-text"><img src="img/language/hindi.jpg" alt="" style="height: 20px;"></span>
-                                    </div> 
-                                </div>
-                            </div>
-                            </div>
 
-                            <div class="col-md-12" >
-                                <div class="form-group langur" style="display: none;">
-                                    <label for="field-1" class="control-label">Urdu</label>
-                                    <div class="input-group">
-                                
-                                        <input type="text" name="ur_choice`+add_line_count+`-{{value1}}" class="inputfile form-control mb-0 choice_val-`+add_line_count+`-{{value1}}"  placeholder="">
-                                        <div class="input-group-append">
-                                            <span  class="input-group-text"><img src="img/language/hindi.jpg" alt="" style="height: 20px;"></span>
-                                        </div> 
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                    <div class="modal-footer">
-                        <button type="button" data-dismiss-modal="modal3" style="background-color:#f9365f!important;border: none!important;"
-                        class="btn btn-info waves-effect waves-light">Save </button>
+                        <div class="row">
+                            <div class="col-md-1">
+                                <label for="field-1" class="control-label">Hindi (हिंदी)</label>
+                            </div>
+                            <div class="col-md-11 pr-0">
+                                <div class="form-group">
+
+                                    <div class="input-group">
+
+                                        <input type="text" class="inputfile form-control mb-0" placeholder="">
+                                        <div class="input-group-append">
+                                            <span class="input-group-text"> <img src="img/language/hindi.jpg" alt=""
+                                                    style="height: 16px;"></span>
+
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
+
                 </div>
             </div>
-                    </div>
-                </div>
+
+            <div class="modal-footer">
+
+                <button type="button" style="background-color:#95CE1D!important;border: none!important;"
+                    class="btn btn-info waves-effect waves-light">Save </button>
             </div>
-            </div>
-        </td>
-        
-          </tr>`)
-  
-          var checks = $('.lang_class:checked').map(function() {
-          var data =  $(this).val()
-          $(".lang"+data).show()
-          }).get()
-  
-  
-    $("button[data-dismiss-modal=modal3]").click(function(){
-      var modal_name = add_line_count+"-"+`{{value1}}`
-  
-        $('#choice_modal-'+modal_name).modal('hide');
-        });
-   
-        let total1 = parseInt(add_line_count) + 1
-        $(".add_line_count"+val1).val(total1);
-  
-      }
+        </div>
+    </div>
+</div>
 
 
-    function choice_remove(val){
-     
-     var tr_id = val
-     $('.tr_choice_remove'+tr_id).hide()
-     div_update = document.getElementsByClassName("tr_choice_remove"+tr_id).innerHTML = "";
-     $('.tr_choice_remove'+tr_id).empty()
-     }
 
-</script>
+<script src="{% static 'js/edit_exam.js' %}"></script>
+<script src="{% static 'admin/js/jquery.min.js' %}"></script>
 
 
+
+
+{% endblock %}

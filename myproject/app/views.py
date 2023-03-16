@@ -460,6 +460,7 @@ def edit_exam(request):
     user = User.objects.all()
     data_main = Main_Exam_section.objects.filter(Exam_id_id = exam_id)
     intial_field = Exam_inital_field.objects.filter(Exam_id = data.id)
+    print("intial_field :::::::::",intial_field)
     lang = Main_exam_language.objects.filter(Exam_id = exam_id)
     context = {
         'data' : data,
@@ -468,7 +469,7 @@ def edit_exam(request):
         'intial_field':intial_field,
         'lang':lang
     } 
-    return render(request,'edit_exam.html' ,context)
+    return render(request,'edit_exam1.html' ,context)
 
 
 
@@ -750,6 +751,8 @@ def attend_user(request):
         "attend_user_details":attend_user_details,
     }
     return render(request,'attend_user.html',context)
+
+
 def see_result_admin(request):
     user_id = request.GET.get("user_id")
     exam_id = request.GET.get("exam_id")
@@ -790,6 +793,13 @@ def update_exam_details(request):
         attempt_limit = request.POST.get("attempt_limit",False)
         attempt_check = request.POST.get("Attempt_check",False)
         required_score = request.POST.get("required_score",False)
+        language_type = request.POST.getlist("language_type")
+
+        print("language selected::::::::::::",language_type)
+        exam_language_list =  Main_exam_language.objects.filter(Exam_id=updated_id)
+        print("exam_language_list::::::::::::::::::::",exam_language_list)
+
+
         if attempt_check == False:
             attempt_limit = 0
         else:
@@ -798,6 +808,8 @@ def update_exam_details(request):
             attempt_limit = 0
         else:
             pass
+
+        
         exam_time_limit = request.POST.get("exam_time_limit",False)
         section = request.POST.get("section",False)
         scoring_mode = request.POST.get("scoring_mode",False)
@@ -836,6 +848,8 @@ def update_exam_details(request):
         )
         messages.success(request,str("Updated"))
         return redirect(request.META['HTTP_REFERER'])
+
+
 
 def section_Question_view_modal(request):
     data_id = request.GET.get("data_id")
@@ -1007,10 +1021,16 @@ def delete_initial_field(request):
         id = request.GET.get("id")
         data = Exam_inital_field.objects.get(id=id)
         return render(request,"delete_initial_field.html",{'data':data})
+
+
 def New_section_add(request):
     if request.method == "POST":
         exam_id = request.POST.get("exam_id")
         section_title = request.POST.get("section_title")
+        print("exam_id::::::::",exam_id)
+        print("section:::::",section_title)
+
+
         section_save = Main_Exam_section.objects.create(
                         Exam_id_id = exam_id,
                         section_title = section_title,

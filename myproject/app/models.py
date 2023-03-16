@@ -43,14 +43,14 @@ access_choices =(
     ("0","Anyone with the link"),
     ("1","Invited people only"),
     ('2','Link_based'),
-    ('2','Secret_key')
-   
+    ('3','Secret_key')
 )
+
 
 section_choices =(
     ("Section","Section"),
     ("Question","Question"),
-   
+    
 )
 
 from django.utils.text import slugify
@@ -187,6 +187,7 @@ class Section_Question_Mapping(common_table):
 Exam_start_field=(
     ("selection","selection"),
     ("Text Input","Text Input"),
+    ("Date Input","Date Input")
    
 )
 

@@ -166,7 +166,7 @@
                                                         <button type="button" class="btn btn-prim pay"
                                                             data-toggle="modal" data-target="#addsection">
                                                             Add a Section
-                                                        </button>
+                                                        </button> 
                                                         <button type="button" class="btn btn-prim pay"
                                                             onclick="direct_question_btn('{{data.id}}')">
                                                             Add a question
@@ -202,8 +202,7 @@
                                                                 <td style="background-color: #f3f6f8">
                                                                     
 
-                                                                    <div class="action-tbl d-flex justify-content-end">
-                                                                        
+                                                                    <div class="action-tbl d-flex justify-content-end">                                                  
                                                                         <i style="cursor: pointer;"
                                                                             class="fa fa-trash-o mx-1 trash-btn"
                                                                             data-toggle="tooltip" data-placement="top"
@@ -232,6 +231,7 @@
                                                                                 </td>
                                                                                 <td>{% if j.Question_id.Question_type == "Radio" %} Multiple choice: only one answer  {% else %}  Multiple choice: multiple answers allowed {% endif %}
                                                                                 </td>
+                                                                                
                                                                                 <td>
                                                                                     <div
                                                                                         class="action-tbl d-flex justify-content-end">
@@ -242,7 +242,6 @@
                                                                                             title=""
                                                                                             data-original-title="Delete" 
                                                                                             onclick="question_delete_btn(`{{j.Question_id.id}}`)"></i>
-
                                                                                     </div>
                                                                                 </td>
                                                                             </tr>
@@ -374,13 +373,11 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-
                                                     </div>
                                                     <div class="col-md-6">
                                                         <h5>Participants</h5>
-
-
                                                         <div class="row">
+                                                            
                                                             <div
                                                                 class="col-md-3 br-right d-flex align-items-center px-0">
                                                                 <h6>Access Mode</h6>
@@ -395,12 +392,18 @@
                                                                     <option value="1" {% if data.access_mode == "1" %}
                                                                         selected {% endif %}>Invited people only
                                                                     </option>
+
+                                                                    <option value="1" {% if data.access_mode == "1" %}
+                                                                        selected {% endif %}>Invited people only
+                                                                    </option>
+                                                                    <option value="1" {% if data.access_mode == "1" %}
+                                                                        selected {% endif %}>Invited people only
+                                                                    </option>
                                                                 </select>
                                                             </div>
                                                         </div>
 
                                                         <div class="row">
-
                                                             <div
                                                                 class="col-md-3 br-right d-flex align-items-center px-0">
                                                                 <h6>Require Login</h6>
@@ -409,13 +412,14 @@
                                                             <div class="col-md-9 d-flex align-items-center r-day">
                                                                 <input type="checkbox" id="login_required" value="True"
                                                                     name="login_required" {% if data.Login_required %}
-                                                                    checked {% endif %}>
+                                                                    checked {% endif %} >
                                                             </div>
+
                                                         </div>
 
                                                         <div class="row" id="attemp_lim" {% if data.Login_required %}
                                                             style="display:block;" {% else %} style="display:none;"
-                                                            {% endif %}>
+                                                            {% endif %} >
                                                             <div
                                                                 class="col-md-3 br-right d-flex align-items-center px-0">
                                                                 <h6>Attempts Limit</h6>
@@ -427,7 +431,6 @@
                                                                     {% if data.attempt_limit %} checked {% endif %}>
                                                             </div>
 
-
                                                             <div class="col-md-9 d-flex align-items-center r-day">
                                                                 <input type="number" class="form-control col-md-3"
                                                                     attemptsid="attempts_limit" value="1"
@@ -435,7 +438,6 @@
                                                                 <span style="font-size: 10px;">attempts</span>
 
                                                             </div>
-
 
 
                                                         </div>
@@ -549,7 +551,7 @@
                                                                 <div class="input-group uploadFile1">
 
                                                                     <input type="text" class="form-control" name="url"
-                                                                        value="https://demo4.odoo.com/survey/start/b137640d-9876-1234-abcd-344ca256531e">
+                                                                        value="https://">
                                                                     <div class="input-group-append">
                                                                         <span class="input-group-text"> <i
                                                                                 class="fas fa-copy"
@@ -571,6 +573,10 @@
                                                 </div>
 
                                             </div>
+
+
+
+
                                             <div class="tab-pane descptn" id="Description" role="tabpanel">
 
 
@@ -678,8 +684,7 @@
 
                                                         <tbody id="append_inital_field" class="body-textcls vertcle-center">
                                                         
-                                                        
-                                                  
+                                                                                                     
                                                         </tbody>
 
                                                     </table>
@@ -807,7 +812,7 @@
 
 
 <div id="addsection" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
-    style="display: none" >
+    style="display:none" >
     <form class="forms-sample" action="New_section_add" method="POST" enctype="multipart/form-data">
     {% csrf_token %}   
 
@@ -816,11 +821,13 @@
         <div class="modal-content" >
             <div class="modal-header">
                 <h4 class="modal-title mt-0">Add a Section</h4>
-                
+
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
+
             </div>
+
             <div class="modal-body">
                 <div class="row">
                     <div class="col-md-12">
@@ -832,6 +839,8 @@
                     </div>
                 </div>
             </div>
+
+            
             <div class="modal-footer">
 
                 <button type="submit" style="background-color:#f9365f!important;border: none!important;"
@@ -1179,7 +1188,9 @@
                     </div>
                 </div>
             </div>
+
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
         <script>
         function section_question(data_id){
             var modal_id = data_id;
@@ -1282,6 +1293,9 @@
             </script>
 
             <script>
+
+
+
     
             intital_value = 1
             $(".add_exam_field").click(function(){
@@ -1383,6 +1397,9 @@
                     $("#title_updated_id").val(myid)
                     $("#title_name_update").val(title)
                 });
+
+
+
 
                 $("#time_limit").click(function () {
                     exam_check = $("#time_limit").is(":checked")
